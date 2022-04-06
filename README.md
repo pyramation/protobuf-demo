@@ -1,18 +1,15 @@
 # protobuf demo
 
 - [ts-proto](./packages/ts-proto)
-
-[example](./packages/ts-proto/src/proto/osmosis/gamm/v1beta1/tx.ts)
+  - [example](./packages/ts-proto/src/proto/osmosis/gamm/v1beta1/tx.ts)
 
 - [ts-proto-ast-babel](./packages/ts-proto-ast-babel)
-
-[example](./packages/ts-proto-ast-babel/src/proto/osmosis/gamm/v1beta1/tx.ts)
-[namespaces](./packages/ts-proto-ast-babel/src/proto/osmosis/gamm/v1beta1/tx.ts#L1560-L1563)
+  - [example](./packages/ts-proto-ast-babel/src/proto/osmosis/gamm/v1beta1/tx.ts)
+  - [namespaces](./packages/ts-proto-ast-babel/src/proto/osmosis/gamm/v1beta1/tx.ts#L1560-L1563)
 
 - [protobuf-ts](./packages/protobuf-ts)
-
-[example](./packages/protobuf-ts/src/proto/osmosis/gamm/v1beta1/tx.ts)
-[client](./packages/protobuf-ts/src/proto/osmosis/gamm/v1beta1/tx.client.ts#L27-L60)
+  - [example](./packages/protobuf-ts/src/proto/osmosis/gamm/v1beta1/tx.ts)
+  - [client](./packages/protobuf-ts/src/proto/osmosis/gamm/v1beta1/tx.client.ts#L27-L60)
 
 WIP: 
 
