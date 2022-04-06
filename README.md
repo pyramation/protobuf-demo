@@ -15,9 +15,8 @@ https://github.com/grpc/grpc-node/blob/master/packages/grpc-js/src/duration.ts#L
 
 - ideally through tranpilation step
   - [ ] one method for registry
-  - [ ] generate message composition objects
-
-- [ ] type_url or typeurl
+  - [ ] generate message composition objects (typeUrl + packet)
+    - [ ] type_url or typeurl
 
 # snippets/structures from other code bases
 
