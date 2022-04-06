@@ -8,6 +8,17 @@ WIP:
 
 - [protoc-gen-typescript](./packages/protoc-gen-typescript)
 
+# questions
+
+- [ ] can some portion of to/from amino be automated?
+https://github.com/grpc/grpc-node/blob/master/packages/grpc-js/src/duration.ts#L23-L32
+
+- ideally through tranpilation step
+  - [ ] one method for registry
+  - [ ] generate message composition objects
+
+- [ ] type_url or typeurl
+
 # snippets/structures from other code bases
 
 ## ts-proto w/registry option
@@ -192,8 +203,6 @@ https://github.com/osmosis-labs/osmosis-frontend/blob/master/src/stores/osmosis/
   },
 ```
 ### amino messages
-
-https://github.com/grpc/grpc-node/blob/master/packages/grpc-js/src/duration.ts#L23-L32
 
 ```js
 swapExactAmountIn: {
