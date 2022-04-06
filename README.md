@@ -8,10 +8,9 @@ WIP:
 
 - [protoc-gen-typescript](./packages/protoc-gen-typescript)
 
+# snippets/structures from other code bases
 
-
-## snippets/structures from other code bases
-### ts-proto w/registry option
+## ts-proto w/registry option
 
 
 ```
@@ -34,7 +33,7 @@ WIP:
 
 ```
 
-### keplr-wallet
+## keplr-wallet
 
 https://github.com/chainapsis/keplr-wallet/blob/master/packages/cosmos/src/stargate/codec/index.ts#L43-L63
 
@@ -63,10 +62,10 @@ defaultProtoCodec.registerAny(
 
 ```
 
-### secret
+## secret
 
 I believe they're using the `ts-proto`'s `outputClientImpl=grpc-web`
-#### protobufs
+### protobufs
 
 https://github.com/scrtlabs/secret.js/blob/master/src/tx/gov.ts#L110-L135
 
@@ -89,7 +88,7 @@ https://github.com/scrtlabs/secret.js/blob/master/src/tx/gov.ts#L110-L135
         break;
  ```
 
-#### aminos
+### aminos
 
 https://github.com/scrtlabs/secret.js/blob/master/src/tx/gov.ts#L223-L244
 
@@ -118,10 +117,56 @@ https://github.com/scrtlabs/secret.js/blob/master/src/tx/gov.ts#L223-L244
     }
  ```
 
+## osmosis
 
-### cosmology
+registry
 
-#### registry 
+https://github.com/osmosis-labs/osmosis-frontend/blob/master/src/stores/osmosis/account/index.ts#L68-L87
+
+```js
+createPool: {
+    type: 'osmosis/gamm/create-balancer-pool',
+    gas: 350000,
+},
+joinPool: {
+    type: 'osmosis/gamm/join-pool',
+    gas: 240000,
+    shareCoinDecimals: 18,
+},
+joinSwapExternAmountIn: {
+    type: 'osmosis/gamm/join-swap-extern-amount-in',
+    gas: 140000,
+    shareCoinDecimals: 18,
+},
+```
+
+aminos
+
+https://github.com/osmosis-labs/osmosis-frontend/blob/master/src/stores/osmosis/account/index.ts#L834-L861
+
+
+```js
+{
+    aminoMsgs: [msg],
+    protoMsgs: [
+        {
+            type_url: '/osmosis.lockup.MsgLockTokens',
+            value: osmosis.lockup.MsgLockTokens.encode({
+                owner: msg.value.owner,
+                duration: {
+                    seconds: Long.fromNumber(Math.floor(parseInt(msg.value.duration) / 1_000_000_000)),
+                    nanos: parseInt(msg.value.duration) % 1_000_000_000,
+                },
+                coins: msg.value.coins,
+            }).finish(),
+        },
+    ],
+}
+```
+
+## cosmology
+
+### registry 
 
 ```js
   joinPool: {
@@ -146,7 +191,7 @@ https://github.com/scrtlabs/secret.js/blob/master/src/tx/gov.ts#L223-L244
     shareCoinDecimals: 18
   },
 ```
-#### amino messages
+### amino messages
 
 https://github.com/grpc/grpc-node/blob/master/packages/grpc-js/src/duration.ts#L23-L32
 
@@ -191,7 +236,7 @@ swapExactAmountIn: {
   },
  ```
 
-#### message composition functions
+### message composition functions
 
 
 ```js
