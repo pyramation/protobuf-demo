@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Duration } from "../../../google/protobuf/duration";
@@ -6,6 +7,7 @@ import { Duration } from "../../../google/protobuf/duration";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
 
 export interface Params {
+  $type: "osmosis.poolincentives.v1beta1.Params";
   /**
    * minted_denom is the denomination of the coin expected to be minted by the
    * minting module. Pool-incentives module doesn’t actually mint the coin
@@ -16,24 +18,29 @@ export interface Params {
 }
 
 export interface LockableDurationsInfo {
+  $type: "osmosis.poolincentives.v1beta1.LockableDurationsInfo";
   lockableDurations: Duration[];
 }
 
 export interface DistrInfo {
+  $type: "osmosis.poolincentives.v1beta1.DistrInfo";
   totalWeight: string;
   records: DistrRecord[];
 }
 
 export interface DistrRecord {
+  $type: "osmosis.poolincentives.v1beta1.DistrRecord";
   gaugeId: Long;
   weight: string;
 }
 
 function createBaseParams(): Params {
-  return { mintedDenom: "" };
+  return { $type: "osmosis.poolincentives.v1beta1.Params", mintedDenom: "" };
 }
 
 export const Params = {
+  $type: "osmosis.poolincentives.v1beta1.Params" as const,
+
   encode(
     message: Params,
     writer: _m0.Writer = _m0.Writer.create()
@@ -64,6 +71,7 @@ export const Params = {
 
   fromJSON(object: any): Params {
     return {
+      $type: Params.$type,
       mintedDenom: isSet(object.mintedDenom) ? String(object.mintedDenom) : "",
     };
   },
@@ -82,11 +90,18 @@ export const Params = {
   },
 };
 
+messageTypeRegistry.set(Params.$type, Params);
+
 function createBaseLockableDurationsInfo(): LockableDurationsInfo {
-  return { lockableDurations: [] };
+  return {
+    $type: "osmosis.poolincentives.v1beta1.LockableDurationsInfo",
+    lockableDurations: [],
+  };
 }
 
 export const LockableDurationsInfo = {
+  $type: "osmosis.poolincentives.v1beta1.LockableDurationsInfo" as const,
+
   encode(
     message: LockableDurationsInfo,
     writer: _m0.Writer = _m0.Writer.create()
@@ -122,6 +137,7 @@ export const LockableDurationsInfo = {
 
   fromJSON(object: any): LockableDurationsInfo {
     return {
+      $type: LockableDurationsInfo.$type,
       lockableDurations: Array.isArray(object?.lockableDurations)
         ? object.lockableDurations.map((e: any) => Duration.fromJSON(e))
         : [],
@@ -150,11 +166,19 @@ export const LockableDurationsInfo = {
   },
 };
 
+messageTypeRegistry.set(LockableDurationsInfo.$type, LockableDurationsInfo);
+
 function createBaseDistrInfo(): DistrInfo {
-  return { totalWeight: "", records: [] };
+  return {
+    $type: "osmosis.poolincentives.v1beta1.DistrInfo",
+    totalWeight: "",
+    records: [],
+  };
 }
 
 export const DistrInfo = {
+  $type: "osmosis.poolincentives.v1beta1.DistrInfo" as const,
+
   encode(
     message: DistrInfo,
     writer: _m0.Writer = _m0.Writer.create()
@@ -191,6 +215,7 @@ export const DistrInfo = {
 
   fromJSON(object: any): DistrInfo {
     return {
+      $type: DistrInfo.$type,
       totalWeight: isSet(object.totalWeight) ? String(object.totalWeight) : "",
       records: Array.isArray(object?.records)
         ? object.records.map((e: any) => DistrRecord.fromJSON(e))
@@ -223,11 +248,19 @@ export const DistrInfo = {
   },
 };
 
+messageTypeRegistry.set(DistrInfo.$type, DistrInfo);
+
 function createBaseDistrRecord(): DistrRecord {
-  return { gaugeId: Long.UZERO, weight: "" };
+  return {
+    $type: "osmosis.poolincentives.v1beta1.DistrRecord",
+    gaugeId: Long.UZERO,
+    weight: "",
+  };
 }
 
 export const DistrRecord = {
+  $type: "osmosis.poolincentives.v1beta1.DistrRecord" as const,
+
   encode(
     message: DistrRecord,
     writer: _m0.Writer = _m0.Writer.create()
@@ -264,6 +297,7 @@ export const DistrRecord = {
 
   fromJSON(object: any): DistrRecord {
     return {
+      $type: DistrRecord.$type,
       gaugeId: isSet(object.gaugeId)
         ? Long.fromString(object.gaugeId)
         : Long.UZERO,
@@ -292,6 +326,8 @@ export const DistrRecord = {
   },
 };
 
+messageTypeRegistry.set(DistrRecord.$type, DistrRecord);
+
 type Builtin =
   | Date
   | Function
@@ -310,14 +346,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

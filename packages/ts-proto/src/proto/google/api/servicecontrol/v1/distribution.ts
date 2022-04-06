@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Distribution_Exemplar } from "../../../../google/api/distribution";
@@ -16,6 +17,7 @@ export const protobufPackage = "google.api.servicecontrol.v1";
  * * a histogram of the values of the sample points
  */
 export interface Distribution {
+  $type: "google.api.servicecontrol.v1.Distribution";
   /** The total number of samples in the distribution. Must be >= 0. */
   count: Long;
   /**
@@ -49,17 +51,18 @@ export interface Distribution {
    */
   bucketCounts: Long[];
   /** Buckets with constant width. */
-  linearBuckets?: Distribution_LinearBuckets | undefined;
+  linearBuckets: Distribution_LinearBuckets | undefined;
   /** Buckets with exponentially growing width. */
-  exponentialBuckets?: Distribution_ExponentialBuckets | undefined;
+  exponentialBuckets: Distribution_ExponentialBuckets | undefined;
   /** Buckets with arbitrary user-provided width. */
-  explicitBuckets?: Distribution_ExplicitBuckets | undefined;
+  explicitBuckets: Distribution_ExplicitBuckets | undefined;
   /** Example points. Must be in increasing order of `value` field. */
   exemplars: Distribution_Exemplar[];
 }
 
 /** Describing buckets with constant width. */
 export interface Distribution_LinearBuckets {
+  $type: "google.api.servicecontrol.v1.Distribution.LinearBuckets";
   /**
    * The number of finite buckets. With the underflow and overflow buckets,
    * the total number of buckets is `num_finite_buckets` + 2.
@@ -83,6 +86,7 @@ export interface Distribution_LinearBuckets {
 
 /** Describing buckets with exponentially growing width. */
 export interface Distribution_ExponentialBuckets {
+  $type: "google.api.servicecontrol.v1.Distribution.ExponentialBuckets";
   /**
    * The number of finite buckets. With the underflow and overflow buckets,
    * the total number of buckets is `num_finite_buckets` + 2.
@@ -107,6 +111,7 @@ export interface Distribution_ExponentialBuckets {
 
 /** Describing buckets with arbitrary user-provided width. */
 export interface Distribution_ExplicitBuckets {
+  $type: "google.api.servicecontrol.v1.Distribution.ExplicitBuckets";
   /**
    * 'bound' is a list of strictly increasing boundaries between
    * buckets. Note that a list of length N-1 defines N buckets because
@@ -129,6 +134,7 @@ export interface Distribution_ExplicitBuckets {
 
 function createBaseDistribution(): Distribution {
   return {
+    $type: "google.api.servicecontrol.v1.Distribution",
     count: Long.ZERO,
     mean: 0,
     minimum: 0,
@@ -143,6 +149,8 @@ function createBaseDistribution(): Distribution {
 }
 
 export const Distribution = {
+  $type: "google.api.servicecontrol.v1.Distribution" as const,
+
   encode(
     message: Distribution,
     writer: _m0.Writer = _m0.Writer.create()
@@ -256,6 +264,7 @@ export const Distribution = {
 
   fromJSON(object: any): Distribution {
     return {
+      $type: Distribution.$type,
       count: isSet(object.count) ? Long.fromString(object.count) : Long.ZERO,
       mean: isSet(object.mean) ? Number(object.mean) : 0,
       minimum: isSet(object.minimum) ? Number(object.minimum) : 0,
@@ -352,11 +361,20 @@ export const Distribution = {
   },
 };
 
+messageTypeRegistry.set(Distribution.$type, Distribution);
+
 function createBaseDistribution_LinearBuckets(): Distribution_LinearBuckets {
-  return { numFiniteBuckets: 0, width: 0, offset: 0 };
+  return {
+    $type: "google.api.servicecontrol.v1.Distribution.LinearBuckets",
+    numFiniteBuckets: 0,
+    width: 0,
+    offset: 0,
+  };
 }
 
 export const Distribution_LinearBuckets = {
+  $type: "google.api.servicecontrol.v1.Distribution.LinearBuckets" as const,
+
   encode(
     message: Distribution_LinearBuckets,
     writer: _m0.Writer = _m0.Writer.create()
@@ -402,6 +420,7 @@ export const Distribution_LinearBuckets = {
 
   fromJSON(object: any): Distribution_LinearBuckets {
     return {
+      $type: Distribution_LinearBuckets.$type,
       numFiniteBuckets: isSet(object.numFiniteBuckets)
         ? Number(object.numFiniteBuckets)
         : 0,
@@ -430,11 +449,24 @@ export const Distribution_LinearBuckets = {
   },
 };
 
+messageTypeRegistry.set(
+  Distribution_LinearBuckets.$type,
+  Distribution_LinearBuckets
+);
+
 function createBaseDistribution_ExponentialBuckets(): Distribution_ExponentialBuckets {
-  return { numFiniteBuckets: 0, growthFactor: 0, scale: 0 };
+  return {
+    $type: "google.api.servicecontrol.v1.Distribution.ExponentialBuckets",
+    numFiniteBuckets: 0,
+    growthFactor: 0,
+    scale: 0,
+  };
 }
 
 export const Distribution_ExponentialBuckets = {
+  $type:
+    "google.api.servicecontrol.v1.Distribution.ExponentialBuckets" as const,
+
   encode(
     message: Distribution_ExponentialBuckets,
     writer: _m0.Writer = _m0.Writer.create()
@@ -480,6 +512,7 @@ export const Distribution_ExponentialBuckets = {
 
   fromJSON(object: any): Distribution_ExponentialBuckets {
     return {
+      $type: Distribution_ExponentialBuckets.$type,
       numFiniteBuckets: isSet(object.numFiniteBuckets)
         ? Number(object.numFiniteBuckets)
         : 0,
@@ -511,11 +544,21 @@ export const Distribution_ExponentialBuckets = {
   },
 };
 
+messageTypeRegistry.set(
+  Distribution_ExponentialBuckets.$type,
+  Distribution_ExponentialBuckets
+);
+
 function createBaseDistribution_ExplicitBuckets(): Distribution_ExplicitBuckets {
-  return { bounds: [] };
+  return {
+    $type: "google.api.servicecontrol.v1.Distribution.ExplicitBuckets",
+    bounds: [],
+  };
 }
 
 export const Distribution_ExplicitBuckets = {
+  $type: "google.api.servicecontrol.v1.Distribution.ExplicitBuckets" as const,
+
   encode(
     message: Distribution_ExplicitBuckets,
     writer: _m0.Writer = _m0.Writer.create()
@@ -558,6 +601,7 @@ export const Distribution_ExplicitBuckets = {
 
   fromJSON(object: any): Distribution_ExplicitBuckets {
     return {
+      $type: Distribution_ExplicitBuckets.$type,
       bounds: Array.isArray(object?.bounds)
         ? object.bounds.map((e: any) => Number(e))
         : [],
@@ -583,6 +627,11 @@ export const Distribution_ExplicitBuckets = {
   },
 };
 
+messageTypeRegistry.set(
+  Distribution_ExplicitBuckets.$type,
+  Distribution_ExplicitBuckets
+);
+
 type Builtin =
   | Date
   | Function
@@ -601,14 +650,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

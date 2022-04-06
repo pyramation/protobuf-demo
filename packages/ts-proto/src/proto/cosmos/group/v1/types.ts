@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Duration } from "../../../google/protobuf/duration";
@@ -229,6 +230,7 @@ export function proposalExecutorResultToJSON(
  * non-zero weight and metadata.
  */
 export interface Member {
+  $type: "cosmos.group.v1.Member";
   /** address is the member's account address. */
   address: string;
   /** weight is the member's voting weight that should be greater than 0. */
@@ -236,38 +238,42 @@ export interface Member {
   /** metadata is any arbitrary metadata to attached to the member. */
   metadata: string;
   /** added_at is a timestamp specifying when a member was added. */
-  addedAt?: Date;
+  addedAt: Date;
 }
 
 /** Members defines a repeated slice of Member objects. */
 export interface Members {
+  $type: "cosmos.group.v1.Members";
   /** members is the list of members. */
   members: Member[];
 }
 
 /** ThresholdDecisionPolicy implements the DecisionPolicy interface */
 export interface ThresholdDecisionPolicy {
+  $type: "cosmos.group.v1.ThresholdDecisionPolicy";
   /** threshold is the minimum weighted sum of yes votes that must be met or exceeded for a proposal to succeed. */
   threshold: string;
   /** windows defines the different windows for voting and execution. */
-  windows?: DecisionPolicyWindows;
+  windows: DecisionPolicyWindows;
 }
 
 /** PercentageDecisionPolicy implements the DecisionPolicy interface */
 export interface PercentageDecisionPolicy {
+  $type: "cosmos.group.v1.PercentageDecisionPolicy";
   /** percentage is the minimum percentage the weighted sum of yes votes must meet for a proposal to succeed. */
   percentage: string;
   /** windows defines the different windows for voting and execution. */
-  windows?: DecisionPolicyWindows;
+  windows: DecisionPolicyWindows;
 }
 
 /** DecisionPolicyWindows defines the different windows for voting and execution. */
 export interface DecisionPolicyWindows {
+  $type: "cosmos.group.v1.DecisionPolicyWindows";
   /**
    * voting_period is the duration from submission of a proposal to the end of voting period
    * Within this times votes can be submitted with MsgVote.
    */
-  votingPeriod?: Duration;
+  votingPeriod: Duration;
   /**
    * min_execution_period is the minimum duration after the proposal submission
    * where members can start sending MsgExec. This means that the window for
@@ -281,11 +287,12 @@ export interface DecisionPolicyWindows {
    * is empty, meaning that all proposals created with this decision policy
    * won't be able to be executed.
    */
-  minExecutionPeriod?: Duration;
+  minExecutionPeriod: Duration;
 }
 
 /** GroupInfo represents the high-level on-chain information for a group. */
 export interface GroupInfo {
+  $type: "cosmos.group.v1.GroupInfo";
   /** id is the unique ID of the group. */
   id: Long;
   /** admin is the account address of the group's admin. */
@@ -302,19 +309,21 @@ export interface GroupInfo {
   /** total_weight is the sum of the group members' weights. */
   totalWeight: string;
   /** created_at is a timestamp specifying when a group was created. */
-  createdAt?: Date;
+  createdAt: Date;
 }
 
 /** GroupMember represents the relationship between a group and a member. */
 export interface GroupMember {
+  $type: "cosmos.group.v1.GroupMember";
   /** group_id is the unique ID of the group. */
   groupId: Long;
   /** member is the member data. */
-  member?: Member;
+  member: Member;
 }
 
 /** GroupPolicyInfo represents the high-level on-chain information for a group policy. */
 export interface GroupPolicyInfo {
+  $type: "cosmos.group.v1.GroupPolicyInfo";
   /** address is the account address of group policy. */
   address: string;
   /** group_id is the unique ID of the group. */
@@ -329,9 +338,9 @@ export interface GroupPolicyInfo {
    */
   version: Long;
   /** decision_policy specifies the group policy's decision policy. */
-  decisionPolicy?: Any;
+  decisionPolicy: Any;
   /** created_at is a timestamp specifying when a group policy was created. */
-  createdAt?: Date;
+  createdAt: Date;
 }
 
 /**
@@ -341,6 +350,7 @@ export interface GroupPolicyInfo {
  * passes as well as some optional metadata associated with the proposal.
  */
 export interface Proposal {
+  $type: "cosmos.group.v1.Proposal";
   /** id is the unique id of the proposal. */
   id: Long;
   /** address is the account address of group policy. */
@@ -350,7 +360,7 @@ export interface Proposal {
   /** proposers are the account addresses of the proposers. */
   proposers: string[];
   /** submit_time is a timestamp specifying when a proposal was submitted. */
-  submitTime?: Date;
+  submitTime: Date;
   /**
    * group_version tracks the version of the group that this proposal corresponds to.
    * When group membership is changed, existing proposals from previous group versions will become invalid.
@@ -374,7 +384,7 @@ export interface Proposal {
    * via gRPC, this field is not populated until the proposal's voting period
    * has ended.
    */
-  finalTallyResult?: TallyResult;
+  finalTallyResult: TallyResult;
   /**
    * voting_period_end is the timestamp before which voting must be done.
    * Unless a successfull MsgExec is called before (to execute a proposal whose
@@ -382,7 +392,7 @@ export interface Proposal {
    * at this point, and the `final_tally_result`, as well
    * as `status` and `result` fields will be accordingly updated.
    */
-  votingPeriodEnd?: Date;
+  votingPeriodEnd: Date;
   /** executor_result is the final result based on the votes and election rule. Initial value is NotRun. */
   executorResult: ProposalExecutorResult;
   /** messages is a list of Msgs that will be executed if the proposal passes. */
@@ -391,6 +401,7 @@ export interface Proposal {
 
 /** TallyResult represents the sum of weighted votes for each vote option. */
 export interface TallyResult {
+  $type: "cosmos.group.v1.TallyResult";
   /** yes_count is the weighted sum of yes votes. */
   yesCount: string;
   /** abstain_count is the weighted sum of abstainers. */
@@ -403,6 +414,7 @@ export interface TallyResult {
 
 /** Vote represents a vote for a proposal. */
 export interface Vote {
+  $type: "cosmos.group.v1.Vote";
   /** proposal is the unique ID of the proposal. */
   proposalId: Long;
   /** voter is the account address of the voter. */
@@ -412,14 +424,22 @@ export interface Vote {
   /** metadata is any arbitrary metadata to attached to the vote. */
   metadata: string;
   /** submit_time is the timestamp when the vote was submitted. */
-  submitTime?: Date;
+  submitTime: Date;
 }
 
 function createBaseMember(): Member {
-  return { address: "", weight: "", metadata: "", addedAt: undefined };
+  return {
+    $type: "cosmos.group.v1.Member",
+    address: "",
+    weight: "",
+    metadata: "",
+    addedAt: undefined,
+  };
 }
 
 export const Member = {
+  $type: "cosmos.group.v1.Member" as const,
+
   encode(
     message: Member,
     writer: _m0.Writer = _m0.Writer.create()
@@ -473,6 +493,7 @@ export const Member = {
 
   fromJSON(object: any): Member {
     return {
+      $type: Member.$type,
       address: isSet(object.address) ? String(object.address) : "",
       weight: isSet(object.weight) ? String(object.weight) : "",
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
@@ -502,11 +523,15 @@ export const Member = {
   },
 };
 
+messageTypeRegistry.set(Member.$type, Member);
+
 function createBaseMembers(): Members {
-  return { members: [] };
+  return { $type: "cosmos.group.v1.Members", members: [] };
 }
 
 export const Members = {
+  $type: "cosmos.group.v1.Members" as const,
+
   encode(
     message: Members,
     writer: _m0.Writer = _m0.Writer.create()
@@ -537,6 +562,7 @@ export const Members = {
 
   fromJSON(object: any): Members {
     return {
+      $type: Members.$type,
       members: Array.isArray(object?.members)
         ? object.members.map((e: any) => Member.fromJSON(e))
         : [],
@@ -562,11 +588,19 @@ export const Members = {
   },
 };
 
+messageTypeRegistry.set(Members.$type, Members);
+
 function createBaseThresholdDecisionPolicy(): ThresholdDecisionPolicy {
-  return { threshold: "", windows: undefined };
+  return {
+    $type: "cosmos.group.v1.ThresholdDecisionPolicy",
+    threshold: "",
+    windows: undefined,
+  };
 }
 
 export const ThresholdDecisionPolicy = {
+  $type: "cosmos.group.v1.ThresholdDecisionPolicy" as const,
+
   encode(
     message: ThresholdDecisionPolicy,
     writer: _m0.Writer = _m0.Writer.create()
@@ -612,6 +646,7 @@ export const ThresholdDecisionPolicy = {
 
   fromJSON(object: any): ThresholdDecisionPolicy {
     return {
+      $type: ThresholdDecisionPolicy.$type,
       threshold: isSet(object.threshold) ? String(object.threshold) : "",
       windows: isSet(object.windows)
         ? DecisionPolicyWindows.fromJSON(object.windows)
@@ -642,11 +677,19 @@ export const ThresholdDecisionPolicy = {
   },
 };
 
+messageTypeRegistry.set(ThresholdDecisionPolicy.$type, ThresholdDecisionPolicy);
+
 function createBasePercentageDecisionPolicy(): PercentageDecisionPolicy {
-  return { percentage: "", windows: undefined };
+  return {
+    $type: "cosmos.group.v1.PercentageDecisionPolicy",
+    percentage: "",
+    windows: undefined,
+  };
 }
 
 export const PercentageDecisionPolicy = {
+  $type: "cosmos.group.v1.PercentageDecisionPolicy" as const,
+
   encode(
     message: PercentageDecisionPolicy,
     writer: _m0.Writer = _m0.Writer.create()
@@ -692,6 +735,7 @@ export const PercentageDecisionPolicy = {
 
   fromJSON(object: any): PercentageDecisionPolicy {
     return {
+      $type: PercentageDecisionPolicy.$type,
       percentage: isSet(object.percentage) ? String(object.percentage) : "",
       windows: isSet(object.windows)
         ? DecisionPolicyWindows.fromJSON(object.windows)
@@ -722,11 +766,22 @@ export const PercentageDecisionPolicy = {
   },
 };
 
+messageTypeRegistry.set(
+  PercentageDecisionPolicy.$type,
+  PercentageDecisionPolicy
+);
+
 function createBaseDecisionPolicyWindows(): DecisionPolicyWindows {
-  return { votingPeriod: undefined, minExecutionPeriod: undefined };
+  return {
+    $type: "cosmos.group.v1.DecisionPolicyWindows",
+    votingPeriod: undefined,
+    minExecutionPeriod: undefined,
+  };
 }
 
 export const DecisionPolicyWindows = {
+  $type: "cosmos.group.v1.DecisionPolicyWindows" as const,
+
   encode(
     message: DecisionPolicyWindows,
     writer: _m0.Writer = _m0.Writer.create()
@@ -769,6 +824,7 @@ export const DecisionPolicyWindows = {
 
   fromJSON(object: any): DecisionPolicyWindows {
     return {
+      $type: DecisionPolicyWindows.$type,
       votingPeriod: isSet(object.votingPeriod)
         ? Duration.fromJSON(object.votingPeriod)
         : undefined,
@@ -808,8 +864,11 @@ export const DecisionPolicyWindows = {
   },
 };
 
+messageTypeRegistry.set(DecisionPolicyWindows.$type, DecisionPolicyWindows);
+
 function createBaseGroupInfo(): GroupInfo {
   return {
+    $type: "cosmos.group.v1.GroupInfo",
     id: Long.UZERO,
     admin: "",
     metadata: "",
@@ -820,6 +879,8 @@ function createBaseGroupInfo(): GroupInfo {
 }
 
 export const GroupInfo = {
+  $type: "cosmos.group.v1.GroupInfo" as const,
+
   encode(
     message: GroupInfo,
     writer: _m0.Writer = _m0.Writer.create()
@@ -885,6 +946,7 @@ export const GroupInfo = {
 
   fromJSON(object: any): GroupInfo {
     return {
+      $type: GroupInfo.$type,
       id: isSet(object.id) ? Long.fromString(object.id) : Long.UZERO,
       admin: isSet(object.admin) ? String(object.admin) : "",
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
@@ -933,11 +995,19 @@ export const GroupInfo = {
   },
 };
 
+messageTypeRegistry.set(GroupInfo.$type, GroupInfo);
+
 function createBaseGroupMember(): GroupMember {
-  return { groupId: Long.UZERO, member: undefined };
+  return {
+    $type: "cosmos.group.v1.GroupMember",
+    groupId: Long.UZERO,
+    member: undefined,
+  };
 }
 
 export const GroupMember = {
+  $type: "cosmos.group.v1.GroupMember" as const,
+
   encode(
     message: GroupMember,
     writer: _m0.Writer = _m0.Writer.create()
@@ -974,6 +1044,7 @@ export const GroupMember = {
 
   fromJSON(object: any): GroupMember {
     return {
+      $type: GroupMember.$type,
       groupId: isSet(object.groupId)
         ? Long.fromString(object.groupId)
         : Long.UZERO,
@@ -1006,8 +1077,11 @@ export const GroupMember = {
   },
 };
 
+messageTypeRegistry.set(GroupMember.$type, GroupMember);
+
 function createBaseGroupPolicyInfo(): GroupPolicyInfo {
   return {
+    $type: "cosmos.group.v1.GroupPolicyInfo",
     address: "",
     groupId: Long.UZERO,
     admin: "",
@@ -1019,6 +1093,8 @@ function createBaseGroupPolicyInfo(): GroupPolicyInfo {
 }
 
 export const GroupPolicyInfo = {
+  $type: "cosmos.group.v1.GroupPolicyInfo" as const,
+
   encode(
     message: GroupPolicyInfo,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1090,6 +1166,7 @@ export const GroupPolicyInfo = {
 
   fromJSON(object: any): GroupPolicyInfo {
     return {
+      $type: GroupPolicyInfo.$type,
       address: isSet(object.address) ? String(object.address) : "",
       groupId: isSet(object.groupId)
         ? Long.fromString(object.groupId)
@@ -1150,8 +1227,11 @@ export const GroupPolicyInfo = {
   },
 };
 
+messageTypeRegistry.set(GroupPolicyInfo.$type, GroupPolicyInfo);
+
 function createBaseProposal(): Proposal {
   return {
+    $type: "cosmos.group.v1.Proposal",
     id: Long.UZERO,
     address: "",
     metadata: "",
@@ -1169,6 +1249,8 @@ function createBaseProposal(): Proposal {
 }
 
 export const Proposal = {
+  $type: "cosmos.group.v1.Proposal" as const,
+
   encode(
     message: Proposal,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1287,6 +1369,7 @@ export const Proposal = {
 
   fromJSON(object: any): Proposal {
     return {
+      $type: Proposal.$type,
       id: isSet(object.id) ? Long.fromString(object.id) : Long.UZERO,
       address: isSet(object.address) ? String(object.address) : "",
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
@@ -1394,11 +1477,21 @@ export const Proposal = {
   },
 };
 
+messageTypeRegistry.set(Proposal.$type, Proposal);
+
 function createBaseTallyResult(): TallyResult {
-  return { yesCount: "", abstainCount: "", noCount: "", noWithVetoCount: "" };
+  return {
+    $type: "cosmos.group.v1.TallyResult",
+    yesCount: "",
+    abstainCount: "",
+    noCount: "",
+    noWithVetoCount: "",
+  };
 }
 
 export const TallyResult = {
+  $type: "cosmos.group.v1.TallyResult" as const,
+
   encode(
     message: TallyResult,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1447,6 +1540,7 @@ export const TallyResult = {
 
   fromJSON(object: any): TallyResult {
     return {
+      $type: TallyResult.$type,
       yesCount: isSet(object.yesCount) ? String(object.yesCount) : "",
       abstainCount: isSet(object.abstainCount)
         ? String(object.abstainCount)
@@ -1481,8 +1575,11 @@ export const TallyResult = {
   },
 };
 
+messageTypeRegistry.set(TallyResult.$type, TallyResult);
+
 function createBaseVote(): Vote {
   return {
+    $type: "cosmos.group.v1.Vote",
     proposalId: Long.UZERO,
     voter: "",
     option: 0,
@@ -1492,6 +1589,8 @@ function createBaseVote(): Vote {
 }
 
 export const Vote = {
+  $type: "cosmos.group.v1.Vote" as const,
+
   encode(message: Vote, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
@@ -1548,6 +1647,7 @@ export const Vote = {
 
   fromJSON(object: any): Vote {
     return {
+      $type: Vote.$type,
       proposalId: isSet(object.proposalId)
         ? Long.fromString(object.proposalId)
         : Long.UZERO,
@@ -1587,6 +1687,8 @@ export const Vote = {
   },
 };
 
+messageTypeRegistry.set(Vote.$type, Vote);
+
 type Builtin =
   | Date
   | Function
@@ -1605,21 +1707,21 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = (date.getTime() % 1_000) * 1_000_000;
-  return { seconds, nanos };
+  return { $type: "google.protobuf.Timestamp", seconds, nanos };
 }
 
 function fromTimestamp(t: Timestamp): Date {

@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Any } from "../../../../google/protobuf/any";
@@ -93,6 +94,7 @@ export function signModeToJSON(object: SignMode): string {
 
 /** SignatureDescriptors wraps multiple SignatureDescriptor's. */
 export interface SignatureDescriptors {
+  $type: "cosmos.tx.signing.v1beta1.SignatureDescriptors";
   /** signatures are the signature descriptors */
   signatures: SignatureDescriptor[];
 }
@@ -104,9 +106,10 @@ export interface SignatureDescriptors {
  * clients.
  */
 export interface SignatureDescriptor {
+  $type: "cosmos.tx.signing.v1beta1.SignatureDescriptor";
   /** public_key is the public key of the signer */
-  publicKey?: Any;
-  data?: SignatureDescriptor_Data;
+  publicKey: Any;
+  data: SignatureDescriptor_Data;
   /**
    * sequence is the sequence of the account, which describes the
    * number of committed transactions signed by a given address. It is used to prevent
@@ -117,14 +120,16 @@ export interface SignatureDescriptor {
 
 /** Data represents signature data */
 export interface SignatureDescriptor_Data {
+  $type: "cosmos.tx.signing.v1beta1.SignatureDescriptor.Data";
   /** single represents a single signer */
-  single?: SignatureDescriptor_Data_Single | undefined;
+  single: SignatureDescriptor_Data_Single | undefined;
   /** multi represents a multisig signer */
-  multi?: SignatureDescriptor_Data_Multi | undefined;
+  multi: SignatureDescriptor_Data_Multi | undefined;
 }
 
 /** Single is the signature data for a single signer */
 export interface SignatureDescriptor_Data_Single {
+  $type: "cosmos.tx.signing.v1beta1.SignatureDescriptor.Data.Single";
   /** mode is the signing mode of the single signer */
   mode: SignMode;
   /** signature is the raw signature bytes */
@@ -133,17 +138,23 @@ export interface SignatureDescriptor_Data_Single {
 
 /** Multi is the signature data for a multisig public key */
 export interface SignatureDescriptor_Data_Multi {
+  $type: "cosmos.tx.signing.v1beta1.SignatureDescriptor.Data.Multi";
   /** bitarray specifies which keys within the multisig are signing */
-  bitarray?: CompactBitArray;
+  bitarray: CompactBitArray;
   /** signatures is the signatures of the multi-signature */
   signatures: SignatureDescriptor_Data[];
 }
 
 function createBaseSignatureDescriptors(): SignatureDescriptors {
-  return { signatures: [] };
+  return {
+    $type: "cosmos.tx.signing.v1beta1.SignatureDescriptors",
+    signatures: [],
+  };
 }
 
 export const SignatureDescriptors = {
+  $type: "cosmos.tx.signing.v1beta1.SignatureDescriptors" as const,
+
   encode(
     message: SignatureDescriptors,
     writer: _m0.Writer = _m0.Writer.create()
@@ -179,6 +190,7 @@ export const SignatureDescriptors = {
 
   fromJSON(object: any): SignatureDescriptors {
     return {
+      $type: SignatureDescriptors.$type,
       signatures: Array.isArray(object?.signatures)
         ? object.signatures.map((e: any) => SignatureDescriptor.fromJSON(e))
         : [],
@@ -207,11 +219,20 @@ export const SignatureDescriptors = {
   },
 };
 
+messageTypeRegistry.set(SignatureDescriptors.$type, SignatureDescriptors);
+
 function createBaseSignatureDescriptor(): SignatureDescriptor {
-  return { publicKey: undefined, data: undefined, sequence: Long.UZERO };
+  return {
+    $type: "cosmos.tx.signing.v1beta1.SignatureDescriptor",
+    publicKey: undefined,
+    data: undefined,
+    sequence: Long.UZERO,
+  };
 }
 
 export const SignatureDescriptor = {
+  $type: "cosmos.tx.signing.v1beta1.SignatureDescriptor" as const,
+
   encode(
     message: SignatureDescriptor,
     writer: _m0.Writer = _m0.Writer.create()
@@ -260,6 +281,7 @@ export const SignatureDescriptor = {
 
   fromJSON(object: any): SignatureDescriptor {
     return {
+      $type: SignatureDescriptor.$type,
       publicKey: isSet(object.publicKey)
         ? Any.fromJSON(object.publicKey)
         : undefined,
@@ -307,11 +329,19 @@ export const SignatureDescriptor = {
   },
 };
 
+messageTypeRegistry.set(SignatureDescriptor.$type, SignatureDescriptor);
+
 function createBaseSignatureDescriptor_Data(): SignatureDescriptor_Data {
-  return { single: undefined, multi: undefined };
+  return {
+    $type: "cosmos.tx.signing.v1beta1.SignatureDescriptor.Data",
+    single: undefined,
+    multi: undefined,
+  };
 }
 
 export const SignatureDescriptor_Data = {
+  $type: "cosmos.tx.signing.v1beta1.SignatureDescriptor.Data" as const,
+
   encode(
     message: SignatureDescriptor_Data,
     writer: _m0.Writer = _m0.Writer.create()
@@ -363,6 +393,7 @@ export const SignatureDescriptor_Data = {
 
   fromJSON(object: any): SignatureDescriptor_Data {
     return {
+      $type: SignatureDescriptor_Data.$type,
       single: isSet(object.single)
         ? SignatureDescriptor_Data_Single.fromJSON(object.single)
         : undefined,
@@ -401,11 +432,22 @@ export const SignatureDescriptor_Data = {
   },
 };
 
+messageTypeRegistry.set(
+  SignatureDescriptor_Data.$type,
+  SignatureDescriptor_Data
+);
+
 function createBaseSignatureDescriptor_Data_Single(): SignatureDescriptor_Data_Single {
-  return { mode: 0, signature: new Uint8Array() };
+  return {
+    $type: "cosmos.tx.signing.v1beta1.SignatureDescriptor.Data.Single",
+    mode: 0,
+    signature: new Uint8Array(),
+  };
 }
 
 export const SignatureDescriptor_Data_Single = {
+  $type: "cosmos.tx.signing.v1beta1.SignatureDescriptor.Data.Single" as const,
+
   encode(
     message: SignatureDescriptor_Data_Single,
     writer: _m0.Writer = _m0.Writer.create()
@@ -445,6 +487,7 @@ export const SignatureDescriptor_Data_Single = {
 
   fromJSON(object: any): SignatureDescriptor_Data_Single {
     return {
+      $type: SignatureDescriptor_Data_Single.$type,
       mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
       signature: isSet(object.signature)
         ? bytesFromBase64(object.signature)
@@ -472,11 +515,22 @@ export const SignatureDescriptor_Data_Single = {
   },
 };
 
+messageTypeRegistry.set(
+  SignatureDescriptor_Data_Single.$type,
+  SignatureDescriptor_Data_Single
+);
+
 function createBaseSignatureDescriptor_Data_Multi(): SignatureDescriptor_Data_Multi {
-  return { bitarray: undefined, signatures: [] };
+  return {
+    $type: "cosmos.tx.signing.v1beta1.SignatureDescriptor.Data.Multi",
+    bitarray: undefined,
+    signatures: [],
+  };
 }
 
 export const SignatureDescriptor_Data_Multi = {
+  $type: "cosmos.tx.signing.v1beta1.SignatureDescriptor.Data.Multi" as const,
+
   encode(
     message: SignatureDescriptor_Data_Multi,
     writer: _m0.Writer = _m0.Writer.create()
@@ -521,6 +575,7 @@ export const SignatureDescriptor_Data_Multi = {
 
   fromJSON(object: any): SignatureDescriptor_Data_Multi {
     return {
+      $type: SignatureDescriptor_Data_Multi.$type,
       bitarray: isSet(object.bitarray)
         ? CompactBitArray.fromJSON(object.bitarray)
         : undefined,
@@ -562,6 +617,11 @@ export const SignatureDescriptor_Data_Multi = {
     return message;
   },
 };
+
+messageTypeRegistry.set(
+  SignatureDescriptor_Data_Multi.$type,
+  SignatureDescriptor_Data_Multi
+);
 
 declare var self: any | undefined;
 declare var window: any | undefined;
@@ -615,14 +675,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

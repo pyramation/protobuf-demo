@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 
@@ -10,6 +11,7 @@ export const protobufPackage = "google.protobuf";
  * The JSON representation for `DoubleValue` is JSON number.
  */
 export interface DoubleValue {
+  $type: "google.protobuf.DoubleValue";
   /** The double value. */
   value: number;
 }
@@ -20,6 +22,7 @@ export interface DoubleValue {
  * The JSON representation for `FloatValue` is JSON number.
  */
 export interface FloatValue {
+  $type: "google.protobuf.FloatValue";
   /** The float value. */
   value: number;
 }
@@ -30,6 +33,7 @@ export interface FloatValue {
  * The JSON representation for `Int64Value` is JSON string.
  */
 export interface Int64Value {
+  $type: "google.protobuf.Int64Value";
   /** The int64 value. */
   value: Long;
 }
@@ -40,6 +44,7 @@ export interface Int64Value {
  * The JSON representation for `UInt64Value` is JSON string.
  */
 export interface UInt64Value {
+  $type: "google.protobuf.UInt64Value";
   /** The uint64 value. */
   value: Long;
 }
@@ -50,6 +55,7 @@ export interface UInt64Value {
  * The JSON representation for `Int32Value` is JSON number.
  */
 export interface Int32Value {
+  $type: "google.protobuf.Int32Value";
   /** The int32 value. */
   value: number;
 }
@@ -60,6 +66,7 @@ export interface Int32Value {
  * The JSON representation for `UInt32Value` is JSON number.
  */
 export interface UInt32Value {
+  $type: "google.protobuf.UInt32Value";
   /** The uint32 value. */
   value: number;
 }
@@ -70,6 +77,7 @@ export interface UInt32Value {
  * The JSON representation for `BoolValue` is JSON `true` and `false`.
  */
 export interface BoolValue {
+  $type: "google.protobuf.BoolValue";
   /** The bool value. */
   value: boolean;
 }
@@ -80,6 +88,7 @@ export interface BoolValue {
  * The JSON representation for `StringValue` is JSON string.
  */
 export interface StringValue {
+  $type: "google.protobuf.StringValue";
   /** The string value. */
   value: string;
 }
@@ -90,15 +99,18 @@ export interface StringValue {
  * The JSON representation for `BytesValue` is JSON string.
  */
 export interface BytesValue {
+  $type: "google.protobuf.BytesValue";
   /** The bytes value. */
   value: Uint8Array;
 }
 
 function createBaseDoubleValue(): DoubleValue {
-  return { value: 0 };
+  return { $type: "google.protobuf.DoubleValue", value: 0 };
 }
 
 export const DoubleValue = {
+  $type: "google.protobuf.DoubleValue" as const,
+
   encode(
     message: DoubleValue,
     writer: _m0.Writer = _m0.Writer.create()
@@ -129,6 +141,7 @@ export const DoubleValue = {
 
   fromJSON(object: any): DoubleValue {
     return {
+      $type: DoubleValue.$type,
       value: isSet(object.value) ? Number(object.value) : 0,
     };
   },
@@ -148,11 +161,15 @@ export const DoubleValue = {
   },
 };
 
+messageTypeRegistry.set(DoubleValue.$type, DoubleValue);
+
 function createBaseFloatValue(): FloatValue {
-  return { value: 0 };
+  return { $type: "google.protobuf.FloatValue", value: 0 };
 }
 
 export const FloatValue = {
+  $type: "google.protobuf.FloatValue" as const,
+
   encode(
     message: FloatValue,
     writer: _m0.Writer = _m0.Writer.create()
@@ -183,6 +200,7 @@ export const FloatValue = {
 
   fromJSON(object: any): FloatValue {
     return {
+      $type: FloatValue.$type,
       value: isSet(object.value) ? Number(object.value) : 0,
     };
   },
@@ -202,11 +220,15 @@ export const FloatValue = {
   },
 };
 
+messageTypeRegistry.set(FloatValue.$type, FloatValue);
+
 function createBaseInt64Value(): Int64Value {
-  return { value: Long.ZERO };
+  return { $type: "google.protobuf.Int64Value", value: Long.ZERO };
 }
 
 export const Int64Value = {
+  $type: "google.protobuf.Int64Value" as const,
+
   encode(
     message: Int64Value,
     writer: _m0.Writer = _m0.Writer.create()
@@ -237,6 +259,7 @@ export const Int64Value = {
 
   fromJSON(object: any): Int64Value {
     return {
+      $type: Int64Value.$type,
       value: isSet(object.value) ? Long.fromString(object.value) : Long.ZERO,
     };
   },
@@ -260,11 +283,15 @@ export const Int64Value = {
   },
 };
 
+messageTypeRegistry.set(Int64Value.$type, Int64Value);
+
 function createBaseUInt64Value(): UInt64Value {
-  return { value: Long.UZERO };
+  return { $type: "google.protobuf.UInt64Value", value: Long.UZERO };
 }
 
 export const UInt64Value = {
+  $type: "google.protobuf.UInt64Value" as const,
+
   encode(
     message: UInt64Value,
     writer: _m0.Writer = _m0.Writer.create()
@@ -295,6 +322,7 @@ export const UInt64Value = {
 
   fromJSON(object: any): UInt64Value {
     return {
+      $type: UInt64Value.$type,
       value: isSet(object.value) ? Long.fromString(object.value) : Long.UZERO,
     };
   },
@@ -318,11 +346,15 @@ export const UInt64Value = {
   },
 };
 
+messageTypeRegistry.set(UInt64Value.$type, UInt64Value);
+
 function createBaseInt32Value(): Int32Value {
-  return { value: 0 };
+  return { $type: "google.protobuf.Int32Value", value: 0 };
 }
 
 export const Int32Value = {
+  $type: "google.protobuf.Int32Value" as const,
+
   encode(
     message: Int32Value,
     writer: _m0.Writer = _m0.Writer.create()
@@ -353,6 +385,7 @@ export const Int32Value = {
 
   fromJSON(object: any): Int32Value {
     return {
+      $type: Int32Value.$type,
       value: isSet(object.value) ? Number(object.value) : 0,
     };
   },
@@ -372,11 +405,15 @@ export const Int32Value = {
   },
 };
 
+messageTypeRegistry.set(Int32Value.$type, Int32Value);
+
 function createBaseUInt32Value(): UInt32Value {
-  return { value: 0 };
+  return { $type: "google.protobuf.UInt32Value", value: 0 };
 }
 
 export const UInt32Value = {
+  $type: "google.protobuf.UInt32Value" as const,
+
   encode(
     message: UInt32Value,
     writer: _m0.Writer = _m0.Writer.create()
@@ -407,6 +444,7 @@ export const UInt32Value = {
 
   fromJSON(object: any): UInt32Value {
     return {
+      $type: UInt32Value.$type,
       value: isSet(object.value) ? Number(object.value) : 0,
     };
   },
@@ -426,11 +464,15 @@ export const UInt32Value = {
   },
 };
 
+messageTypeRegistry.set(UInt32Value.$type, UInt32Value);
+
 function createBaseBoolValue(): BoolValue {
-  return { value: false };
+  return { $type: "google.protobuf.BoolValue", value: false };
 }
 
 export const BoolValue = {
+  $type: "google.protobuf.BoolValue" as const,
+
   encode(
     message: BoolValue,
     writer: _m0.Writer = _m0.Writer.create()
@@ -461,6 +503,7 @@ export const BoolValue = {
 
   fromJSON(object: any): BoolValue {
     return {
+      $type: BoolValue.$type,
       value: isSet(object.value) ? Boolean(object.value) : false,
     };
   },
@@ -480,11 +523,15 @@ export const BoolValue = {
   },
 };
 
+messageTypeRegistry.set(BoolValue.$type, BoolValue);
+
 function createBaseStringValue(): StringValue {
-  return { value: "" };
+  return { $type: "google.protobuf.StringValue", value: "" };
 }
 
 export const StringValue = {
+  $type: "google.protobuf.StringValue" as const,
+
   encode(
     message: StringValue,
     writer: _m0.Writer = _m0.Writer.create()
@@ -515,6 +562,7 @@ export const StringValue = {
 
   fromJSON(object: any): StringValue {
     return {
+      $type: StringValue.$type,
       value: isSet(object.value) ? String(object.value) : "",
     };
   },
@@ -534,11 +582,15 @@ export const StringValue = {
   },
 };
 
+messageTypeRegistry.set(StringValue.$type, StringValue);
+
 function createBaseBytesValue(): BytesValue {
-  return { value: new Uint8Array() };
+  return { $type: "google.protobuf.BytesValue", value: new Uint8Array() };
 }
 
 export const BytesValue = {
+  $type: "google.protobuf.BytesValue" as const,
+
   encode(
     message: BytesValue,
     writer: _m0.Writer = _m0.Writer.create()
@@ -569,6 +621,7 @@ export const BytesValue = {
 
   fromJSON(object: any): BytesValue {
     return {
+      $type: BytesValue.$type,
       value: isSet(object.value)
         ? bytesFromBase64(object.value)
         : new Uint8Array(),
@@ -592,6 +645,8 @@ export const BytesValue = {
     return message;
   },
 };
+
+messageTypeRegistry.set(BytesValue.$type, BytesValue);
 
 declare var self: any | undefined;
 declare var window: any | undefined;
@@ -645,14 +700,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

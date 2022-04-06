@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Params } from "../../osmosis/superfluid/params";
@@ -19,36 +20,47 @@ import { SyntheticLock } from "../../osmosis/lockup/lock";
 
 export const protobufPackage = "osmosis.superfluid";
 
-export interface QueryParamsRequest {}
+export interface QueryParamsRequest {
+  $type: "osmosis.superfluid.QueryParamsRequest";
+}
 
 export interface QueryParamsResponse {
+  $type: "osmosis.superfluid.QueryParamsResponse";
   /** params defines the parameters of the module. */
-  params?: Params;
+  params: Params;
 }
 
 export interface AssetTypeRequest {
+  $type: "osmosis.superfluid.AssetTypeRequest";
   denom: string;
 }
 
 export interface AssetTypeResponse {
+  $type: "osmosis.superfluid.AssetTypeResponse";
   assetType: SuperfluidAssetType;
 }
 
-export interface AllAssetsRequest {}
+export interface AllAssetsRequest {
+  $type: "osmosis.superfluid.AllAssetsRequest";
+}
 
 export interface AllAssetsResponse {
+  $type: "osmosis.superfluid.AllAssetsResponse";
   assets: SuperfluidAsset[];
 }
 
 export interface AssetMultiplierRequest {
+  $type: "osmosis.superfluid.AssetMultiplierRequest";
   denom: string;
 }
 
 export interface AssetMultiplierResponse {
-  osmoEquivalentMultiplier?: OsmoEquivalentMultiplierRecord;
+  $type: "osmosis.superfluid.AssetMultiplierResponse";
+  osmoEquivalentMultiplier: OsmoEquivalentMultiplierRecord;
 }
 
 export interface SuperfluidIntermediaryAccountInfo {
+  $type: "osmosis.superfluid.SuperfluidIntermediaryAccountInfo";
   denom: string;
   valAddr: string;
   gaugeId: Long;
@@ -56,81 +68,100 @@ export interface SuperfluidIntermediaryAccountInfo {
 }
 
 export interface AllIntermediaryAccountsRequest {
-  pagination?: PageRequest;
+  $type: "osmosis.superfluid.AllIntermediaryAccountsRequest";
+  pagination: PageRequest;
 }
 
 export interface AllIntermediaryAccountsResponse {
+  $type: "osmosis.superfluid.AllIntermediaryAccountsResponse";
   accounts: SuperfluidIntermediaryAccountInfo[];
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 
 export interface ConnectedIntermediaryAccountRequest {
+  $type: "osmosis.superfluid.ConnectedIntermediaryAccountRequest";
   lockId: Long;
 }
 
 export interface ConnectedIntermediaryAccountResponse {
-  account?: SuperfluidIntermediaryAccountInfo;
+  $type: "osmosis.superfluid.ConnectedIntermediaryAccountResponse";
+  account: SuperfluidIntermediaryAccountInfo;
 }
 
-export interface TotalSuperfluidDelegationsRequest {}
+export interface TotalSuperfluidDelegationsRequest {
+  $type: "osmosis.superfluid.TotalSuperfluidDelegationsRequest";
+}
 
 export interface TotalSuperfluidDelegationsResponse {
+  $type: "osmosis.superfluid.TotalSuperfluidDelegationsResponse";
   totalDelegations: string;
 }
 
 export interface SuperfluidDelegationAmountRequest {
+  $type: "osmosis.superfluid.SuperfluidDelegationAmountRequest";
   delegatorAddress: string;
   validatorAddress: string;
   denom: string;
 }
 
 export interface SuperfluidDelegationAmountResponse {
+  $type: "osmosis.superfluid.SuperfluidDelegationAmountResponse";
   amount: Coin[];
 }
 
 export interface SuperfluidDelegationsByDelegatorRequest {
+  $type: "osmosis.superfluid.SuperfluidDelegationsByDelegatorRequest";
   delegatorAddress: string;
 }
 
 export interface SuperfluidDelegationsByDelegatorResponse {
+  $type: "osmosis.superfluid.SuperfluidDelegationsByDelegatorResponse";
   superfluidDelegationRecords: SuperfluidDelegationRecord[];
   totalDelegatedCoins: Coin[];
 }
 
 export interface SuperfluidUndelegationsByDelegatorRequest {
+  $type: "osmosis.superfluid.SuperfluidUndelegationsByDelegatorRequest";
   delegatorAddress: string;
   denom: string;
 }
 
 export interface SuperfluidUndelegationsByDelegatorResponse {
+  $type: "osmosis.superfluid.SuperfluidUndelegationsByDelegatorResponse";
   superfluidDelegationRecords: SuperfluidDelegationRecord[];
   totalUndelegatedCoins: Coin[];
   syntheticLocks: SyntheticLock[];
 }
 
 export interface SuperfluidDelegationsByValidatorDenomRequest {
+  $type: "osmosis.superfluid.SuperfluidDelegationsByValidatorDenomRequest";
   validatorAddress: string;
   denom: string;
 }
 
 export interface SuperfluidDelegationsByValidatorDenomResponse {
+  $type: "osmosis.superfluid.SuperfluidDelegationsByValidatorDenomResponse";
   superfluidDelegationRecords: SuperfluidDelegationRecord[];
 }
 
 export interface EstimateSuperfluidDelegatedAmountByValidatorDenomRequest {
+  $type: "osmosis.superfluid.EstimateSuperfluidDelegatedAmountByValidatorDenomRequest";
   validatorAddress: string;
   denom: string;
 }
 
 export interface EstimateSuperfluidDelegatedAmountByValidatorDenomResponse {
+  $type: "osmosis.superfluid.EstimateSuperfluidDelegatedAmountByValidatorDenomResponse";
   totalDelegatedCoins: Coin[];
 }
 
 function createBaseQueryParamsRequest(): QueryParamsRequest {
-  return {};
+  return { $type: "osmosis.superfluid.QueryParamsRequest" };
 }
 
 export const QueryParamsRequest = {
+  $type: "osmosis.superfluid.QueryParamsRequest" as const,
+
   encode(
     _: QueryParamsRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -154,7 +185,9 @@ export const QueryParamsRequest = {
   },
 
   fromJSON(_: any): QueryParamsRequest {
-    return {};
+    return {
+      $type: QueryParamsRequest.$type,
+    };
   },
 
   toJSON(_: QueryParamsRequest): unknown {
@@ -170,11 +203,15 @@ export const QueryParamsRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryParamsRequest.$type, QueryParamsRequest);
+
 function createBaseQueryParamsResponse(): QueryParamsResponse {
-  return { params: undefined };
+  return { $type: "osmosis.superfluid.QueryParamsResponse", params: undefined };
 }
 
 export const QueryParamsResponse = {
+  $type: "osmosis.superfluid.QueryParamsResponse" as const,
+
   encode(
     message: QueryParamsResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -205,6 +242,7 @@ export const QueryParamsResponse = {
 
   fromJSON(object: any): QueryParamsResponse {
     return {
+      $type: QueryParamsResponse.$type,
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
     };
   },
@@ -228,11 +266,15 @@ export const QueryParamsResponse = {
   },
 };
 
+messageTypeRegistry.set(QueryParamsResponse.$type, QueryParamsResponse);
+
 function createBaseAssetTypeRequest(): AssetTypeRequest {
-  return { denom: "" };
+  return { $type: "osmosis.superfluid.AssetTypeRequest", denom: "" };
 }
 
 export const AssetTypeRequest = {
+  $type: "osmosis.superfluid.AssetTypeRequest" as const,
+
   encode(
     message: AssetTypeRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -263,6 +305,7 @@ export const AssetTypeRequest = {
 
   fromJSON(object: any): AssetTypeRequest {
     return {
+      $type: AssetTypeRequest.$type,
       denom: isSet(object.denom) ? String(object.denom) : "",
     };
   },
@@ -282,11 +325,15 @@ export const AssetTypeRequest = {
   },
 };
 
+messageTypeRegistry.set(AssetTypeRequest.$type, AssetTypeRequest);
+
 function createBaseAssetTypeResponse(): AssetTypeResponse {
-  return { assetType: 0 };
+  return { $type: "osmosis.superfluid.AssetTypeResponse", assetType: 0 };
 }
 
 export const AssetTypeResponse = {
+  $type: "osmosis.superfluid.AssetTypeResponse" as const,
+
   encode(
     message: AssetTypeResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -317,6 +364,7 @@ export const AssetTypeResponse = {
 
   fromJSON(object: any): AssetTypeResponse {
     return {
+      $type: AssetTypeResponse.$type,
       assetType: isSet(object.assetType)
         ? superfluidAssetTypeFromJSON(object.assetType)
         : 0,
@@ -339,11 +387,15 @@ export const AssetTypeResponse = {
   },
 };
 
+messageTypeRegistry.set(AssetTypeResponse.$type, AssetTypeResponse);
+
 function createBaseAllAssetsRequest(): AllAssetsRequest {
-  return {};
+  return { $type: "osmosis.superfluid.AllAssetsRequest" };
 }
 
 export const AllAssetsRequest = {
+  $type: "osmosis.superfluid.AllAssetsRequest" as const,
+
   encode(
     _: AllAssetsRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -367,7 +419,9 @@ export const AllAssetsRequest = {
   },
 
   fromJSON(_: any): AllAssetsRequest {
-    return {};
+    return {
+      $type: AllAssetsRequest.$type,
+    };
   },
 
   toJSON(_: AllAssetsRequest): unknown {
@@ -383,11 +437,15 @@ export const AllAssetsRequest = {
   },
 };
 
+messageTypeRegistry.set(AllAssetsRequest.$type, AllAssetsRequest);
+
 function createBaseAllAssetsResponse(): AllAssetsResponse {
-  return { assets: [] };
+  return { $type: "osmosis.superfluid.AllAssetsResponse", assets: [] };
 }
 
 export const AllAssetsResponse = {
+  $type: "osmosis.superfluid.AllAssetsResponse" as const,
+
   encode(
     message: AllAssetsResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -418,6 +476,7 @@ export const AllAssetsResponse = {
 
   fromJSON(object: any): AllAssetsResponse {
     return {
+      $type: AllAssetsResponse.$type,
       assets: Array.isArray(object?.assets)
         ? object.assets.map((e: any) => SuperfluidAsset.fromJSON(e))
         : [],
@@ -446,11 +505,15 @@ export const AllAssetsResponse = {
   },
 };
 
+messageTypeRegistry.set(AllAssetsResponse.$type, AllAssetsResponse);
+
 function createBaseAssetMultiplierRequest(): AssetMultiplierRequest {
-  return { denom: "" };
+  return { $type: "osmosis.superfluid.AssetMultiplierRequest", denom: "" };
 }
 
 export const AssetMultiplierRequest = {
+  $type: "osmosis.superfluid.AssetMultiplierRequest" as const,
+
   encode(
     message: AssetMultiplierRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -484,6 +547,7 @@ export const AssetMultiplierRequest = {
 
   fromJSON(object: any): AssetMultiplierRequest {
     return {
+      $type: AssetMultiplierRequest.$type,
       denom: isSet(object.denom) ? String(object.denom) : "",
     };
   },
@@ -503,11 +567,18 @@ export const AssetMultiplierRequest = {
   },
 };
 
+messageTypeRegistry.set(AssetMultiplierRequest.$type, AssetMultiplierRequest);
+
 function createBaseAssetMultiplierResponse(): AssetMultiplierResponse {
-  return { osmoEquivalentMultiplier: undefined };
+  return {
+    $type: "osmosis.superfluid.AssetMultiplierResponse",
+    osmoEquivalentMultiplier: undefined,
+  };
 }
 
 export const AssetMultiplierResponse = {
+  $type: "osmosis.superfluid.AssetMultiplierResponse" as const,
+
   encode(
     message: AssetMultiplierResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -545,6 +616,7 @@ export const AssetMultiplierResponse = {
 
   fromJSON(object: any): AssetMultiplierResponse {
     return {
+      $type: AssetMultiplierResponse.$type,
       osmoEquivalentMultiplier: isSet(object.osmoEquivalentMultiplier)
         ? OsmoEquivalentMultiplierRecord.fromJSON(
             object.osmoEquivalentMultiplier
@@ -579,11 +651,21 @@ export const AssetMultiplierResponse = {
   },
 };
 
+messageTypeRegistry.set(AssetMultiplierResponse.$type, AssetMultiplierResponse);
+
 function createBaseSuperfluidIntermediaryAccountInfo(): SuperfluidIntermediaryAccountInfo {
-  return { denom: "", valAddr: "", gaugeId: Long.UZERO, address: "" };
+  return {
+    $type: "osmosis.superfluid.SuperfluidIntermediaryAccountInfo",
+    denom: "",
+    valAddr: "",
+    gaugeId: Long.UZERO,
+    address: "",
+  };
 }
 
 export const SuperfluidIntermediaryAccountInfo = {
+  $type: "osmosis.superfluid.SuperfluidIntermediaryAccountInfo" as const,
+
   encode(
     message: SuperfluidIntermediaryAccountInfo,
     writer: _m0.Writer = _m0.Writer.create()
@@ -635,6 +717,7 @@ export const SuperfluidIntermediaryAccountInfo = {
 
   fromJSON(object: any): SuperfluidIntermediaryAccountInfo {
     return {
+      $type: SuperfluidIntermediaryAccountInfo.$type,
       denom: isSet(object.denom) ? String(object.denom) : "",
       valAddr: isSet(object.valAddr) ? String(object.valAddr) : "",
       gaugeId: isSet(object.gaugeId)
@@ -669,11 +752,21 @@ export const SuperfluidIntermediaryAccountInfo = {
   },
 };
 
+messageTypeRegistry.set(
+  SuperfluidIntermediaryAccountInfo.$type,
+  SuperfluidIntermediaryAccountInfo
+);
+
 function createBaseAllIntermediaryAccountsRequest(): AllIntermediaryAccountsRequest {
-  return { pagination: undefined };
+  return {
+    $type: "osmosis.superfluid.AllIntermediaryAccountsRequest",
+    pagination: undefined,
+  };
 }
 
 export const AllIntermediaryAccountsRequest = {
+  $type: "osmosis.superfluid.AllIntermediaryAccountsRequest" as const,
+
   encode(
     message: AllIntermediaryAccountsRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -707,6 +800,7 @@ export const AllIntermediaryAccountsRequest = {
 
   fromJSON(object: any): AllIntermediaryAccountsRequest {
     return {
+      $type: AllIntermediaryAccountsRequest.$type,
       pagination: isSet(object.pagination)
         ? PageRequest.fromJSON(object.pagination)
         : undefined,
@@ -734,11 +828,22 @@ export const AllIntermediaryAccountsRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  AllIntermediaryAccountsRequest.$type,
+  AllIntermediaryAccountsRequest
+);
+
 function createBaseAllIntermediaryAccountsResponse(): AllIntermediaryAccountsResponse {
-  return { accounts: [], pagination: undefined };
+  return {
+    $type: "osmosis.superfluid.AllIntermediaryAccountsResponse",
+    accounts: [],
+    pagination: undefined,
+  };
 }
 
 export const AllIntermediaryAccountsResponse = {
+  $type: "osmosis.superfluid.AllIntermediaryAccountsResponse" as const,
+
   encode(
     message: AllIntermediaryAccountsResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -786,6 +891,7 @@ export const AllIntermediaryAccountsResponse = {
 
   fromJSON(object: any): AllIntermediaryAccountsResponse {
     return {
+      $type: AllIntermediaryAccountsResponse.$type,
       accounts: Array.isArray(object?.accounts)
         ? object.accounts.map((e: any) =>
             SuperfluidIntermediaryAccountInfo.fromJSON(e)
@@ -829,11 +935,21 @@ export const AllIntermediaryAccountsResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  AllIntermediaryAccountsResponse.$type,
+  AllIntermediaryAccountsResponse
+);
+
 function createBaseConnectedIntermediaryAccountRequest(): ConnectedIntermediaryAccountRequest {
-  return { lockId: Long.UZERO };
+  return {
+    $type: "osmosis.superfluid.ConnectedIntermediaryAccountRequest",
+    lockId: Long.UZERO,
+  };
 }
 
 export const ConnectedIntermediaryAccountRequest = {
+  $type: "osmosis.superfluid.ConnectedIntermediaryAccountRequest" as const,
+
   encode(
     message: ConnectedIntermediaryAccountRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -867,6 +983,7 @@ export const ConnectedIntermediaryAccountRequest = {
 
   fromJSON(object: any): ConnectedIntermediaryAccountRequest {
     return {
+      $type: ConnectedIntermediaryAccountRequest.$type,
       lockId: isSet(object.lockId)
         ? Long.fromString(object.lockId)
         : Long.UZERO,
@@ -892,11 +1009,21 @@ export const ConnectedIntermediaryAccountRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  ConnectedIntermediaryAccountRequest.$type,
+  ConnectedIntermediaryAccountRequest
+);
+
 function createBaseConnectedIntermediaryAccountResponse(): ConnectedIntermediaryAccountResponse {
-  return { account: undefined };
+  return {
+    $type: "osmosis.superfluid.ConnectedIntermediaryAccountResponse",
+    account: undefined,
+  };
 }
 
 export const ConnectedIntermediaryAccountResponse = {
+  $type: "osmosis.superfluid.ConnectedIntermediaryAccountResponse" as const,
+
   encode(
     message: ConnectedIntermediaryAccountResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -936,6 +1063,7 @@ export const ConnectedIntermediaryAccountResponse = {
 
   fromJSON(object: any): ConnectedIntermediaryAccountResponse {
     return {
+      $type: ConnectedIntermediaryAccountResponse.$type,
       account: isSet(object.account)
         ? SuperfluidIntermediaryAccountInfo.fromJSON(object.account)
         : undefined,
@@ -963,11 +1091,18 @@ export const ConnectedIntermediaryAccountResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  ConnectedIntermediaryAccountResponse.$type,
+  ConnectedIntermediaryAccountResponse
+);
+
 function createBaseTotalSuperfluidDelegationsRequest(): TotalSuperfluidDelegationsRequest {
-  return {};
+  return { $type: "osmosis.superfluid.TotalSuperfluidDelegationsRequest" };
 }
 
 export const TotalSuperfluidDelegationsRequest = {
+  $type: "osmosis.superfluid.TotalSuperfluidDelegationsRequest" as const,
+
   encode(
     _: TotalSuperfluidDelegationsRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -994,7 +1129,9 @@ export const TotalSuperfluidDelegationsRequest = {
   },
 
   fromJSON(_: any): TotalSuperfluidDelegationsRequest {
-    return {};
+    return {
+      $type: TotalSuperfluidDelegationsRequest.$type,
+    };
   },
 
   toJSON(_: TotalSuperfluidDelegationsRequest): unknown {
@@ -1010,11 +1147,21 @@ export const TotalSuperfluidDelegationsRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  TotalSuperfluidDelegationsRequest.$type,
+  TotalSuperfluidDelegationsRequest
+);
+
 function createBaseTotalSuperfluidDelegationsResponse(): TotalSuperfluidDelegationsResponse {
-  return { totalDelegations: "" };
+  return {
+    $type: "osmosis.superfluid.TotalSuperfluidDelegationsResponse",
+    totalDelegations: "",
+  };
 }
 
 export const TotalSuperfluidDelegationsResponse = {
+  $type: "osmosis.superfluid.TotalSuperfluidDelegationsResponse" as const,
+
   encode(
     message: TotalSuperfluidDelegationsResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1048,6 +1195,7 @@ export const TotalSuperfluidDelegationsResponse = {
 
   fromJSON(object: any): TotalSuperfluidDelegationsResponse {
     return {
+      $type: TotalSuperfluidDelegationsResponse.$type,
       totalDelegations: isSet(object.totalDelegations)
         ? String(object.totalDelegations)
         : "",
@@ -1070,11 +1218,23 @@ export const TotalSuperfluidDelegationsResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  TotalSuperfluidDelegationsResponse.$type,
+  TotalSuperfluidDelegationsResponse
+);
+
 function createBaseSuperfluidDelegationAmountRequest(): SuperfluidDelegationAmountRequest {
-  return { delegatorAddress: "", validatorAddress: "", denom: "" };
+  return {
+    $type: "osmosis.superfluid.SuperfluidDelegationAmountRequest",
+    delegatorAddress: "",
+    validatorAddress: "",
+    denom: "",
+  };
 }
 
 export const SuperfluidDelegationAmountRequest = {
+  $type: "osmosis.superfluid.SuperfluidDelegationAmountRequest" as const,
+
   encode(
     message: SuperfluidDelegationAmountRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1120,6 +1280,7 @@ export const SuperfluidDelegationAmountRequest = {
 
   fromJSON(object: any): SuperfluidDelegationAmountRequest {
     return {
+      $type: SuperfluidDelegationAmountRequest.$type,
       delegatorAddress: isSet(object.delegatorAddress)
         ? String(object.delegatorAddress)
         : "",
@@ -1151,11 +1312,21 @@ export const SuperfluidDelegationAmountRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  SuperfluidDelegationAmountRequest.$type,
+  SuperfluidDelegationAmountRequest
+);
+
 function createBaseSuperfluidDelegationAmountResponse(): SuperfluidDelegationAmountResponse {
-  return { amount: [] };
+  return {
+    $type: "osmosis.superfluid.SuperfluidDelegationAmountResponse",
+    amount: [],
+  };
 }
 
 export const SuperfluidDelegationAmountResponse = {
+  $type: "osmosis.superfluid.SuperfluidDelegationAmountResponse" as const,
+
   encode(
     message: SuperfluidDelegationAmountResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1189,6 +1360,7 @@ export const SuperfluidDelegationAmountResponse = {
 
   fromJSON(object: any): SuperfluidDelegationAmountResponse {
     return {
+      $type: SuperfluidDelegationAmountResponse.$type,
       amount: Array.isArray(object?.amount)
         ? object.amount.map((e: any) => Coin.fromJSON(e))
         : [],
@@ -1214,11 +1386,21 @@ export const SuperfluidDelegationAmountResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  SuperfluidDelegationAmountResponse.$type,
+  SuperfluidDelegationAmountResponse
+);
+
 function createBaseSuperfluidDelegationsByDelegatorRequest(): SuperfluidDelegationsByDelegatorRequest {
-  return { delegatorAddress: "" };
+  return {
+    $type: "osmosis.superfluid.SuperfluidDelegationsByDelegatorRequest",
+    delegatorAddress: "",
+  };
 }
 
 export const SuperfluidDelegationsByDelegatorRequest = {
+  $type: "osmosis.superfluid.SuperfluidDelegationsByDelegatorRequest" as const,
+
   encode(
     message: SuperfluidDelegationsByDelegatorRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1252,6 +1434,7 @@ export const SuperfluidDelegationsByDelegatorRequest = {
 
   fromJSON(object: any): SuperfluidDelegationsByDelegatorRequest {
     return {
+      $type: SuperfluidDelegationsByDelegatorRequest.$type,
       delegatorAddress: isSet(object.delegatorAddress)
         ? String(object.delegatorAddress)
         : "",
@@ -1274,11 +1457,22 @@ export const SuperfluidDelegationsByDelegatorRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  SuperfluidDelegationsByDelegatorRequest.$type,
+  SuperfluidDelegationsByDelegatorRequest
+);
+
 function createBaseSuperfluidDelegationsByDelegatorResponse(): SuperfluidDelegationsByDelegatorResponse {
-  return { superfluidDelegationRecords: [], totalDelegatedCoins: [] };
+  return {
+    $type: "osmosis.superfluid.SuperfluidDelegationsByDelegatorResponse",
+    superfluidDelegationRecords: [],
+    totalDelegatedCoins: [],
+  };
 }
 
 export const SuperfluidDelegationsByDelegatorResponse = {
+  $type: "osmosis.superfluid.SuperfluidDelegationsByDelegatorResponse" as const,
+
   encode(
     message: SuperfluidDelegationsByDelegatorResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1322,6 +1516,7 @@ export const SuperfluidDelegationsByDelegatorResponse = {
 
   fromJSON(object: any): SuperfluidDelegationsByDelegatorResponse {
     return {
+      $type: SuperfluidDelegationsByDelegatorResponse.$type,
       superfluidDelegationRecords: Array.isArray(
         object?.superfluidDelegationRecords
       )
@@ -1368,11 +1563,23 @@ export const SuperfluidDelegationsByDelegatorResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  SuperfluidDelegationsByDelegatorResponse.$type,
+  SuperfluidDelegationsByDelegatorResponse
+);
+
 function createBaseSuperfluidUndelegationsByDelegatorRequest(): SuperfluidUndelegationsByDelegatorRequest {
-  return { delegatorAddress: "", denom: "" };
+  return {
+    $type: "osmosis.superfluid.SuperfluidUndelegationsByDelegatorRequest",
+    delegatorAddress: "",
+    denom: "",
+  };
 }
 
 export const SuperfluidUndelegationsByDelegatorRequest = {
+  $type:
+    "osmosis.superfluid.SuperfluidUndelegationsByDelegatorRequest" as const,
+
   encode(
     message: SuperfluidUndelegationsByDelegatorRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1412,6 +1619,7 @@ export const SuperfluidUndelegationsByDelegatorRequest = {
 
   fromJSON(object: any): SuperfluidUndelegationsByDelegatorRequest {
     return {
+      $type: SuperfluidUndelegationsByDelegatorRequest.$type,
       delegatorAddress: isSet(object.delegatorAddress)
         ? String(object.delegatorAddress)
         : "",
@@ -1437,8 +1645,14 @@ export const SuperfluidUndelegationsByDelegatorRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  SuperfluidUndelegationsByDelegatorRequest.$type,
+  SuperfluidUndelegationsByDelegatorRequest
+);
+
 function createBaseSuperfluidUndelegationsByDelegatorResponse(): SuperfluidUndelegationsByDelegatorResponse {
   return {
+    $type: "osmosis.superfluid.SuperfluidUndelegationsByDelegatorResponse",
     superfluidDelegationRecords: [],
     totalUndelegatedCoins: [],
     syntheticLocks: [],
@@ -1446,6 +1660,9 @@ function createBaseSuperfluidUndelegationsByDelegatorResponse(): SuperfluidUndel
 }
 
 export const SuperfluidUndelegationsByDelegatorResponse = {
+  $type:
+    "osmosis.superfluid.SuperfluidUndelegationsByDelegatorResponse" as const,
+
   encode(
     message: SuperfluidUndelegationsByDelegatorResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1497,6 +1714,7 @@ export const SuperfluidUndelegationsByDelegatorResponse = {
 
   fromJSON(object: any): SuperfluidUndelegationsByDelegatorResponse {
     return {
+      $type: SuperfluidUndelegationsByDelegatorResponse.$type,
       superfluidDelegationRecords: Array.isArray(
         object?.superfluidDelegationRecords
       )
@@ -1555,11 +1773,23 @@ export const SuperfluidUndelegationsByDelegatorResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  SuperfluidUndelegationsByDelegatorResponse.$type,
+  SuperfluidUndelegationsByDelegatorResponse
+);
+
 function createBaseSuperfluidDelegationsByValidatorDenomRequest(): SuperfluidDelegationsByValidatorDenomRequest {
-  return { validatorAddress: "", denom: "" };
+  return {
+    $type: "osmosis.superfluid.SuperfluidDelegationsByValidatorDenomRequest",
+    validatorAddress: "",
+    denom: "",
+  };
 }
 
 export const SuperfluidDelegationsByValidatorDenomRequest = {
+  $type:
+    "osmosis.superfluid.SuperfluidDelegationsByValidatorDenomRequest" as const,
+
   encode(
     message: SuperfluidDelegationsByValidatorDenomRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1599,6 +1829,7 @@ export const SuperfluidDelegationsByValidatorDenomRequest = {
 
   fromJSON(object: any): SuperfluidDelegationsByValidatorDenomRequest {
     return {
+      $type: SuperfluidDelegationsByValidatorDenomRequest.$type,
       validatorAddress: isSet(object.validatorAddress)
         ? String(object.validatorAddress)
         : "",
@@ -1627,11 +1858,22 @@ export const SuperfluidDelegationsByValidatorDenomRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  SuperfluidDelegationsByValidatorDenomRequest.$type,
+  SuperfluidDelegationsByValidatorDenomRequest
+);
+
 function createBaseSuperfluidDelegationsByValidatorDenomResponse(): SuperfluidDelegationsByValidatorDenomResponse {
-  return { superfluidDelegationRecords: [] };
+  return {
+    $type: "osmosis.superfluid.SuperfluidDelegationsByValidatorDenomResponse",
+    superfluidDelegationRecords: [],
+  };
 }
 
 export const SuperfluidDelegationsByValidatorDenomResponse = {
+  $type:
+    "osmosis.superfluid.SuperfluidDelegationsByValidatorDenomResponse" as const,
+
   encode(
     message: SuperfluidDelegationsByValidatorDenomResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1667,6 +1909,7 @@ export const SuperfluidDelegationsByValidatorDenomResponse = {
 
   fromJSON(object: any): SuperfluidDelegationsByValidatorDenomResponse {
     return {
+      $type: SuperfluidDelegationsByValidatorDenomResponse.$type,
       superfluidDelegationRecords: Array.isArray(
         object?.superfluidDelegationRecords
       )
@@ -1704,11 +1947,24 @@ export const SuperfluidDelegationsByValidatorDenomResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  SuperfluidDelegationsByValidatorDenomResponse.$type,
+  SuperfluidDelegationsByValidatorDenomResponse
+);
+
 function createBaseEstimateSuperfluidDelegatedAmountByValidatorDenomRequest(): EstimateSuperfluidDelegatedAmountByValidatorDenomRequest {
-  return { validatorAddress: "", denom: "" };
+  return {
+    $type:
+      "osmosis.superfluid.EstimateSuperfluidDelegatedAmountByValidatorDenomRequest",
+    validatorAddress: "",
+    denom: "",
+  };
 }
 
 export const EstimateSuperfluidDelegatedAmountByValidatorDenomRequest = {
+  $type:
+    "osmosis.superfluid.EstimateSuperfluidDelegatedAmountByValidatorDenomRequest" as const,
+
   encode(
     message: EstimateSuperfluidDelegatedAmountByValidatorDenomRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1751,6 +2007,7 @@ export const EstimateSuperfluidDelegatedAmountByValidatorDenomRequest = {
     object: any
   ): EstimateSuperfluidDelegatedAmountByValidatorDenomRequest {
     return {
+      $type: EstimateSuperfluidDelegatedAmountByValidatorDenomRequest.$type,
       validatorAddress: isSet(object.validatorAddress)
         ? String(object.validatorAddress)
         : "",
@@ -1782,11 +2039,23 @@ export const EstimateSuperfluidDelegatedAmountByValidatorDenomRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  EstimateSuperfluidDelegatedAmountByValidatorDenomRequest.$type,
+  EstimateSuperfluidDelegatedAmountByValidatorDenomRequest
+);
+
 function createBaseEstimateSuperfluidDelegatedAmountByValidatorDenomResponse(): EstimateSuperfluidDelegatedAmountByValidatorDenomResponse {
-  return { totalDelegatedCoins: [] };
+  return {
+    $type:
+      "osmosis.superfluid.EstimateSuperfluidDelegatedAmountByValidatorDenomResponse",
+    totalDelegatedCoins: [],
+  };
 }
 
 export const EstimateSuperfluidDelegatedAmountByValidatorDenomResponse = {
+  $type:
+    "osmosis.superfluid.EstimateSuperfluidDelegatedAmountByValidatorDenomResponse" as const,
+
   encode(
     message: EstimateSuperfluidDelegatedAmountByValidatorDenomResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1825,6 +2094,7 @@ export const EstimateSuperfluidDelegatedAmountByValidatorDenomResponse = {
     object: any
   ): EstimateSuperfluidDelegatedAmountByValidatorDenomResponse {
     return {
+      $type: EstimateSuperfluidDelegatedAmountByValidatorDenomResponse.$type,
       totalDelegatedCoins: Array.isArray(object?.totalDelegatedCoins)
         ? object.totalDelegatedCoins.map((e: any) => Coin.fromJSON(e))
         : [],
@@ -1858,6 +2128,11 @@ export const EstimateSuperfluidDelegatedAmountByValidatorDenomResponse = {
     return message;
   },
 };
+
+messageTypeRegistry.set(
+  EstimateSuperfluidDelegatedAmountByValidatorDenomResponse.$type,
+  EstimateSuperfluidDelegatedAmountByValidatorDenomResponse
+);
 
 /** Query defines the gRPC querier service. */
 export interface Query {
@@ -2138,14 +2413,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

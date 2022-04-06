@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Documentation } from "../../google/api/documentation";
@@ -49,6 +50,7 @@ export const protobufPackage = "google.api";
  *           provider_id: google_calendar_auth
  */
 export interface Service {
+  $type: "google.api.Service";
   /**
    * The service name, which is a DNS-like logical identifier for the
    * service, such as `calendar.googleapis.com`. The service name
@@ -97,19 +99,19 @@ export interface Service {
    */
   enums: Enum[];
   /** Additional API documentation. */
-  documentation?: Documentation;
+  documentation: Documentation;
   /** API backend configuration. */
-  backend?: Backend;
+  backend: Backend;
   /** HTTP configuration. */
-  http?: Http;
+  http: Http;
   /** Quota configuration. */
-  quota?: Quota;
+  quota: Quota;
   /** Auth configuration. */
-  authentication?: Authentication;
+  authentication: Authentication;
   /** Context configuration. */
-  context?: Context;
+  context: Context;
   /** Configuration controlling usage of this service. */
-  usage?: Usage;
+  usage: Usage;
   /**
    * Configuration for network endpoints.  If this is empty, then an endpoint
    * with the same name as the service is automatically generated to service all
@@ -117,7 +119,7 @@ export interface Service {
    */
   endpoints: Endpoint[];
   /** Configuration for the service control plane. */
-  control?: Control;
+  control: Control;
   /** Defines the logs used by this service. */
   logs: LogDescriptor[];
   /** Defines the metrics used by this service. */
@@ -128,15 +130,15 @@ export interface Service {
    */
   monitoredResources: MonitoredResourceDescriptor[];
   /** Billing configuration. */
-  billing?: Billing;
+  billing: Billing;
   /** Logging configuration. */
-  logging?: Logging;
+  logging: Logging;
   /** Monitoring configuration. */
-  monitoring?: Monitoring;
+  monitoring: Monitoring;
   /** System parameter configuration. */
-  systemParameters?: SystemParameters;
+  systemParameters: SystemParameters;
   /** Output only. The source information for this configuration if available. */
-  sourceInfo?: SourceInfo;
+  sourceInfo: SourceInfo;
   /**
    * Obsolete. Do not use.
    *
@@ -145,11 +147,12 @@ export interface Service {
    *
    * @deprecated
    */
-  configVersion?: number;
+  configVersion: number | undefined;
 }
 
 function createBaseService(): Service {
   return {
+    $type: "google.api.Service",
     name: "",
     title: "",
     producerProjectId: "",
@@ -179,6 +182,8 @@ function createBaseService(): Service {
 }
 
 export const Service = {
+  $type: "google.api.Service" as const,
+
   encode(
     message: Service,
     writer: _m0.Writer = _m0.Writer.create()
@@ -269,7 +274,7 @@ export const Service = {
     }
     if (message.configVersion !== undefined) {
       UInt32Value.encode(
-        { value: message.configVersion! },
+        { $type: "google.protobuf.UInt32Value", value: message.configVersion! },
         writer.uint32(162).fork()
       ).ldelim();
     }
@@ -381,6 +386,7 @@ export const Service = {
 
   fromJSON(object: any): Service {
     return {
+      $type: Service.$type,
       name: isSet(object.name) ? String(object.name) : "",
       title: isSet(object.title) ? String(object.title) : "",
       producerProjectId: isSet(object.producerProjectId)
@@ -625,6 +631,8 @@ export const Service = {
   },
 };
 
+messageTypeRegistry.set(Service.$type, Service);
+
 type Builtin =
   | Date
   | Function
@@ -643,14 +651,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

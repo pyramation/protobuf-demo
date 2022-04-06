@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { SuperfluidAsset } from "../../osmosis/superfluid/superfluid";
@@ -10,6 +11,7 @@ export const protobufPackage = "osmosis.superfluid.v1beta1";
  * assets
  */
 export interface SetSuperfluidAssetsProposal {
+  $type: "osmosis.superfluid.v1beta1.SetSuperfluidAssetsProposal";
   title: string;
   description: string;
   assets: SuperfluidAsset[];
@@ -20,16 +22,24 @@ export interface SetSuperfluidAssetsProposal {
  * assets by denom
  */
 export interface RemoveSuperfluidAssetsProposal {
+  $type: "osmosis.superfluid.v1beta1.RemoveSuperfluidAssetsProposal";
   title: string;
   description: string;
   superfluidAssetDenoms: string[];
 }
 
 function createBaseSetSuperfluidAssetsProposal(): SetSuperfluidAssetsProposal {
-  return { title: "", description: "", assets: [] };
+  return {
+    $type: "osmosis.superfluid.v1beta1.SetSuperfluidAssetsProposal",
+    title: "",
+    description: "",
+    assets: [],
+  };
 }
 
 export const SetSuperfluidAssetsProposal = {
+  $type: "osmosis.superfluid.v1beta1.SetSuperfluidAssetsProposal" as const,
+
   encode(
     message: SetSuperfluidAssetsProposal,
     writer: _m0.Writer = _m0.Writer.create()
@@ -75,6 +85,7 @@ export const SetSuperfluidAssetsProposal = {
 
   fromJSON(object: any): SetSuperfluidAssetsProposal {
     return {
+      $type: SetSuperfluidAssetsProposal.$type,
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
       assets: Array.isArray(object?.assets)
@@ -110,11 +121,23 @@ export const SetSuperfluidAssetsProposal = {
   },
 };
 
+messageTypeRegistry.set(
+  SetSuperfluidAssetsProposal.$type,
+  SetSuperfluidAssetsProposal
+);
+
 function createBaseRemoveSuperfluidAssetsProposal(): RemoveSuperfluidAssetsProposal {
-  return { title: "", description: "", superfluidAssetDenoms: [] };
+  return {
+    $type: "osmosis.superfluid.v1beta1.RemoveSuperfluidAssetsProposal",
+    title: "",
+    description: "",
+    superfluidAssetDenoms: [],
+  };
 }
 
 export const RemoveSuperfluidAssetsProposal = {
+  $type: "osmosis.superfluid.v1beta1.RemoveSuperfluidAssetsProposal" as const,
+
   encode(
     message: RemoveSuperfluidAssetsProposal,
     writer: _m0.Writer = _m0.Writer.create()
@@ -160,6 +183,7 @@ export const RemoveSuperfluidAssetsProposal = {
 
   fromJSON(object: any): RemoveSuperfluidAssetsProposal {
     return {
+      $type: RemoveSuperfluidAssetsProposal.$type,
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
       superfluidAssetDenoms: Array.isArray(object?.superfluidAssetDenoms)
@@ -193,6 +217,11 @@ export const RemoveSuperfluidAssetsProposal = {
   },
 };
 
+messageTypeRegistry.set(
+  RemoveSuperfluidAssetsProposal.$type,
+  RemoveSuperfluidAssetsProposal
+);
+
 type Builtin =
   | Date
   | Function
@@ -211,14 +240,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

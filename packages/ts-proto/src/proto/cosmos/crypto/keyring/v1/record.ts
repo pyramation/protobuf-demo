@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Any } from "../../../../google/protobuf/any";
@@ -8,18 +9,19 @@ export const protobufPackage = "cosmos.crypto.keyring.v1";
 
 /** Record is used for representing a key in the keyring. */
 export interface Record {
+  $type: "cosmos.crypto.keyring.v1.Record";
   /** name represents a name of Record */
   name: string;
   /** pub_key represents a public key in any format */
-  pubKey?: Any;
+  pubKey: Any;
   /** local stores the public information about a locally stored key */
-  local?: Record_Local | undefined;
+  local: Record_Local | undefined;
   /** ledger stores the public information about a Ledger key */
-  ledger?: Record_Ledger | undefined;
+  ledger: Record_Ledger | undefined;
   /** Multi does not store any information. */
-  multi?: Record_Multi | undefined;
+  multi: Record_Multi | undefined;
   /** Offline does not store any information. */
-  offline?: Record_Offline | undefined;
+  offline: Record_Offline | undefined;
 }
 
 /**
@@ -27,23 +29,30 @@ export interface Record {
  * Local item
  */
 export interface Record_Local {
-  privKey?: Any;
+  $type: "cosmos.crypto.keyring.v1.Record.Local";
+  privKey: Any;
   privKeyType: string;
 }
 
 /** Ledger item */
 export interface Record_Ledger {
-  path?: BIP44Params;
+  $type: "cosmos.crypto.keyring.v1.Record.Ledger";
+  path: BIP44Params;
 }
 
 /** Multi item */
-export interface Record_Multi {}
+export interface Record_Multi {
+  $type: "cosmos.crypto.keyring.v1.Record.Multi";
+}
 
 /** Offline item */
-export interface Record_Offline {}
+export interface Record_Offline {
+  $type: "cosmos.crypto.keyring.v1.Record.Offline";
+}
 
 function createBaseRecord(): Record {
   return {
+    $type: "cosmos.crypto.keyring.v1.Record",
     name: "",
     pubKey: undefined,
     local: undefined,
@@ -54,6 +63,8 @@ function createBaseRecord(): Record {
 }
 
 export const Record = {
+  $type: "cosmos.crypto.keyring.v1.Record" as const,
+
   encode(
     message: Record,
     writer: _m0.Writer = _m0.Writer.create()
@@ -114,6 +125,7 @@ export const Record = {
 
   fromJSON(object: any): Record {
     return {
+      $type: Record.$type,
       name: isSet(object.name) ? String(object.name) : "",
       pubKey: isSet(object.pubKey) ? Any.fromJSON(object.pubKey) : undefined,
       local: isSet(object.local)
@@ -182,11 +194,19 @@ export const Record = {
   },
 };
 
+messageTypeRegistry.set(Record.$type, Record);
+
 function createBaseRecord_Local(): Record_Local {
-  return { privKey: undefined, privKeyType: "" };
+  return {
+    $type: "cosmos.crypto.keyring.v1.Record.Local",
+    privKey: undefined,
+    privKeyType: "",
+  };
 }
 
 export const Record_Local = {
+  $type: "cosmos.crypto.keyring.v1.Record.Local" as const,
+
   encode(
     message: Record_Local,
     writer: _m0.Writer = _m0.Writer.create()
@@ -223,6 +243,7 @@ export const Record_Local = {
 
   fromJSON(object: any): Record_Local {
     return {
+      $type: Record_Local.$type,
       privKey: isSet(object.privKey) ? Any.fromJSON(object.privKey) : undefined,
       privKeyType: isSet(object.privKeyType) ? String(object.privKeyType) : "",
     };
@@ -250,11 +271,15 @@ export const Record_Local = {
   },
 };
 
+messageTypeRegistry.set(Record_Local.$type, Record_Local);
+
 function createBaseRecord_Ledger(): Record_Ledger {
-  return { path: undefined };
+  return { $type: "cosmos.crypto.keyring.v1.Record.Ledger", path: undefined };
 }
 
 export const Record_Ledger = {
+  $type: "cosmos.crypto.keyring.v1.Record.Ledger" as const,
+
   encode(
     message: Record_Ledger,
     writer: _m0.Writer = _m0.Writer.create()
@@ -285,6 +310,7 @@ export const Record_Ledger = {
 
   fromJSON(object: any): Record_Ledger {
     return {
+      $type: Record_Ledger.$type,
       path: isSet(object.path) ? BIP44Params.fromJSON(object.path) : undefined,
     };
   },
@@ -308,11 +334,15 @@ export const Record_Ledger = {
   },
 };
 
+messageTypeRegistry.set(Record_Ledger.$type, Record_Ledger);
+
 function createBaseRecord_Multi(): Record_Multi {
-  return {};
+  return { $type: "cosmos.crypto.keyring.v1.Record.Multi" };
 }
 
 export const Record_Multi = {
+  $type: "cosmos.crypto.keyring.v1.Record.Multi" as const,
+
   encode(
     _: Record_Multi,
     writer: _m0.Writer = _m0.Writer.create()
@@ -336,7 +366,9 @@ export const Record_Multi = {
   },
 
   fromJSON(_: any): Record_Multi {
-    return {};
+    return {
+      $type: Record_Multi.$type,
+    };
   },
 
   toJSON(_: Record_Multi): unknown {
@@ -352,11 +384,15 @@ export const Record_Multi = {
   },
 };
 
+messageTypeRegistry.set(Record_Multi.$type, Record_Multi);
+
 function createBaseRecord_Offline(): Record_Offline {
-  return {};
+  return { $type: "cosmos.crypto.keyring.v1.Record.Offline" };
 }
 
 export const Record_Offline = {
+  $type: "cosmos.crypto.keyring.v1.Record.Offline" as const,
+
   encode(
     _: Record_Offline,
     writer: _m0.Writer = _m0.Writer.create()
@@ -380,7 +416,9 @@ export const Record_Offline = {
   },
 
   fromJSON(_: any): Record_Offline {
-    return {};
+    return {
+      $type: Record_Offline.$type,
+    };
   },
 
   toJSON(_: Record_Offline): unknown {
@@ -395,6 +433,8 @@ export const Record_Offline = {
     return message;
   },
 };
+
+messageTypeRegistry.set(Record_Offline.$type, Record_Offline);
 
 type Builtin =
   | Date
@@ -414,14 +454,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

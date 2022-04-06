@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Duration } from "../../../google/protobuf/duration";
@@ -11,59 +12,83 @@ import { Gauge } from "../../../osmosis/incentives/gauge";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
 
 export interface QueryGaugeIdsRequest {
+  $type: "osmosis.poolincentives.v1beta1.QueryGaugeIdsRequest";
   poolId: Long;
 }
 
 export interface QueryGaugeIdsResponse {
+  $type: "osmosis.poolincentives.v1beta1.QueryGaugeIdsResponse";
   gaugeIdsWithDuration: QueryGaugeIdsResponse_GaugeIdWithDuration[];
 }
 
 export interface QueryGaugeIdsResponse_GaugeIdWithDuration {
+  $type: "osmosis.poolincentives.v1beta1.QueryGaugeIdsResponse.GaugeIdWithDuration";
   gaugeId: Long;
-  duration?: Duration;
+  duration: Duration;
 }
 
-export interface QueryDistrInfoRequest {}
+export interface QueryDistrInfoRequest {
+  $type: "osmosis.poolincentives.v1beta1.QueryDistrInfoRequest";
+}
 
 export interface QueryDistrInfoResponse {
-  distrInfo?: DistrInfo;
+  $type: "osmosis.poolincentives.v1beta1.QueryDistrInfoResponse";
+  distrInfo: DistrInfo;
 }
 
-export interface QueryParamsRequest {}
+export interface QueryParamsRequest {
+  $type: "osmosis.poolincentives.v1beta1.QueryParamsRequest";
+}
 
 export interface QueryParamsResponse {
-  params?: Params;
+  $type: "osmosis.poolincentives.v1beta1.QueryParamsResponse";
+  params: Params;
 }
 
-export interface QueryLockableDurationsRequest {}
+export interface QueryLockableDurationsRequest {
+  $type: "osmosis.poolincentives.v1beta1.QueryLockableDurationsRequest";
+}
 
 export interface QueryLockableDurationsResponse {
+  $type: "osmosis.poolincentives.v1beta1.QueryLockableDurationsResponse";
   lockableDurations: Duration[];
 }
 
-export interface QueryIncentivizedPoolsRequest {}
+export interface QueryIncentivizedPoolsRequest {
+  $type: "osmosis.poolincentives.v1beta1.QueryIncentivizedPoolsRequest";
+}
 
 export interface IncentivizedPool {
+  $type: "osmosis.poolincentives.v1beta1.IncentivizedPool";
   poolId: Long;
-  lockableDuration?: Duration;
+  lockableDuration: Duration;
   gaugeId: Long;
 }
 
 export interface QueryIncentivizedPoolsResponse {
+  $type: "osmosis.poolincentives.v1beta1.QueryIncentivizedPoolsResponse";
   incentivizedPools: IncentivizedPool[];
 }
 
-export interface QueryExternalIncentiveGaugesRequest {}
+export interface QueryExternalIncentiveGaugesRequest {
+  $type: "osmosis.poolincentives.v1beta1.QueryExternalIncentiveGaugesRequest";
+}
 
 export interface QueryExternalIncentiveGaugesResponse {
+  $type: "osmosis.poolincentives.v1beta1.QueryExternalIncentiveGaugesResponse";
   data: Gauge[];
 }
 
 function createBaseQueryGaugeIdsRequest(): QueryGaugeIdsRequest {
-  return { poolId: Long.UZERO };
+  return {
+    $type: "osmosis.poolincentives.v1beta1.QueryGaugeIdsRequest",
+    poolId: Long.UZERO,
+  };
 }
 
 export const QueryGaugeIdsRequest = {
+  $type: "osmosis.poolincentives.v1beta1.QueryGaugeIdsRequest" as const,
+
   encode(
     message: QueryGaugeIdsRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -97,6 +122,7 @@ export const QueryGaugeIdsRequest = {
 
   fromJSON(object: any): QueryGaugeIdsRequest {
     return {
+      $type: QueryGaugeIdsRequest.$type,
       poolId: isSet(object.poolId)
         ? Long.fromString(object.poolId)
         : Long.UZERO,
@@ -122,11 +148,18 @@ export const QueryGaugeIdsRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryGaugeIdsRequest.$type, QueryGaugeIdsRequest);
+
 function createBaseQueryGaugeIdsResponse(): QueryGaugeIdsResponse {
-  return { gaugeIdsWithDuration: [] };
+  return {
+    $type: "osmosis.poolincentives.v1beta1.QueryGaugeIdsResponse",
+    gaugeIdsWithDuration: [],
+  };
 }
 
 export const QueryGaugeIdsResponse = {
+  $type: "osmosis.poolincentives.v1beta1.QueryGaugeIdsResponse" as const,
+
   encode(
     message: QueryGaugeIdsResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -168,6 +201,7 @@ export const QueryGaugeIdsResponse = {
 
   fromJSON(object: any): QueryGaugeIdsResponse {
     return {
+      $type: QueryGaugeIdsResponse.$type,
       gaugeIdsWithDuration: Array.isArray(object?.gaugeIdsWithDuration)
         ? object.gaugeIdsWithDuration.map((e: any) =>
             QueryGaugeIdsResponse_GaugeIdWithDuration.fromJSON(e)
@@ -200,11 +234,21 @@ export const QueryGaugeIdsResponse = {
   },
 };
 
+messageTypeRegistry.set(QueryGaugeIdsResponse.$type, QueryGaugeIdsResponse);
+
 function createBaseQueryGaugeIdsResponse_GaugeIdWithDuration(): QueryGaugeIdsResponse_GaugeIdWithDuration {
-  return { gaugeId: Long.UZERO, duration: undefined };
+  return {
+    $type:
+      "osmosis.poolincentives.v1beta1.QueryGaugeIdsResponse.GaugeIdWithDuration",
+    gaugeId: Long.UZERO,
+    duration: undefined,
+  };
 }
 
 export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
+  $type:
+    "osmosis.poolincentives.v1beta1.QueryGaugeIdsResponse.GaugeIdWithDuration" as const,
+
   encode(
     message: QueryGaugeIdsResponse_GaugeIdWithDuration,
     writer: _m0.Writer = _m0.Writer.create()
@@ -244,6 +288,7 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
 
   fromJSON(object: any): QueryGaugeIdsResponse_GaugeIdWithDuration {
     return {
+      $type: QueryGaugeIdsResponse_GaugeIdWithDuration.$type,
       gaugeId: isSet(object.gaugeId)
         ? Long.fromString(object.gaugeId)
         : Long.UZERO,
@@ -280,11 +325,18 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryGaugeIdsResponse_GaugeIdWithDuration.$type,
+  QueryGaugeIdsResponse_GaugeIdWithDuration
+);
+
 function createBaseQueryDistrInfoRequest(): QueryDistrInfoRequest {
-  return {};
+  return { $type: "osmosis.poolincentives.v1beta1.QueryDistrInfoRequest" };
 }
 
 export const QueryDistrInfoRequest = {
+  $type: "osmosis.poolincentives.v1beta1.QueryDistrInfoRequest" as const,
+
   encode(
     _: QueryDistrInfoRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -311,7 +363,9 @@ export const QueryDistrInfoRequest = {
   },
 
   fromJSON(_: any): QueryDistrInfoRequest {
-    return {};
+    return {
+      $type: QueryDistrInfoRequest.$type,
+    };
   },
 
   toJSON(_: QueryDistrInfoRequest): unknown {
@@ -327,11 +381,18 @@ export const QueryDistrInfoRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryDistrInfoRequest.$type, QueryDistrInfoRequest);
+
 function createBaseQueryDistrInfoResponse(): QueryDistrInfoResponse {
-  return { distrInfo: undefined };
+  return {
+    $type: "osmosis.poolincentives.v1beta1.QueryDistrInfoResponse",
+    distrInfo: undefined,
+  };
 }
 
 export const QueryDistrInfoResponse = {
+  $type: "osmosis.poolincentives.v1beta1.QueryDistrInfoResponse" as const,
+
   encode(
     message: QueryDistrInfoResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -365,6 +426,7 @@ export const QueryDistrInfoResponse = {
 
   fromJSON(object: any): QueryDistrInfoResponse {
     return {
+      $type: QueryDistrInfoResponse.$type,
       distrInfo: isSet(object.distrInfo)
         ? DistrInfo.fromJSON(object.distrInfo)
         : undefined,
@@ -392,11 +454,15 @@ export const QueryDistrInfoResponse = {
   },
 };
 
+messageTypeRegistry.set(QueryDistrInfoResponse.$type, QueryDistrInfoResponse);
+
 function createBaseQueryParamsRequest(): QueryParamsRequest {
-  return {};
+  return { $type: "osmosis.poolincentives.v1beta1.QueryParamsRequest" };
 }
 
 export const QueryParamsRequest = {
+  $type: "osmosis.poolincentives.v1beta1.QueryParamsRequest" as const,
+
   encode(
     _: QueryParamsRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -420,7 +486,9 @@ export const QueryParamsRequest = {
   },
 
   fromJSON(_: any): QueryParamsRequest {
-    return {};
+    return {
+      $type: QueryParamsRequest.$type,
+    };
   },
 
   toJSON(_: QueryParamsRequest): unknown {
@@ -436,11 +504,18 @@ export const QueryParamsRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryParamsRequest.$type, QueryParamsRequest);
+
 function createBaseQueryParamsResponse(): QueryParamsResponse {
-  return { params: undefined };
+  return {
+    $type: "osmosis.poolincentives.v1beta1.QueryParamsResponse",
+    params: undefined,
+  };
 }
 
 export const QueryParamsResponse = {
+  $type: "osmosis.poolincentives.v1beta1.QueryParamsResponse" as const,
+
   encode(
     message: QueryParamsResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -471,6 +546,7 @@ export const QueryParamsResponse = {
 
   fromJSON(object: any): QueryParamsResponse {
     return {
+      $type: QueryParamsResponse.$type,
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
     };
   },
@@ -494,11 +570,18 @@ export const QueryParamsResponse = {
   },
 };
 
+messageTypeRegistry.set(QueryParamsResponse.$type, QueryParamsResponse);
+
 function createBaseQueryLockableDurationsRequest(): QueryLockableDurationsRequest {
-  return {};
+  return {
+    $type: "osmosis.poolincentives.v1beta1.QueryLockableDurationsRequest",
+  };
 }
 
 export const QueryLockableDurationsRequest = {
+  $type:
+    "osmosis.poolincentives.v1beta1.QueryLockableDurationsRequest" as const,
+
   encode(
     _: QueryLockableDurationsRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -525,7 +608,9 @@ export const QueryLockableDurationsRequest = {
   },
 
   fromJSON(_: any): QueryLockableDurationsRequest {
-    return {};
+    return {
+      $type: QueryLockableDurationsRequest.$type,
+    };
   },
 
   toJSON(_: QueryLockableDurationsRequest): unknown {
@@ -541,11 +626,22 @@ export const QueryLockableDurationsRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryLockableDurationsRequest.$type,
+  QueryLockableDurationsRequest
+);
+
 function createBaseQueryLockableDurationsResponse(): QueryLockableDurationsResponse {
-  return { lockableDurations: [] };
+  return {
+    $type: "osmosis.poolincentives.v1beta1.QueryLockableDurationsResponse",
+    lockableDurations: [],
+  };
 }
 
 export const QueryLockableDurationsResponse = {
+  $type:
+    "osmosis.poolincentives.v1beta1.QueryLockableDurationsResponse" as const,
+
   encode(
     message: QueryLockableDurationsResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -581,6 +677,7 @@ export const QueryLockableDurationsResponse = {
 
   fromJSON(object: any): QueryLockableDurationsResponse {
     return {
+      $type: QueryLockableDurationsResponse.$type,
       lockableDurations: Array.isArray(object?.lockableDurations)
         ? object.lockableDurations.map((e: any) => Duration.fromJSON(e))
         : [],
@@ -609,11 +706,21 @@ export const QueryLockableDurationsResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryLockableDurationsResponse.$type,
+  QueryLockableDurationsResponse
+);
+
 function createBaseQueryIncentivizedPoolsRequest(): QueryIncentivizedPoolsRequest {
-  return {};
+  return {
+    $type: "osmosis.poolincentives.v1beta1.QueryIncentivizedPoolsRequest",
+  };
 }
 
 export const QueryIncentivizedPoolsRequest = {
+  $type:
+    "osmosis.poolincentives.v1beta1.QueryIncentivizedPoolsRequest" as const,
+
   encode(
     _: QueryIncentivizedPoolsRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -640,7 +747,9 @@ export const QueryIncentivizedPoolsRequest = {
   },
 
   fromJSON(_: any): QueryIncentivizedPoolsRequest {
-    return {};
+    return {
+      $type: QueryIncentivizedPoolsRequest.$type,
+    };
   },
 
   toJSON(_: QueryIncentivizedPoolsRequest): unknown {
@@ -656,8 +765,14 @@ export const QueryIncentivizedPoolsRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryIncentivizedPoolsRequest.$type,
+  QueryIncentivizedPoolsRequest
+);
+
 function createBaseIncentivizedPool(): IncentivizedPool {
   return {
+    $type: "osmosis.poolincentives.v1beta1.IncentivizedPool",
     poolId: Long.UZERO,
     lockableDuration: undefined,
     gaugeId: Long.UZERO,
@@ -665,6 +780,8 @@ function createBaseIncentivizedPool(): IncentivizedPool {
 }
 
 export const IncentivizedPool = {
+  $type: "osmosis.poolincentives.v1beta1.IncentivizedPool" as const,
+
   encode(
     message: IncentivizedPool,
     writer: _m0.Writer = _m0.Writer.create()
@@ -710,6 +827,7 @@ export const IncentivizedPool = {
 
   fromJSON(object: any): IncentivizedPool {
     return {
+      $type: IncentivizedPool.$type,
       poolId: isSet(object.poolId)
         ? Long.fromString(object.poolId)
         : Long.UZERO,
@@ -755,11 +873,19 @@ export const IncentivizedPool = {
   },
 };
 
+messageTypeRegistry.set(IncentivizedPool.$type, IncentivizedPool);
+
 function createBaseQueryIncentivizedPoolsResponse(): QueryIncentivizedPoolsResponse {
-  return { incentivizedPools: [] };
+  return {
+    $type: "osmosis.poolincentives.v1beta1.QueryIncentivizedPoolsResponse",
+    incentivizedPools: [],
+  };
 }
 
 export const QueryIncentivizedPoolsResponse = {
+  $type:
+    "osmosis.poolincentives.v1beta1.QueryIncentivizedPoolsResponse" as const,
+
   encode(
     message: QueryIncentivizedPoolsResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -795,6 +921,7 @@ export const QueryIncentivizedPoolsResponse = {
 
   fromJSON(object: any): QueryIncentivizedPoolsResponse {
     return {
+      $type: QueryIncentivizedPoolsResponse.$type,
       incentivizedPools: Array.isArray(object?.incentivizedPools)
         ? object.incentivizedPools.map((e: any) => IncentivizedPool.fromJSON(e))
         : [],
@@ -824,11 +951,21 @@ export const QueryIncentivizedPoolsResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryIncentivizedPoolsResponse.$type,
+  QueryIncentivizedPoolsResponse
+);
+
 function createBaseQueryExternalIncentiveGaugesRequest(): QueryExternalIncentiveGaugesRequest {
-  return {};
+  return {
+    $type: "osmosis.poolincentives.v1beta1.QueryExternalIncentiveGaugesRequest",
+  };
 }
 
 export const QueryExternalIncentiveGaugesRequest = {
+  $type:
+    "osmosis.poolincentives.v1beta1.QueryExternalIncentiveGaugesRequest" as const,
+
   encode(
     _: QueryExternalIncentiveGaugesRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -855,7 +992,9 @@ export const QueryExternalIncentiveGaugesRequest = {
   },
 
   fromJSON(_: any): QueryExternalIncentiveGaugesRequest {
-    return {};
+    return {
+      $type: QueryExternalIncentiveGaugesRequest.$type,
+    };
   },
 
   toJSON(_: QueryExternalIncentiveGaugesRequest): unknown {
@@ -871,11 +1010,23 @@ export const QueryExternalIncentiveGaugesRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryExternalIncentiveGaugesRequest.$type,
+  QueryExternalIncentiveGaugesRequest
+);
+
 function createBaseQueryExternalIncentiveGaugesResponse(): QueryExternalIncentiveGaugesResponse {
-  return { data: [] };
+  return {
+    $type:
+      "osmosis.poolincentives.v1beta1.QueryExternalIncentiveGaugesResponse",
+    data: [],
+  };
 }
 
 export const QueryExternalIncentiveGaugesResponse = {
+  $type:
+    "osmosis.poolincentives.v1beta1.QueryExternalIncentiveGaugesResponse" as const,
+
   encode(
     message: QueryExternalIncentiveGaugesResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -909,6 +1060,7 @@ export const QueryExternalIncentiveGaugesResponse = {
 
   fromJSON(object: any): QueryExternalIncentiveGaugesResponse {
     return {
+      $type: QueryExternalIncentiveGaugesResponse.$type,
       data: Array.isArray(object?.data)
         ? object.data.map((e: any) => Gauge.fromJSON(e))
         : [],
@@ -933,6 +1085,11 @@ export const QueryExternalIncentiveGaugesResponse = {
     return message;
   },
 };
+
+messageTypeRegistry.set(
+  QueryExternalIncentiveGaugesResponse.$type,
+  QueryExternalIncentiveGaugesResponse
+);
 
 export interface Query {
   /** GaugeIds takes the pool id and returns the matching gauge ids and durations */
@@ -1066,14 +1223,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

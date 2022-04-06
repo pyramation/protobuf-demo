@@ -1,29 +1,37 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { EpochInfo } from "../../osmosis/epochs/genesis";
 
 export const protobufPackage = "osmosis.epochs.v1beta1";
 
-export interface QueryEpochsInfoRequest {}
+export interface QueryEpochsInfoRequest {
+  $type: "osmosis.epochs.v1beta1.QueryEpochsInfoRequest";
+}
 
 export interface QueryEpochsInfoResponse {
+  $type: "osmosis.epochs.v1beta1.QueryEpochsInfoResponse";
   epochs: EpochInfo[];
 }
 
 export interface QueryCurrentEpochRequest {
+  $type: "osmosis.epochs.v1beta1.QueryCurrentEpochRequest";
   identifier: string;
 }
 
 export interface QueryCurrentEpochResponse {
+  $type: "osmosis.epochs.v1beta1.QueryCurrentEpochResponse";
   currentEpoch: Long;
 }
 
 function createBaseQueryEpochsInfoRequest(): QueryEpochsInfoRequest {
-  return {};
+  return { $type: "osmosis.epochs.v1beta1.QueryEpochsInfoRequest" };
 }
 
 export const QueryEpochsInfoRequest = {
+  $type: "osmosis.epochs.v1beta1.QueryEpochsInfoRequest" as const,
+
   encode(
     _: QueryEpochsInfoRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -50,7 +58,9 @@ export const QueryEpochsInfoRequest = {
   },
 
   fromJSON(_: any): QueryEpochsInfoRequest {
-    return {};
+    return {
+      $type: QueryEpochsInfoRequest.$type,
+    };
   },
 
   toJSON(_: QueryEpochsInfoRequest): unknown {
@@ -66,11 +76,18 @@ export const QueryEpochsInfoRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryEpochsInfoRequest.$type, QueryEpochsInfoRequest);
+
 function createBaseQueryEpochsInfoResponse(): QueryEpochsInfoResponse {
-  return { epochs: [] };
+  return {
+    $type: "osmosis.epochs.v1beta1.QueryEpochsInfoResponse",
+    epochs: [],
+  };
 }
 
 export const QueryEpochsInfoResponse = {
+  $type: "osmosis.epochs.v1beta1.QueryEpochsInfoResponse" as const,
+
   encode(
     message: QueryEpochsInfoResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -104,6 +121,7 @@ export const QueryEpochsInfoResponse = {
 
   fromJSON(object: any): QueryEpochsInfoResponse {
     return {
+      $type: QueryEpochsInfoResponse.$type,
       epochs: Array.isArray(object?.epochs)
         ? object.epochs.map((e: any) => EpochInfo.fromJSON(e))
         : [],
@@ -131,11 +149,18 @@ export const QueryEpochsInfoResponse = {
   },
 };
 
+messageTypeRegistry.set(QueryEpochsInfoResponse.$type, QueryEpochsInfoResponse);
+
 function createBaseQueryCurrentEpochRequest(): QueryCurrentEpochRequest {
-  return { identifier: "" };
+  return {
+    $type: "osmosis.epochs.v1beta1.QueryCurrentEpochRequest",
+    identifier: "",
+  };
 }
 
 export const QueryCurrentEpochRequest = {
+  $type: "osmosis.epochs.v1beta1.QueryCurrentEpochRequest" as const,
+
   encode(
     message: QueryCurrentEpochRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -169,6 +194,7 @@ export const QueryCurrentEpochRequest = {
 
   fromJSON(object: any): QueryCurrentEpochRequest {
     return {
+      $type: QueryCurrentEpochRequest.$type,
       identifier: isSet(object.identifier) ? String(object.identifier) : "",
     };
   },
@@ -188,11 +214,21 @@ export const QueryCurrentEpochRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryCurrentEpochRequest.$type,
+  QueryCurrentEpochRequest
+);
+
 function createBaseQueryCurrentEpochResponse(): QueryCurrentEpochResponse {
-  return { currentEpoch: Long.ZERO };
+  return {
+    $type: "osmosis.epochs.v1beta1.QueryCurrentEpochResponse",
+    currentEpoch: Long.ZERO,
+  };
 }
 
 export const QueryCurrentEpochResponse = {
+  $type: "osmosis.epochs.v1beta1.QueryCurrentEpochResponse" as const,
+
   encode(
     message: QueryCurrentEpochResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -226,6 +262,7 @@ export const QueryCurrentEpochResponse = {
 
   fromJSON(object: any): QueryCurrentEpochResponse {
     return {
+      $type: QueryCurrentEpochResponse.$type,
       currentEpoch: isSet(object.currentEpoch)
         ? Long.fromString(object.currentEpoch)
         : Long.ZERO,
@@ -250,6 +287,11 @@ export const QueryCurrentEpochResponse = {
     return message;
   },
 };
+
+messageTypeRegistry.set(
+  QueryCurrentEpochResponse.$type,
+  QueryCurrentEpochResponse
+);
 
 /** Query defines the gRPC querier service. */
 export interface Query {
@@ -323,14 +365,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

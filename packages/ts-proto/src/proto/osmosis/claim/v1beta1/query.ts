@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Params } from "../../../osmosis/claim/v1beta1/params";
@@ -13,53 +14,67 @@ import { Coin } from "../../../cosmos/base/v1beta1/coin";
 export const protobufPackage = "osmosis.claim.v1beta1";
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
-export interface QueryModuleAccountBalanceRequest {}
+export interface QueryModuleAccountBalanceRequest {
+  $type: "osmosis.claim.v1beta1.QueryModuleAccountBalanceRequest";
+}
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryModuleAccountBalanceResponse {
+  $type: "osmosis.claim.v1beta1.QueryModuleAccountBalanceResponse";
   /** params defines the parameters of the module. */
   moduleAccountBalance: Coin[];
 }
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
-export interface QueryParamsRequest {}
+export interface QueryParamsRequest {
+  $type: "osmosis.claim.v1beta1.QueryParamsRequest";
+}
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
+  $type: "osmosis.claim.v1beta1.QueryParamsResponse";
   /** params defines the parameters of the module. */
-  params?: Params;
+  params: Params;
 }
 
 export interface QueryClaimRecordRequest {
+  $type: "osmosis.claim.v1beta1.QueryClaimRecordRequest";
   address: string;
 }
 
 export interface QueryClaimRecordResponse {
-  claimRecord?: ClaimRecord;
+  $type: "osmosis.claim.v1beta1.QueryClaimRecordResponse";
+  claimRecord: ClaimRecord;
 }
 
 export interface QueryClaimableForActionRequest {
+  $type: "osmosis.claim.v1beta1.QueryClaimableForActionRequest";
   address: string;
   action: Action;
 }
 
 export interface QueryClaimableForActionResponse {
+  $type: "osmosis.claim.v1beta1.QueryClaimableForActionResponse";
   coins: Coin[];
 }
 
 export interface QueryTotalClaimableRequest {
+  $type: "osmosis.claim.v1beta1.QueryTotalClaimableRequest";
   address: string;
 }
 
 export interface QueryTotalClaimableResponse {
+  $type: "osmosis.claim.v1beta1.QueryTotalClaimableResponse";
   coins: Coin[];
 }
 
 function createBaseQueryModuleAccountBalanceRequest(): QueryModuleAccountBalanceRequest {
-  return {};
+  return { $type: "osmosis.claim.v1beta1.QueryModuleAccountBalanceRequest" };
 }
 
 export const QueryModuleAccountBalanceRequest = {
+  $type: "osmosis.claim.v1beta1.QueryModuleAccountBalanceRequest" as const,
+
   encode(
     _: QueryModuleAccountBalanceRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -86,7 +101,9 @@ export const QueryModuleAccountBalanceRequest = {
   },
 
   fromJSON(_: any): QueryModuleAccountBalanceRequest {
-    return {};
+    return {
+      $type: QueryModuleAccountBalanceRequest.$type,
+    };
   },
 
   toJSON(_: QueryModuleAccountBalanceRequest): unknown {
@@ -102,11 +119,21 @@ export const QueryModuleAccountBalanceRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryModuleAccountBalanceRequest.$type,
+  QueryModuleAccountBalanceRequest
+);
+
 function createBaseQueryModuleAccountBalanceResponse(): QueryModuleAccountBalanceResponse {
-  return { moduleAccountBalance: [] };
+  return {
+    $type: "osmosis.claim.v1beta1.QueryModuleAccountBalanceResponse",
+    moduleAccountBalance: [],
+  };
 }
 
 export const QueryModuleAccountBalanceResponse = {
+  $type: "osmosis.claim.v1beta1.QueryModuleAccountBalanceResponse" as const,
+
   encode(
     message: QueryModuleAccountBalanceResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -142,6 +169,7 @@ export const QueryModuleAccountBalanceResponse = {
 
   fromJSON(object: any): QueryModuleAccountBalanceResponse {
     return {
+      $type: QueryModuleAccountBalanceResponse.$type,
       moduleAccountBalance: Array.isArray(object?.moduleAccountBalance)
         ? object.moduleAccountBalance.map((e: any) => Coin.fromJSON(e))
         : [],
@@ -170,11 +198,18 @@ export const QueryModuleAccountBalanceResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryModuleAccountBalanceResponse.$type,
+  QueryModuleAccountBalanceResponse
+);
+
 function createBaseQueryParamsRequest(): QueryParamsRequest {
-  return {};
+  return { $type: "osmosis.claim.v1beta1.QueryParamsRequest" };
 }
 
 export const QueryParamsRequest = {
+  $type: "osmosis.claim.v1beta1.QueryParamsRequest" as const,
+
   encode(
     _: QueryParamsRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -198,7 +233,9 @@ export const QueryParamsRequest = {
   },
 
   fromJSON(_: any): QueryParamsRequest {
-    return {};
+    return {
+      $type: QueryParamsRequest.$type,
+    };
   },
 
   toJSON(_: QueryParamsRequest): unknown {
@@ -214,11 +251,18 @@ export const QueryParamsRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryParamsRequest.$type, QueryParamsRequest);
+
 function createBaseQueryParamsResponse(): QueryParamsResponse {
-  return { params: undefined };
+  return {
+    $type: "osmosis.claim.v1beta1.QueryParamsResponse",
+    params: undefined,
+  };
 }
 
 export const QueryParamsResponse = {
+  $type: "osmosis.claim.v1beta1.QueryParamsResponse" as const,
+
   encode(
     message: QueryParamsResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -249,6 +293,7 @@ export const QueryParamsResponse = {
 
   fromJSON(object: any): QueryParamsResponse {
     return {
+      $type: QueryParamsResponse.$type,
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
     };
   },
@@ -272,11 +317,18 @@ export const QueryParamsResponse = {
   },
 };
 
+messageTypeRegistry.set(QueryParamsResponse.$type, QueryParamsResponse);
+
 function createBaseQueryClaimRecordRequest(): QueryClaimRecordRequest {
-  return { address: "" };
+  return {
+    $type: "osmosis.claim.v1beta1.QueryClaimRecordRequest",
+    address: "",
+  };
 }
 
 export const QueryClaimRecordRequest = {
+  $type: "osmosis.claim.v1beta1.QueryClaimRecordRequest" as const,
+
   encode(
     message: QueryClaimRecordRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -310,6 +362,7 @@ export const QueryClaimRecordRequest = {
 
   fromJSON(object: any): QueryClaimRecordRequest {
     return {
+      $type: QueryClaimRecordRequest.$type,
       address: isSet(object.address) ? String(object.address) : "",
     };
   },
@@ -329,11 +382,18 @@ export const QueryClaimRecordRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryClaimRecordRequest.$type, QueryClaimRecordRequest);
+
 function createBaseQueryClaimRecordResponse(): QueryClaimRecordResponse {
-  return { claimRecord: undefined };
+  return {
+    $type: "osmosis.claim.v1beta1.QueryClaimRecordResponse",
+    claimRecord: undefined,
+  };
 }
 
 export const QueryClaimRecordResponse = {
+  $type: "osmosis.claim.v1beta1.QueryClaimRecordResponse" as const,
+
   encode(
     message: QueryClaimRecordResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -370,6 +430,7 @@ export const QueryClaimRecordResponse = {
 
   fromJSON(object: any): QueryClaimRecordResponse {
     return {
+      $type: QueryClaimRecordResponse.$type,
       claimRecord: isSet(object.claimRecord)
         ? ClaimRecord.fromJSON(object.claimRecord)
         : undefined,
@@ -397,11 +458,22 @@ export const QueryClaimRecordResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryClaimRecordResponse.$type,
+  QueryClaimRecordResponse
+);
+
 function createBaseQueryClaimableForActionRequest(): QueryClaimableForActionRequest {
-  return { address: "", action: 0 };
+  return {
+    $type: "osmosis.claim.v1beta1.QueryClaimableForActionRequest",
+    address: "",
+    action: 0,
+  };
 }
 
 export const QueryClaimableForActionRequest = {
+  $type: "osmosis.claim.v1beta1.QueryClaimableForActionRequest" as const,
+
   encode(
     message: QueryClaimableForActionRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -441,6 +513,7 @@ export const QueryClaimableForActionRequest = {
 
   fromJSON(object: any): QueryClaimableForActionRequest {
     return {
+      $type: QueryClaimableForActionRequest.$type,
       address: isSet(object.address) ? String(object.address) : "",
       action: isSet(object.action) ? actionFromJSON(object.action) : 0,
     };
@@ -463,11 +536,21 @@ export const QueryClaimableForActionRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryClaimableForActionRequest.$type,
+  QueryClaimableForActionRequest
+);
+
 function createBaseQueryClaimableForActionResponse(): QueryClaimableForActionResponse {
-  return { coins: [] };
+  return {
+    $type: "osmosis.claim.v1beta1.QueryClaimableForActionResponse",
+    coins: [],
+  };
 }
 
 export const QueryClaimableForActionResponse = {
+  $type: "osmosis.claim.v1beta1.QueryClaimableForActionResponse" as const,
+
   encode(
     message: QueryClaimableForActionResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -501,6 +584,7 @@ export const QueryClaimableForActionResponse = {
 
   fromJSON(object: any): QueryClaimableForActionResponse {
     return {
+      $type: QueryClaimableForActionResponse.$type,
       coins: Array.isArray(object?.coins)
         ? object.coins.map((e: any) => Coin.fromJSON(e))
         : [],
@@ -526,11 +610,21 @@ export const QueryClaimableForActionResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryClaimableForActionResponse.$type,
+  QueryClaimableForActionResponse
+);
+
 function createBaseQueryTotalClaimableRequest(): QueryTotalClaimableRequest {
-  return { address: "" };
+  return {
+    $type: "osmosis.claim.v1beta1.QueryTotalClaimableRequest",
+    address: "",
+  };
 }
 
 export const QueryTotalClaimableRequest = {
+  $type: "osmosis.claim.v1beta1.QueryTotalClaimableRequest" as const,
+
   encode(
     message: QueryTotalClaimableRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -564,6 +658,7 @@ export const QueryTotalClaimableRequest = {
 
   fromJSON(object: any): QueryTotalClaimableRequest {
     return {
+      $type: QueryTotalClaimableRequest.$type,
       address: isSet(object.address) ? String(object.address) : "",
     };
   },
@@ -583,11 +678,21 @@ export const QueryTotalClaimableRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryTotalClaimableRequest.$type,
+  QueryTotalClaimableRequest
+);
+
 function createBaseQueryTotalClaimableResponse(): QueryTotalClaimableResponse {
-  return { coins: [] };
+  return {
+    $type: "osmosis.claim.v1beta1.QueryTotalClaimableResponse",
+    coins: [],
+  };
 }
 
 export const QueryTotalClaimableResponse = {
+  $type: "osmosis.claim.v1beta1.QueryTotalClaimableResponse" as const,
+
   encode(
     message: QueryTotalClaimableResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -621,6 +726,7 @@ export const QueryTotalClaimableResponse = {
 
   fromJSON(object: any): QueryTotalClaimableResponse {
     return {
+      $type: QueryTotalClaimableResponse.$type,
       coins: Array.isArray(object?.coins)
         ? object.coins.map((e: any) => Coin.fromJSON(e))
         : [],
@@ -645,6 +751,11 @@ export const QueryTotalClaimableResponse = {
     return message;
   },
 };
+
+messageTypeRegistry.set(
+  QueryTotalClaimableResponse.$type,
+  QueryTotalClaimableResponse
+);
 
 /** Query defines the gRPC querier service. */
 export interface Query {
@@ -768,14 +879,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

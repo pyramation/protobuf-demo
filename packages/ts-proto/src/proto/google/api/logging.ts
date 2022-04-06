@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 
@@ -36,6 +37,7 @@ export const protobufPackage = "google.api";
  *         - activity_history
  */
 export interface Logging {
+  $type: "google.api.Logging";
   /**
    * Logging configurations for sending logs to the producer project.
    * There can be multiple producer destinations, each one must have a
@@ -57,6 +59,7 @@ export interface Logging {
  * or the consumer project).
  */
 export interface Logging_LoggingDestination {
+  $type: "google.api.Logging.LoggingDestination";
   /**
    * The monitored resource type. The type must be defined in the
    * [Service.monitored_resources][google.api.Service.monitored_resources] section.
@@ -72,10 +75,16 @@ export interface Logging_LoggingDestination {
 }
 
 function createBaseLogging(): Logging {
-  return { producerDestinations: [], consumerDestinations: [] };
+  return {
+    $type: "google.api.Logging",
+    producerDestinations: [],
+    consumerDestinations: [],
+  };
 }
 
 export const Logging = {
+  $type: "google.api.Logging" as const,
+
   encode(
     message: Logging,
     writer: _m0.Writer = _m0.Writer.create()
@@ -116,6 +125,7 @@ export const Logging = {
 
   fromJSON(object: any): Logging {
     return {
+      $type: Logging.$type,
       producerDestinations: Array.isArray(object?.producerDestinations)
         ? object.producerDestinations.map((e: any) =>
             Logging_LoggingDestination.fromJSON(e)
@@ -162,11 +172,19 @@ export const Logging = {
   },
 };
 
+messageTypeRegistry.set(Logging.$type, Logging);
+
 function createBaseLogging_LoggingDestination(): Logging_LoggingDestination {
-  return { monitoredResource: "", logs: [] };
+  return {
+    $type: "google.api.Logging.LoggingDestination",
+    monitoredResource: "",
+    logs: [],
+  };
 }
 
 export const Logging_LoggingDestination = {
+  $type: "google.api.Logging.LoggingDestination" as const,
+
   encode(
     message: Logging_LoggingDestination,
     writer: _m0.Writer = _m0.Writer.create()
@@ -206,6 +224,7 @@ export const Logging_LoggingDestination = {
 
   fromJSON(object: any): Logging_LoggingDestination {
     return {
+      $type: Logging_LoggingDestination.$type,
       monitoredResource: isSet(object.monitoredResource)
         ? String(object.monitoredResource)
         : "",
@@ -237,6 +256,11 @@ export const Logging_LoggingDestination = {
   },
 };
 
+messageTypeRegistry.set(
+  Logging_LoggingDestination.$type,
+  Logging_LoggingDestination
+);
+
 type Builtin =
   | Date
   | Function
@@ -255,14 +279,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

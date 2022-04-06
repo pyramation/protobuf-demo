@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 
@@ -11,15 +12,22 @@ export const protobufPackage = "osmosis.txfees.v1beta1";
  * The pool ID must have osmo as one of its assets.
  */
 export interface FeeToken {
+  $type: "osmosis.txfees.v1beta1.FeeToken";
   denom: string;
   poolID: Long;
 }
 
 function createBaseFeeToken(): FeeToken {
-  return { denom: "", poolID: Long.UZERO };
+  return {
+    $type: "osmosis.txfees.v1beta1.FeeToken",
+    denom: "",
+    poolID: Long.UZERO,
+  };
 }
 
 export const FeeToken = {
+  $type: "osmosis.txfees.v1beta1.FeeToken" as const,
+
   encode(
     message: FeeToken,
     writer: _m0.Writer = _m0.Writer.create()
@@ -56,6 +64,7 @@ export const FeeToken = {
 
   fromJSON(object: any): FeeToken {
     return {
+      $type: FeeToken.$type,
       denom: isSet(object.denom) ? String(object.denom) : "",
       poolID: isSet(object.poolID)
         ? Long.fromString(object.poolID)
@@ -82,6 +91,8 @@ export const FeeToken = {
   },
 };
 
+messageTypeRegistry.set(FeeToken.$type, FeeToken);
+
 type Builtin =
   | Date
   | Function
@@ -100,14 +111,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

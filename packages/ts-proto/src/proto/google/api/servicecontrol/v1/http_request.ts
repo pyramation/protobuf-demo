@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Duration } from "../../../../google/protobuf/duration";
@@ -11,6 +12,7 @@ export const protobufPackage = "google.api.servicecontrol.v1";
  * information MUST be defined in a separate message.
  */
 export interface HttpRequest {
+  $type: "google.api.servicecontrol.v1.HttpRequest";
   /** The request method. Examples: `"GET"`, `"HEAD"`, `"PUT"`, `"POST"`. */
   requestMethod: string;
   /**
@@ -60,7 +62,7 @@ export interface HttpRequest {
    * The request processing latency on the server, from the time the request was
    * received until the response was sent.
    */
-  latency?: Duration;
+  latency: Duration;
   /** Whether or not a cache lookup was attempted. */
   cacheLookup: boolean;
   /**
@@ -85,6 +87,7 @@ export interface HttpRequest {
 
 function createBaseHttpRequest(): HttpRequest {
   return {
+    $type: "google.api.servicecontrol.v1.HttpRequest",
     requestMethod: "",
     requestUrl: "",
     requestSize: Long.ZERO,
@@ -104,6 +107,8 @@ function createBaseHttpRequest(): HttpRequest {
 }
 
 export const HttpRequest = {
+  $type: "google.api.servicecontrol.v1.HttpRequest" as const,
+
   encode(
     message: HttpRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -218,6 +223,7 @@ export const HttpRequest = {
 
   fromJSON(object: any): HttpRequest {
     return {
+      $type: HttpRequest.$type,
       requestMethod: isSet(object.requestMethod)
         ? String(object.requestMethod)
         : "",
@@ -318,6 +324,8 @@ export const HttpRequest = {
   },
 };
 
+messageTypeRegistry.set(HttpRequest.$type, HttpRequest);
+
 type Builtin =
   | Date
   | Function
@@ -336,14 +344,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

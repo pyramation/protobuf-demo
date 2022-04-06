@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Gauge } from "../../osmosis/incentives/gauge";
@@ -11,92 +12,115 @@ import { Duration } from "../../google/protobuf/duration";
 
 export const protobufPackage = "osmosis.incentives";
 
-export interface ModuleToDistributeCoinsRequest {}
+export interface ModuleToDistributeCoinsRequest {
+  $type: "osmosis.incentives.ModuleToDistributeCoinsRequest";
+}
 
 export interface ModuleToDistributeCoinsResponse {
+  $type: "osmosis.incentives.ModuleToDistributeCoinsResponse";
   coins: Coin[];
 }
 
-export interface ModuleDistributedCoinsRequest {}
+export interface ModuleDistributedCoinsRequest {
+  $type: "osmosis.incentives.ModuleDistributedCoinsRequest";
+}
 
 export interface ModuleDistributedCoinsResponse {
+  $type: "osmosis.incentives.ModuleDistributedCoinsResponse";
   coins: Coin[];
 }
 
 export interface GaugeByIDRequest {
+  $type: "osmosis.incentives.GaugeByIDRequest";
   id: Long;
 }
 
 export interface GaugeByIDResponse {
-  gauge?: Gauge;
+  $type: "osmosis.incentives.GaugeByIDResponse";
+  gauge: Gauge;
 }
 
 export interface GaugesRequest {
+  $type: "osmosis.incentives.GaugesRequest";
   /** pagination defines an pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 
 export interface GaugesResponse {
+  $type: "osmosis.incentives.GaugesResponse";
   data: Gauge[];
   /** pagination defines an pagination for the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 
 export interface ActiveGaugesRequest {
+  $type: "osmosis.incentives.ActiveGaugesRequest";
   /** pagination defines an pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 
 export interface ActiveGaugesResponse {
+  $type: "osmosis.incentives.ActiveGaugesResponse";
   data: Gauge[];
   /** pagination defines an pagination for the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 
 export interface ActiveGaugesPerDenomRequest {
+  $type: "osmosis.incentives.ActiveGaugesPerDenomRequest";
   denom: string;
   /** pagination defines an pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 
 export interface ActiveGaugesPerDenomResponse {
+  $type: "osmosis.incentives.ActiveGaugesPerDenomResponse";
   data: Gauge[];
   /** pagination defines an pagination for the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 
 export interface UpcomingGaugesRequest {
+  $type: "osmosis.incentives.UpcomingGaugesRequest";
   /** pagination defines an pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 
 export interface UpcomingGaugesResponse {
+  $type: "osmosis.incentives.UpcomingGaugesResponse";
   data: Gauge[];
   /** pagination defines an pagination for the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 
 export interface RewardsEstRequest {
+  $type: "osmosis.incentives.RewardsEstRequest";
   owner: string;
   lockIds: Long[];
   endEpoch: Long;
 }
 
 export interface RewardsEstResponse {
+  $type: "osmosis.incentives.RewardsEstResponse";
   coins: Coin[];
 }
 
-export interface QueryLockableDurationsRequest {}
+export interface QueryLockableDurationsRequest {
+  $type: "osmosis.incentives.QueryLockableDurationsRequest";
+}
 
 export interface QueryLockableDurationsResponse {
+  $type: "osmosis.incentives.QueryLockableDurationsResponse";
   lockableDurations: Duration[];
 }
 
 function createBaseModuleToDistributeCoinsRequest(): ModuleToDistributeCoinsRequest {
-  return {};
+  return { $type: "osmosis.incentives.ModuleToDistributeCoinsRequest" };
 }
 
 export const ModuleToDistributeCoinsRequest = {
+  $type: "osmosis.incentives.ModuleToDistributeCoinsRequest" as const,
+
   encode(
     _: ModuleToDistributeCoinsRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -123,7 +147,9 @@ export const ModuleToDistributeCoinsRequest = {
   },
 
   fromJSON(_: any): ModuleToDistributeCoinsRequest {
-    return {};
+    return {
+      $type: ModuleToDistributeCoinsRequest.$type,
+    };
   },
 
   toJSON(_: ModuleToDistributeCoinsRequest): unknown {
@@ -139,11 +165,21 @@ export const ModuleToDistributeCoinsRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  ModuleToDistributeCoinsRequest.$type,
+  ModuleToDistributeCoinsRequest
+);
+
 function createBaseModuleToDistributeCoinsResponse(): ModuleToDistributeCoinsResponse {
-  return { coins: [] };
+  return {
+    $type: "osmosis.incentives.ModuleToDistributeCoinsResponse",
+    coins: [],
+  };
 }
 
 export const ModuleToDistributeCoinsResponse = {
+  $type: "osmosis.incentives.ModuleToDistributeCoinsResponse" as const,
+
   encode(
     message: ModuleToDistributeCoinsResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -177,6 +213,7 @@ export const ModuleToDistributeCoinsResponse = {
 
   fromJSON(object: any): ModuleToDistributeCoinsResponse {
     return {
+      $type: ModuleToDistributeCoinsResponse.$type,
       coins: Array.isArray(object?.coins)
         ? object.coins.map((e: any) => Coin.fromJSON(e))
         : [],
@@ -202,11 +239,18 @@ export const ModuleToDistributeCoinsResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  ModuleToDistributeCoinsResponse.$type,
+  ModuleToDistributeCoinsResponse
+);
+
 function createBaseModuleDistributedCoinsRequest(): ModuleDistributedCoinsRequest {
-  return {};
+  return { $type: "osmosis.incentives.ModuleDistributedCoinsRequest" };
 }
 
 export const ModuleDistributedCoinsRequest = {
+  $type: "osmosis.incentives.ModuleDistributedCoinsRequest" as const,
+
   encode(
     _: ModuleDistributedCoinsRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -233,7 +277,9 @@ export const ModuleDistributedCoinsRequest = {
   },
 
   fromJSON(_: any): ModuleDistributedCoinsRequest {
-    return {};
+    return {
+      $type: ModuleDistributedCoinsRequest.$type,
+    };
   },
 
   toJSON(_: ModuleDistributedCoinsRequest): unknown {
@@ -249,11 +295,21 @@ export const ModuleDistributedCoinsRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  ModuleDistributedCoinsRequest.$type,
+  ModuleDistributedCoinsRequest
+);
+
 function createBaseModuleDistributedCoinsResponse(): ModuleDistributedCoinsResponse {
-  return { coins: [] };
+  return {
+    $type: "osmosis.incentives.ModuleDistributedCoinsResponse",
+    coins: [],
+  };
 }
 
 export const ModuleDistributedCoinsResponse = {
+  $type: "osmosis.incentives.ModuleDistributedCoinsResponse" as const,
+
   encode(
     message: ModuleDistributedCoinsResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -287,6 +343,7 @@ export const ModuleDistributedCoinsResponse = {
 
   fromJSON(object: any): ModuleDistributedCoinsResponse {
     return {
+      $type: ModuleDistributedCoinsResponse.$type,
       coins: Array.isArray(object?.coins)
         ? object.coins.map((e: any) => Coin.fromJSON(e))
         : [],
@@ -312,11 +369,18 @@ export const ModuleDistributedCoinsResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  ModuleDistributedCoinsResponse.$type,
+  ModuleDistributedCoinsResponse
+);
+
 function createBaseGaugeByIDRequest(): GaugeByIDRequest {
-  return { id: Long.UZERO };
+  return { $type: "osmosis.incentives.GaugeByIDRequest", id: Long.UZERO };
 }
 
 export const GaugeByIDRequest = {
+  $type: "osmosis.incentives.GaugeByIDRequest" as const,
+
   encode(
     message: GaugeByIDRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -347,6 +411,7 @@ export const GaugeByIDRequest = {
 
   fromJSON(object: any): GaugeByIDRequest {
     return {
+      $type: GaugeByIDRequest.$type,
       id: isSet(object.id) ? Long.fromString(object.id) : Long.UZERO,
     };
   },
@@ -370,11 +435,15 @@ export const GaugeByIDRequest = {
   },
 };
 
+messageTypeRegistry.set(GaugeByIDRequest.$type, GaugeByIDRequest);
+
 function createBaseGaugeByIDResponse(): GaugeByIDResponse {
-  return { gauge: undefined };
+  return { $type: "osmosis.incentives.GaugeByIDResponse", gauge: undefined };
 }
 
 export const GaugeByIDResponse = {
+  $type: "osmosis.incentives.GaugeByIDResponse" as const,
+
   encode(
     message: GaugeByIDResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -405,6 +474,7 @@ export const GaugeByIDResponse = {
 
   fromJSON(object: any): GaugeByIDResponse {
     return {
+      $type: GaugeByIDResponse.$type,
       gauge: isSet(object.gauge) ? Gauge.fromJSON(object.gauge) : undefined,
     };
   },
@@ -428,11 +498,15 @@ export const GaugeByIDResponse = {
   },
 };
 
+messageTypeRegistry.set(GaugeByIDResponse.$type, GaugeByIDResponse);
+
 function createBaseGaugesRequest(): GaugesRequest {
-  return { pagination: undefined };
+  return { $type: "osmosis.incentives.GaugesRequest", pagination: undefined };
 }
 
 export const GaugesRequest = {
+  $type: "osmosis.incentives.GaugesRequest" as const,
+
   encode(
     message: GaugesRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -463,6 +537,7 @@ export const GaugesRequest = {
 
   fromJSON(object: any): GaugesRequest {
     return {
+      $type: GaugesRequest.$type,
       pagination: isSet(object.pagination)
         ? PageRequest.fromJSON(object.pagination)
         : undefined,
@@ -490,11 +565,19 @@ export const GaugesRequest = {
   },
 };
 
+messageTypeRegistry.set(GaugesRequest.$type, GaugesRequest);
+
 function createBaseGaugesResponse(): GaugesResponse {
-  return { data: [], pagination: undefined };
+  return {
+    $type: "osmosis.incentives.GaugesResponse",
+    data: [],
+    pagination: undefined,
+  };
 }
 
 export const GaugesResponse = {
+  $type: "osmosis.incentives.GaugesResponse" as const,
+
   encode(
     message: GaugesResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -534,6 +617,7 @@ export const GaugesResponse = {
 
   fromJSON(object: any): GaugesResponse {
     return {
+      $type: GaugesResponse.$type,
       data: Array.isArray(object?.data)
         ? object.data.map((e: any) => Gauge.fromJSON(e))
         : [],
@@ -570,11 +654,18 @@ export const GaugesResponse = {
   },
 };
 
+messageTypeRegistry.set(GaugesResponse.$type, GaugesResponse);
+
 function createBaseActiveGaugesRequest(): ActiveGaugesRequest {
-  return { pagination: undefined };
+  return {
+    $type: "osmosis.incentives.ActiveGaugesRequest",
+    pagination: undefined,
+  };
 }
 
 export const ActiveGaugesRequest = {
+  $type: "osmosis.incentives.ActiveGaugesRequest" as const,
+
   encode(
     message: ActiveGaugesRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -605,6 +696,7 @@ export const ActiveGaugesRequest = {
 
   fromJSON(object: any): ActiveGaugesRequest {
     return {
+      $type: ActiveGaugesRequest.$type,
       pagination: isSet(object.pagination)
         ? PageRequest.fromJSON(object.pagination)
         : undefined,
@@ -632,11 +724,19 @@ export const ActiveGaugesRequest = {
   },
 };
 
+messageTypeRegistry.set(ActiveGaugesRequest.$type, ActiveGaugesRequest);
+
 function createBaseActiveGaugesResponse(): ActiveGaugesResponse {
-  return { data: [], pagination: undefined };
+  return {
+    $type: "osmosis.incentives.ActiveGaugesResponse",
+    data: [],
+    pagination: undefined,
+  };
 }
 
 export const ActiveGaugesResponse = {
+  $type: "osmosis.incentives.ActiveGaugesResponse" as const,
+
   encode(
     message: ActiveGaugesResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -679,6 +779,7 @@ export const ActiveGaugesResponse = {
 
   fromJSON(object: any): ActiveGaugesResponse {
     return {
+      $type: ActiveGaugesResponse.$type,
       data: Array.isArray(object?.data)
         ? object.data.map((e: any) => Gauge.fromJSON(e))
         : [],
@@ -715,11 +816,19 @@ export const ActiveGaugesResponse = {
   },
 };
 
+messageTypeRegistry.set(ActiveGaugesResponse.$type, ActiveGaugesResponse);
+
 function createBaseActiveGaugesPerDenomRequest(): ActiveGaugesPerDenomRequest {
-  return { denom: "", pagination: undefined };
+  return {
+    $type: "osmosis.incentives.ActiveGaugesPerDenomRequest",
+    denom: "",
+    pagination: undefined,
+  };
 }
 
 export const ActiveGaugesPerDenomRequest = {
+  $type: "osmosis.incentives.ActiveGaugesPerDenomRequest" as const,
+
   encode(
     message: ActiveGaugesPerDenomRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -759,6 +868,7 @@ export const ActiveGaugesPerDenomRequest = {
 
   fromJSON(object: any): ActiveGaugesPerDenomRequest {
     return {
+      $type: ActiveGaugesPerDenomRequest.$type,
       denom: isSet(object.denom) ? String(object.denom) : "",
       pagination: isSet(object.pagination)
         ? PageRequest.fromJSON(object.pagination)
@@ -789,11 +899,22 @@ export const ActiveGaugesPerDenomRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  ActiveGaugesPerDenomRequest.$type,
+  ActiveGaugesPerDenomRequest
+);
+
 function createBaseActiveGaugesPerDenomResponse(): ActiveGaugesPerDenomResponse {
-  return { data: [], pagination: undefined };
+  return {
+    $type: "osmosis.incentives.ActiveGaugesPerDenomResponse",
+    data: [],
+    pagination: undefined,
+  };
 }
 
 export const ActiveGaugesPerDenomResponse = {
+  $type: "osmosis.incentives.ActiveGaugesPerDenomResponse" as const,
+
   encode(
     message: ActiveGaugesPerDenomResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -836,6 +957,7 @@ export const ActiveGaugesPerDenomResponse = {
 
   fromJSON(object: any): ActiveGaugesPerDenomResponse {
     return {
+      $type: ActiveGaugesPerDenomResponse.$type,
       data: Array.isArray(object?.data)
         ? object.data.map((e: any) => Gauge.fromJSON(e))
         : [],
@@ -872,11 +994,21 @@ export const ActiveGaugesPerDenomResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  ActiveGaugesPerDenomResponse.$type,
+  ActiveGaugesPerDenomResponse
+);
+
 function createBaseUpcomingGaugesRequest(): UpcomingGaugesRequest {
-  return { pagination: undefined };
+  return {
+    $type: "osmosis.incentives.UpcomingGaugesRequest",
+    pagination: undefined,
+  };
 }
 
 export const UpcomingGaugesRequest = {
+  $type: "osmosis.incentives.UpcomingGaugesRequest" as const,
+
   encode(
     message: UpcomingGaugesRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -910,6 +1042,7 @@ export const UpcomingGaugesRequest = {
 
   fromJSON(object: any): UpcomingGaugesRequest {
     return {
+      $type: UpcomingGaugesRequest.$type,
       pagination: isSet(object.pagination)
         ? PageRequest.fromJSON(object.pagination)
         : undefined,
@@ -937,11 +1070,19 @@ export const UpcomingGaugesRequest = {
   },
 };
 
+messageTypeRegistry.set(UpcomingGaugesRequest.$type, UpcomingGaugesRequest);
+
 function createBaseUpcomingGaugesResponse(): UpcomingGaugesResponse {
-  return { data: [], pagination: undefined };
+  return {
+    $type: "osmosis.incentives.UpcomingGaugesResponse",
+    data: [],
+    pagination: undefined,
+  };
 }
 
 export const UpcomingGaugesResponse = {
+  $type: "osmosis.incentives.UpcomingGaugesResponse" as const,
+
   encode(
     message: UpcomingGaugesResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -984,6 +1125,7 @@ export const UpcomingGaugesResponse = {
 
   fromJSON(object: any): UpcomingGaugesResponse {
     return {
+      $type: UpcomingGaugesResponse.$type,
       data: Array.isArray(object?.data)
         ? object.data.map((e: any) => Gauge.fromJSON(e))
         : [],
@@ -1020,11 +1162,20 @@ export const UpcomingGaugesResponse = {
   },
 };
 
+messageTypeRegistry.set(UpcomingGaugesResponse.$type, UpcomingGaugesResponse);
+
 function createBaseRewardsEstRequest(): RewardsEstRequest {
-  return { owner: "", lockIds: [], endEpoch: Long.ZERO };
+  return {
+    $type: "osmosis.incentives.RewardsEstRequest",
+    owner: "",
+    lockIds: [],
+    endEpoch: Long.ZERO,
+  };
 }
 
 export const RewardsEstRequest = {
+  $type: "osmosis.incentives.RewardsEstRequest" as const,
+
   encode(
     message: RewardsEstRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1076,6 +1227,7 @@ export const RewardsEstRequest = {
 
   fromJSON(object: any): RewardsEstRequest {
     return {
+      $type: RewardsEstRequest.$type,
       owner: isSet(object.owner) ? String(object.owner) : "",
       lockIds: Array.isArray(object?.lockIds)
         ? object.lockIds.map((e: any) => Long.fromString(e))
@@ -1113,11 +1265,15 @@ export const RewardsEstRequest = {
   },
 };
 
+messageTypeRegistry.set(RewardsEstRequest.$type, RewardsEstRequest);
+
 function createBaseRewardsEstResponse(): RewardsEstResponse {
-  return { coins: [] };
+  return { $type: "osmosis.incentives.RewardsEstResponse", coins: [] };
 }
 
 export const RewardsEstResponse = {
+  $type: "osmosis.incentives.RewardsEstResponse" as const,
+
   encode(
     message: RewardsEstResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1148,6 +1304,7 @@ export const RewardsEstResponse = {
 
   fromJSON(object: any): RewardsEstResponse {
     return {
+      $type: RewardsEstResponse.$type,
       coins: Array.isArray(object?.coins)
         ? object.coins.map((e: any) => Coin.fromJSON(e))
         : [],
@@ -1173,11 +1330,15 @@ export const RewardsEstResponse = {
   },
 };
 
+messageTypeRegistry.set(RewardsEstResponse.$type, RewardsEstResponse);
+
 function createBaseQueryLockableDurationsRequest(): QueryLockableDurationsRequest {
-  return {};
+  return { $type: "osmosis.incentives.QueryLockableDurationsRequest" };
 }
 
 export const QueryLockableDurationsRequest = {
+  $type: "osmosis.incentives.QueryLockableDurationsRequest" as const,
+
   encode(
     _: QueryLockableDurationsRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1204,7 +1365,9 @@ export const QueryLockableDurationsRequest = {
   },
 
   fromJSON(_: any): QueryLockableDurationsRequest {
-    return {};
+    return {
+      $type: QueryLockableDurationsRequest.$type,
+    };
   },
 
   toJSON(_: QueryLockableDurationsRequest): unknown {
@@ -1220,11 +1383,21 @@ export const QueryLockableDurationsRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryLockableDurationsRequest.$type,
+  QueryLockableDurationsRequest
+);
+
 function createBaseQueryLockableDurationsResponse(): QueryLockableDurationsResponse {
-  return { lockableDurations: [] };
+  return {
+    $type: "osmosis.incentives.QueryLockableDurationsResponse",
+    lockableDurations: [],
+  };
 }
 
 export const QueryLockableDurationsResponse = {
+  $type: "osmosis.incentives.QueryLockableDurationsResponse" as const,
+
   encode(
     message: QueryLockableDurationsResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1260,6 +1433,7 @@ export const QueryLockableDurationsResponse = {
 
   fromJSON(object: any): QueryLockableDurationsResponse {
     return {
+      $type: QueryLockableDurationsResponse.$type,
       lockableDurations: Array.isArray(object?.lockableDurations)
         ? object.lockableDurations.map((e: any) => Duration.fromJSON(e))
         : [],
@@ -1287,6 +1461,11 @@ export const QueryLockableDurationsResponse = {
     return message;
   },
 };
+
+messageTypeRegistry.set(
+  QueryLockableDurationsResponse.$type,
+  QueryLockableDurationsResponse
+);
 
 /** Query defines the gRPC querier service. */
 export interface Query {
@@ -1480,14 +1659,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

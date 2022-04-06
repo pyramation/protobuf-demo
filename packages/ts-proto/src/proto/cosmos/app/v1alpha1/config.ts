@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Any } from "../../../google/protobuf/any";
@@ -15,12 +16,14 @@ export const protobufPackage = "cosmos.app.v1alpha1";
  * their state machine with a config object alone.
  */
 export interface Config {
+  $type: "cosmos.app.v1alpha1.Config";
   /** modules are the module configurations for the app. */
   modules: ModuleConfig[];
 }
 
 /** ModuleConfig is a module configuration for an app. */
 export interface ModuleConfig {
+  $type: "cosmos.app.v1alpha1.ModuleConfig";
   /**
    * name is the unique name of the module within the app. It should be a name
    * that persists between different versions of a module so that modules
@@ -38,14 +41,16 @@ export interface ModuleConfig {
    * config is the config object for the module. Module config messages should
    * define a ModuleDescriptor using the cosmos.app.v1alpha1.is_module extension.
    */
-  config?: Any;
+  config: Any;
 }
 
 function createBaseConfig(): Config {
-  return { modules: [] };
+  return { $type: "cosmos.app.v1alpha1.Config", modules: [] };
 }
 
 export const Config = {
+  $type: "cosmos.app.v1alpha1.Config" as const,
+
   encode(
     message: Config,
     writer: _m0.Writer = _m0.Writer.create()
@@ -76,6 +81,7 @@ export const Config = {
 
   fromJSON(object: any): Config {
     return {
+      $type: Config.$type,
       modules: Array.isArray(object?.modules)
         ? object.modules.map((e: any) => ModuleConfig.fromJSON(e))
         : [],
@@ -102,11 +108,19 @@ export const Config = {
   },
 };
 
+messageTypeRegistry.set(Config.$type, Config);
+
 function createBaseModuleConfig(): ModuleConfig {
-  return { name: "", config: undefined };
+  return {
+    $type: "cosmos.app.v1alpha1.ModuleConfig",
+    name: "",
+    config: undefined,
+  };
 }
 
 export const ModuleConfig = {
+  $type: "cosmos.app.v1alpha1.ModuleConfig" as const,
+
   encode(
     message: ModuleConfig,
     writer: _m0.Writer = _m0.Writer.create()
@@ -143,6 +157,7 @@ export const ModuleConfig = {
 
   fromJSON(object: any): ModuleConfig {
     return {
+      $type: ModuleConfig.$type,
       name: isSet(object.name) ? String(object.name) : "",
       config: isSet(object.config) ? Any.fromJSON(object.config) : undefined,
     };
@@ -169,6 +184,8 @@ export const ModuleConfig = {
   },
 };
 
+messageTypeRegistry.set(ModuleConfig.$type, ModuleConfig);
+
 type Builtin =
   | Date
   | Function
@@ -187,14 +204,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

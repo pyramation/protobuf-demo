@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import {
@@ -16,6 +17,7 @@ export const protobufPackage = "cosmos.gov.v1";
 
 /** GenesisState defines the gov module's genesis state. */
 export interface GenesisState {
+  $type: "cosmos.gov.v1.GenesisState";
   /** starting_proposal_id is the ID of the starting proposal. */
   startingProposalId: Long;
   /** deposits defines all the deposits present at genesis. */
@@ -25,15 +27,16 @@ export interface GenesisState {
   /** proposals defines all the proposals present at genesis. */
   proposals: Proposal[];
   /** params defines all the paramaters of related to deposit. */
-  depositParams?: DepositParams;
+  depositParams: DepositParams;
   /** params defines all the paramaters of related to voting. */
-  votingParams?: VotingParams;
+  votingParams: VotingParams;
   /** params defines all the paramaters of related to tally. */
-  tallyParams?: TallyParams;
+  tallyParams: TallyParams;
 }
 
 function createBaseGenesisState(): GenesisState {
   return {
+    $type: "cosmos.gov.v1.GenesisState",
     startingProposalId: Long.UZERO,
     deposits: [],
     votes: [],
@@ -45,6 +48,8 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
+  $type: "cosmos.gov.v1.GenesisState" as const,
+
   encode(
     message: GenesisState,
     writer: _m0.Writer = _m0.Writer.create()
@@ -120,6 +125,7 @@ export const GenesisState = {
 
   fromJSON(object: any): GenesisState {
     return {
+      $type: GenesisState.$type,
       startingProposalId: isSet(object.startingProposalId)
         ? Long.fromString(object.startingProposalId)
         : Long.UZERO,
@@ -214,6 +220,8 @@ export const GenesisState = {
   },
 };
 
+messageTypeRegistry.set(GenesisState.$type, GenesisState);
+
 type Builtin =
   | Date
   | Function
@@ -232,14 +240,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

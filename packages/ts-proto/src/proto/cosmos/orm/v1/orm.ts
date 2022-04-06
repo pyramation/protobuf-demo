@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 
@@ -6,8 +7,9 @@ export const protobufPackage = "cosmos.orm.v1";
 
 /** TableDescriptor describes an ORM table. */
 export interface TableDescriptor {
+  $type: "cosmos.orm.v1.TableDescriptor";
   /** primary_key defines the primary key for the table. */
-  primaryKey?: PrimaryKeyDescriptor;
+  primaryKey: PrimaryKeyDescriptor;
   /** index defines one or more secondary indexes. */
   index: SecondaryIndexDescriptor[];
   /**
@@ -20,6 +22,7 @@ export interface TableDescriptor {
 
 /** PrimaryKeyDescriptor describes a table primary key. */
 export interface PrimaryKeyDescriptor {
+  $type: "cosmos.orm.v1.PrimaryKeyDescriptor";
   /**
    * fields is a comma-separated list of fields in the primary key. Spaces are
    * not allowed. Supported field types, their encodings, and any applicable constraints
@@ -63,6 +66,7 @@ export interface PrimaryKeyDescriptor {
 
 /** PrimaryKeyDescriptor describes a table secondary index. */
 export interface SecondaryIndexDescriptor {
+  $type: "cosmos.orm.v1.SecondaryIndexDescriptor";
   /**
    * fields is a comma-separated list of fields in the index. The supported
    * field types are the same as those for PrimaryKeyDescriptor.fields.
@@ -87,6 +91,7 @@ export interface SecondaryIndexDescriptor {
 
 /** TableDescriptor describes an ORM singleton table which has at most one instance. */
 export interface SingletonDescriptor {
+  $type: "cosmos.orm.v1.SingletonDescriptor";
   /**
    * id is a non-zero integer ID that must be unique within the
    * tables and singletons in this file. It may be deprecated in the future when this
@@ -96,10 +101,17 @@ export interface SingletonDescriptor {
 }
 
 function createBaseTableDescriptor(): TableDescriptor {
-  return { primaryKey: undefined, index: [], id: 0 };
+  return {
+    $type: "cosmos.orm.v1.TableDescriptor",
+    primaryKey: undefined,
+    index: [],
+    id: 0,
+  };
 }
 
 export const TableDescriptor = {
+  $type: "cosmos.orm.v1.TableDescriptor" as const,
+
   encode(
     message: TableDescriptor,
     writer: _m0.Writer = _m0.Writer.create()
@@ -150,6 +162,7 @@ export const TableDescriptor = {
 
   fromJSON(object: any): TableDescriptor {
     return {
+      $type: TableDescriptor.$type,
       primaryKey: isSet(object.primaryKey)
         ? PrimaryKeyDescriptor.fromJSON(object.primaryKey)
         : undefined,
@@ -192,11 +205,19 @@ export const TableDescriptor = {
   },
 };
 
+messageTypeRegistry.set(TableDescriptor.$type, TableDescriptor);
+
 function createBasePrimaryKeyDescriptor(): PrimaryKeyDescriptor {
-  return { fields: "", autoIncrement: false };
+  return {
+    $type: "cosmos.orm.v1.PrimaryKeyDescriptor",
+    fields: "",
+    autoIncrement: false,
+  };
 }
 
 export const PrimaryKeyDescriptor = {
+  $type: "cosmos.orm.v1.PrimaryKeyDescriptor" as const,
+
   encode(
     message: PrimaryKeyDescriptor,
     writer: _m0.Writer = _m0.Writer.create()
@@ -236,6 +257,7 @@ export const PrimaryKeyDescriptor = {
 
   fromJSON(object: any): PrimaryKeyDescriptor {
     return {
+      $type: PrimaryKeyDescriptor.$type,
       fields: isSet(object.fields) ? String(object.fields) : "",
       autoIncrement: isSet(object.autoIncrement)
         ? Boolean(object.autoIncrement)
@@ -261,11 +283,20 @@ export const PrimaryKeyDescriptor = {
   },
 };
 
+messageTypeRegistry.set(PrimaryKeyDescriptor.$type, PrimaryKeyDescriptor);
+
 function createBaseSecondaryIndexDescriptor(): SecondaryIndexDescriptor {
-  return { fields: "", id: 0, unique: false };
+  return {
+    $type: "cosmos.orm.v1.SecondaryIndexDescriptor",
+    fields: "",
+    id: 0,
+    unique: false,
+  };
 }
 
 export const SecondaryIndexDescriptor = {
+  $type: "cosmos.orm.v1.SecondaryIndexDescriptor" as const,
+
   encode(
     message: SecondaryIndexDescriptor,
     writer: _m0.Writer = _m0.Writer.create()
@@ -311,6 +342,7 @@ export const SecondaryIndexDescriptor = {
 
   fromJSON(object: any): SecondaryIndexDescriptor {
     return {
+      $type: SecondaryIndexDescriptor.$type,
       fields: isSet(object.fields) ? String(object.fields) : "",
       id: isSet(object.id) ? Number(object.id) : 0,
       unique: isSet(object.unique) ? Boolean(object.unique) : false,
@@ -336,11 +368,18 @@ export const SecondaryIndexDescriptor = {
   },
 };
 
+messageTypeRegistry.set(
+  SecondaryIndexDescriptor.$type,
+  SecondaryIndexDescriptor
+);
+
 function createBaseSingletonDescriptor(): SingletonDescriptor {
-  return { id: 0 };
+  return { $type: "cosmos.orm.v1.SingletonDescriptor", id: 0 };
 }
 
 export const SingletonDescriptor = {
+  $type: "cosmos.orm.v1.SingletonDescriptor" as const,
+
   encode(
     message: SingletonDescriptor,
     writer: _m0.Writer = _m0.Writer.create()
@@ -371,6 +410,7 @@ export const SingletonDescriptor = {
 
   fromJSON(object: any): SingletonDescriptor {
     return {
+      $type: SingletonDescriptor.$type,
       id: isSet(object.id) ? Number(object.id) : 0,
     };
   },
@@ -390,6 +430,8 @@ export const SingletonDescriptor = {
   },
 };
 
+messageTypeRegistry.set(SingletonDescriptor.$type, SingletonDescriptor);
+
 type Builtin =
   | Date
   | Function
@@ -408,14 +450,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

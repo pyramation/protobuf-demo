@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Timestamp } from "../../google/protobuf/timestamp";
@@ -23,6 +24,7 @@ export const protobufPackage = "google.api";
  * will render the `mean` and `sum_of_squared_deviation` fields meaningless.
  */
 export interface Distribution {
+  $type: "google.api.Distribution";
   /**
    * The number of values in the population. Must be non-negative. This value
    * must equal the sum of the values in `bucket_counts` if a histogram is
@@ -50,12 +52,12 @@ export interface Distribution {
    * If specified, contains the range of the population values. The field
    * must not be present if the `count` is zero.
    */
-  range?: Distribution_Range;
+  range: Distribution_Range;
   /**
    * Defines the histogram bucket boundaries. If the distribution does not
    * contain a histogram, then omit this field.
    */
-  bucketOptions?: Distribution_BucketOptions;
+  bucketOptions: Distribution_BucketOptions;
   /**
    * The number of values in each bucket of the histogram, as described in
    * `bucket_options`. If the distribution does not have a histogram, then omit
@@ -80,6 +82,7 @@ export interface Distribution {
 
 /** The range of the population values. */
 export interface Distribution_Range {
+  $type: "google.api.Distribution.Range";
   /** The minimum of the population values. */
   min: number;
   /** The maximum of the population values. */
@@ -104,12 +107,13 @@ export interface Distribution_Range {
  * so-called because both bounds are finite.
  */
 export interface Distribution_BucketOptions {
+  $type: "google.api.Distribution.BucketOptions";
   /** The linear bucket. */
-  linearBuckets?: Distribution_BucketOptions_Linear | undefined;
+  linearBuckets: Distribution_BucketOptions_Linear | undefined;
   /** The exponential buckets. */
-  exponentialBuckets?: Distribution_BucketOptions_Exponential | undefined;
+  exponentialBuckets: Distribution_BucketOptions_Exponential | undefined;
   /** The explicit buckets. */
-  explicitBuckets?: Distribution_BucketOptions_Explicit | undefined;
+  explicitBuckets: Distribution_BucketOptions_Explicit | undefined;
 }
 
 /**
@@ -124,6 +128,7 @@ export interface Distribution_BucketOptions {
  *    Lower bound (1 <= i < N):       offset + (width * (i - 1)).
  */
 export interface Distribution_BucketOptions_Linear {
+  $type: "google.api.Distribution.BucketOptions.Linear";
   /** Must be greater than 0. */
   numFiniteBuckets: number;
   /** Must be greater than 0. */
@@ -144,6 +149,7 @@ export interface Distribution_BucketOptions_Linear {
  *    Lower bound (1 <= i < N):       scale * (growth_factor ^ (i - 1)).
  */
 export interface Distribution_BucketOptions_Exponential {
+  $type: "google.api.Distribution.BucketOptions.Exponential";
   /** Must be greater than 0. */
   numFiniteBuckets: number;
   /** Must be greater than 1. */
@@ -166,6 +172,7 @@ export interface Distribution_BucketOptions_Exponential {
  * element is the common boundary of the overflow and underflow buckets.
  */
 export interface Distribution_BucketOptions_Explicit {
+  $type: "google.api.Distribution.BucketOptions.Explicit";
   /** The values must be monotonically increasing. */
   bounds: number[];
 }
@@ -178,13 +185,14 @@ export interface Distribution_BucketOptions_Explicit {
  * such as a example values and timestamps, origin, etc.
  */
 export interface Distribution_Exemplar {
+  $type: "google.api.Distribution.Exemplar";
   /**
    * Value of the exemplar point. This value determines to which bucket the
    * exemplar belongs.
    */
   value: number;
   /** The observation (sampling) time of the above value. */
-  timestamp?: Date;
+  timestamp: Date;
   /**
    * Contextual information about the example value. Examples are:
    *
@@ -203,6 +211,7 @@ export interface Distribution_Exemplar {
 
 function createBaseDistribution(): Distribution {
   return {
+    $type: "google.api.Distribution",
     count: Long.ZERO,
     mean: 0,
     sumOfSquaredDeviation: 0,
@@ -214,6 +223,8 @@ function createBaseDistribution(): Distribution {
 }
 
 export const Distribution = {
+  $type: "google.api.Distribution" as const,
+
   encode(
     message: Distribution,
     writer: _m0.Writer = _m0.Writer.create()
@@ -300,6 +311,7 @@ export const Distribution = {
 
   fromJSON(object: any): Distribution {
     return {
+      $type: Distribution.$type,
       count: isSet(object.count) ? Long.fromString(object.count) : Long.ZERO,
       mean: isSet(object.mean) ? Number(object.mean) : 0,
       sumOfSquaredDeviation: isSet(object.sumOfSquaredDeviation)
@@ -378,11 +390,15 @@ export const Distribution = {
   },
 };
 
+messageTypeRegistry.set(Distribution.$type, Distribution);
+
 function createBaseDistribution_Range(): Distribution_Range {
-  return { min: 0, max: 0 };
+  return { $type: "google.api.Distribution.Range", min: 0, max: 0 };
 }
 
 export const Distribution_Range = {
+  $type: "google.api.Distribution.Range" as const,
+
   encode(
     message: Distribution_Range,
     writer: _m0.Writer = _m0.Writer.create()
@@ -419,6 +435,7 @@ export const Distribution_Range = {
 
   fromJSON(object: any): Distribution_Range {
     return {
+      $type: Distribution_Range.$type,
       min: isSet(object.min) ? Number(object.min) : 0,
       max: isSet(object.max) ? Number(object.max) : 0,
     };
@@ -441,8 +458,11 @@ export const Distribution_Range = {
   },
 };
 
+messageTypeRegistry.set(Distribution_Range.$type, Distribution_Range);
+
 function createBaseDistribution_BucketOptions(): Distribution_BucketOptions {
   return {
+    $type: "google.api.Distribution.BucketOptions",
     linearBuckets: undefined,
     exponentialBuckets: undefined,
     explicitBuckets: undefined,
@@ -450,6 +470,8 @@ function createBaseDistribution_BucketOptions(): Distribution_BucketOptions {
 }
 
 export const Distribution_BucketOptions = {
+  $type: "google.api.Distribution.BucketOptions" as const,
+
   encode(
     message: Distribution_BucketOptions,
     writer: _m0.Writer = _m0.Writer.create()
@@ -514,6 +536,7 @@ export const Distribution_BucketOptions = {
 
   fromJSON(object: any): Distribution_BucketOptions {
     return {
+      $type: Distribution_BucketOptions.$type,
       linearBuckets: isSet(object.linearBuckets)
         ? Distribution_BucketOptions_Linear.fromJSON(object.linearBuckets)
         : undefined,
@@ -572,11 +595,23 @@ export const Distribution_BucketOptions = {
   },
 };
 
+messageTypeRegistry.set(
+  Distribution_BucketOptions.$type,
+  Distribution_BucketOptions
+);
+
 function createBaseDistribution_BucketOptions_Linear(): Distribution_BucketOptions_Linear {
-  return { numFiniteBuckets: 0, width: 0, offset: 0 };
+  return {
+    $type: "google.api.Distribution.BucketOptions.Linear",
+    numFiniteBuckets: 0,
+    width: 0,
+    offset: 0,
+  };
 }
 
 export const Distribution_BucketOptions_Linear = {
+  $type: "google.api.Distribution.BucketOptions.Linear" as const,
+
   encode(
     message: Distribution_BucketOptions_Linear,
     writer: _m0.Writer = _m0.Writer.create()
@@ -622,6 +657,7 @@ export const Distribution_BucketOptions_Linear = {
 
   fromJSON(object: any): Distribution_BucketOptions_Linear {
     return {
+      $type: Distribution_BucketOptions_Linear.$type,
       numFiniteBuckets: isSet(object.numFiniteBuckets)
         ? Number(object.numFiniteBuckets)
         : 0,
@@ -650,11 +686,23 @@ export const Distribution_BucketOptions_Linear = {
   },
 };
 
+messageTypeRegistry.set(
+  Distribution_BucketOptions_Linear.$type,
+  Distribution_BucketOptions_Linear
+);
+
 function createBaseDistribution_BucketOptions_Exponential(): Distribution_BucketOptions_Exponential {
-  return { numFiniteBuckets: 0, growthFactor: 0, scale: 0 };
+  return {
+    $type: "google.api.Distribution.BucketOptions.Exponential",
+    numFiniteBuckets: 0,
+    growthFactor: 0,
+    scale: 0,
+  };
 }
 
 export const Distribution_BucketOptions_Exponential = {
+  $type: "google.api.Distribution.BucketOptions.Exponential" as const,
+
   encode(
     message: Distribution_BucketOptions_Exponential,
     writer: _m0.Writer = _m0.Writer.create()
@@ -700,6 +748,7 @@ export const Distribution_BucketOptions_Exponential = {
 
   fromJSON(object: any): Distribution_BucketOptions_Exponential {
     return {
+      $type: Distribution_BucketOptions_Exponential.$type,
       numFiniteBuckets: isSet(object.numFiniteBuckets)
         ? Number(object.numFiniteBuckets)
         : 0,
@@ -731,11 +780,21 @@ export const Distribution_BucketOptions_Exponential = {
   },
 };
 
+messageTypeRegistry.set(
+  Distribution_BucketOptions_Exponential.$type,
+  Distribution_BucketOptions_Exponential
+);
+
 function createBaseDistribution_BucketOptions_Explicit(): Distribution_BucketOptions_Explicit {
-  return { bounds: [] };
+  return {
+    $type: "google.api.Distribution.BucketOptions.Explicit",
+    bounds: [],
+  };
 }
 
 export const Distribution_BucketOptions_Explicit = {
+  $type: "google.api.Distribution.BucketOptions.Explicit" as const,
+
   encode(
     message: Distribution_BucketOptions_Explicit,
     writer: _m0.Writer = _m0.Writer.create()
@@ -778,6 +837,7 @@ export const Distribution_BucketOptions_Explicit = {
 
   fromJSON(object: any): Distribution_BucketOptions_Explicit {
     return {
+      $type: Distribution_BucketOptions_Explicit.$type,
       bounds: Array.isArray(object?.bounds)
         ? object.bounds.map((e: any) => Number(e))
         : [],
@@ -803,11 +863,23 @@ export const Distribution_BucketOptions_Explicit = {
   },
 };
 
+messageTypeRegistry.set(
+  Distribution_BucketOptions_Explicit.$type,
+  Distribution_BucketOptions_Explicit
+);
+
 function createBaseDistribution_Exemplar(): Distribution_Exemplar {
-  return { value: 0, timestamp: undefined, attachments: [] };
+  return {
+    $type: "google.api.Distribution.Exemplar",
+    value: 0,
+    timestamp: undefined,
+    attachments: [],
+  };
 }
 
 export const Distribution_Exemplar = {
+  $type: "google.api.Distribution.Exemplar" as const,
+
   encode(
     message: Distribution_Exemplar,
     writer: _m0.Writer = _m0.Writer.create()
@@ -858,6 +930,7 @@ export const Distribution_Exemplar = {
 
   fromJSON(object: any): Distribution_Exemplar {
     return {
+      $type: Distribution_Exemplar.$type,
       value: isSet(object.value) ? Number(object.value) : 0,
       timestamp: isSet(object.timestamp)
         ? fromJsonTimestamp(object.timestamp)
@@ -895,6 +968,8 @@ export const Distribution_Exemplar = {
   },
 };
 
+messageTypeRegistry.set(Distribution_Exemplar.$type, Distribution_Exemplar);
+
 type Builtin =
   | Date
   | Function
@@ -913,21 +988,21 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = (date.getTime() % 1_000) * 1_000_000;
-  return { seconds, nanos };
+  return { $type: "google.protobuf.Timestamp", seconds, nanos };
 }
 
 function fromTimestamp(t: Timestamp): Date {

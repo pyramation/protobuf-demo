@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Duration } from "../../google/protobuf/duration";
@@ -47,22 +48,24 @@ export function lockQueryTypeToJSON(object: LockQueryType): string {
  * coins locked.
  */
 export interface PeriodLock {
+  $type: "osmosis.lockup.PeriodLock";
   ID: Long;
   owner: string;
-  duration?: Duration;
-  endTime?: Date;
+  duration: Duration;
+  endTime: Date;
   coins: Coin[];
 }
 
 export interface QueryCondition {
+  $type: "osmosis.lockup.QueryCondition";
   /** type of lock query, ByLockDuration | ByLockTime */
   lockQueryType: LockQueryType;
   /** What token denomination are we looking for lockups of */
   denom: string;
   /** valid when query condition is ByDuration */
-  duration?: Duration;
+  duration: Duration;
   /** valid when query condition is ByTime */
-  timestamp?: Date;
+  timestamp: Date;
 }
 
 /**
@@ -82,6 +85,7 @@ export interface QueryCondition {
  * allowing partial unlocks of synthetic lockups.
  */
 export interface SyntheticLock {
+  $type: "osmosis.lockup.SyntheticLock";
   /** underlying native lockup id for this synthetic lockup */
   underlyingLockId: Long;
   synthDenom: string;
@@ -89,12 +93,13 @@ export interface SyntheticLock {
    * used for unbonding synthetic lockups, for active synthetic lockups, this
    * value is set to uninitialized value
    */
-  endTime?: Date;
-  duration?: Duration;
+  endTime: Date;
+  duration: Duration;
 }
 
 function createBasePeriodLock(): PeriodLock {
   return {
+    $type: "osmosis.lockup.PeriodLock",
     ID: Long.UZERO,
     owner: "",
     duration: undefined,
@@ -104,6 +109,8 @@ function createBasePeriodLock(): PeriodLock {
 }
 
 export const PeriodLock = {
+  $type: "osmosis.lockup.PeriodLock" as const,
+
   encode(
     message: PeriodLock,
     writer: _m0.Writer = _m0.Writer.create()
@@ -163,6 +170,7 @@ export const PeriodLock = {
 
   fromJSON(object: any): PeriodLock {
     return {
+      $type: PeriodLock.$type,
       ID: isSet(object.ID) ? Long.fromString(object.ID) : Long.UZERO,
       owner: isSet(object.owner) ? String(object.owner) : "",
       duration: isSet(object.duration)
@@ -215,8 +223,11 @@ export const PeriodLock = {
   },
 };
 
+messageTypeRegistry.set(PeriodLock.$type, PeriodLock);
+
 function createBaseQueryCondition(): QueryCondition {
   return {
+    $type: "osmosis.lockup.QueryCondition",
     lockQueryType: 0,
     denom: "",
     duration: undefined,
@@ -225,6 +236,8 @@ function createBaseQueryCondition(): QueryCondition {
 }
 
 export const QueryCondition = {
+  $type: "osmosis.lockup.QueryCondition" as const,
+
   encode(
     message: QueryCondition,
     writer: _m0.Writer = _m0.Writer.create()
@@ -278,6 +291,7 @@ export const QueryCondition = {
 
   fromJSON(object: any): QueryCondition {
     return {
+      $type: QueryCondition.$type,
       lockQueryType: isSet(object.lockQueryType)
         ? lockQueryTypeFromJSON(object.lockQueryType)
         : 0,
@@ -320,8 +334,11 @@ export const QueryCondition = {
   },
 };
 
+messageTypeRegistry.set(QueryCondition.$type, QueryCondition);
+
 function createBaseSyntheticLock(): SyntheticLock {
   return {
+    $type: "osmosis.lockup.SyntheticLock",
     underlyingLockId: Long.UZERO,
     synthDenom: "",
     endTime: undefined,
@@ -330,6 +347,8 @@ function createBaseSyntheticLock(): SyntheticLock {
 }
 
 export const SyntheticLock = {
+  $type: "osmosis.lockup.SyntheticLock" as const,
+
   encode(
     message: SyntheticLock,
     writer: _m0.Writer = _m0.Writer.create()
@@ -383,6 +402,7 @@ export const SyntheticLock = {
 
   fromJSON(object: any): SyntheticLock {
     return {
+      $type: SyntheticLock.$type,
       underlyingLockId: isSet(object.underlyingLockId)
         ? Long.fromString(object.underlyingLockId)
         : Long.UZERO,
@@ -430,6 +450,8 @@ export const SyntheticLock = {
   },
 };
 
+messageTypeRegistry.set(SyntheticLock.$type, SyntheticLock);
+
 type Builtin =
   | Date
   | Function
@@ -448,21 +470,21 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = (date.getTime() % 1_000) * 1_000_000;
-  return { seconds, nanos };
+  return { $type: "google.protobuf.Timestamp", seconds, nanos };
 }
 
 function fromTimestamp(t: Timestamp): Date {

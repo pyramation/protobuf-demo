@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { DistrRecord } from "../../../osmosis/pool-incentives/v1beta1/incentives";
@@ -15,6 +16,7 @@ export const protobufPackage = "osmosis.poolincentives.v1beta1";
  * configuration. Note that gaugeId=0 represents the community pool.
  */
 export interface ReplacePoolIncentivesProposal {
+  $type: "osmosis.poolincentives.v1beta1.ReplacePoolIncentivesProposal";
   title: string;
   description: string;
   records: DistrRecord[];
@@ -30,16 +32,25 @@ export interface ReplacePoolIncentivesProposal {
  * [(Gauge 0, 5), (Gauge 2, 4), (Gauge 3, 10)]
  */
 export interface UpdatePoolIncentivesProposal {
+  $type: "osmosis.poolincentives.v1beta1.UpdatePoolIncentivesProposal";
   title: string;
   description: string;
   records: DistrRecord[];
 }
 
 function createBaseReplacePoolIncentivesProposal(): ReplacePoolIncentivesProposal {
-  return { title: "", description: "", records: [] };
+  return {
+    $type: "osmosis.poolincentives.v1beta1.ReplacePoolIncentivesProposal",
+    title: "",
+    description: "",
+    records: [],
+  };
 }
 
 export const ReplacePoolIncentivesProposal = {
+  $type:
+    "osmosis.poolincentives.v1beta1.ReplacePoolIncentivesProposal" as const,
+
   encode(
     message: ReplacePoolIncentivesProposal,
     writer: _m0.Writer = _m0.Writer.create()
@@ -85,6 +96,7 @@ export const ReplacePoolIncentivesProposal = {
 
   fromJSON(object: any): ReplacePoolIncentivesProposal {
     return {
+      $type: ReplacePoolIncentivesProposal.$type,
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
       records: Array.isArray(object?.records)
@@ -120,11 +132,23 @@ export const ReplacePoolIncentivesProposal = {
   },
 };
 
+messageTypeRegistry.set(
+  ReplacePoolIncentivesProposal.$type,
+  ReplacePoolIncentivesProposal
+);
+
 function createBaseUpdatePoolIncentivesProposal(): UpdatePoolIncentivesProposal {
-  return { title: "", description: "", records: [] };
+  return {
+    $type: "osmosis.poolincentives.v1beta1.UpdatePoolIncentivesProposal",
+    title: "",
+    description: "",
+    records: [],
+  };
 }
 
 export const UpdatePoolIncentivesProposal = {
+  $type: "osmosis.poolincentives.v1beta1.UpdatePoolIncentivesProposal" as const,
+
   encode(
     message: UpdatePoolIncentivesProposal,
     writer: _m0.Writer = _m0.Writer.create()
@@ -170,6 +194,7 @@ export const UpdatePoolIncentivesProposal = {
 
   fromJSON(object: any): UpdatePoolIncentivesProposal {
     return {
+      $type: UpdatePoolIncentivesProposal.$type,
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
       records: Array.isArray(object?.records)
@@ -205,6 +230,11 @@ export const UpdatePoolIncentivesProposal = {
   },
 };
 
+messageTypeRegistry.set(
+  UpdatePoolIncentivesProposal.$type,
+  UpdatePoolIncentivesProposal
+);
+
 type Builtin =
   | Date
   | Function
@@ -223,14 +253,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Config } from "../../../cosmos/app/v1alpha1/config";
@@ -6,19 +7,24 @@ import { Config } from "../../../cosmos/app/v1alpha1/config";
 export const protobufPackage = "cosmos.app.v1alpha1";
 
 /** QueryConfigRequest is the Query/Config request type. */
-export interface QueryConfigRequest {}
+export interface QueryConfigRequest {
+  $type: "cosmos.app.v1alpha1.QueryConfigRequest";
+}
 
 /** QueryConfigRequest is the Query/Config response type. */
 export interface QueryConfigResponse {
+  $type: "cosmos.app.v1alpha1.QueryConfigResponse";
   /** config is the current app config. */
-  config?: Config;
+  config: Config;
 }
 
 function createBaseQueryConfigRequest(): QueryConfigRequest {
-  return {};
+  return { $type: "cosmos.app.v1alpha1.QueryConfigRequest" };
 }
 
 export const QueryConfigRequest = {
+  $type: "cosmos.app.v1alpha1.QueryConfigRequest" as const,
+
   encode(
     _: QueryConfigRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -42,7 +48,9 @@ export const QueryConfigRequest = {
   },
 
   fromJSON(_: any): QueryConfigRequest {
-    return {};
+    return {
+      $type: QueryConfigRequest.$type,
+    };
   },
 
   toJSON(_: QueryConfigRequest): unknown {
@@ -58,11 +66,18 @@ export const QueryConfigRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryConfigRequest.$type, QueryConfigRequest);
+
 function createBaseQueryConfigResponse(): QueryConfigResponse {
-  return { config: undefined };
+  return {
+    $type: "cosmos.app.v1alpha1.QueryConfigResponse",
+    config: undefined,
+  };
 }
 
 export const QueryConfigResponse = {
+  $type: "cosmos.app.v1alpha1.QueryConfigResponse" as const,
+
   encode(
     message: QueryConfigResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -93,6 +108,7 @@ export const QueryConfigResponse = {
 
   fromJSON(object: any): QueryConfigResponse {
     return {
+      $type: QueryConfigResponse.$type,
       config: isSet(object.config) ? Config.fromJSON(object.config) : undefined,
     };
   },
@@ -115,6 +131,8 @@ export const QueryConfigResponse = {
     return message;
   },
 };
+
+messageTypeRegistry.set(QueryConfigResponse.$type, QueryConfigResponse);
 
 /** Query is the app module query service. */
 export interface Query {
@@ -167,14 +185,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

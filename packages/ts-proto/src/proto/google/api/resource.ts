@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 
@@ -54,6 +55,7 @@ export const protobufPackage = "google.api";
  *       pattern: "billingAccounts/{billing_account}/logs/{log}"
  */
 export interface ResourceDescriptor {
+  $type: "google.api.ResourceDescriptor";
   /**
    * The resource type. It must be in the format of
    * {service_name}/{resource_type_kind}. The `resource_type_kind` must be
@@ -246,6 +248,7 @@ export function resourceDescriptor_StyleToJSON(
  * an API resource.
  */
 export interface ResourceReference {
+  $type: "google.api.ResourceReference";
   /**
    * The resource type that the annotated field references.
    *
@@ -287,6 +290,7 @@ export interface ResourceReference {
 
 function createBaseResourceDescriptor(): ResourceDescriptor {
   return {
+    $type: "google.api.ResourceDescriptor",
     type: "",
     pattern: [],
     nameField: "",
@@ -298,6 +302,8 @@ function createBaseResourceDescriptor(): ResourceDescriptor {
 }
 
 export const ResourceDescriptor = {
+  $type: "google.api.ResourceDescriptor" as const,
+
   encode(
     message: ResourceDescriptor,
     writer: _m0.Writer = _m0.Writer.create()
@@ -373,6 +379,7 @@ export const ResourceDescriptor = {
 
   fromJSON(object: any): ResourceDescriptor {
     return {
+      $type: ResourceDescriptor.$type,
       type: isSet(object.type) ? String(object.type) : "",
       pattern: Array.isArray(object?.pattern)
         ? object.pattern.map((e: any) => String(e))
@@ -425,11 +432,15 @@ export const ResourceDescriptor = {
   },
 };
 
+messageTypeRegistry.set(ResourceDescriptor.$type, ResourceDescriptor);
+
 function createBaseResourceReference(): ResourceReference {
-  return { type: "", childType: "" };
+  return { $type: "google.api.ResourceReference", type: "", childType: "" };
 }
 
 export const ResourceReference = {
+  $type: "google.api.ResourceReference" as const,
+
   encode(
     message: ResourceReference,
     writer: _m0.Writer = _m0.Writer.create()
@@ -466,6 +477,7 @@ export const ResourceReference = {
 
   fromJSON(object: any): ResourceReference {
     return {
+      $type: ResourceReference.$type,
       type: isSet(object.type) ? String(object.type) : "",
       childType: isSet(object.childType) ? String(object.childType) : "",
     };
@@ -488,6 +500,8 @@ export const ResourceReference = {
   },
 };
 
+messageTypeRegistry.set(ResourceReference.$type, ResourceReference);
+
 type Builtin =
   | Date
   | Function
@@ -506,14 +520,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

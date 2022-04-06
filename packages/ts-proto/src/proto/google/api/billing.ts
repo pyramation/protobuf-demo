@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 
@@ -39,6 +40,7 @@ export const protobufPackage = "google.api";
  *         - library.googleapis.com/book/borrowed_count
  */
 export interface Billing {
+  $type: "google.api.Billing";
   /**
    * Billing configurations for sending metrics to the consumer project.
    * There can be multiple consumer destinations per service, each one must have
@@ -53,6 +55,7 @@ export interface Billing {
  * bill against consumer project).
  */
 export interface Billing_BillingDestination {
+  $type: "google.api.Billing.BillingDestination";
   /**
    * The monitored resource type. The type must be defined in
    * [Service.monitored_resources][google.api.Service.monitored_resources] section.
@@ -66,10 +69,12 @@ export interface Billing_BillingDestination {
 }
 
 function createBaseBilling(): Billing {
-  return { consumerDestinations: [] };
+  return { $type: "google.api.Billing", consumerDestinations: [] };
 }
 
 export const Billing = {
+  $type: "google.api.Billing" as const,
+
   encode(
     message: Billing,
     writer: _m0.Writer = _m0.Writer.create()
@@ -102,6 +107,7 @@ export const Billing = {
 
   fromJSON(object: any): Billing {
     return {
+      $type: Billing.$type,
       consumerDestinations: Array.isArray(object?.consumerDestinations)
         ? object.consumerDestinations.map((e: any) =>
             Billing_BillingDestination.fromJSON(e)
@@ -132,11 +138,19 @@ export const Billing = {
   },
 };
 
+messageTypeRegistry.set(Billing.$type, Billing);
+
 function createBaseBilling_BillingDestination(): Billing_BillingDestination {
-  return { monitoredResource: "", metrics: [] };
+  return {
+    $type: "google.api.Billing.BillingDestination",
+    monitoredResource: "",
+    metrics: [],
+  };
 }
 
 export const Billing_BillingDestination = {
+  $type: "google.api.Billing.BillingDestination" as const,
+
   encode(
     message: Billing_BillingDestination,
     writer: _m0.Writer = _m0.Writer.create()
@@ -176,6 +190,7 @@ export const Billing_BillingDestination = {
 
   fromJSON(object: any): Billing_BillingDestination {
     return {
+      $type: Billing_BillingDestination.$type,
       monitoredResource: isSet(object.monitoredResource)
         ? String(object.monitoredResource)
         : "",
@@ -207,6 +222,11 @@ export const Billing_BillingDestination = {
   },
 };
 
+messageTypeRegistry.set(
+  Billing_BillingDestination.$type,
+  Billing_BillingDestination
+);
+
 type Builtin =
   | Date
   | Function
@@ -225,14 +245,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

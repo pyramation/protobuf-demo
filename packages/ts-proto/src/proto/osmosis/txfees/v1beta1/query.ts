@@ -1,35 +1,46 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { FeeToken } from "../../../osmosis/txfees/v1beta1/feetoken";
 
 export const protobufPackage = "osmosis.txfees.v1beta1";
 
-export interface QueryFeeTokensRequest {}
+export interface QueryFeeTokensRequest {
+  $type: "osmosis.txfees.v1beta1.QueryFeeTokensRequest";
+}
 
 export interface QueryFeeTokensResponse {
+  $type: "osmosis.txfees.v1beta1.QueryFeeTokensResponse";
   feeTokens: FeeToken[];
 }
 
 export interface QueryDenomPoolIdRequest {
+  $type: "osmosis.txfees.v1beta1.QueryDenomPoolIdRequest";
   denom: string;
 }
 
 export interface QueryDenomPoolIdResponse {
+  $type: "osmosis.txfees.v1beta1.QueryDenomPoolIdResponse";
   poolID: Long;
 }
 
-export interface QueryBaseDenomRequest {}
+export interface QueryBaseDenomRequest {
+  $type: "osmosis.txfees.v1beta1.QueryBaseDenomRequest";
+}
 
 export interface QueryBaseDenomResponse {
+  $type: "osmosis.txfees.v1beta1.QueryBaseDenomResponse";
   baseDenom: string;
 }
 
 function createBaseQueryFeeTokensRequest(): QueryFeeTokensRequest {
-  return {};
+  return { $type: "osmosis.txfees.v1beta1.QueryFeeTokensRequest" };
 }
 
 export const QueryFeeTokensRequest = {
+  $type: "osmosis.txfees.v1beta1.QueryFeeTokensRequest" as const,
+
   encode(
     _: QueryFeeTokensRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -56,7 +67,9 @@ export const QueryFeeTokensRequest = {
   },
 
   fromJSON(_: any): QueryFeeTokensRequest {
-    return {};
+    return {
+      $type: QueryFeeTokensRequest.$type,
+    };
   },
 
   toJSON(_: QueryFeeTokensRequest): unknown {
@@ -72,11 +85,18 @@ export const QueryFeeTokensRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryFeeTokensRequest.$type, QueryFeeTokensRequest);
+
 function createBaseQueryFeeTokensResponse(): QueryFeeTokensResponse {
-  return { feeTokens: [] };
+  return {
+    $type: "osmosis.txfees.v1beta1.QueryFeeTokensResponse",
+    feeTokens: [],
+  };
 }
 
 export const QueryFeeTokensResponse = {
+  $type: "osmosis.txfees.v1beta1.QueryFeeTokensResponse" as const,
+
   encode(
     message: QueryFeeTokensResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -110,6 +130,7 @@ export const QueryFeeTokensResponse = {
 
   fromJSON(object: any): QueryFeeTokensResponse {
     return {
+      $type: QueryFeeTokensResponse.$type,
       feeTokens: Array.isArray(object?.feeTokens)
         ? object.feeTokens.map((e: any) => FeeToken.fromJSON(e))
         : [],
@@ -138,11 +159,15 @@ export const QueryFeeTokensResponse = {
   },
 };
 
+messageTypeRegistry.set(QueryFeeTokensResponse.$type, QueryFeeTokensResponse);
+
 function createBaseQueryDenomPoolIdRequest(): QueryDenomPoolIdRequest {
-  return { denom: "" };
+  return { $type: "osmosis.txfees.v1beta1.QueryDenomPoolIdRequest", denom: "" };
 }
 
 export const QueryDenomPoolIdRequest = {
+  $type: "osmosis.txfees.v1beta1.QueryDenomPoolIdRequest" as const,
+
   encode(
     message: QueryDenomPoolIdRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -176,6 +201,7 @@ export const QueryDenomPoolIdRequest = {
 
   fromJSON(object: any): QueryDenomPoolIdRequest {
     return {
+      $type: QueryDenomPoolIdRequest.$type,
       denom: isSet(object.denom) ? String(object.denom) : "",
     };
   },
@@ -195,11 +221,18 @@ export const QueryDenomPoolIdRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryDenomPoolIdRequest.$type, QueryDenomPoolIdRequest);
+
 function createBaseQueryDenomPoolIdResponse(): QueryDenomPoolIdResponse {
-  return { poolID: Long.UZERO };
+  return {
+    $type: "osmosis.txfees.v1beta1.QueryDenomPoolIdResponse",
+    poolID: Long.UZERO,
+  };
 }
 
 export const QueryDenomPoolIdResponse = {
+  $type: "osmosis.txfees.v1beta1.QueryDenomPoolIdResponse" as const,
+
   encode(
     message: QueryDenomPoolIdResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -233,6 +266,7 @@ export const QueryDenomPoolIdResponse = {
 
   fromJSON(object: any): QueryDenomPoolIdResponse {
     return {
+      $type: QueryDenomPoolIdResponse.$type,
       poolID: isSet(object.poolID)
         ? Long.fromString(object.poolID)
         : Long.UZERO,
@@ -258,11 +292,18 @@ export const QueryDenomPoolIdResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryDenomPoolIdResponse.$type,
+  QueryDenomPoolIdResponse
+);
+
 function createBaseQueryBaseDenomRequest(): QueryBaseDenomRequest {
-  return {};
+  return { $type: "osmosis.txfees.v1beta1.QueryBaseDenomRequest" };
 }
 
 export const QueryBaseDenomRequest = {
+  $type: "osmosis.txfees.v1beta1.QueryBaseDenomRequest" as const,
+
   encode(
     _: QueryBaseDenomRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -289,7 +330,9 @@ export const QueryBaseDenomRequest = {
   },
 
   fromJSON(_: any): QueryBaseDenomRequest {
-    return {};
+    return {
+      $type: QueryBaseDenomRequest.$type,
+    };
   },
 
   toJSON(_: QueryBaseDenomRequest): unknown {
@@ -305,11 +348,18 @@ export const QueryBaseDenomRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryBaseDenomRequest.$type, QueryBaseDenomRequest);
+
 function createBaseQueryBaseDenomResponse(): QueryBaseDenomResponse {
-  return { baseDenom: "" };
+  return {
+    $type: "osmosis.txfees.v1beta1.QueryBaseDenomResponse",
+    baseDenom: "",
+  };
 }
 
 export const QueryBaseDenomResponse = {
+  $type: "osmosis.txfees.v1beta1.QueryBaseDenomResponse" as const,
+
   encode(
     message: QueryBaseDenomResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -343,6 +393,7 @@ export const QueryBaseDenomResponse = {
 
   fromJSON(object: any): QueryBaseDenomResponse {
     return {
+      $type: QueryBaseDenomResponse.$type,
       baseDenom: isSet(object.baseDenom) ? String(object.baseDenom) : "",
     };
   },
@@ -361,6 +412,8 @@ export const QueryBaseDenomResponse = {
     return message;
   },
 };
+
+messageTypeRegistry.set(QueryBaseDenomResponse.$type, QueryBaseDenomResponse);
 
 export interface Query {
   /**
@@ -448,14 +501,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

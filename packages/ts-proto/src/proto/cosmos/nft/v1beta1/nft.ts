@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Any } from "../../../google/protobuf/any";
@@ -7,6 +8,7 @@ export const protobufPackage = "cosmos.nft.v1beta1";
 
 /** Class defines the class of the nft type. */
 export interface Class {
+  $type: "cosmos.nft.v1beta1.Class";
   /** id defines the unique identifier of the NFT classification, similar to the contract address of ERC721 */
   id: string;
   /** name defines the human-readable name of the NFT classification. Optional */
@@ -20,11 +22,12 @@ export interface Class {
   /** uri_hash is a hash of the document pointed by uri. Optional */
   uriHash: string;
   /** data is the app specific metadata of the NFT class. Optional */
-  data?: Any;
+  data: Any;
 }
 
 /** NFT defines the NFT. */
 export interface NFT {
+  $type: "cosmos.nft.v1beta1.NFT";
   /** class_id associated with the NFT, similar to the contract address of ERC721 */
   classId: string;
   /** id is a unique identifier of the NFT */
@@ -34,11 +37,12 @@ export interface NFT {
   /** uri_hash is a hash of the document pointed by uri */
   uriHash: string;
   /** data is an app specific data of the NFT. Optional */
-  data?: Any;
+  data: Any;
 }
 
 function createBaseClass(): Class {
   return {
+    $type: "cosmos.nft.v1beta1.Class",
     id: "",
     name: "",
     symbol: "",
@@ -50,6 +54,8 @@ function createBaseClass(): Class {
 }
 
 export const Class = {
+  $type: "cosmos.nft.v1beta1.Class" as const,
+
   encode(message: Class, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
@@ -113,6 +119,7 @@ export const Class = {
 
   fromJSON(object: any): Class {
     return {
+      $type: Class.$type,
       id: isSet(object.id) ? String(object.id) : "",
       name: isSet(object.name) ? String(object.name) : "",
       symbol: isSet(object.symbol) ? String(object.symbol) : "",
@@ -153,11 +160,22 @@ export const Class = {
   },
 };
 
+messageTypeRegistry.set(Class.$type, Class);
+
 function createBaseNFT(): NFT {
-  return { classId: "", id: "", uri: "", uriHash: "", data: undefined };
+  return {
+    $type: "cosmos.nft.v1beta1.NFT",
+    classId: "",
+    id: "",
+    uri: "",
+    uriHash: "",
+    data: undefined,
+  };
 }
 
 export const NFT = {
+  $type: "cosmos.nft.v1beta1.NFT" as const,
+
   encode(message: NFT, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
@@ -209,6 +227,7 @@ export const NFT = {
 
   fromJSON(object: any): NFT {
     return {
+      $type: NFT.$type,
       classId: isSet(object.classId) ? String(object.classId) : "",
       id: isSet(object.id) ? String(object.id) : "",
       uri: isSet(object.uri) ? String(object.uri) : "",
@@ -242,6 +261,8 @@ export const NFT = {
   },
 };
 
+messageTypeRegistry.set(NFT.$type, NFT);
+
 type Builtin =
   | Date
   | Function
@@ -260,14 +281,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 
@@ -23,6 +24,7 @@ export const protobufPackage = "google.api";
  *        type: INT64
  */
 export interface ProjectProperties {
+  $type: "google.api.ProjectProperties";
   /** List of per consumer project-specific properties. */
   properties: Property[];
 }
@@ -40,6 +42,7 @@ export interface ProjectProperties {
  * define and set these properties.
  */
 export interface Property {
+  $type: "google.api.Property";
   /** The name of the property (a.k.a key). */
   name: string;
   /** The type of this property. */
@@ -109,10 +112,12 @@ export function property_PropertyTypeToJSON(
 }
 
 function createBaseProjectProperties(): ProjectProperties {
-  return { properties: [] };
+  return { $type: "google.api.ProjectProperties", properties: [] };
 }
 
 export const ProjectProperties = {
+  $type: "google.api.ProjectProperties" as const,
+
   encode(
     message: ProjectProperties,
     writer: _m0.Writer = _m0.Writer.create()
@@ -143,6 +148,7 @@ export const ProjectProperties = {
 
   fromJSON(object: any): ProjectProperties {
     return {
+      $type: ProjectProperties.$type,
       properties: Array.isArray(object?.properties)
         ? object.properties.map((e: any) => Property.fromJSON(e))
         : [],
@@ -171,11 +177,15 @@ export const ProjectProperties = {
   },
 };
 
+messageTypeRegistry.set(ProjectProperties.$type, ProjectProperties);
+
 function createBaseProperty(): Property {
-  return { name: "", type: 0, description: "" };
+  return { $type: "google.api.Property", name: "", type: 0, description: "" };
 }
 
 export const Property = {
+  $type: "google.api.Property" as const,
+
   encode(
     message: Property,
     writer: _m0.Writer = _m0.Writer.create()
@@ -218,6 +228,7 @@ export const Property = {
 
   fromJSON(object: any): Property {
     return {
+      $type: Property.$type,
       name: isSet(object.name) ? String(object.name) : "",
       type: isSet(object.type) ? property_PropertyTypeFromJSON(object.type) : 0,
       description: isSet(object.description) ? String(object.description) : "",
@@ -243,6 +254,8 @@ export const Property = {
   },
 };
 
+messageTypeRegistry.set(Property.$type, Property);
+
 type Builtin =
   | Date
   | Function
@@ -261,14 +274,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

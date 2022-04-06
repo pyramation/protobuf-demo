@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Any } from "../../google/protobuf/any";
@@ -7,15 +8,18 @@ export const protobufPackage = "google.api";
 
 /** Source information used to create a Service Config */
 export interface SourceInfo {
+  $type: "google.api.SourceInfo";
   /** All files used during config generation. */
   sourceFiles: Any[];
 }
 
 function createBaseSourceInfo(): SourceInfo {
-  return { sourceFiles: [] };
+  return { $type: "google.api.SourceInfo", sourceFiles: [] };
 }
 
 export const SourceInfo = {
+  $type: "google.api.SourceInfo" as const,
+
   encode(
     message: SourceInfo,
     writer: _m0.Writer = _m0.Writer.create()
@@ -46,6 +50,7 @@ export const SourceInfo = {
 
   fromJSON(object: any): SourceInfo {
     return {
+      $type: SourceInfo.$type,
       sourceFiles: Array.isArray(object?.sourceFiles)
         ? object.sourceFiles.map((e: any) => Any.fromJSON(e))
         : [],
@@ -74,6 +79,8 @@ export const SourceInfo = {
   },
 };
 
+messageTypeRegistry.set(SourceInfo.$type, SourceInfo);
+
 type Builtin =
   | Date
   | Function
@@ -92,14 +99,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import {
@@ -18,122 +19,139 @@ export const protobufPackage = "cosmos.group.v1";
 
 /** QueryGroupInfoRequest is the Query/GroupInfo request type. */
 export interface QueryGroupInfoRequest {
+  $type: "cosmos.group.v1.QueryGroupInfoRequest";
   /** group_id is the unique ID of the group. */
   groupId: Long;
 }
 
 /** QueryGroupInfoResponse is the Query/GroupInfo response type. */
 export interface QueryGroupInfoResponse {
+  $type: "cosmos.group.v1.QueryGroupInfoResponse";
   /** info is the GroupInfo for the group. */
-  info?: GroupInfo;
+  info: GroupInfo;
 }
 
 /** QueryGroupPolicyInfoRequest is the Query/GroupPolicyInfo request type. */
 export interface QueryGroupPolicyInfoRequest {
+  $type: "cosmos.group.v1.QueryGroupPolicyInfoRequest";
   /** address is the account address of the group policy. */
   address: string;
 }
 
 /** QueryGroupPolicyInfoResponse is the Query/GroupPolicyInfo response type. */
 export interface QueryGroupPolicyInfoResponse {
+  $type: "cosmos.group.v1.QueryGroupPolicyInfoResponse";
   /** info is the GroupPolicyInfo for the group policy. */
-  info?: GroupPolicyInfo;
+  info: GroupPolicyInfo;
 }
 
 /** QueryGroupMembersRequest is the Query/GroupMembers request type. */
 export interface QueryGroupMembersRequest {
+  $type: "cosmos.group.v1.QueryGroupMembersRequest";
   /** group_id is the unique ID of the group. */
   groupId: Long;
   /** pagination defines an optional pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 
 /** QueryGroupMembersResponse is the Query/GroupMembersResponse response type. */
 export interface QueryGroupMembersResponse {
+  $type: "cosmos.group.v1.QueryGroupMembersResponse";
   /** members are the members of the group with given group_id. */
   members: GroupMember[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 
 /** QueryGroupsByAdminRequest is the Query/GroupsByAdmin request type. */
 export interface QueryGroupsByAdminRequest {
+  $type: "cosmos.group.v1.QueryGroupsByAdminRequest";
   /** admin is the account address of a group's admin. */
   admin: string;
   /** pagination defines an optional pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 
 /** QueryGroupsByAdminResponse is the Query/GroupsByAdminResponse response type. */
 export interface QueryGroupsByAdminResponse {
+  $type: "cosmos.group.v1.QueryGroupsByAdminResponse";
   /** groups are the groups info with the provided admin. */
   groups: GroupInfo[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 
 /** QueryGroupPoliciesByGroupRequest is the Query/GroupPoliciesByGroup request type. */
 export interface QueryGroupPoliciesByGroupRequest {
+  $type: "cosmos.group.v1.QueryGroupPoliciesByGroupRequest";
   /** group_id is the unique ID of the group policy's group. */
   groupId: Long;
   /** pagination defines an optional pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 
 /** QueryGroupPoliciesByGroupResponse is the Query/GroupPoliciesByGroup response type. */
 export interface QueryGroupPoliciesByGroupResponse {
+  $type: "cosmos.group.v1.QueryGroupPoliciesByGroupResponse";
   /** group_policies are the group policies info associated with the provided group. */
   groupPolicies: GroupPolicyInfo[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 
 /** QueryGroupPoliciesByAdminRequest is the Query/GroupPoliciesByAdmin request type. */
 export interface QueryGroupPoliciesByAdminRequest {
+  $type: "cosmos.group.v1.QueryGroupPoliciesByAdminRequest";
   /** admin is the admin address of the group policy. */
   admin: string;
   /** pagination defines an optional pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 
 /** QueryGroupPoliciesByAdminResponse is the Query/GroupPoliciesByAdmin response type. */
 export interface QueryGroupPoliciesByAdminResponse {
+  $type: "cosmos.group.v1.QueryGroupPoliciesByAdminResponse";
   /** group_policies are the group policies info with provided admin. */
   groupPolicies: GroupPolicyInfo[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 
 /** QueryProposalRequest is the Query/Proposal request type. */
 export interface QueryProposalRequest {
+  $type: "cosmos.group.v1.QueryProposalRequest";
   /** proposal_id is the unique ID of a proposal. */
   proposalId: Long;
 }
 
 /** QueryProposalResponse is the Query/Proposal response type. */
 export interface QueryProposalResponse {
+  $type: "cosmos.group.v1.QueryProposalResponse";
   /** proposal is the proposal info. */
-  proposal?: Proposal;
+  proposal: Proposal;
 }
 
 /** QueryProposalsByGroupPolicyRequest is the Query/ProposalByGroupPolicy request type. */
 export interface QueryProposalsByGroupPolicyRequest {
+  $type: "cosmos.group.v1.QueryProposalsByGroupPolicyRequest";
   /** address is the account address of the group policy related to proposals. */
   address: string;
   /** pagination defines an optional pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 
 /** QueryProposalsByGroupPolicyResponse is the Query/ProposalByGroupPolicy response type. */
 export interface QueryProposalsByGroupPolicyResponse {
+  $type: "cosmos.group.v1.QueryProposalsByGroupPolicyResponse";
   /** proposals are the proposals with given group policy. */
   proposals: Proposal[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 
 /** QueryVoteByProposalVoterRequest is the Query/VoteByProposalVoter request type. */
 export interface QueryVoteByProposalVoterRequest {
+  $type: "cosmos.group.v1.QueryVoteByProposalVoterRequest";
   /** proposal_id is the unique ID of a proposal. */
   proposalId: Long;
   /** voter is a proposal voter account address. */
@@ -142,75 +160,89 @@ export interface QueryVoteByProposalVoterRequest {
 
 /** QueryVoteByProposalVoterResponse is the Query/VoteByProposalVoter response type. */
 export interface QueryVoteByProposalVoterResponse {
+  $type: "cosmos.group.v1.QueryVoteByProposalVoterResponse";
   /** vote is the vote with given proposal_id and voter. */
-  vote?: Vote;
+  vote: Vote;
 }
 
 /** QueryVotesByProposalRequest is the Query/VotesByProposal request type. */
 export interface QueryVotesByProposalRequest {
+  $type: "cosmos.group.v1.QueryVotesByProposalRequest";
   /** proposal_id is the unique ID of a proposal. */
   proposalId: Long;
   /** pagination defines an optional pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 
 /** QueryVotesByProposalResponse is the Query/VotesByProposal response type. */
 export interface QueryVotesByProposalResponse {
+  $type: "cosmos.group.v1.QueryVotesByProposalResponse";
   /** votes are the list of votes for given proposal_id. */
   votes: Vote[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 
 /** QueryVotesByVoterRequest is the Query/VotesByVoter request type. */
 export interface QueryVotesByVoterRequest {
+  $type: "cosmos.group.v1.QueryVotesByVoterRequest";
   /** voter is a proposal voter account address. */
   voter: string;
   /** pagination defines an optional pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 
 /** QueryVotesByVoterResponse is the Query/VotesByVoter response type. */
 export interface QueryVotesByVoterResponse {
+  $type: "cosmos.group.v1.QueryVotesByVoterResponse";
   /** votes are the list of votes by given voter. */
   votes: Vote[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 
 /** QueryGroupsByMemberRequest is the Query/GroupsByMember request type. */
 export interface QueryGroupsByMemberRequest {
+  $type: "cosmos.group.v1.QueryGroupsByMemberRequest";
   /** address is the group member address. */
   address: string;
   /** pagination defines an optional pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 
 /** QueryGroupsByMemberResponse is the Query/GroupsByMember response type. */
 export interface QueryGroupsByMemberResponse {
+  $type: "cosmos.group.v1.QueryGroupsByMemberResponse";
   /** groups are the groups info with the provided group member. */
   groups: GroupInfo[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 
 /** QueryTallyResultRequest is the Query/TallyResult request type. */
 export interface QueryTallyResultRequest {
+  $type: "cosmos.group.v1.QueryTallyResultRequest";
   /** proposal_id is the unique id of a proposal. */
   proposalId: Long;
 }
 
 /** QueryTallyResultResponse is the Query/TallyResult response type. */
 export interface QueryTallyResultResponse {
+  $type: "cosmos.group.v1.QueryTallyResultResponse";
   /** tally defines the requested tally. */
-  tally?: TallyResult;
+  tally: TallyResult;
 }
 
 function createBaseQueryGroupInfoRequest(): QueryGroupInfoRequest {
-  return { groupId: Long.UZERO };
+  return {
+    $type: "cosmos.group.v1.QueryGroupInfoRequest",
+    groupId: Long.UZERO,
+  };
 }
 
 export const QueryGroupInfoRequest = {
+  $type: "cosmos.group.v1.QueryGroupInfoRequest" as const,
+
   encode(
     message: QueryGroupInfoRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -244,6 +276,7 @@ export const QueryGroupInfoRequest = {
 
   fromJSON(object: any): QueryGroupInfoRequest {
     return {
+      $type: QueryGroupInfoRequest.$type,
       groupId: isSet(object.groupId)
         ? Long.fromString(object.groupId)
         : Long.UZERO,
@@ -269,11 +302,15 @@ export const QueryGroupInfoRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryGroupInfoRequest.$type, QueryGroupInfoRequest);
+
 function createBaseQueryGroupInfoResponse(): QueryGroupInfoResponse {
-  return { info: undefined };
+  return { $type: "cosmos.group.v1.QueryGroupInfoResponse", info: undefined };
 }
 
 export const QueryGroupInfoResponse = {
+  $type: "cosmos.group.v1.QueryGroupInfoResponse" as const,
+
   encode(
     message: QueryGroupInfoResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -307,6 +344,7 @@ export const QueryGroupInfoResponse = {
 
   fromJSON(object: any): QueryGroupInfoResponse {
     return {
+      $type: QueryGroupInfoResponse.$type,
       info: isSet(object.info) ? GroupInfo.fromJSON(object.info) : undefined,
     };
   },
@@ -330,11 +368,15 @@ export const QueryGroupInfoResponse = {
   },
 };
 
+messageTypeRegistry.set(QueryGroupInfoResponse.$type, QueryGroupInfoResponse);
+
 function createBaseQueryGroupPolicyInfoRequest(): QueryGroupPolicyInfoRequest {
-  return { address: "" };
+  return { $type: "cosmos.group.v1.QueryGroupPolicyInfoRequest", address: "" };
 }
 
 export const QueryGroupPolicyInfoRequest = {
+  $type: "cosmos.group.v1.QueryGroupPolicyInfoRequest" as const,
+
   encode(
     message: QueryGroupPolicyInfoRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -368,6 +410,7 @@ export const QueryGroupPolicyInfoRequest = {
 
   fromJSON(object: any): QueryGroupPolicyInfoRequest {
     return {
+      $type: QueryGroupPolicyInfoRequest.$type,
       address: isSet(object.address) ? String(object.address) : "",
     };
   },
@@ -387,11 +430,21 @@ export const QueryGroupPolicyInfoRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryGroupPolicyInfoRequest.$type,
+  QueryGroupPolicyInfoRequest
+);
+
 function createBaseQueryGroupPolicyInfoResponse(): QueryGroupPolicyInfoResponse {
-  return { info: undefined };
+  return {
+    $type: "cosmos.group.v1.QueryGroupPolicyInfoResponse",
+    info: undefined,
+  };
 }
 
 export const QueryGroupPolicyInfoResponse = {
+  $type: "cosmos.group.v1.QueryGroupPolicyInfoResponse" as const,
+
   encode(
     message: QueryGroupPolicyInfoResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -425,6 +478,7 @@ export const QueryGroupPolicyInfoResponse = {
 
   fromJSON(object: any): QueryGroupPolicyInfoResponse {
     return {
+      $type: QueryGroupPolicyInfoResponse.$type,
       info: isSet(object.info)
         ? GroupPolicyInfo.fromJSON(object.info)
         : undefined,
@@ -452,11 +506,22 @@ export const QueryGroupPolicyInfoResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryGroupPolicyInfoResponse.$type,
+  QueryGroupPolicyInfoResponse
+);
+
 function createBaseQueryGroupMembersRequest(): QueryGroupMembersRequest {
-  return { groupId: Long.UZERO, pagination: undefined };
+  return {
+    $type: "cosmos.group.v1.QueryGroupMembersRequest",
+    groupId: Long.UZERO,
+    pagination: undefined,
+  };
 }
 
 export const QueryGroupMembersRequest = {
+  $type: "cosmos.group.v1.QueryGroupMembersRequest" as const,
+
   encode(
     message: QueryGroupMembersRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -496,6 +561,7 @@ export const QueryGroupMembersRequest = {
 
   fromJSON(object: any): QueryGroupMembersRequest {
     return {
+      $type: QueryGroupMembersRequest.$type,
       groupId: isSet(object.groupId)
         ? Long.fromString(object.groupId)
         : Long.UZERO,
@@ -532,11 +598,22 @@ export const QueryGroupMembersRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryGroupMembersRequest.$type,
+  QueryGroupMembersRequest
+);
+
 function createBaseQueryGroupMembersResponse(): QueryGroupMembersResponse {
-  return { members: [], pagination: undefined };
+  return {
+    $type: "cosmos.group.v1.QueryGroupMembersResponse",
+    members: [],
+    pagination: undefined,
+  };
 }
 
 export const QueryGroupMembersResponse = {
+  $type: "cosmos.group.v1.QueryGroupMembersResponse" as const,
+
   encode(
     message: QueryGroupMembersResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -579,6 +656,7 @@ export const QueryGroupMembersResponse = {
 
   fromJSON(object: any): QueryGroupMembersResponse {
     return {
+      $type: QueryGroupMembersResponse.$type,
       members: Array.isArray(object?.members)
         ? object.members.map((e: any) => GroupMember.fromJSON(e))
         : [],
@@ -618,11 +696,22 @@ export const QueryGroupMembersResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryGroupMembersResponse.$type,
+  QueryGroupMembersResponse
+);
+
 function createBaseQueryGroupsByAdminRequest(): QueryGroupsByAdminRequest {
-  return { admin: "", pagination: undefined };
+  return {
+    $type: "cosmos.group.v1.QueryGroupsByAdminRequest",
+    admin: "",
+    pagination: undefined,
+  };
 }
 
 export const QueryGroupsByAdminRequest = {
+  $type: "cosmos.group.v1.QueryGroupsByAdminRequest" as const,
+
   encode(
     message: QueryGroupsByAdminRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -662,6 +751,7 @@ export const QueryGroupsByAdminRequest = {
 
   fromJSON(object: any): QueryGroupsByAdminRequest {
     return {
+      $type: QueryGroupsByAdminRequest.$type,
       admin: isSet(object.admin) ? String(object.admin) : "",
       pagination: isSet(object.pagination)
         ? PageRequest.fromJSON(object.pagination)
@@ -692,11 +782,22 @@ export const QueryGroupsByAdminRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryGroupsByAdminRequest.$type,
+  QueryGroupsByAdminRequest
+);
+
 function createBaseQueryGroupsByAdminResponse(): QueryGroupsByAdminResponse {
-  return { groups: [], pagination: undefined };
+  return {
+    $type: "cosmos.group.v1.QueryGroupsByAdminResponse",
+    groups: [],
+    pagination: undefined,
+  };
 }
 
 export const QueryGroupsByAdminResponse = {
+  $type: "cosmos.group.v1.QueryGroupsByAdminResponse" as const,
+
   encode(
     message: QueryGroupsByAdminResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -739,6 +840,7 @@ export const QueryGroupsByAdminResponse = {
 
   fromJSON(object: any): QueryGroupsByAdminResponse {
     return {
+      $type: QueryGroupsByAdminResponse.$type,
       groups: Array.isArray(object?.groups)
         ? object.groups.map((e: any) => GroupInfo.fromJSON(e))
         : [],
@@ -777,11 +879,22 @@ export const QueryGroupsByAdminResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryGroupsByAdminResponse.$type,
+  QueryGroupsByAdminResponse
+);
+
 function createBaseQueryGroupPoliciesByGroupRequest(): QueryGroupPoliciesByGroupRequest {
-  return { groupId: Long.UZERO, pagination: undefined };
+  return {
+    $type: "cosmos.group.v1.QueryGroupPoliciesByGroupRequest",
+    groupId: Long.UZERO,
+    pagination: undefined,
+  };
 }
 
 export const QueryGroupPoliciesByGroupRequest = {
+  $type: "cosmos.group.v1.QueryGroupPoliciesByGroupRequest" as const,
+
   encode(
     message: QueryGroupPoliciesByGroupRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -821,6 +934,7 @@ export const QueryGroupPoliciesByGroupRequest = {
 
   fromJSON(object: any): QueryGroupPoliciesByGroupRequest {
     return {
+      $type: QueryGroupPoliciesByGroupRequest.$type,
       groupId: isSet(object.groupId)
         ? Long.fromString(object.groupId)
         : Long.UZERO,
@@ -857,11 +971,22 @@ export const QueryGroupPoliciesByGroupRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryGroupPoliciesByGroupRequest.$type,
+  QueryGroupPoliciesByGroupRequest
+);
+
 function createBaseQueryGroupPoliciesByGroupResponse(): QueryGroupPoliciesByGroupResponse {
-  return { groupPolicies: [], pagination: undefined };
+  return {
+    $type: "cosmos.group.v1.QueryGroupPoliciesByGroupResponse",
+    groupPolicies: [],
+    pagination: undefined,
+  };
 }
 
 export const QueryGroupPoliciesByGroupResponse = {
+  $type: "cosmos.group.v1.QueryGroupPoliciesByGroupResponse" as const,
+
   encode(
     message: QueryGroupPoliciesByGroupResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -906,6 +1031,7 @@ export const QueryGroupPoliciesByGroupResponse = {
 
   fromJSON(object: any): QueryGroupPoliciesByGroupResponse {
     return {
+      $type: QueryGroupPoliciesByGroupResponse.$type,
       groupPolicies: Array.isArray(object?.groupPolicies)
         ? object.groupPolicies.map((e: any) => GroupPolicyInfo.fromJSON(e))
         : [],
@@ -945,11 +1071,22 @@ export const QueryGroupPoliciesByGroupResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryGroupPoliciesByGroupResponse.$type,
+  QueryGroupPoliciesByGroupResponse
+);
+
 function createBaseQueryGroupPoliciesByAdminRequest(): QueryGroupPoliciesByAdminRequest {
-  return { admin: "", pagination: undefined };
+  return {
+    $type: "cosmos.group.v1.QueryGroupPoliciesByAdminRequest",
+    admin: "",
+    pagination: undefined,
+  };
 }
 
 export const QueryGroupPoliciesByAdminRequest = {
+  $type: "cosmos.group.v1.QueryGroupPoliciesByAdminRequest" as const,
+
   encode(
     message: QueryGroupPoliciesByAdminRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -989,6 +1126,7 @@ export const QueryGroupPoliciesByAdminRequest = {
 
   fromJSON(object: any): QueryGroupPoliciesByAdminRequest {
     return {
+      $type: QueryGroupPoliciesByAdminRequest.$type,
       admin: isSet(object.admin) ? String(object.admin) : "",
       pagination: isSet(object.pagination)
         ? PageRequest.fromJSON(object.pagination)
@@ -1019,11 +1157,22 @@ export const QueryGroupPoliciesByAdminRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryGroupPoliciesByAdminRequest.$type,
+  QueryGroupPoliciesByAdminRequest
+);
+
 function createBaseQueryGroupPoliciesByAdminResponse(): QueryGroupPoliciesByAdminResponse {
-  return { groupPolicies: [], pagination: undefined };
+  return {
+    $type: "cosmos.group.v1.QueryGroupPoliciesByAdminResponse",
+    groupPolicies: [],
+    pagination: undefined,
+  };
 }
 
 export const QueryGroupPoliciesByAdminResponse = {
+  $type: "cosmos.group.v1.QueryGroupPoliciesByAdminResponse" as const,
+
   encode(
     message: QueryGroupPoliciesByAdminResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1068,6 +1217,7 @@ export const QueryGroupPoliciesByAdminResponse = {
 
   fromJSON(object: any): QueryGroupPoliciesByAdminResponse {
     return {
+      $type: QueryGroupPoliciesByAdminResponse.$type,
       groupPolicies: Array.isArray(object?.groupPolicies)
         ? object.groupPolicies.map((e: any) => GroupPolicyInfo.fromJSON(e))
         : [],
@@ -1107,11 +1257,21 @@ export const QueryGroupPoliciesByAdminResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryGroupPoliciesByAdminResponse.$type,
+  QueryGroupPoliciesByAdminResponse
+);
+
 function createBaseQueryProposalRequest(): QueryProposalRequest {
-  return { proposalId: Long.UZERO };
+  return {
+    $type: "cosmos.group.v1.QueryProposalRequest",
+    proposalId: Long.UZERO,
+  };
 }
 
 export const QueryProposalRequest = {
+  $type: "cosmos.group.v1.QueryProposalRequest" as const,
+
   encode(
     message: QueryProposalRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1145,6 +1305,7 @@ export const QueryProposalRequest = {
 
   fromJSON(object: any): QueryProposalRequest {
     return {
+      $type: QueryProposalRequest.$type,
       proposalId: isSet(object.proposalId)
         ? Long.fromString(object.proposalId)
         : Long.UZERO,
@@ -1170,11 +1331,18 @@ export const QueryProposalRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryProposalRequest.$type, QueryProposalRequest);
+
 function createBaseQueryProposalResponse(): QueryProposalResponse {
-  return { proposal: undefined };
+  return {
+    $type: "cosmos.group.v1.QueryProposalResponse",
+    proposal: undefined,
+  };
 }
 
 export const QueryProposalResponse = {
+  $type: "cosmos.group.v1.QueryProposalResponse" as const,
+
   encode(
     message: QueryProposalResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1208,6 +1376,7 @@ export const QueryProposalResponse = {
 
   fromJSON(object: any): QueryProposalResponse {
     return {
+      $type: QueryProposalResponse.$type,
       proposal: isSet(object.proposal)
         ? Proposal.fromJSON(object.proposal)
         : undefined,
@@ -1235,11 +1404,19 @@ export const QueryProposalResponse = {
   },
 };
 
+messageTypeRegistry.set(QueryProposalResponse.$type, QueryProposalResponse);
+
 function createBaseQueryProposalsByGroupPolicyRequest(): QueryProposalsByGroupPolicyRequest {
-  return { address: "", pagination: undefined };
+  return {
+    $type: "cosmos.group.v1.QueryProposalsByGroupPolicyRequest",
+    address: "",
+    pagination: undefined,
+  };
 }
 
 export const QueryProposalsByGroupPolicyRequest = {
+  $type: "cosmos.group.v1.QueryProposalsByGroupPolicyRequest" as const,
+
   encode(
     message: QueryProposalsByGroupPolicyRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1279,6 +1456,7 @@ export const QueryProposalsByGroupPolicyRequest = {
 
   fromJSON(object: any): QueryProposalsByGroupPolicyRequest {
     return {
+      $type: QueryProposalsByGroupPolicyRequest.$type,
       address: isSet(object.address) ? String(object.address) : "",
       pagination: isSet(object.pagination)
         ? PageRequest.fromJSON(object.pagination)
@@ -1309,11 +1487,22 @@ export const QueryProposalsByGroupPolicyRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryProposalsByGroupPolicyRequest.$type,
+  QueryProposalsByGroupPolicyRequest
+);
+
 function createBaseQueryProposalsByGroupPolicyResponse(): QueryProposalsByGroupPolicyResponse {
-  return { proposals: [], pagination: undefined };
+  return {
+    $type: "cosmos.group.v1.QueryProposalsByGroupPolicyResponse",
+    proposals: [],
+    pagination: undefined,
+  };
 }
 
 export const QueryProposalsByGroupPolicyResponse = {
+  $type: "cosmos.group.v1.QueryProposalsByGroupPolicyResponse" as const,
+
   encode(
     message: QueryProposalsByGroupPolicyResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1356,6 +1545,7 @@ export const QueryProposalsByGroupPolicyResponse = {
 
   fromJSON(object: any): QueryProposalsByGroupPolicyResponse {
     return {
+      $type: QueryProposalsByGroupPolicyResponse.$type,
       proposals: Array.isArray(object?.proposals)
         ? object.proposals.map((e: any) => Proposal.fromJSON(e))
         : [],
@@ -1395,11 +1585,22 @@ export const QueryProposalsByGroupPolicyResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryProposalsByGroupPolicyResponse.$type,
+  QueryProposalsByGroupPolicyResponse
+);
+
 function createBaseQueryVoteByProposalVoterRequest(): QueryVoteByProposalVoterRequest {
-  return { proposalId: Long.UZERO, voter: "" };
+  return {
+    $type: "cosmos.group.v1.QueryVoteByProposalVoterRequest",
+    proposalId: Long.UZERO,
+    voter: "",
+  };
 }
 
 export const QueryVoteByProposalVoterRequest = {
+  $type: "cosmos.group.v1.QueryVoteByProposalVoterRequest" as const,
+
   encode(
     message: QueryVoteByProposalVoterRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1439,6 +1640,7 @@ export const QueryVoteByProposalVoterRequest = {
 
   fromJSON(object: any): QueryVoteByProposalVoterRequest {
     return {
+      $type: QueryVoteByProposalVoterRequest.$type,
       proposalId: isSet(object.proposalId)
         ? Long.fromString(object.proposalId)
         : Long.UZERO,
@@ -1467,11 +1669,21 @@ export const QueryVoteByProposalVoterRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryVoteByProposalVoterRequest.$type,
+  QueryVoteByProposalVoterRequest
+);
+
 function createBaseQueryVoteByProposalVoterResponse(): QueryVoteByProposalVoterResponse {
-  return { vote: undefined };
+  return {
+    $type: "cosmos.group.v1.QueryVoteByProposalVoterResponse",
+    vote: undefined,
+  };
 }
 
 export const QueryVoteByProposalVoterResponse = {
+  $type: "cosmos.group.v1.QueryVoteByProposalVoterResponse" as const,
+
   encode(
     message: QueryVoteByProposalVoterResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1505,6 +1717,7 @@ export const QueryVoteByProposalVoterResponse = {
 
   fromJSON(object: any): QueryVoteByProposalVoterResponse {
     return {
+      $type: QueryVoteByProposalVoterResponse.$type,
       vote: isSet(object.vote) ? Vote.fromJSON(object.vote) : undefined,
     };
   },
@@ -1528,11 +1741,22 @@ export const QueryVoteByProposalVoterResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryVoteByProposalVoterResponse.$type,
+  QueryVoteByProposalVoterResponse
+);
+
 function createBaseQueryVotesByProposalRequest(): QueryVotesByProposalRequest {
-  return { proposalId: Long.UZERO, pagination: undefined };
+  return {
+    $type: "cosmos.group.v1.QueryVotesByProposalRequest",
+    proposalId: Long.UZERO,
+    pagination: undefined,
+  };
 }
 
 export const QueryVotesByProposalRequest = {
+  $type: "cosmos.group.v1.QueryVotesByProposalRequest" as const,
+
   encode(
     message: QueryVotesByProposalRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1572,6 +1796,7 @@ export const QueryVotesByProposalRequest = {
 
   fromJSON(object: any): QueryVotesByProposalRequest {
     return {
+      $type: QueryVotesByProposalRequest.$type,
       proposalId: isSet(object.proposalId)
         ? Long.fromString(object.proposalId)
         : Long.UZERO,
@@ -1608,11 +1833,22 @@ export const QueryVotesByProposalRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryVotesByProposalRequest.$type,
+  QueryVotesByProposalRequest
+);
+
 function createBaseQueryVotesByProposalResponse(): QueryVotesByProposalResponse {
-  return { votes: [], pagination: undefined };
+  return {
+    $type: "cosmos.group.v1.QueryVotesByProposalResponse",
+    votes: [],
+    pagination: undefined,
+  };
 }
 
 export const QueryVotesByProposalResponse = {
+  $type: "cosmos.group.v1.QueryVotesByProposalResponse" as const,
+
   encode(
     message: QueryVotesByProposalResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1655,6 +1891,7 @@ export const QueryVotesByProposalResponse = {
 
   fromJSON(object: any): QueryVotesByProposalResponse {
     return {
+      $type: QueryVotesByProposalResponse.$type,
       votes: Array.isArray(object?.votes)
         ? object.votes.map((e: any) => Vote.fromJSON(e))
         : [],
@@ -1691,11 +1928,22 @@ export const QueryVotesByProposalResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryVotesByProposalResponse.$type,
+  QueryVotesByProposalResponse
+);
+
 function createBaseQueryVotesByVoterRequest(): QueryVotesByVoterRequest {
-  return { voter: "", pagination: undefined };
+  return {
+    $type: "cosmos.group.v1.QueryVotesByVoterRequest",
+    voter: "",
+    pagination: undefined,
+  };
 }
 
 export const QueryVotesByVoterRequest = {
+  $type: "cosmos.group.v1.QueryVotesByVoterRequest" as const,
+
   encode(
     message: QueryVotesByVoterRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1735,6 +1983,7 @@ export const QueryVotesByVoterRequest = {
 
   fromJSON(object: any): QueryVotesByVoterRequest {
     return {
+      $type: QueryVotesByVoterRequest.$type,
       voter: isSet(object.voter) ? String(object.voter) : "",
       pagination: isSet(object.pagination)
         ? PageRequest.fromJSON(object.pagination)
@@ -1765,11 +2014,22 @@ export const QueryVotesByVoterRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryVotesByVoterRequest.$type,
+  QueryVotesByVoterRequest
+);
+
 function createBaseQueryVotesByVoterResponse(): QueryVotesByVoterResponse {
-  return { votes: [], pagination: undefined };
+  return {
+    $type: "cosmos.group.v1.QueryVotesByVoterResponse",
+    votes: [],
+    pagination: undefined,
+  };
 }
 
 export const QueryVotesByVoterResponse = {
+  $type: "cosmos.group.v1.QueryVotesByVoterResponse" as const,
+
   encode(
     message: QueryVotesByVoterResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1812,6 +2072,7 @@ export const QueryVotesByVoterResponse = {
 
   fromJSON(object: any): QueryVotesByVoterResponse {
     return {
+      $type: QueryVotesByVoterResponse.$type,
       votes: Array.isArray(object?.votes)
         ? object.votes.map((e: any) => Vote.fromJSON(e))
         : [],
@@ -1848,11 +2109,22 @@ export const QueryVotesByVoterResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryVotesByVoterResponse.$type,
+  QueryVotesByVoterResponse
+);
+
 function createBaseQueryGroupsByMemberRequest(): QueryGroupsByMemberRequest {
-  return { address: "", pagination: undefined };
+  return {
+    $type: "cosmos.group.v1.QueryGroupsByMemberRequest",
+    address: "",
+    pagination: undefined,
+  };
 }
 
 export const QueryGroupsByMemberRequest = {
+  $type: "cosmos.group.v1.QueryGroupsByMemberRequest" as const,
+
   encode(
     message: QueryGroupsByMemberRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1892,6 +2164,7 @@ export const QueryGroupsByMemberRequest = {
 
   fromJSON(object: any): QueryGroupsByMemberRequest {
     return {
+      $type: QueryGroupsByMemberRequest.$type,
       address: isSet(object.address) ? String(object.address) : "",
       pagination: isSet(object.pagination)
         ? PageRequest.fromJSON(object.pagination)
@@ -1922,11 +2195,22 @@ export const QueryGroupsByMemberRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryGroupsByMemberRequest.$type,
+  QueryGroupsByMemberRequest
+);
+
 function createBaseQueryGroupsByMemberResponse(): QueryGroupsByMemberResponse {
-  return { groups: [], pagination: undefined };
+  return {
+    $type: "cosmos.group.v1.QueryGroupsByMemberResponse",
+    groups: [],
+    pagination: undefined,
+  };
 }
 
 export const QueryGroupsByMemberResponse = {
+  $type: "cosmos.group.v1.QueryGroupsByMemberResponse" as const,
+
   encode(
     message: QueryGroupsByMemberResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1969,6 +2253,7 @@ export const QueryGroupsByMemberResponse = {
 
   fromJSON(object: any): QueryGroupsByMemberResponse {
     return {
+      $type: QueryGroupsByMemberResponse.$type,
       groups: Array.isArray(object?.groups)
         ? object.groups.map((e: any) => GroupInfo.fromJSON(e))
         : [],
@@ -2007,11 +2292,21 @@ export const QueryGroupsByMemberResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryGroupsByMemberResponse.$type,
+  QueryGroupsByMemberResponse
+);
+
 function createBaseQueryTallyResultRequest(): QueryTallyResultRequest {
-  return { proposalId: Long.UZERO };
+  return {
+    $type: "cosmos.group.v1.QueryTallyResultRequest",
+    proposalId: Long.UZERO,
+  };
 }
 
 export const QueryTallyResultRequest = {
+  $type: "cosmos.group.v1.QueryTallyResultRequest" as const,
+
   encode(
     message: QueryTallyResultRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -2045,6 +2340,7 @@ export const QueryTallyResultRequest = {
 
   fromJSON(object: any): QueryTallyResultRequest {
     return {
+      $type: QueryTallyResultRequest.$type,
       proposalId: isSet(object.proposalId)
         ? Long.fromString(object.proposalId)
         : Long.UZERO,
@@ -2070,11 +2366,18 @@ export const QueryTallyResultRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryTallyResultRequest.$type, QueryTallyResultRequest);
+
 function createBaseQueryTallyResultResponse(): QueryTallyResultResponse {
-  return { tally: undefined };
+  return {
+    $type: "cosmos.group.v1.QueryTallyResultResponse",
+    tally: undefined,
+  };
 }
 
 export const QueryTallyResultResponse = {
+  $type: "cosmos.group.v1.QueryTallyResultResponse" as const,
+
   encode(
     message: QueryTallyResultResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -2108,6 +2411,7 @@ export const QueryTallyResultResponse = {
 
   fromJSON(object: any): QueryTallyResultResponse {
     return {
+      $type: QueryTallyResultResponse.$type,
       tally: isSet(object.tally)
         ? TallyResult.fromJSON(object.tally)
         : undefined,
@@ -2134,6 +2438,11 @@ export const QueryTallyResultResponse = {
     return message;
   },
 };
+
+messageTypeRegistry.set(
+  QueryTallyResultResponse.$type,
+  QueryTallyResultResponse
+);
 
 /** Query is the cosmos.group.v1 Query service. */
 export interface Query {
@@ -2406,14 +2715,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 
@@ -6,6 +7,7 @@ export const protobufPackage = "cosmos.nft.v1beta1";
 
 /** EventSend is emitted on Msg/Send */
 export interface EventSend {
+  $type: "cosmos.nft.v1beta1.EventSend";
   classId: string;
   id: string;
   sender: string;
@@ -14,6 +16,7 @@ export interface EventSend {
 
 /** EventMint is emitted on Mint */
 export interface EventMint {
+  $type: "cosmos.nft.v1beta1.EventMint";
   classId: string;
   id: string;
   owner: string;
@@ -21,16 +24,25 @@ export interface EventMint {
 
 /** EventBurn is emitted on Burn */
 export interface EventBurn {
+  $type: "cosmos.nft.v1beta1.EventBurn";
   classId: string;
   id: string;
   owner: string;
 }
 
 function createBaseEventSend(): EventSend {
-  return { classId: "", id: "", sender: "", receiver: "" };
+  return {
+    $type: "cosmos.nft.v1beta1.EventSend",
+    classId: "",
+    id: "",
+    sender: "",
+    receiver: "",
+  };
 }
 
 export const EventSend = {
+  $type: "cosmos.nft.v1beta1.EventSend" as const,
+
   encode(
     message: EventSend,
     writer: _m0.Writer = _m0.Writer.create()
@@ -79,6 +91,7 @@ export const EventSend = {
 
   fromJSON(object: any): EventSend {
     return {
+      $type: EventSend.$type,
       classId: isSet(object.classId) ? String(object.classId) : "",
       id: isSet(object.id) ? String(object.id) : "",
       sender: isSet(object.sender) ? String(object.sender) : "",
@@ -107,11 +120,20 @@ export const EventSend = {
   },
 };
 
+messageTypeRegistry.set(EventSend.$type, EventSend);
+
 function createBaseEventMint(): EventMint {
-  return { classId: "", id: "", owner: "" };
+  return {
+    $type: "cosmos.nft.v1beta1.EventMint",
+    classId: "",
+    id: "",
+    owner: "",
+  };
 }
 
 export const EventMint = {
+  $type: "cosmos.nft.v1beta1.EventMint" as const,
+
   encode(
     message: EventMint,
     writer: _m0.Writer = _m0.Writer.create()
@@ -154,6 +176,7 @@ export const EventMint = {
 
   fromJSON(object: any): EventMint {
     return {
+      $type: EventMint.$type,
       classId: isSet(object.classId) ? String(object.classId) : "",
       id: isSet(object.id) ? String(object.id) : "",
       owner: isSet(object.owner) ? String(object.owner) : "",
@@ -179,11 +202,20 @@ export const EventMint = {
   },
 };
 
+messageTypeRegistry.set(EventMint.$type, EventMint);
+
 function createBaseEventBurn(): EventBurn {
-  return { classId: "", id: "", owner: "" };
+  return {
+    $type: "cosmos.nft.v1beta1.EventBurn",
+    classId: "",
+    id: "",
+    owner: "",
+  };
 }
 
 export const EventBurn = {
+  $type: "cosmos.nft.v1beta1.EventBurn" as const,
+
   encode(
     message: EventBurn,
     writer: _m0.Writer = _m0.Writer.create()
@@ -226,6 +258,7 @@ export const EventBurn = {
 
   fromJSON(object: any): EventBurn {
     return {
+      $type: EventBurn.$type,
       classId: isSet(object.classId) ? String(object.classId) : "",
       id: isSet(object.id) ? String(object.id) : "",
       owner: isSet(object.owner) ? String(object.owner) : "",
@@ -251,6 +284,8 @@ export const EventBurn = {
   },
 };
 
+messageTypeRegistry.set(EventBurn.$type, EventBurn);
+
 type Builtin =
   | Date
   | Function
@@ -269,14 +304,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

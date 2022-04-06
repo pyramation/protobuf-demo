@@ -1,27 +1,33 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 
 export const protobufPackage = "osmosis.store.v1beta1";
 
 export interface Node {
+  $type: "osmosis.store.v1beta1.Node";
   children: Child[];
 }
 
 export interface Child {
+  $type: "osmosis.store.v1beta1.Child";
   index: Uint8Array;
   accumulation: string;
 }
 
 export interface Leaf {
-  leaf?: Child;
+  $type: "osmosis.store.v1beta1.Leaf";
+  leaf: Child;
 }
 
 function createBaseNode(): Node {
-  return { children: [] };
+  return { $type: "osmosis.store.v1beta1.Node", children: [] };
 }
 
 export const Node = {
+  $type: "osmosis.store.v1beta1.Node" as const,
+
   encode(message: Node, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.children) {
       Child.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -49,6 +55,7 @@ export const Node = {
 
   fromJSON(object: any): Node {
     return {
+      $type: Node.$type,
       children: Array.isArray(object?.children)
         ? object.children.map((e: any) => Child.fromJSON(e))
         : [],
@@ -74,11 +81,19 @@ export const Node = {
   },
 };
 
+messageTypeRegistry.set(Node.$type, Node);
+
 function createBaseChild(): Child {
-  return { index: new Uint8Array(), accumulation: "" };
+  return {
+    $type: "osmosis.store.v1beta1.Child",
+    index: new Uint8Array(),
+    accumulation: "",
+  };
 }
 
 export const Child = {
+  $type: "osmosis.store.v1beta1.Child" as const,
+
   encode(message: Child, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.index.length !== 0) {
       writer.uint32(10).bytes(message.index);
@@ -112,6 +127,7 @@ export const Child = {
 
   fromJSON(object: any): Child {
     return {
+      $type: Child.$type,
       index: isSet(object.index)
         ? bytesFromBase64(object.index)
         : new Uint8Array(),
@@ -140,11 +156,15 @@ export const Child = {
   },
 };
 
+messageTypeRegistry.set(Child.$type, Child);
+
 function createBaseLeaf(): Leaf {
-  return { leaf: undefined };
+  return { $type: "osmosis.store.v1beta1.Leaf", leaf: undefined };
 }
 
 export const Leaf = {
+  $type: "osmosis.store.v1beta1.Leaf" as const,
+
   encode(message: Leaf, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.leaf !== undefined) {
       Child.encode(message.leaf, writer.uint32(10).fork()).ldelim();
@@ -172,6 +192,7 @@ export const Leaf = {
 
   fromJSON(object: any): Leaf {
     return {
+      $type: Leaf.$type,
       leaf: isSet(object.leaf) ? Child.fromJSON(object.leaf) : undefined,
     };
   },
@@ -192,6 +213,8 @@ export const Leaf = {
     return message;
   },
 };
+
+messageTypeRegistry.set(Leaf.$type, Leaf);
 
 declare var self: any | undefined;
 declare var window: any | undefined;
@@ -245,14 +268,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

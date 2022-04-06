@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { QueryCondition } from "../../osmosis/lockup/lock";
@@ -8,6 +9,7 @@ import { Coin } from "../../cosmos/base/v1beta1/coin";
 export const protobufPackage = "osmosis.incentives";
 
 export interface MsgCreateGauge {
+  $type: "osmosis.incentives.MsgCreateGauge";
   /**
    * flag to show if it's perpetual or multi-epoch
    * distribution incentives by third party
@@ -15,27 +17,33 @@ export interface MsgCreateGauge {
   isPerpetual: boolean;
   owner: string;
   /** distribute condition of a lock which meet one of these conditions */
-  distributeTo?: QueryCondition;
+  distributeTo: QueryCondition;
   /** can distribute multiple coins */
   coins: Coin[];
   /** distribution start time */
-  startTime?: Date;
+  startTime: Date;
   /** number of epochs distribution will be done */
   numEpochsPaidOver: Long;
 }
 
-export interface MsgCreateGaugeResponse {}
+export interface MsgCreateGaugeResponse {
+  $type: "osmosis.incentives.MsgCreateGaugeResponse";
+}
 
 export interface MsgAddToGauge {
+  $type: "osmosis.incentives.MsgAddToGauge";
   owner: string;
   gaugeId: Long;
   rewards: Coin[];
 }
 
-export interface MsgAddToGaugeResponse {}
+export interface MsgAddToGaugeResponse {
+  $type: "osmosis.incentives.MsgAddToGaugeResponse";
+}
 
 function createBaseMsgCreateGauge(): MsgCreateGauge {
   return {
+    $type: "osmosis.incentives.MsgCreateGauge",
     isPerpetual: false,
     owner: "",
     distributeTo: undefined,
@@ -46,6 +54,8 @@ function createBaseMsgCreateGauge(): MsgCreateGauge {
 }
 
 export const MsgCreateGauge = {
+  $type: "osmosis.incentives.MsgCreateGauge" as const,
+
   encode(
     message: MsgCreateGauge,
     writer: _m0.Writer = _m0.Writer.create()
@@ -114,6 +124,7 @@ export const MsgCreateGauge = {
 
   fromJSON(object: any): MsgCreateGauge {
     return {
+      $type: MsgCreateGauge.$type,
       isPerpetual: isSet(object.isPerpetual)
         ? Boolean(object.isPerpetual)
         : false,
@@ -177,11 +188,15 @@ export const MsgCreateGauge = {
   },
 };
 
+messageTypeRegistry.set(MsgCreateGauge.$type, MsgCreateGauge);
+
 function createBaseMsgCreateGaugeResponse(): MsgCreateGaugeResponse {
-  return {};
+  return { $type: "osmosis.incentives.MsgCreateGaugeResponse" };
 }
 
 export const MsgCreateGaugeResponse = {
+  $type: "osmosis.incentives.MsgCreateGaugeResponse" as const,
+
   encode(
     _: MsgCreateGaugeResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -208,7 +223,9 @@ export const MsgCreateGaugeResponse = {
   },
 
   fromJSON(_: any): MsgCreateGaugeResponse {
-    return {};
+    return {
+      $type: MsgCreateGaugeResponse.$type,
+    };
   },
 
   toJSON(_: MsgCreateGaugeResponse): unknown {
@@ -224,11 +241,20 @@ export const MsgCreateGaugeResponse = {
   },
 };
 
+messageTypeRegistry.set(MsgCreateGaugeResponse.$type, MsgCreateGaugeResponse);
+
 function createBaseMsgAddToGauge(): MsgAddToGauge {
-  return { owner: "", gaugeId: Long.UZERO, rewards: [] };
+  return {
+    $type: "osmosis.incentives.MsgAddToGauge",
+    owner: "",
+    gaugeId: Long.UZERO,
+    rewards: [],
+  };
 }
 
 export const MsgAddToGauge = {
+  $type: "osmosis.incentives.MsgAddToGauge" as const,
+
   encode(
     message: MsgAddToGauge,
     writer: _m0.Writer = _m0.Writer.create()
@@ -271,6 +297,7 @@ export const MsgAddToGauge = {
 
   fromJSON(object: any): MsgAddToGauge {
     return {
+      $type: MsgAddToGauge.$type,
       owner: isSet(object.owner) ? String(object.owner) : "",
       gaugeId: isSet(object.gaugeId)
         ? Long.fromString(object.gaugeId)
@@ -310,11 +337,15 @@ export const MsgAddToGauge = {
   },
 };
 
+messageTypeRegistry.set(MsgAddToGauge.$type, MsgAddToGauge);
+
 function createBaseMsgAddToGaugeResponse(): MsgAddToGaugeResponse {
-  return {};
+  return { $type: "osmosis.incentives.MsgAddToGaugeResponse" };
 }
 
 export const MsgAddToGaugeResponse = {
+  $type: "osmosis.incentives.MsgAddToGaugeResponse" as const,
+
   encode(
     _: MsgAddToGaugeResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -341,7 +372,9 @@ export const MsgAddToGaugeResponse = {
   },
 
   fromJSON(_: any): MsgAddToGaugeResponse {
-    return {};
+    return {
+      $type: MsgAddToGaugeResponse.$type,
+    };
   },
 
   toJSON(_: MsgAddToGaugeResponse): unknown {
@@ -356,6 +389,8 @@ export const MsgAddToGaugeResponse = {
     return message;
   },
 };
+
+messageTypeRegistry.set(MsgAddToGaugeResponse.$type, MsgAddToGaugeResponse);
 
 export interface Msg {
   CreateGauge(request: MsgCreateGauge): Promise<MsgCreateGaugeResponse>;
@@ -420,21 +455,21 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = (date.getTime() % 1_000) * 1_000_000;
-  return { seconds, nanos };
+  return { $type: "google.protobuf.Timestamp", seconds, nanos };
 }
 
 function fromTimestamp(t: Timestamp): Date {

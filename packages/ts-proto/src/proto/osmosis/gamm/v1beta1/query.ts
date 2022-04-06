@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Any } from "../../../google/protobuf/any";
@@ -16,73 +17,89 @@ export const protobufPackage = "osmosis.gamm.v1beta1";
 
 /** =============================== Pool */
 export interface QueryPoolRequest {
+  $type: "osmosis.gamm.v1beta1.QueryPoolRequest";
   poolId: Long;
 }
 
 export interface QueryPoolResponse {
-  pool?: Any;
+  $type: "osmosis.gamm.v1beta1.QueryPoolResponse";
+  pool: Any;
 }
 
 /** =============================== Pools */
 export interface QueryPoolsRequest {
+  $type: "osmosis.gamm.v1beta1.QueryPoolsRequest";
   /** pagination defines an optional pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 
 export interface QueryPoolsResponse {
+  $type: "osmosis.gamm.v1beta1.QueryPoolsResponse";
   pools: Any[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 
 /** =============================== NumPools */
-export interface QueryNumPoolsRequest {}
+export interface QueryNumPoolsRequest {
+  $type: "osmosis.gamm.v1beta1.QueryNumPoolsRequest";
+}
 
 export interface QueryNumPoolsResponse {
+  $type: "osmosis.gamm.v1beta1.QueryNumPoolsResponse";
   numPools: Long;
 }
 
 /** =============================== PoolParams */
 export interface QueryPoolParamsRequest {
+  $type: "osmosis.gamm.v1beta1.QueryPoolParamsRequest";
   poolId: Long;
 }
 
 export interface QueryPoolParamsResponse {
-  params?: Any;
+  $type: "osmosis.gamm.v1beta1.QueryPoolParamsResponse";
+  params: Any;
 }
 
 /** =============================== PoolLiquidity */
 export interface QueryTotalPoolLiquidityRequest {
+  $type: "osmosis.gamm.v1beta1.QueryTotalPoolLiquidityRequest";
   poolId: Long;
 }
 
 export interface QueryTotalPoolLiquidityResponse {
+  $type: "osmosis.gamm.v1beta1.QueryTotalPoolLiquidityResponse";
   liquidity: Coin[];
 }
 
 /** =============================== TotalShares */
 export interface QueryTotalSharesRequest {
+  $type: "osmosis.gamm.v1beta1.QueryTotalSharesRequest";
   poolId: Long;
 }
 
 export interface QueryTotalSharesResponse {
-  totalShares?: Coin;
+  $type: "osmosis.gamm.v1beta1.QueryTotalSharesResponse";
+  totalShares: Coin;
 }
 
 /** =============================== SpotPrice */
 export interface QuerySpotPriceRequest {
+  $type: "osmosis.gamm.v1beta1.QuerySpotPriceRequest";
   poolId: Long;
   tokenInDenom: string;
   tokenOutDenom: string;
 }
 
 export interface QuerySpotPriceResponse {
+  $type: "osmosis.gamm.v1beta1.QuerySpotPriceResponse";
   /** String of the Dec. Ex) 10.203uatom */
   spotPrice: string;
 }
 
 /** =============================== EstimateSwapExactAmountIn */
 export interface QuerySwapExactAmountInRequest {
+  $type: "osmosis.gamm.v1beta1.QuerySwapExactAmountInRequest";
   sender: string;
   poolId: Long;
   tokenIn: string;
@@ -90,11 +107,13 @@ export interface QuerySwapExactAmountInRequest {
 }
 
 export interface QuerySwapExactAmountInResponse {
+  $type: "osmosis.gamm.v1beta1.QuerySwapExactAmountInResponse";
   tokenOutAmount: string;
 }
 
 /** =============================== EstimateSwapExactAmountOut */
 export interface QuerySwapExactAmountOutRequest {
+  $type: "osmosis.gamm.v1beta1.QuerySwapExactAmountOutRequest";
   sender: string;
   poolId: Long;
   routes: SwapAmountOutRoute[];
@@ -102,20 +121,26 @@ export interface QuerySwapExactAmountOutRequest {
 }
 
 export interface QuerySwapExactAmountOutResponse {
+  $type: "osmosis.gamm.v1beta1.QuerySwapExactAmountOutResponse";
   tokenInAmount: string;
 }
 
-export interface QueryTotalLiquidityRequest {}
+export interface QueryTotalLiquidityRequest {
+  $type: "osmosis.gamm.v1beta1.QueryTotalLiquidityRequest";
+}
 
 export interface QueryTotalLiquidityResponse {
+  $type: "osmosis.gamm.v1beta1.QueryTotalLiquidityResponse";
   liquidity: Coin[];
 }
 
 function createBaseQueryPoolRequest(): QueryPoolRequest {
-  return { poolId: Long.UZERO };
+  return { $type: "osmosis.gamm.v1beta1.QueryPoolRequest", poolId: Long.UZERO };
 }
 
 export const QueryPoolRequest = {
+  $type: "osmosis.gamm.v1beta1.QueryPoolRequest" as const,
+
   encode(
     message: QueryPoolRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -146,6 +171,7 @@ export const QueryPoolRequest = {
 
   fromJSON(object: any): QueryPoolRequest {
     return {
+      $type: QueryPoolRequest.$type,
       poolId: isSet(object.poolId)
         ? Long.fromString(object.poolId)
         : Long.UZERO,
@@ -171,11 +197,15 @@ export const QueryPoolRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryPoolRequest.$type, QueryPoolRequest);
+
 function createBaseQueryPoolResponse(): QueryPoolResponse {
-  return { pool: undefined };
+  return { $type: "osmosis.gamm.v1beta1.QueryPoolResponse", pool: undefined };
 }
 
 export const QueryPoolResponse = {
+  $type: "osmosis.gamm.v1beta1.QueryPoolResponse" as const,
+
   encode(
     message: QueryPoolResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -206,6 +236,7 @@ export const QueryPoolResponse = {
 
   fromJSON(object: any): QueryPoolResponse {
     return {
+      $type: QueryPoolResponse.$type,
       pool: isSet(object.pool) ? Any.fromJSON(object.pool) : undefined,
     };
   },
@@ -229,11 +260,18 @@ export const QueryPoolResponse = {
   },
 };
 
+messageTypeRegistry.set(QueryPoolResponse.$type, QueryPoolResponse);
+
 function createBaseQueryPoolsRequest(): QueryPoolsRequest {
-  return { pagination: undefined };
+  return {
+    $type: "osmosis.gamm.v1beta1.QueryPoolsRequest",
+    pagination: undefined,
+  };
 }
 
 export const QueryPoolsRequest = {
+  $type: "osmosis.gamm.v1beta1.QueryPoolsRequest" as const,
+
   encode(
     message: QueryPoolsRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -264,6 +302,7 @@ export const QueryPoolsRequest = {
 
   fromJSON(object: any): QueryPoolsRequest {
     return {
+      $type: QueryPoolsRequest.$type,
       pagination: isSet(object.pagination)
         ? PageRequest.fromJSON(object.pagination)
         : undefined,
@@ -291,11 +330,19 @@ export const QueryPoolsRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryPoolsRequest.$type, QueryPoolsRequest);
+
 function createBaseQueryPoolsResponse(): QueryPoolsResponse {
-  return { pools: [], pagination: undefined };
+  return {
+    $type: "osmosis.gamm.v1beta1.QueryPoolsResponse",
+    pools: [],
+    pagination: undefined,
+  };
 }
 
 export const QueryPoolsResponse = {
+  $type: "osmosis.gamm.v1beta1.QueryPoolsResponse" as const,
+
   encode(
     message: QueryPoolsResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -335,6 +382,7 @@ export const QueryPoolsResponse = {
 
   fromJSON(object: any): QueryPoolsResponse {
     return {
+      $type: QueryPoolsResponse.$type,
       pools: Array.isArray(object?.pools)
         ? object.pools.map((e: any) => Any.fromJSON(e))
         : [],
@@ -371,11 +419,15 @@ export const QueryPoolsResponse = {
   },
 };
 
+messageTypeRegistry.set(QueryPoolsResponse.$type, QueryPoolsResponse);
+
 function createBaseQueryNumPoolsRequest(): QueryNumPoolsRequest {
-  return {};
+  return { $type: "osmosis.gamm.v1beta1.QueryNumPoolsRequest" };
 }
 
 export const QueryNumPoolsRequest = {
+  $type: "osmosis.gamm.v1beta1.QueryNumPoolsRequest" as const,
+
   encode(
     _: QueryNumPoolsRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -402,7 +454,9 @@ export const QueryNumPoolsRequest = {
   },
 
   fromJSON(_: any): QueryNumPoolsRequest {
-    return {};
+    return {
+      $type: QueryNumPoolsRequest.$type,
+    };
   },
 
   toJSON(_: QueryNumPoolsRequest): unknown {
@@ -418,11 +472,18 @@ export const QueryNumPoolsRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryNumPoolsRequest.$type, QueryNumPoolsRequest);
+
 function createBaseQueryNumPoolsResponse(): QueryNumPoolsResponse {
-  return { numPools: Long.UZERO };
+  return {
+    $type: "osmosis.gamm.v1beta1.QueryNumPoolsResponse",
+    numPools: Long.UZERO,
+  };
 }
 
 export const QueryNumPoolsResponse = {
+  $type: "osmosis.gamm.v1beta1.QueryNumPoolsResponse" as const,
+
   encode(
     message: QueryNumPoolsResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -456,6 +517,7 @@ export const QueryNumPoolsResponse = {
 
   fromJSON(object: any): QueryNumPoolsResponse {
     return {
+      $type: QueryNumPoolsResponse.$type,
       numPools: isSet(object.numPools)
         ? Long.fromString(object.numPools)
         : Long.UZERO,
@@ -481,11 +543,18 @@ export const QueryNumPoolsResponse = {
   },
 };
 
+messageTypeRegistry.set(QueryNumPoolsResponse.$type, QueryNumPoolsResponse);
+
 function createBaseQueryPoolParamsRequest(): QueryPoolParamsRequest {
-  return { poolId: Long.UZERO };
+  return {
+    $type: "osmosis.gamm.v1beta1.QueryPoolParamsRequest",
+    poolId: Long.UZERO,
+  };
 }
 
 export const QueryPoolParamsRequest = {
+  $type: "osmosis.gamm.v1beta1.QueryPoolParamsRequest" as const,
+
   encode(
     message: QueryPoolParamsRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -519,6 +588,7 @@ export const QueryPoolParamsRequest = {
 
   fromJSON(object: any): QueryPoolParamsRequest {
     return {
+      $type: QueryPoolParamsRequest.$type,
       poolId: isSet(object.poolId)
         ? Long.fromString(object.poolId)
         : Long.UZERO,
@@ -544,11 +614,18 @@ export const QueryPoolParamsRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryPoolParamsRequest.$type, QueryPoolParamsRequest);
+
 function createBaseQueryPoolParamsResponse(): QueryPoolParamsResponse {
-  return { params: undefined };
+  return {
+    $type: "osmosis.gamm.v1beta1.QueryPoolParamsResponse",
+    params: undefined,
+  };
 }
 
 export const QueryPoolParamsResponse = {
+  $type: "osmosis.gamm.v1beta1.QueryPoolParamsResponse" as const,
+
   encode(
     message: QueryPoolParamsResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -582,6 +659,7 @@ export const QueryPoolParamsResponse = {
 
   fromJSON(object: any): QueryPoolParamsResponse {
     return {
+      $type: QueryPoolParamsResponse.$type,
       params: isSet(object.params) ? Any.fromJSON(object.params) : undefined,
     };
   },
@@ -605,11 +683,18 @@ export const QueryPoolParamsResponse = {
   },
 };
 
+messageTypeRegistry.set(QueryPoolParamsResponse.$type, QueryPoolParamsResponse);
+
 function createBaseQueryTotalPoolLiquidityRequest(): QueryTotalPoolLiquidityRequest {
-  return { poolId: Long.UZERO };
+  return {
+    $type: "osmosis.gamm.v1beta1.QueryTotalPoolLiquidityRequest",
+    poolId: Long.UZERO,
+  };
 }
 
 export const QueryTotalPoolLiquidityRequest = {
+  $type: "osmosis.gamm.v1beta1.QueryTotalPoolLiquidityRequest" as const,
+
   encode(
     message: QueryTotalPoolLiquidityRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -643,6 +728,7 @@ export const QueryTotalPoolLiquidityRequest = {
 
   fromJSON(object: any): QueryTotalPoolLiquidityRequest {
     return {
+      $type: QueryTotalPoolLiquidityRequest.$type,
       poolId: isSet(object.poolId)
         ? Long.fromString(object.poolId)
         : Long.UZERO,
@@ -668,11 +754,21 @@ export const QueryTotalPoolLiquidityRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryTotalPoolLiquidityRequest.$type,
+  QueryTotalPoolLiquidityRequest
+);
+
 function createBaseQueryTotalPoolLiquidityResponse(): QueryTotalPoolLiquidityResponse {
-  return { liquidity: [] };
+  return {
+    $type: "osmosis.gamm.v1beta1.QueryTotalPoolLiquidityResponse",
+    liquidity: [],
+  };
 }
 
 export const QueryTotalPoolLiquidityResponse = {
+  $type: "osmosis.gamm.v1beta1.QueryTotalPoolLiquidityResponse" as const,
+
   encode(
     message: QueryTotalPoolLiquidityResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -706,6 +802,7 @@ export const QueryTotalPoolLiquidityResponse = {
 
   fromJSON(object: any): QueryTotalPoolLiquidityResponse {
     return {
+      $type: QueryTotalPoolLiquidityResponse.$type,
       liquidity: Array.isArray(object?.liquidity)
         ? object.liquidity.map((e: any) => Coin.fromJSON(e))
         : [],
@@ -733,11 +830,21 @@ export const QueryTotalPoolLiquidityResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryTotalPoolLiquidityResponse.$type,
+  QueryTotalPoolLiquidityResponse
+);
+
 function createBaseQueryTotalSharesRequest(): QueryTotalSharesRequest {
-  return { poolId: Long.UZERO };
+  return {
+    $type: "osmosis.gamm.v1beta1.QueryTotalSharesRequest",
+    poolId: Long.UZERO,
+  };
 }
 
 export const QueryTotalSharesRequest = {
+  $type: "osmosis.gamm.v1beta1.QueryTotalSharesRequest" as const,
+
   encode(
     message: QueryTotalSharesRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -771,6 +878,7 @@ export const QueryTotalSharesRequest = {
 
   fromJSON(object: any): QueryTotalSharesRequest {
     return {
+      $type: QueryTotalSharesRequest.$type,
       poolId: isSet(object.poolId)
         ? Long.fromString(object.poolId)
         : Long.UZERO,
@@ -796,11 +904,18 @@ export const QueryTotalSharesRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryTotalSharesRequest.$type, QueryTotalSharesRequest);
+
 function createBaseQueryTotalSharesResponse(): QueryTotalSharesResponse {
-  return { totalShares: undefined };
+  return {
+    $type: "osmosis.gamm.v1beta1.QueryTotalSharesResponse",
+    totalShares: undefined,
+  };
 }
 
 export const QueryTotalSharesResponse = {
+  $type: "osmosis.gamm.v1beta1.QueryTotalSharesResponse" as const,
+
   encode(
     message: QueryTotalSharesResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -834,6 +949,7 @@ export const QueryTotalSharesResponse = {
 
   fromJSON(object: any): QueryTotalSharesResponse {
     return {
+      $type: QueryTotalSharesResponse.$type,
       totalShares: isSet(object.totalShares)
         ? Coin.fromJSON(object.totalShares)
         : undefined,
@@ -861,11 +977,23 @@ export const QueryTotalSharesResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryTotalSharesResponse.$type,
+  QueryTotalSharesResponse
+);
+
 function createBaseQuerySpotPriceRequest(): QuerySpotPriceRequest {
-  return { poolId: Long.UZERO, tokenInDenom: "", tokenOutDenom: "" };
+  return {
+    $type: "osmosis.gamm.v1beta1.QuerySpotPriceRequest",
+    poolId: Long.UZERO,
+    tokenInDenom: "",
+    tokenOutDenom: "",
+  };
 }
 
 export const QuerySpotPriceRequest = {
+  $type: "osmosis.gamm.v1beta1.QuerySpotPriceRequest" as const,
+
   encode(
     message: QuerySpotPriceRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -911,6 +1039,7 @@ export const QuerySpotPriceRequest = {
 
   fromJSON(object: any): QuerySpotPriceRequest {
     return {
+      $type: QuerySpotPriceRequest.$type,
       poolId: isSet(object.poolId)
         ? Long.fromString(object.poolId)
         : Long.UZERO,
@@ -948,11 +1077,18 @@ export const QuerySpotPriceRequest = {
   },
 };
 
+messageTypeRegistry.set(QuerySpotPriceRequest.$type, QuerySpotPriceRequest);
+
 function createBaseQuerySpotPriceResponse(): QuerySpotPriceResponse {
-  return { spotPrice: "" };
+  return {
+    $type: "osmosis.gamm.v1beta1.QuerySpotPriceResponse",
+    spotPrice: "",
+  };
 }
 
 export const QuerySpotPriceResponse = {
+  $type: "osmosis.gamm.v1beta1.QuerySpotPriceResponse" as const,
+
   encode(
     message: QuerySpotPriceResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -986,6 +1122,7 @@ export const QuerySpotPriceResponse = {
 
   fromJSON(object: any): QuerySpotPriceResponse {
     return {
+      $type: QuerySpotPriceResponse.$type,
       spotPrice: isSet(object.spotPrice) ? String(object.spotPrice) : "",
     };
   },
@@ -1005,11 +1142,21 @@ export const QuerySpotPriceResponse = {
   },
 };
 
+messageTypeRegistry.set(QuerySpotPriceResponse.$type, QuerySpotPriceResponse);
+
 function createBaseQuerySwapExactAmountInRequest(): QuerySwapExactAmountInRequest {
-  return { sender: "", poolId: Long.UZERO, tokenIn: "", routes: [] };
+  return {
+    $type: "osmosis.gamm.v1beta1.QuerySwapExactAmountInRequest",
+    sender: "",
+    poolId: Long.UZERO,
+    tokenIn: "",
+    routes: [],
+  };
 }
 
 export const QuerySwapExactAmountInRequest = {
+  $type: "osmosis.gamm.v1beta1.QuerySwapExactAmountInRequest" as const,
+
   encode(
     message: QuerySwapExactAmountInRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1063,6 +1210,7 @@ export const QuerySwapExactAmountInRequest = {
 
   fromJSON(object: any): QuerySwapExactAmountInRequest {
     return {
+      $type: QuerySwapExactAmountInRequest.$type,
       sender: isSet(object.sender) ? String(object.sender) : "",
       poolId: isSet(object.poolId)
         ? Long.fromString(object.poolId)
@@ -1106,11 +1254,21 @@ export const QuerySwapExactAmountInRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  QuerySwapExactAmountInRequest.$type,
+  QuerySwapExactAmountInRequest
+);
+
 function createBaseQuerySwapExactAmountInResponse(): QuerySwapExactAmountInResponse {
-  return { tokenOutAmount: "" };
+  return {
+    $type: "osmosis.gamm.v1beta1.QuerySwapExactAmountInResponse",
+    tokenOutAmount: "",
+  };
 }
 
 export const QuerySwapExactAmountInResponse = {
+  $type: "osmosis.gamm.v1beta1.QuerySwapExactAmountInResponse" as const,
+
   encode(
     message: QuerySwapExactAmountInResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1144,6 +1302,7 @@ export const QuerySwapExactAmountInResponse = {
 
   fromJSON(object: any): QuerySwapExactAmountInResponse {
     return {
+      $type: QuerySwapExactAmountInResponse.$type,
       tokenOutAmount: isSet(object.tokenOutAmount)
         ? String(object.tokenOutAmount)
         : "",
@@ -1166,11 +1325,24 @@ export const QuerySwapExactAmountInResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  QuerySwapExactAmountInResponse.$type,
+  QuerySwapExactAmountInResponse
+);
+
 function createBaseQuerySwapExactAmountOutRequest(): QuerySwapExactAmountOutRequest {
-  return { sender: "", poolId: Long.UZERO, routes: [], tokenOut: "" };
+  return {
+    $type: "osmosis.gamm.v1beta1.QuerySwapExactAmountOutRequest",
+    sender: "",
+    poolId: Long.UZERO,
+    routes: [],
+    tokenOut: "",
+  };
 }
 
 export const QuerySwapExactAmountOutRequest = {
+  $type: "osmosis.gamm.v1beta1.QuerySwapExactAmountOutRequest" as const,
+
   encode(
     message: QuerySwapExactAmountOutRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1224,6 +1396,7 @@ export const QuerySwapExactAmountOutRequest = {
 
   fromJSON(object: any): QuerySwapExactAmountOutRequest {
     return {
+      $type: QuerySwapExactAmountOutRequest.$type,
       sender: isSet(object.sender) ? String(object.sender) : "",
       poolId: isSet(object.poolId)
         ? Long.fromString(object.poolId)
@@ -1267,11 +1440,21 @@ export const QuerySwapExactAmountOutRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  QuerySwapExactAmountOutRequest.$type,
+  QuerySwapExactAmountOutRequest
+);
+
 function createBaseQuerySwapExactAmountOutResponse(): QuerySwapExactAmountOutResponse {
-  return { tokenInAmount: "" };
+  return {
+    $type: "osmosis.gamm.v1beta1.QuerySwapExactAmountOutResponse",
+    tokenInAmount: "",
+  };
 }
 
 export const QuerySwapExactAmountOutResponse = {
+  $type: "osmosis.gamm.v1beta1.QuerySwapExactAmountOutResponse" as const,
+
   encode(
     message: QuerySwapExactAmountOutResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1305,6 +1488,7 @@ export const QuerySwapExactAmountOutResponse = {
 
   fromJSON(object: any): QuerySwapExactAmountOutResponse {
     return {
+      $type: QuerySwapExactAmountOutResponse.$type,
       tokenInAmount: isSet(object.tokenInAmount)
         ? String(object.tokenInAmount)
         : "",
@@ -1327,11 +1511,18 @@ export const QuerySwapExactAmountOutResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  QuerySwapExactAmountOutResponse.$type,
+  QuerySwapExactAmountOutResponse
+);
+
 function createBaseQueryTotalLiquidityRequest(): QueryTotalLiquidityRequest {
-  return {};
+  return { $type: "osmosis.gamm.v1beta1.QueryTotalLiquidityRequest" };
 }
 
 export const QueryTotalLiquidityRequest = {
+  $type: "osmosis.gamm.v1beta1.QueryTotalLiquidityRequest" as const,
+
   encode(
     _: QueryTotalLiquidityRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1358,7 +1549,9 @@ export const QueryTotalLiquidityRequest = {
   },
 
   fromJSON(_: any): QueryTotalLiquidityRequest {
-    return {};
+    return {
+      $type: QueryTotalLiquidityRequest.$type,
+    };
   },
 
   toJSON(_: QueryTotalLiquidityRequest): unknown {
@@ -1374,11 +1567,21 @@ export const QueryTotalLiquidityRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryTotalLiquidityRequest.$type,
+  QueryTotalLiquidityRequest
+);
+
 function createBaseQueryTotalLiquidityResponse(): QueryTotalLiquidityResponse {
-  return { liquidity: [] };
+  return {
+    $type: "osmosis.gamm.v1beta1.QueryTotalLiquidityResponse",
+    liquidity: [],
+  };
 }
 
 export const QueryTotalLiquidityResponse = {
+  $type: "osmosis.gamm.v1beta1.QueryTotalLiquidityResponse" as const,
+
   encode(
     message: QueryTotalLiquidityResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1412,6 +1615,7 @@ export const QueryTotalLiquidityResponse = {
 
   fromJSON(object: any): QueryTotalLiquidityResponse {
     return {
+      $type: QueryTotalLiquidityResponse.$type,
       liquidity: Array.isArray(object?.liquidity)
         ? object.liquidity.map((e: any) => Coin.fromJSON(e))
         : [],
@@ -1438,6 +1642,11 @@ export const QueryTotalLiquidityResponse = {
     return message;
   },
 };
+
+messageTypeRegistry.set(
+  QueryTotalLiquidityResponse.$type,
+  QueryTotalLiquidityResponse
+);
 
 export interface Query {
   Pools(request: QueryPoolsRequest): Promise<QueryPoolsResponse>;
@@ -1639,14 +1848,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

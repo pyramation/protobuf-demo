@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { SourceInfo } from "../../../../google/api/expr/v1beta1/source";
@@ -12,10 +13,11 @@ export const protobufPackage = "google.api.expr.v1beta1";
 
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExpr {
+  $type: "google.api.expr.v1beta1.ParsedExpr";
   /** The parsed expression. */
-  expr?: Expr;
+  expr: Expr;
   /** The source info derived from input that generated the parsed `expr`. */
-  sourceInfo?: SourceInfo;
+  sourceInfo: SourceInfo;
   /** The syntax version of the source, e.g. `cel1`. */
   syntaxVersion: string;
 }
@@ -38,6 +40,7 @@ export interface ParsedExpr {
  * the function declaration `startsWith`.
  */
 export interface Expr {
+  $type: "google.api.expr.v1beta1.Expr";
   /**
    * Required. An id assigned to this node by the parser which is unique in a
    * given expression tree. This is used to associate type information and other
@@ -45,23 +48,24 @@ export interface Expr {
    */
   id: number;
   /** A literal expression. */
-  literalExpr?: Literal | undefined;
+  literalExpr: Literal | undefined;
   /** An identifier expression. */
-  identExpr?: Expr_Ident | undefined;
+  identExpr: Expr_Ident | undefined;
   /** A field selection expression, e.g. `request.auth`. */
-  selectExpr?: Expr_Select | undefined;
+  selectExpr: Expr_Select | undefined;
   /** A call expression, including calls to predefined functions and operators. */
-  callExpr?: Expr_Call | undefined;
+  callExpr: Expr_Call | undefined;
   /** A list creation expression. */
-  listExpr?: Expr_CreateList | undefined;
+  listExpr: Expr_CreateList | undefined;
   /** A map or object creation expression. */
-  structExpr?: Expr_CreateStruct | undefined;
+  structExpr: Expr_CreateStruct | undefined;
   /** A comprehension expression. */
-  comprehensionExpr?: Expr_Comprehension | undefined;
+  comprehensionExpr: Expr_Comprehension | undefined;
 }
 
 /** An identifier expression. e.g. `request`. */
 export interface Expr_Ident {
+  $type: "google.api.expr.v1beta1.Expr.Ident";
   /**
    * Required. Holds a single, unqualified identifier, possibly preceded by a
    * '.'.
@@ -73,13 +77,14 @@ export interface Expr_Ident {
 
 /** A field selection expression. e.g. `request.auth`. */
 export interface Expr_Select {
+  $type: "google.api.expr.v1beta1.Expr.Select";
   /**
    * Required. The target of the selection expression.
    *
    * For example, in the select expression `request.auth`, the `request`
    * portion of the expression is the `operand`.
    */
-  operand?: Expr;
+  operand: Expr;
   /**
    * Required. The name of the field to select.
    *
@@ -101,11 +106,12 @@ export interface Expr_Select {
  * For example, `value == 10`, `size(map_value)`.
  */
 export interface Expr_Call {
+  $type: "google.api.expr.v1beta1.Expr.Call";
   /**
    * The target of an method call-style expression. For example, `x` in
    * `x.f()`.
    */
-  target?: Expr;
+  target: Expr;
   /** Required. The name of the function or method being called. */
   function: string;
   /** The arguments. */
@@ -119,6 +125,7 @@ export interface Expr_Call {
  * `dyn([1, 'hello', 2.0])`
  */
 export interface Expr_CreateList {
+  $type: "google.api.expr.v1beta1.Expr.CreateList";
   /** The elements part of the list. */
   elements: Expr[];
 }
@@ -131,6 +138,7 @@ export interface Expr_CreateList {
  * `types.MyType{field_id: 'value'}`.
  */
 export interface Expr_CreateStruct {
+  $type: "google.api.expr.v1beta1.Expr.CreateStruct";
   /**
    * The type name of the message to be created, empty when creating map
    * literals.
@@ -142,6 +150,7 @@ export interface Expr_CreateStruct {
 
 /** Represents an entry. */
 export interface Expr_CreateStruct_Entry {
+  $type: "google.api.expr.v1beta1.Expr.CreateStruct.Entry";
   /**
    * Required. An id assigned to this node by the parser which is unique
    * in a given expression tree. This is used to associate type
@@ -151,9 +160,9 @@ export interface Expr_CreateStruct_Entry {
   /** The field key for a message creator statement. */
   fieldKey: string | undefined;
   /** The key expression for a map creation statement. */
-  mapKey?: Expr | undefined;
+  mapKey: Expr | undefined;
   /** Required. The value assigned to the key. */
-  value?: Expr;
+  value: Expr;
 }
 
 /**
@@ -185,33 +194,34 @@ export interface Expr_CreateStruct_Entry {
  * types, the macro tests whether the property `x` is defined on `m`.
  */
 export interface Expr_Comprehension {
+  $type: "google.api.expr.v1beta1.Expr.Comprehension";
   /** The name of the iteration variable. */
   iterVar: string;
   /** The range over which var iterates. */
-  iterRange?: Expr;
+  iterRange: Expr;
   /** The name of the variable used for accumulation of the result. */
   accuVar: string;
   /** The initial value of the accumulator. */
-  accuInit?: Expr;
+  accuInit: Expr;
   /**
    * An expression which can contain iter_var and accu_var.
    *
    * Returns false when the result has been computed and may be used as
    * a hint to short-circuit the remainder of the comprehension.
    */
-  loopCondition?: Expr;
+  loopCondition: Expr;
   /**
    * An expression which can contain iter_var and accu_var.
    *
    * Computes the next value of accu_var.
    */
-  loopStep?: Expr;
+  loopStep: Expr;
   /**
    * An expression which can contain accu_var.
    *
    * Computes the result.
    */
-  result?: Expr;
+  result: Expr;
 }
 
 /**
@@ -228,6 +238,7 @@ export interface Expr_Comprehension {
  * `true`, `null`.
  */
 export interface Literal {
+  $type: "google.api.expr.v1beta1.Literal";
   /** null value. */
   nullValue: NullValue | undefined;
   /** boolean value. */
@@ -245,10 +256,17 @@ export interface Literal {
 }
 
 function createBaseParsedExpr(): ParsedExpr {
-  return { expr: undefined, sourceInfo: undefined, syntaxVersion: "" };
+  return {
+    $type: "google.api.expr.v1beta1.ParsedExpr",
+    expr: undefined,
+    sourceInfo: undefined,
+    syntaxVersion: "",
+  };
 }
 
 export const ParsedExpr = {
+  $type: "google.api.expr.v1beta1.ParsedExpr" as const,
+
   encode(
     message: ParsedExpr,
     writer: _m0.Writer = _m0.Writer.create()
@@ -291,6 +309,7 @@ export const ParsedExpr = {
 
   fromJSON(object: any): ParsedExpr {
     return {
+      $type: ParsedExpr.$type,
       expr: isSet(object.expr) ? Expr.fromJSON(object.expr) : undefined,
       sourceInfo: isSet(object.sourceInfo)
         ? SourceInfo.fromJSON(object.sourceInfo)
@@ -331,8 +350,11 @@ export const ParsedExpr = {
   },
 };
 
+messageTypeRegistry.set(ParsedExpr.$type, ParsedExpr);
+
 function createBaseExpr(): Expr {
   return {
+    $type: "google.api.expr.v1beta1.Expr",
     id: 0,
     literalExpr: undefined,
     identExpr: undefined,
@@ -345,6 +367,8 @@ function createBaseExpr(): Expr {
 }
 
 export const Expr = {
+  $type: "google.api.expr.v1beta1.Expr" as const,
+
   encode(message: Expr, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== 0) {
       writer.uint32(16).int32(message.id);
@@ -429,6 +453,7 @@ export const Expr = {
 
   fromJSON(object: any): Expr {
     return {
+      $type: Expr.$type,
       id: isSet(object.id) ? Number(object.id) : 0,
       literalExpr: isSet(object.literalExpr)
         ? Literal.fromJSON(object.literalExpr)
@@ -524,11 +549,15 @@ export const Expr = {
   },
 };
 
+messageTypeRegistry.set(Expr.$type, Expr);
+
 function createBaseExpr_Ident(): Expr_Ident {
-  return { name: "" };
+  return { $type: "google.api.expr.v1beta1.Expr.Ident", name: "" };
 }
 
 export const Expr_Ident = {
+  $type: "google.api.expr.v1beta1.Expr.Ident" as const,
+
   encode(
     message: Expr_Ident,
     writer: _m0.Writer = _m0.Writer.create()
@@ -559,6 +588,7 @@ export const Expr_Ident = {
 
   fromJSON(object: any): Expr_Ident {
     return {
+      $type: Expr_Ident.$type,
       name: isSet(object.name) ? String(object.name) : "",
     };
   },
@@ -578,11 +608,20 @@ export const Expr_Ident = {
   },
 };
 
+messageTypeRegistry.set(Expr_Ident.$type, Expr_Ident);
+
 function createBaseExpr_Select(): Expr_Select {
-  return { operand: undefined, field: "", testOnly: false };
+  return {
+    $type: "google.api.expr.v1beta1.Expr.Select",
+    operand: undefined,
+    field: "",
+    testOnly: false,
+  };
 }
 
 export const Expr_Select = {
+  $type: "google.api.expr.v1beta1.Expr.Select" as const,
+
   encode(
     message: Expr_Select,
     writer: _m0.Writer = _m0.Writer.create()
@@ -625,6 +664,7 @@ export const Expr_Select = {
 
   fromJSON(object: any): Expr_Select {
     return {
+      $type: Expr_Select.$type,
       operand: isSet(object.operand)
         ? Expr.fromJSON(object.operand)
         : undefined,
@@ -658,11 +698,20 @@ export const Expr_Select = {
   },
 };
 
+messageTypeRegistry.set(Expr_Select.$type, Expr_Select);
+
 function createBaseExpr_Call(): Expr_Call {
-  return { target: undefined, function: "", args: [] };
+  return {
+    $type: "google.api.expr.v1beta1.Expr.Call",
+    target: undefined,
+    function: "",
+    args: [],
+  };
 }
 
 export const Expr_Call = {
+  $type: "google.api.expr.v1beta1.Expr.Call" as const,
+
   encode(
     message: Expr_Call,
     writer: _m0.Writer = _m0.Writer.create()
@@ -705,6 +754,7 @@ export const Expr_Call = {
 
   fromJSON(object: any): Expr_Call {
     return {
+      $type: Expr_Call.$type,
       target: isSet(object.target) ? Expr.fromJSON(object.target) : undefined,
       function: isSet(object.function) ? String(object.function) : "",
       args: Array.isArray(object?.args)
@@ -740,11 +790,15 @@ export const Expr_Call = {
   },
 };
 
+messageTypeRegistry.set(Expr_Call.$type, Expr_Call);
+
 function createBaseExpr_CreateList(): Expr_CreateList {
-  return { elements: [] };
+  return { $type: "google.api.expr.v1beta1.Expr.CreateList", elements: [] };
 }
 
 export const Expr_CreateList = {
+  $type: "google.api.expr.v1beta1.Expr.CreateList" as const,
+
   encode(
     message: Expr_CreateList,
     writer: _m0.Writer = _m0.Writer.create()
@@ -775,6 +829,7 @@ export const Expr_CreateList = {
 
   fromJSON(object: any): Expr_CreateList {
     return {
+      $type: Expr_CreateList.$type,
       elements: Array.isArray(object?.elements)
         ? object.elements.map((e: any) => Expr.fromJSON(e))
         : [],
@@ -802,11 +857,19 @@ export const Expr_CreateList = {
   },
 };
 
+messageTypeRegistry.set(Expr_CreateList.$type, Expr_CreateList);
+
 function createBaseExpr_CreateStruct(): Expr_CreateStruct {
-  return { type: "", entries: [] };
+  return {
+    $type: "google.api.expr.v1beta1.Expr.CreateStruct",
+    type: "",
+    entries: [],
+  };
 }
 
 export const Expr_CreateStruct = {
+  $type: "google.api.expr.v1beta1.Expr.CreateStruct" as const,
+
   encode(
     message: Expr_CreateStruct,
     writer: _m0.Writer = _m0.Writer.create()
@@ -845,6 +908,7 @@ export const Expr_CreateStruct = {
 
   fromJSON(object: any): Expr_CreateStruct {
     return {
+      $type: Expr_CreateStruct.$type,
       type: isSet(object.type) ? String(object.type) : "",
       entries: Array.isArray(object?.entries)
         ? object.entries.map((e: any) => Expr_CreateStruct_Entry.fromJSON(e))
@@ -876,11 +940,21 @@ export const Expr_CreateStruct = {
   },
 };
 
+messageTypeRegistry.set(Expr_CreateStruct.$type, Expr_CreateStruct);
+
 function createBaseExpr_CreateStruct_Entry(): Expr_CreateStruct_Entry {
-  return { id: 0, fieldKey: undefined, mapKey: undefined, value: undefined };
+  return {
+    $type: "google.api.expr.v1beta1.Expr.CreateStruct.Entry",
+    id: 0,
+    fieldKey: undefined,
+    mapKey: undefined,
+    value: undefined,
+  };
 }
 
 export const Expr_CreateStruct_Entry = {
+  $type: "google.api.expr.v1beta1.Expr.CreateStruct.Entry" as const,
+
   encode(
     message: Expr_CreateStruct_Entry,
     writer: _m0.Writer = _m0.Writer.create()
@@ -932,6 +1006,7 @@ export const Expr_CreateStruct_Entry = {
 
   fromJSON(object: any): Expr_CreateStruct_Entry {
     return {
+      $type: Expr_CreateStruct_Entry.$type,
       id: isSet(object.id) ? Number(object.id) : 0,
       fieldKey: isSet(object.fieldKey) ? String(object.fieldKey) : undefined,
       mapKey: isSet(object.mapKey) ? Expr.fromJSON(object.mapKey) : undefined,
@@ -968,8 +1043,11 @@ export const Expr_CreateStruct_Entry = {
   },
 };
 
+messageTypeRegistry.set(Expr_CreateStruct_Entry.$type, Expr_CreateStruct_Entry);
+
 function createBaseExpr_Comprehension(): Expr_Comprehension {
   return {
+    $type: "google.api.expr.v1beta1.Expr.Comprehension",
     iterVar: "",
     iterRange: undefined,
     accuVar: "",
@@ -981,6 +1059,8 @@ function createBaseExpr_Comprehension(): Expr_Comprehension {
 }
 
 export const Expr_Comprehension = {
+  $type: "google.api.expr.v1beta1.Expr.Comprehension" as const,
+
   encode(
     message: Expr_Comprehension,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1047,6 +1127,7 @@ export const Expr_Comprehension = {
 
   fromJSON(object: any): Expr_Comprehension {
     return {
+      $type: Expr_Comprehension.$type,
       iterVar: isSet(object.iterVar) ? String(object.iterVar) : "",
       iterRange: isSet(object.iterRange)
         ? Expr.fromJSON(object.iterRange)
@@ -1120,8 +1201,11 @@ export const Expr_Comprehension = {
   },
 };
 
+messageTypeRegistry.set(Expr_Comprehension.$type, Expr_Comprehension);
+
 function createBaseLiteral(): Literal {
   return {
+    $type: "google.api.expr.v1beta1.Literal",
     nullValue: undefined,
     boolValue: undefined,
     int64Value: undefined,
@@ -1133,6 +1217,8 @@ function createBaseLiteral(): Literal {
 }
 
 export const Literal = {
+  $type: "google.api.expr.v1beta1.Literal" as const,
+
   encode(
     message: Literal,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1199,6 +1285,7 @@ export const Literal = {
 
   fromJSON(object: any): Literal {
     return {
+      $type: Literal.$type,
       nullValue: isSet(object.nullValue)
         ? nullValueFromJSON(object.nullValue)
         : undefined,
@@ -1266,6 +1353,8 @@ export const Literal = {
   },
 };
 
+messageTypeRegistry.set(Literal.$type, Literal);
+
 declare var self: any | undefined;
 declare var window: any | undefined;
 declare var global: any | undefined;
@@ -1318,14 +1407,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

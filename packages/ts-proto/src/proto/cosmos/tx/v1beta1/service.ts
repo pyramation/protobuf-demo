@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import {
@@ -121,10 +122,11 @@ export function broadcastModeToJSON(object: BroadcastMode): string {
  * RPC method.
  */
 export interface GetTxsEventRequest {
+  $type: "cosmos.tx.v1beta1.GetTxsEventRequest";
   /** events is the list of transaction event type. */
   events: string[];
   /** pagination defines a pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
   orderBy: OrderBy;
 }
 
@@ -133,12 +135,13 @@ export interface GetTxsEventRequest {
  * RPC method.
  */
 export interface GetTxsEventResponse {
+  $type: "cosmos.tx.v1beta1.GetTxsEventResponse";
   /** txs is the list of queried transactions. */
   txs: Tx[];
   /** tx_responses is the list of queried TxResponses. */
   txResponses: TxResponse[];
   /** pagination defines a pagination for the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 
 /**
@@ -146,6 +149,7 @@ export interface GetTxsEventResponse {
  * RPC method.
  */
 export interface BroadcastTxRequest {
+  $type: "cosmos.tx.v1beta1.BroadcastTxRequest";
   /** tx_bytes is the raw transaction. */
   txBytes: Uint8Array;
   mode: BroadcastMode;
@@ -156,8 +160,9 @@ export interface BroadcastTxRequest {
  * Service.BroadcastTx method.
  */
 export interface BroadcastTxResponse {
+  $type: "cosmos.tx.v1beta1.BroadcastTxResponse";
   /** tx_response is the queried TxResponses. */
-  txResponse?: TxResponse;
+  txResponse: TxResponse;
 }
 
 /**
@@ -165,13 +170,14 @@ export interface BroadcastTxResponse {
  * RPC method.
  */
 export interface SimulateRequest {
+  $type: "cosmos.tx.v1beta1.SimulateRequest";
   /**
    * tx is the transaction to simulate.
    * Deprecated. Send raw tx bytes instead.
    *
    * @deprecated
    */
-  tx?: Tx;
+  tx: Tx;
   /**
    * tx_bytes is the raw transaction.
    *
@@ -185,10 +191,11 @@ export interface SimulateRequest {
  * Service.SimulateRPC method.
  */
 export interface SimulateResponse {
+  $type: "cosmos.tx.v1beta1.SimulateResponse";
   /** gas_info is the information about gas used in the simulation. */
-  gasInfo?: GasInfo;
+  gasInfo: GasInfo;
   /** result is the result of the simulation. */
-  result?: Result;
+  result: Result;
 }
 
 /**
@@ -196,16 +203,18 @@ export interface SimulateResponse {
  * RPC method.
  */
 export interface GetTxRequest {
+  $type: "cosmos.tx.v1beta1.GetTxRequest";
   /** hash is the tx hash to query, encoded as a hex string. */
   hash: string;
 }
 
 /** GetTxResponse is the response type for the Service.GetTx method. */
 export interface GetTxResponse {
+  $type: "cosmos.tx.v1beta1.GetTxResponse";
   /** tx is the queried transaction. */
-  tx?: Tx;
+  tx: Tx;
   /** tx_response is the queried TxResponses. */
-  txResponse?: TxResponse;
+  txResponse: TxResponse;
 }
 
 /**
@@ -215,10 +224,11 @@ export interface GetTxResponse {
  * Since: cosmos-sdk 0.45.2
  */
 export interface GetBlockWithTxsRequest {
+  $type: "cosmos.tx.v1beta1.GetBlockWithTxsRequest";
   /** height is the height of the block to query. */
   height: Long;
   /** pagination defines a pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 
 /**
@@ -227,19 +237,27 @@ export interface GetBlockWithTxsRequest {
  * Since: cosmos-sdk 0.45.2
  */
 export interface GetBlockWithTxsResponse {
+  $type: "cosmos.tx.v1beta1.GetBlockWithTxsResponse";
   /** txs are the transactions in the block. */
   txs: Tx[];
-  blockId?: BlockID;
-  block?: Block;
+  blockId: BlockID;
+  block: Block;
   /** pagination defines a pagination for the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 
 function createBaseGetTxsEventRequest(): GetTxsEventRequest {
-  return { events: [], pagination: undefined, orderBy: 0 };
+  return {
+    $type: "cosmos.tx.v1beta1.GetTxsEventRequest",
+    events: [],
+    pagination: undefined,
+    orderBy: 0,
+  };
 }
 
 export const GetTxsEventRequest = {
+  $type: "cosmos.tx.v1beta1.GetTxsEventRequest" as const,
+
   encode(
     message: GetTxsEventRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -282,6 +300,7 @@ export const GetTxsEventRequest = {
 
   fromJSON(object: any): GetTxsEventRequest {
     return {
+      $type: GetTxsEventRequest.$type,
       events: Array.isArray(object?.events)
         ? object.events.map((e: any) => String(e))
         : [],
@@ -322,11 +341,20 @@ export const GetTxsEventRequest = {
   },
 };
 
+messageTypeRegistry.set(GetTxsEventRequest.$type, GetTxsEventRequest);
+
 function createBaseGetTxsEventResponse(): GetTxsEventResponse {
-  return { txs: [], txResponses: [], pagination: undefined };
+  return {
+    $type: "cosmos.tx.v1beta1.GetTxsEventResponse",
+    txs: [],
+    txResponses: [],
+    pagination: undefined,
+  };
 }
 
 export const GetTxsEventResponse = {
+  $type: "cosmos.tx.v1beta1.GetTxsEventResponse" as const,
+
   encode(
     message: GetTxsEventResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -372,6 +400,7 @@ export const GetTxsEventResponse = {
 
   fromJSON(object: any): GetTxsEventResponse {
     return {
+      $type: GetTxsEventResponse.$type,
       txs: Array.isArray(object?.txs)
         ? object.txs.map((e: any) => Tx.fromJSON(e))
         : [],
@@ -420,11 +449,19 @@ export const GetTxsEventResponse = {
   },
 };
 
+messageTypeRegistry.set(GetTxsEventResponse.$type, GetTxsEventResponse);
+
 function createBaseBroadcastTxRequest(): BroadcastTxRequest {
-  return { txBytes: new Uint8Array(), mode: 0 };
+  return {
+    $type: "cosmos.tx.v1beta1.BroadcastTxRequest",
+    txBytes: new Uint8Array(),
+    mode: 0,
+  };
 }
 
 export const BroadcastTxRequest = {
+  $type: "cosmos.tx.v1beta1.BroadcastTxRequest" as const,
+
   encode(
     message: BroadcastTxRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -461,6 +498,7 @@ export const BroadcastTxRequest = {
 
   fromJSON(object: any): BroadcastTxRequest {
     return {
+      $type: BroadcastTxRequest.$type,
       txBytes: isSet(object.txBytes)
         ? bytesFromBase64(object.txBytes)
         : new Uint8Array(),
@@ -489,11 +527,18 @@ export const BroadcastTxRequest = {
   },
 };
 
+messageTypeRegistry.set(BroadcastTxRequest.$type, BroadcastTxRequest);
+
 function createBaseBroadcastTxResponse(): BroadcastTxResponse {
-  return { txResponse: undefined };
+  return {
+    $type: "cosmos.tx.v1beta1.BroadcastTxResponse",
+    txResponse: undefined,
+  };
 }
 
 export const BroadcastTxResponse = {
+  $type: "cosmos.tx.v1beta1.BroadcastTxResponse" as const,
+
   encode(
     message: BroadcastTxResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -524,6 +569,7 @@ export const BroadcastTxResponse = {
 
   fromJSON(object: any): BroadcastTxResponse {
     return {
+      $type: BroadcastTxResponse.$type,
       txResponse: isSet(object.txResponse)
         ? TxResponse.fromJSON(object.txResponse)
         : undefined,
@@ -551,11 +597,19 @@ export const BroadcastTxResponse = {
   },
 };
 
+messageTypeRegistry.set(BroadcastTxResponse.$type, BroadcastTxResponse);
+
 function createBaseSimulateRequest(): SimulateRequest {
-  return { tx: undefined, txBytes: new Uint8Array() };
+  return {
+    $type: "cosmos.tx.v1beta1.SimulateRequest",
+    tx: undefined,
+    txBytes: new Uint8Array(),
+  };
 }
 
 export const SimulateRequest = {
+  $type: "cosmos.tx.v1beta1.SimulateRequest" as const,
+
   encode(
     message: SimulateRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -592,6 +646,7 @@ export const SimulateRequest = {
 
   fromJSON(object: any): SimulateRequest {
     return {
+      $type: SimulateRequest.$type,
       tx: isSet(object.tx) ? Tx.fromJSON(object.tx) : undefined,
       txBytes: isSet(object.txBytes)
         ? bytesFromBase64(object.txBytes)
@@ -623,11 +678,19 @@ export const SimulateRequest = {
   },
 };
 
+messageTypeRegistry.set(SimulateRequest.$type, SimulateRequest);
+
 function createBaseSimulateResponse(): SimulateResponse {
-  return { gasInfo: undefined, result: undefined };
+  return {
+    $type: "cosmos.tx.v1beta1.SimulateResponse",
+    gasInfo: undefined,
+    result: undefined,
+  };
 }
 
 export const SimulateResponse = {
+  $type: "cosmos.tx.v1beta1.SimulateResponse" as const,
+
   encode(
     message: SimulateResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -664,6 +727,7 @@ export const SimulateResponse = {
 
   fromJSON(object: any): SimulateResponse {
     return {
+      $type: SimulateResponse.$type,
       gasInfo: isSet(object.gasInfo)
         ? GasInfo.fromJSON(object.gasInfo)
         : undefined,
@@ -698,11 +762,15 @@ export const SimulateResponse = {
   },
 };
 
+messageTypeRegistry.set(SimulateResponse.$type, SimulateResponse);
+
 function createBaseGetTxRequest(): GetTxRequest {
-  return { hash: "" };
+  return { $type: "cosmos.tx.v1beta1.GetTxRequest", hash: "" };
 }
 
 export const GetTxRequest = {
+  $type: "cosmos.tx.v1beta1.GetTxRequest" as const,
+
   encode(
     message: GetTxRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -733,6 +801,7 @@ export const GetTxRequest = {
 
   fromJSON(object: any): GetTxRequest {
     return {
+      $type: GetTxRequest.$type,
       hash: isSet(object.hash) ? String(object.hash) : "",
     };
   },
@@ -752,11 +821,19 @@ export const GetTxRequest = {
   },
 };
 
+messageTypeRegistry.set(GetTxRequest.$type, GetTxRequest);
+
 function createBaseGetTxResponse(): GetTxResponse {
-  return { tx: undefined, txResponse: undefined };
+  return {
+    $type: "cosmos.tx.v1beta1.GetTxResponse",
+    tx: undefined,
+    txResponse: undefined,
+  };
 }
 
 export const GetTxResponse = {
+  $type: "cosmos.tx.v1beta1.GetTxResponse" as const,
+
   encode(
     message: GetTxResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -793,6 +870,7 @@ export const GetTxResponse = {
 
   fromJSON(object: any): GetTxResponse {
     return {
+      $type: GetTxResponse.$type,
       tx: isSet(object.tx) ? Tx.fromJSON(object.tx) : undefined,
       txResponse: isSet(object.txResponse)
         ? TxResponse.fromJSON(object.txResponse)
@@ -827,11 +905,19 @@ export const GetTxResponse = {
   },
 };
 
+messageTypeRegistry.set(GetTxResponse.$type, GetTxResponse);
+
 function createBaseGetBlockWithTxsRequest(): GetBlockWithTxsRequest {
-  return { height: Long.ZERO, pagination: undefined };
+  return {
+    $type: "cosmos.tx.v1beta1.GetBlockWithTxsRequest",
+    height: Long.ZERO,
+    pagination: undefined,
+  };
 }
 
 export const GetBlockWithTxsRequest = {
+  $type: "cosmos.tx.v1beta1.GetBlockWithTxsRequest" as const,
+
   encode(
     message: GetBlockWithTxsRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -871,6 +957,7 @@ export const GetBlockWithTxsRequest = {
 
   fromJSON(object: any): GetBlockWithTxsRequest {
     return {
+      $type: GetBlockWithTxsRequest.$type,
       height: isSet(object.height) ? Long.fromString(object.height) : Long.ZERO,
       pagination: isSet(object.pagination)
         ? PageRequest.fromJSON(object.pagination)
@@ -905,8 +992,11 @@ export const GetBlockWithTxsRequest = {
   },
 };
 
+messageTypeRegistry.set(GetBlockWithTxsRequest.$type, GetBlockWithTxsRequest);
+
 function createBaseGetBlockWithTxsResponse(): GetBlockWithTxsResponse {
   return {
+    $type: "cosmos.tx.v1beta1.GetBlockWithTxsResponse",
     txs: [],
     blockId: undefined,
     block: undefined,
@@ -915,6 +1005,8 @@ function createBaseGetBlockWithTxsResponse(): GetBlockWithTxsResponse {
 }
 
 export const GetBlockWithTxsResponse = {
+  $type: "cosmos.tx.v1beta1.GetBlockWithTxsResponse" as const,
+
   encode(
     message: GetBlockWithTxsResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -969,6 +1061,7 @@ export const GetBlockWithTxsResponse = {
 
   fromJSON(object: any): GetBlockWithTxsResponse {
     return {
+      $type: GetBlockWithTxsResponse.$type,
       txs: Array.isArray(object?.txs)
         ? object.txs.map((e: any) => Tx.fromJSON(e))
         : [],
@@ -1022,6 +1115,8 @@ export const GetBlockWithTxsResponse = {
     return message;
   },
 };
+
+messageTypeRegistry.set(GetBlockWithTxsResponse.$type, GetBlockWithTxsResponse);
 
 /** Service defines a gRPC service for interacting with transactions. */
 export interface Service {
@@ -1174,14 +1269,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

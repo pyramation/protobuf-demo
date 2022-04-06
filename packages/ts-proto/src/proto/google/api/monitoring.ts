@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 
@@ -59,6 +60,7 @@ export const protobufPackage = "google.api";
  *         - library.googleapis.com/book/num_overdue
  */
 export interface Monitoring {
+  $type: "google.api.Monitoring";
   /**
    * Monitoring configurations for sending metrics to the producer project.
    * There can be multiple producer destinations. A monitored resource type may
@@ -84,6 +86,7 @@ export interface Monitoring {
  * or the consumer project).
  */
 export interface Monitoring_MonitoringDestination {
+  $type: "google.api.Monitoring.MonitoringDestination";
   /**
    * The monitored resource type. The type must be defined in
    * [Service.monitored_resources][google.api.Service.monitored_resources] section.
@@ -97,10 +100,16 @@ export interface Monitoring_MonitoringDestination {
 }
 
 function createBaseMonitoring(): Monitoring {
-  return { producerDestinations: [], consumerDestinations: [] };
+  return {
+    $type: "google.api.Monitoring",
+    producerDestinations: [],
+    consumerDestinations: [],
+  };
 }
 
 export const Monitoring = {
+  $type: "google.api.Monitoring" as const,
+
   encode(
     message: Monitoring,
     writer: _m0.Writer = _m0.Writer.create()
@@ -147,6 +156,7 @@ export const Monitoring = {
 
   fromJSON(object: any): Monitoring {
     return {
+      $type: Monitoring.$type,
       producerDestinations: Array.isArray(object?.producerDestinations)
         ? object.producerDestinations.map((e: any) =>
             Monitoring_MonitoringDestination.fromJSON(e)
@@ -195,11 +205,19 @@ export const Monitoring = {
   },
 };
 
+messageTypeRegistry.set(Monitoring.$type, Monitoring);
+
 function createBaseMonitoring_MonitoringDestination(): Monitoring_MonitoringDestination {
-  return { monitoredResource: "", metrics: [] };
+  return {
+    $type: "google.api.Monitoring.MonitoringDestination",
+    monitoredResource: "",
+    metrics: [],
+  };
 }
 
 export const Monitoring_MonitoringDestination = {
+  $type: "google.api.Monitoring.MonitoringDestination" as const,
+
   encode(
     message: Monitoring_MonitoringDestination,
     writer: _m0.Writer = _m0.Writer.create()
@@ -239,6 +257,7 @@ export const Monitoring_MonitoringDestination = {
 
   fromJSON(object: any): Monitoring_MonitoringDestination {
     return {
+      $type: Monitoring_MonitoringDestination.$type,
       monitoredResource: isSet(object.monitoredResource)
         ? String(object.monitoredResource)
         : "",
@@ -270,6 +289,11 @@ export const Monitoring_MonitoringDestination = {
   },
 };
 
+messageTypeRegistry.set(
+  Monitoring_MonitoringDestination.$type,
+  Monitoring_MonitoringDestination
+);
+
 type Builtin =
   | Date
   | Function
@@ -288,14 +312,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

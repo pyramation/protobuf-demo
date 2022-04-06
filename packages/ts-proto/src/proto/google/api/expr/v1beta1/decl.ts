@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Expr } from "../../../../google/api/expr/v1beta1/expr";
@@ -7,6 +8,7 @@ export const protobufPackage = "google.api.expr.v1beta1";
 
 /** A declaration. */
 export interface Decl {
+  $type: "google.api.expr.v1beta1.Decl";
   /** The id of the declaration. */
   id: number;
   /** The name of the declaration. */
@@ -14,9 +16,9 @@ export interface Decl {
   /** The documentation string for the declaration. */
   doc: string;
   /** An identifier declaration. */
-  ident?: IdentDecl | undefined;
+  ident: IdentDecl | undefined;
   /** A function declaration. */
-  function?: FunctionDecl | undefined;
+  function: FunctionDecl | undefined;
 }
 
 /**
@@ -26,6 +28,7 @@ export interface Decl {
  * and dispatching.
  */
 export interface DeclType {
+  $type: "google.api.expr.v1beta1.DeclType";
   /** The expression id of the declared type, if applicable. */
   id: number;
   /** The type name, e.g. 'int', 'my.type.Type' or 'T' */
@@ -39,27 +42,38 @@ export interface DeclType {
 
 /** An identifier declaration. */
 export interface IdentDecl {
+  $type: "google.api.expr.v1beta1.IdentDecl";
   /** Optional type of the identifier. */
-  type?: DeclType;
+  type: DeclType;
   /** Optional value of the identifier. */
-  value?: Expr;
+  value: Expr;
 }
 
 /** A function declaration. */
 export interface FunctionDecl {
+  $type: "google.api.expr.v1beta1.FunctionDecl";
   /** The function arguments. */
   args: IdentDecl[];
   /** Optional declared return type. */
-  returnType?: DeclType;
+  returnType: DeclType;
   /** If the first argument of the function is the receiver. */
   receiverFunction: boolean;
 }
 
 function createBaseDecl(): Decl {
-  return { id: 0, name: "", doc: "", ident: undefined, function: undefined };
+  return {
+    $type: "google.api.expr.v1beta1.Decl",
+    id: 0,
+    name: "",
+    doc: "",
+    ident: undefined,
+    function: undefined,
+  };
 }
 
 export const Decl = {
+  $type: "google.api.expr.v1beta1.Decl" as const,
+
   encode(message: Decl, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== 0) {
       writer.uint32(8).int32(message.id);
@@ -111,6 +125,7 @@ export const Decl = {
 
   fromJSON(object: any): Decl {
     return {
+      $type: Decl.$type,
       id: isSet(object.id) ? Number(object.id) : 0,
       name: isSet(object.name) ? String(object.name) : "",
       doc: isSet(object.doc) ? String(object.doc) : "",
@@ -152,11 +167,20 @@ export const Decl = {
   },
 };
 
+messageTypeRegistry.set(Decl.$type, Decl);
+
 function createBaseDeclType(): DeclType {
-  return { id: 0, type: "", typeParams: [] };
+  return {
+    $type: "google.api.expr.v1beta1.DeclType",
+    id: 0,
+    type: "",
+    typeParams: [],
+  };
 }
 
 export const DeclType = {
+  $type: "google.api.expr.v1beta1.DeclType" as const,
+
   encode(
     message: DeclType,
     writer: _m0.Writer = _m0.Writer.create()
@@ -199,6 +223,7 @@ export const DeclType = {
 
   fromJSON(object: any): DeclType {
     return {
+      $type: DeclType.$type,
       id: isSet(object.id) ? Number(object.id) : 0,
       type: isSet(object.type) ? String(object.type) : "",
       typeParams: Array.isArray(object?.typeParams)
@@ -231,11 +256,19 @@ export const DeclType = {
   },
 };
 
+messageTypeRegistry.set(DeclType.$type, DeclType);
+
 function createBaseIdentDecl(): IdentDecl {
-  return { type: undefined, value: undefined };
+  return {
+    $type: "google.api.expr.v1beta1.IdentDecl",
+    type: undefined,
+    value: undefined,
+  };
 }
 
 export const IdentDecl = {
+  $type: "google.api.expr.v1beta1.IdentDecl" as const,
+
   encode(
     message: IdentDecl,
     writer: _m0.Writer = _m0.Writer.create()
@@ -272,6 +305,7 @@ export const IdentDecl = {
 
   fromJSON(object: any): IdentDecl {
     return {
+      $type: IdentDecl.$type,
       type: isSet(object.type) ? DeclType.fromJSON(object.type) : undefined,
       value: isSet(object.value) ? Expr.fromJSON(object.value) : undefined,
     };
@@ -302,11 +336,20 @@ export const IdentDecl = {
   },
 };
 
+messageTypeRegistry.set(IdentDecl.$type, IdentDecl);
+
 function createBaseFunctionDecl(): FunctionDecl {
-  return { args: [], returnType: undefined, receiverFunction: false };
+  return {
+    $type: "google.api.expr.v1beta1.FunctionDecl",
+    args: [],
+    returnType: undefined,
+    receiverFunction: false,
+  };
 }
 
 export const FunctionDecl = {
+  $type: "google.api.expr.v1beta1.FunctionDecl" as const,
+
   encode(
     message: FunctionDecl,
     writer: _m0.Writer = _m0.Writer.create()
@@ -349,6 +392,7 @@ export const FunctionDecl = {
 
   fromJSON(object: any): FunctionDecl {
     return {
+      $type: FunctionDecl.$type,
       args: Array.isArray(object?.args)
         ? object.args.map((e: any) => IdentDecl.fromJSON(e))
         : [],
@@ -391,6 +435,8 @@ export const FunctionDecl = {
   },
 };
 
+messageTypeRegistry.set(FunctionDecl.$type, FunctionDecl);
+
 type Builtin =
   | Date
   | Function
@@ -409,14 +455,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

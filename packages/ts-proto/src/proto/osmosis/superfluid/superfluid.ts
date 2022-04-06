@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
@@ -40,6 +41,7 @@ export function superfluidAssetTypeToJSON(object: SuperfluidAssetType): string {
 
 /** SuperfluidAsset stores the pair of superfluid asset type and denom pair */
 export interface SuperfluidAsset {
+  $type: "osmosis.superfluid.SuperfluidAsset";
   denom: string;
   assetType: SuperfluidAssetType;
 }
@@ -49,6 +51,7 @@ export interface SuperfluidAsset {
  * and OSMO tokens for superfluid staking
  */
 export interface SuperfluidIntermediaryAccount {
+  $type: "osmosis.superfluid.SuperfluidIntermediaryAccount";
   denom: string;
   valAddr: string;
   /** perpetual gauge for rewards distribution */
@@ -65,6 +68,7 @@ export interface SuperfluidIntermediaryAccount {
  * change.
  */
 export interface OsmoEquivalentMultiplierRecord {
+  $type: "osmosis.superfluid.OsmoEquivalentMultiplierRecord";
   epochNumber: Long;
   /** superfluid asset denom, can be LP token or native token */
   denom: string;
@@ -76,21 +80,29 @@ export interface OsmoEquivalentMultiplierRecord {
  * and OSMO tokens for superfluid staking
  */
 export interface SuperfluidDelegationRecord {
+  $type: "osmosis.superfluid.SuperfluidDelegationRecord";
   delegatorAddress: string;
   validatorAddress: string;
-  delegationAmount?: Coin;
+  delegationAmount: Coin;
 }
 
 export interface LockIdIntermediaryAccountConnection {
+  $type: "osmosis.superfluid.LockIdIntermediaryAccountConnection";
   lockId: Long;
   intermediaryAccount: string;
 }
 
 function createBaseSuperfluidAsset(): SuperfluidAsset {
-  return { denom: "", assetType: 0 };
+  return {
+    $type: "osmosis.superfluid.SuperfluidAsset",
+    denom: "",
+    assetType: 0,
+  };
 }
 
 export const SuperfluidAsset = {
+  $type: "osmosis.superfluid.SuperfluidAsset" as const,
+
   encode(
     message: SuperfluidAsset,
     writer: _m0.Writer = _m0.Writer.create()
@@ -127,6 +139,7 @@ export const SuperfluidAsset = {
 
   fromJSON(object: any): SuperfluidAsset {
     return {
+      $type: SuperfluidAsset.$type,
       denom: isSet(object.denom) ? String(object.denom) : "",
       assetType: isSet(object.assetType)
         ? superfluidAssetTypeFromJSON(object.assetType)
@@ -152,11 +165,20 @@ export const SuperfluidAsset = {
   },
 };
 
+messageTypeRegistry.set(SuperfluidAsset.$type, SuperfluidAsset);
+
 function createBaseSuperfluidIntermediaryAccount(): SuperfluidIntermediaryAccount {
-  return { denom: "", valAddr: "", gaugeId: Long.UZERO };
+  return {
+    $type: "osmosis.superfluid.SuperfluidIntermediaryAccount",
+    denom: "",
+    valAddr: "",
+    gaugeId: Long.UZERO,
+  };
 }
 
 export const SuperfluidIntermediaryAccount = {
+  $type: "osmosis.superfluid.SuperfluidIntermediaryAccount" as const,
+
   encode(
     message: SuperfluidIntermediaryAccount,
     writer: _m0.Writer = _m0.Writer.create()
@@ -202,6 +224,7 @@ export const SuperfluidIntermediaryAccount = {
 
   fromJSON(object: any): SuperfluidIntermediaryAccount {
     return {
+      $type: SuperfluidIntermediaryAccount.$type,
       denom: isSet(object.denom) ? String(object.denom) : "",
       valAddr: isSet(object.valAddr) ? String(object.valAddr) : "",
       gaugeId: isSet(object.gaugeId)
@@ -233,11 +256,23 @@ export const SuperfluidIntermediaryAccount = {
   },
 };
 
+messageTypeRegistry.set(
+  SuperfluidIntermediaryAccount.$type,
+  SuperfluidIntermediaryAccount
+);
+
 function createBaseOsmoEquivalentMultiplierRecord(): OsmoEquivalentMultiplierRecord {
-  return { epochNumber: Long.ZERO, denom: "", multiplier: "" };
+  return {
+    $type: "osmosis.superfluid.OsmoEquivalentMultiplierRecord",
+    epochNumber: Long.ZERO,
+    denom: "",
+    multiplier: "",
+  };
 }
 
 export const OsmoEquivalentMultiplierRecord = {
+  $type: "osmosis.superfluid.OsmoEquivalentMultiplierRecord" as const,
+
   encode(
     message: OsmoEquivalentMultiplierRecord,
     writer: _m0.Writer = _m0.Writer.create()
@@ -283,6 +318,7 @@ export const OsmoEquivalentMultiplierRecord = {
 
   fromJSON(object: any): OsmoEquivalentMultiplierRecord {
     return {
+      $type: OsmoEquivalentMultiplierRecord.$type,
       epochNumber: isSet(object.epochNumber)
         ? Long.fromString(object.epochNumber)
         : Long.ZERO,
@@ -314,8 +350,14 @@ export const OsmoEquivalentMultiplierRecord = {
   },
 };
 
+messageTypeRegistry.set(
+  OsmoEquivalentMultiplierRecord.$type,
+  OsmoEquivalentMultiplierRecord
+);
+
 function createBaseSuperfluidDelegationRecord(): SuperfluidDelegationRecord {
   return {
+    $type: "osmosis.superfluid.SuperfluidDelegationRecord",
     delegatorAddress: "",
     validatorAddress: "",
     delegationAmount: undefined,
@@ -323,6 +365,8 @@ function createBaseSuperfluidDelegationRecord(): SuperfluidDelegationRecord {
 }
 
 export const SuperfluidDelegationRecord = {
+  $type: "osmosis.superfluid.SuperfluidDelegationRecord" as const,
+
   encode(
     message: SuperfluidDelegationRecord,
     writer: _m0.Writer = _m0.Writer.create()
@@ -368,6 +412,7 @@ export const SuperfluidDelegationRecord = {
 
   fromJSON(object: any): SuperfluidDelegationRecord {
     return {
+      $type: SuperfluidDelegationRecord.$type,
       delegatorAddress: isSet(object.delegatorAddress)
         ? String(object.delegatorAddress)
         : "",
@@ -407,11 +452,22 @@ export const SuperfluidDelegationRecord = {
   },
 };
 
+messageTypeRegistry.set(
+  SuperfluidDelegationRecord.$type,
+  SuperfluidDelegationRecord
+);
+
 function createBaseLockIdIntermediaryAccountConnection(): LockIdIntermediaryAccountConnection {
-  return { lockId: Long.UZERO, intermediaryAccount: "" };
+  return {
+    $type: "osmosis.superfluid.LockIdIntermediaryAccountConnection",
+    lockId: Long.UZERO,
+    intermediaryAccount: "",
+  };
 }
 
 export const LockIdIntermediaryAccountConnection = {
+  $type: "osmosis.superfluid.LockIdIntermediaryAccountConnection" as const,
+
   encode(
     message: LockIdIntermediaryAccountConnection,
     writer: _m0.Writer = _m0.Writer.create()
@@ -451,6 +507,7 @@ export const LockIdIntermediaryAccountConnection = {
 
   fromJSON(object: any): LockIdIntermediaryAccountConnection {
     return {
+      $type: LockIdIntermediaryAccountConnection.$type,
       lockId: isSet(object.lockId)
         ? Long.fromString(object.lockId)
         : Long.UZERO,
@@ -482,6 +539,11 @@ export const LockIdIntermediaryAccountConnection = {
   },
 };
 
+messageTypeRegistry.set(
+  LockIdIntermediaryAccountConnection.$type,
+  LockIdIntermediaryAccountConnection
+);
+
 type Builtin =
   | Date
   | Function
@@ -500,14 +562,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

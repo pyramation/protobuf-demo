@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 
@@ -9,6 +10,7 @@ export const protobufPackage = "google.protobuf";
  * protobuf element, like the file in which it is defined.
  */
 export interface SourceContext {
+  $type: "google.protobuf.SourceContext";
   /**
    * The path-qualified name of the .proto file that contained the associated
    * protobuf element.  For example: `"google/protobuf/source_context.proto"`.
@@ -17,10 +19,12 @@ export interface SourceContext {
 }
 
 function createBaseSourceContext(): SourceContext {
-  return { fileName: "" };
+  return { $type: "google.protobuf.SourceContext", fileName: "" };
 }
 
 export const SourceContext = {
+  $type: "google.protobuf.SourceContext" as const,
+
   encode(
     message: SourceContext,
     writer: _m0.Writer = _m0.Writer.create()
@@ -51,6 +55,7 @@ export const SourceContext = {
 
   fromJSON(object: any): SourceContext {
     return {
+      $type: SourceContext.$type,
       fileName: isSet(object.fileName) ? String(object.fileName) : "",
     };
   },
@@ -70,6 +75,8 @@ export const SourceContext = {
   },
 };
 
+messageTypeRegistry.set(SourceContext.$type, SourceContext);
+
 type Builtin =
   | Date
   | Function
@@ -88,14 +95,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

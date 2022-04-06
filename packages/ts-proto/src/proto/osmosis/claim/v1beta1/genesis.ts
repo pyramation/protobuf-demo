@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
@@ -9,16 +10,18 @@ export const protobufPackage = "osmosis.claim.v1beta1";
 
 /** GenesisState defines the claim module's genesis state. */
 export interface GenesisState {
+  $type: "osmosis.claim.v1beta1.GenesisState";
   /** balance of the claim module's account */
-  moduleAccountBalance?: Coin;
+  moduleAccountBalance: Coin;
   /** params defines all the parameters of the module. */
-  params?: Params;
+  params: Params;
   /** list of claim records, one for every airdrop recipient */
   claimRecords: ClaimRecord[];
 }
 
 function createBaseGenesisState(): GenesisState {
   return {
+    $type: "osmosis.claim.v1beta1.GenesisState",
     moduleAccountBalance: undefined,
     params: undefined,
     claimRecords: [],
@@ -26,6 +29,8 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
+  $type: "osmosis.claim.v1beta1.GenesisState" as const,
+
   encode(
     message: GenesisState,
     writer: _m0.Writer = _m0.Writer.create()
@@ -73,6 +78,7 @@ export const GenesisState = {
 
   fromJSON(object: any): GenesisState {
     return {
+      $type: GenesisState.$type,
       moduleAccountBalance: isSet(object.moduleAccountBalance)
         ? Coin.fromJSON(object.moduleAccountBalance)
         : undefined,
@@ -120,6 +126,8 @@ export const GenesisState = {
   },
 };
 
+messageTypeRegistry.set(GenesisState.$type, GenesisState);
+
 type Builtin =
   | Date
   | Function
@@ -138,14 +146,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

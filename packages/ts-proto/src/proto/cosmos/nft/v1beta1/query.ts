@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import {
@@ -11,87 +12,107 @@ export const protobufPackage = "cosmos.nft.v1beta1";
 
 /** QueryBalanceRequest is the request type for the Query/Balance RPC method */
 export interface QueryBalanceRequest {
+  $type: "cosmos.nft.v1beta1.QueryBalanceRequest";
   classId: string;
   owner: string;
 }
 
 /** QueryBalanceResponse is the response type for the Query/Balance RPC method */
 export interface QueryBalanceResponse {
+  $type: "cosmos.nft.v1beta1.QueryBalanceResponse";
   amount: Long;
 }
 
 /** QueryOwnerRequest is the request type for the Query/Owner RPC method */
 export interface QueryOwnerRequest {
+  $type: "cosmos.nft.v1beta1.QueryOwnerRequest";
   classId: string;
   id: string;
 }
 
 /** QueryOwnerResponse is the response type for the Query/Owner RPC method */
 export interface QueryOwnerResponse {
+  $type: "cosmos.nft.v1beta1.QueryOwnerResponse";
   owner: string;
 }
 
 /** QuerySupplyRequest is the request type for the Query/Supply RPC method */
 export interface QuerySupplyRequest {
+  $type: "cosmos.nft.v1beta1.QuerySupplyRequest";
   classId: string;
 }
 
 /** QuerySupplyResponse is the response type for the Query/Supply RPC method */
 export interface QuerySupplyResponse {
+  $type: "cosmos.nft.v1beta1.QuerySupplyResponse";
   amount: Long;
 }
 
 /** QueryNFTstRequest is the request type for the Query/NFTs RPC method */
 export interface QueryNFTsRequest {
+  $type: "cosmos.nft.v1beta1.QueryNFTsRequest";
   classId: string;
   owner: string;
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 
 /** QueryNFTsResponse is the response type for the Query/NFTs RPC methods */
 export interface QueryNFTsResponse {
+  $type: "cosmos.nft.v1beta1.QueryNFTsResponse";
   nfts: NFT[];
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 
 /** QueryNFTRequest is the request type for the Query/NFT RPC method */
 export interface QueryNFTRequest {
+  $type: "cosmos.nft.v1beta1.QueryNFTRequest";
   classId: string;
   id: string;
 }
 
 /** QueryNFTResponse is the response type for the Query/NFT RPC method */
 export interface QueryNFTResponse {
-  nft?: NFT;
+  $type: "cosmos.nft.v1beta1.QueryNFTResponse";
+  nft: NFT;
 }
 
 /** QueryClassRequest is the request type for the Query/Class RPC method */
 export interface QueryClassRequest {
+  $type: "cosmos.nft.v1beta1.QueryClassRequest";
   classId: string;
 }
 
 /** QueryClassResponse is the response type for the Query/Class RPC method */
 export interface QueryClassResponse {
-  class?: Class;
+  $type: "cosmos.nft.v1beta1.QueryClassResponse";
+  class: Class;
 }
 
 /** QueryClassesRequest is the request type for the Query/Classes RPC method */
 export interface QueryClassesRequest {
+  $type: "cosmos.nft.v1beta1.QueryClassesRequest";
   /** pagination defines an optional pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 
 /** QueryClassesResponse is the response type for the Query/Classes RPC method */
 export interface QueryClassesResponse {
+  $type: "cosmos.nft.v1beta1.QueryClassesResponse";
   classes: Class[];
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 
 function createBaseQueryBalanceRequest(): QueryBalanceRequest {
-  return { classId: "", owner: "" };
+  return {
+    $type: "cosmos.nft.v1beta1.QueryBalanceRequest",
+    classId: "",
+    owner: "",
+  };
 }
 
 export const QueryBalanceRequest = {
+  $type: "cosmos.nft.v1beta1.QueryBalanceRequest" as const,
+
   encode(
     message: QueryBalanceRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -128,6 +149,7 @@ export const QueryBalanceRequest = {
 
   fromJSON(object: any): QueryBalanceRequest {
     return {
+      $type: QueryBalanceRequest.$type,
       classId: isSet(object.classId) ? String(object.classId) : "",
       owner: isSet(object.owner) ? String(object.owner) : "",
     };
@@ -150,11 +172,18 @@ export const QueryBalanceRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryBalanceRequest.$type, QueryBalanceRequest);
+
 function createBaseQueryBalanceResponse(): QueryBalanceResponse {
-  return { amount: Long.UZERO };
+  return {
+    $type: "cosmos.nft.v1beta1.QueryBalanceResponse",
+    amount: Long.UZERO,
+  };
 }
 
 export const QueryBalanceResponse = {
+  $type: "cosmos.nft.v1beta1.QueryBalanceResponse" as const,
+
   encode(
     message: QueryBalanceResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -188,6 +217,7 @@ export const QueryBalanceResponse = {
 
   fromJSON(object: any): QueryBalanceResponse {
     return {
+      $type: QueryBalanceResponse.$type,
       amount: isSet(object.amount)
         ? Long.fromString(object.amount)
         : Long.UZERO,
@@ -213,11 +243,15 @@ export const QueryBalanceResponse = {
   },
 };
 
+messageTypeRegistry.set(QueryBalanceResponse.$type, QueryBalanceResponse);
+
 function createBaseQueryOwnerRequest(): QueryOwnerRequest {
-  return { classId: "", id: "" };
+  return { $type: "cosmos.nft.v1beta1.QueryOwnerRequest", classId: "", id: "" };
 }
 
 export const QueryOwnerRequest = {
+  $type: "cosmos.nft.v1beta1.QueryOwnerRequest" as const,
+
   encode(
     message: QueryOwnerRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -254,6 +288,7 @@ export const QueryOwnerRequest = {
 
   fromJSON(object: any): QueryOwnerRequest {
     return {
+      $type: QueryOwnerRequest.$type,
       classId: isSet(object.classId) ? String(object.classId) : "",
       id: isSet(object.id) ? String(object.id) : "",
     };
@@ -276,11 +311,15 @@ export const QueryOwnerRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryOwnerRequest.$type, QueryOwnerRequest);
+
 function createBaseQueryOwnerResponse(): QueryOwnerResponse {
-  return { owner: "" };
+  return { $type: "cosmos.nft.v1beta1.QueryOwnerResponse", owner: "" };
 }
 
 export const QueryOwnerResponse = {
+  $type: "cosmos.nft.v1beta1.QueryOwnerResponse" as const,
+
   encode(
     message: QueryOwnerResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -311,6 +350,7 @@ export const QueryOwnerResponse = {
 
   fromJSON(object: any): QueryOwnerResponse {
     return {
+      $type: QueryOwnerResponse.$type,
       owner: isSet(object.owner) ? String(object.owner) : "",
     };
   },
@@ -330,11 +370,15 @@ export const QueryOwnerResponse = {
   },
 };
 
+messageTypeRegistry.set(QueryOwnerResponse.$type, QueryOwnerResponse);
+
 function createBaseQuerySupplyRequest(): QuerySupplyRequest {
-  return { classId: "" };
+  return { $type: "cosmos.nft.v1beta1.QuerySupplyRequest", classId: "" };
 }
 
 export const QuerySupplyRequest = {
+  $type: "cosmos.nft.v1beta1.QuerySupplyRequest" as const,
+
   encode(
     message: QuerySupplyRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -365,6 +409,7 @@ export const QuerySupplyRequest = {
 
   fromJSON(object: any): QuerySupplyRequest {
     return {
+      $type: QuerySupplyRequest.$type,
       classId: isSet(object.classId) ? String(object.classId) : "",
     };
   },
@@ -384,11 +429,18 @@ export const QuerySupplyRequest = {
   },
 };
 
+messageTypeRegistry.set(QuerySupplyRequest.$type, QuerySupplyRequest);
+
 function createBaseQuerySupplyResponse(): QuerySupplyResponse {
-  return { amount: Long.UZERO };
+  return {
+    $type: "cosmos.nft.v1beta1.QuerySupplyResponse",
+    amount: Long.UZERO,
+  };
 }
 
 export const QuerySupplyResponse = {
+  $type: "cosmos.nft.v1beta1.QuerySupplyResponse" as const,
+
   encode(
     message: QuerySupplyResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -419,6 +471,7 @@ export const QuerySupplyResponse = {
 
   fromJSON(object: any): QuerySupplyResponse {
     return {
+      $type: QuerySupplyResponse.$type,
       amount: isSet(object.amount)
         ? Long.fromString(object.amount)
         : Long.UZERO,
@@ -444,11 +497,20 @@ export const QuerySupplyResponse = {
   },
 };
 
+messageTypeRegistry.set(QuerySupplyResponse.$type, QuerySupplyResponse);
+
 function createBaseQueryNFTsRequest(): QueryNFTsRequest {
-  return { classId: "", owner: "", pagination: undefined };
+  return {
+    $type: "cosmos.nft.v1beta1.QueryNFTsRequest",
+    classId: "",
+    owner: "",
+    pagination: undefined,
+  };
 }
 
 export const QueryNFTsRequest = {
+  $type: "cosmos.nft.v1beta1.QueryNFTsRequest" as const,
+
   encode(
     message: QueryNFTsRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -491,6 +553,7 @@ export const QueryNFTsRequest = {
 
   fromJSON(object: any): QueryNFTsRequest {
     return {
+      $type: QueryNFTsRequest.$type,
       classId: isSet(object.classId) ? String(object.classId) : "",
       owner: isSet(object.owner) ? String(object.owner) : "",
       pagination: isSet(object.pagination)
@@ -524,11 +587,19 @@ export const QueryNFTsRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryNFTsRequest.$type, QueryNFTsRequest);
+
 function createBaseQueryNFTsResponse(): QueryNFTsResponse {
-  return { nfts: [], pagination: undefined };
+  return {
+    $type: "cosmos.nft.v1beta1.QueryNFTsResponse",
+    nfts: [],
+    pagination: undefined,
+  };
 }
 
 export const QueryNFTsResponse = {
+  $type: "cosmos.nft.v1beta1.QueryNFTsResponse" as const,
+
   encode(
     message: QueryNFTsResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -568,6 +639,7 @@ export const QueryNFTsResponse = {
 
   fromJSON(object: any): QueryNFTsResponse {
     return {
+      $type: QueryNFTsResponse.$type,
       nfts: Array.isArray(object?.nfts)
         ? object.nfts.map((e: any) => NFT.fromJSON(e))
         : [],
@@ -604,11 +676,15 @@ export const QueryNFTsResponse = {
   },
 };
 
+messageTypeRegistry.set(QueryNFTsResponse.$type, QueryNFTsResponse);
+
 function createBaseQueryNFTRequest(): QueryNFTRequest {
-  return { classId: "", id: "" };
+  return { $type: "cosmos.nft.v1beta1.QueryNFTRequest", classId: "", id: "" };
 }
 
 export const QueryNFTRequest = {
+  $type: "cosmos.nft.v1beta1.QueryNFTRequest" as const,
+
   encode(
     message: QueryNFTRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -645,6 +721,7 @@ export const QueryNFTRequest = {
 
   fromJSON(object: any): QueryNFTRequest {
     return {
+      $type: QueryNFTRequest.$type,
       classId: isSet(object.classId) ? String(object.classId) : "",
       id: isSet(object.id) ? String(object.id) : "",
     };
@@ -667,11 +744,15 @@ export const QueryNFTRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryNFTRequest.$type, QueryNFTRequest);
+
 function createBaseQueryNFTResponse(): QueryNFTResponse {
-  return { nft: undefined };
+  return { $type: "cosmos.nft.v1beta1.QueryNFTResponse", nft: undefined };
 }
 
 export const QueryNFTResponse = {
+  $type: "cosmos.nft.v1beta1.QueryNFTResponse" as const,
+
   encode(
     message: QueryNFTResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -702,6 +783,7 @@ export const QueryNFTResponse = {
 
   fromJSON(object: any): QueryNFTResponse {
     return {
+      $type: QueryNFTResponse.$type,
       nft: isSet(object.nft) ? NFT.fromJSON(object.nft) : undefined,
     };
   },
@@ -725,11 +807,15 @@ export const QueryNFTResponse = {
   },
 };
 
+messageTypeRegistry.set(QueryNFTResponse.$type, QueryNFTResponse);
+
 function createBaseQueryClassRequest(): QueryClassRequest {
-  return { classId: "" };
+  return { $type: "cosmos.nft.v1beta1.QueryClassRequest", classId: "" };
 }
 
 export const QueryClassRequest = {
+  $type: "cosmos.nft.v1beta1.QueryClassRequest" as const,
+
   encode(
     message: QueryClassRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -760,6 +846,7 @@ export const QueryClassRequest = {
 
   fromJSON(object: any): QueryClassRequest {
     return {
+      $type: QueryClassRequest.$type,
       classId: isSet(object.classId) ? String(object.classId) : "",
     };
   },
@@ -779,11 +866,15 @@ export const QueryClassRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryClassRequest.$type, QueryClassRequest);
+
 function createBaseQueryClassResponse(): QueryClassResponse {
-  return { class: undefined };
+  return { $type: "cosmos.nft.v1beta1.QueryClassResponse", class: undefined };
 }
 
 export const QueryClassResponse = {
+  $type: "cosmos.nft.v1beta1.QueryClassResponse" as const,
+
   encode(
     message: QueryClassResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -814,6 +905,7 @@ export const QueryClassResponse = {
 
   fromJSON(object: any): QueryClassResponse {
     return {
+      $type: QueryClassResponse.$type,
       class: isSet(object.class) ? Class.fromJSON(object.class) : undefined,
     };
   },
@@ -837,11 +929,18 @@ export const QueryClassResponse = {
   },
 };
 
+messageTypeRegistry.set(QueryClassResponse.$type, QueryClassResponse);
+
 function createBaseQueryClassesRequest(): QueryClassesRequest {
-  return { pagination: undefined };
+  return {
+    $type: "cosmos.nft.v1beta1.QueryClassesRequest",
+    pagination: undefined,
+  };
 }
 
 export const QueryClassesRequest = {
+  $type: "cosmos.nft.v1beta1.QueryClassesRequest" as const,
+
   encode(
     message: QueryClassesRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -872,6 +971,7 @@ export const QueryClassesRequest = {
 
   fromJSON(object: any): QueryClassesRequest {
     return {
+      $type: QueryClassesRequest.$type,
       pagination: isSet(object.pagination)
         ? PageRequest.fromJSON(object.pagination)
         : undefined,
@@ -899,11 +999,19 @@ export const QueryClassesRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryClassesRequest.$type, QueryClassesRequest);
+
 function createBaseQueryClassesResponse(): QueryClassesResponse {
-  return { classes: [], pagination: undefined };
+  return {
+    $type: "cosmos.nft.v1beta1.QueryClassesResponse",
+    classes: [],
+    pagination: undefined,
+  };
 }
 
 export const QueryClassesResponse = {
+  $type: "cosmos.nft.v1beta1.QueryClassesResponse" as const,
+
   encode(
     message: QueryClassesResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -946,6 +1054,7 @@ export const QueryClassesResponse = {
 
   fromJSON(object: any): QueryClassesResponse {
     return {
+      $type: QueryClassesResponse.$type,
       classes: Array.isArray(object?.classes)
         ? object.classes.map((e: any) => Class.fromJSON(e))
         : [],
@@ -983,6 +1092,8 @@ export const QueryClassesResponse = {
     return message;
   },
 };
+
+messageTypeRegistry.set(QueryClassesResponse.$type, QueryClassesResponse);
 
 /** Query defines the gRPC querier service. */
 export interface Query {
@@ -1112,14 +1223,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

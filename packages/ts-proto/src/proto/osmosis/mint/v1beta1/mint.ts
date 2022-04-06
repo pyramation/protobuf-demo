@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 
@@ -6,16 +7,19 @@ export const protobufPackage = "osmosis.mint.v1beta1";
 
 /** Minter represents the minting state. */
 export interface Minter {
+  $type: "osmosis.mint.v1beta1.Minter";
   /** current epoch provisions */
   epochProvisions: string;
 }
 
 export interface WeightedAddress {
+  $type: "osmosis.mint.v1beta1.WeightedAddress";
   address: string;
   weight: string;
 }
 
 export interface DistributionProportions {
+  $type: "osmosis.mint.v1beta1.DistributionProportions";
   /**
    * staking defines the proportion of the minted minted_denom that is to be
    * allocated as staking rewards.
@@ -40,6 +44,7 @@ export interface DistributionProportions {
 
 /** Params holds parameters for the mint module. */
 export interface Params {
+  $type: "osmosis.mint.v1beta1.Params";
   /** type of coin to mint */
   mintDenom: string;
   /** epoch provisions from the first epoch */
@@ -51,7 +56,7 @@ export interface Params {
   /** reduction multiplier to execute on each period */
   reductionFactor: string;
   /** distribution_proportions defines the proportion of the minted denom */
-  distributionProportions?: DistributionProportions;
+  distributionProportions: DistributionProportions;
   /** address to receive developer rewards */
   weightedDeveloperRewardsReceivers: WeightedAddress[];
   /** start epoch to distribute minting rewards */
@@ -59,10 +64,12 @@ export interface Params {
 }
 
 function createBaseMinter(): Minter {
-  return { epochProvisions: "" };
+  return { $type: "osmosis.mint.v1beta1.Minter", epochProvisions: "" };
 }
 
 export const Minter = {
+  $type: "osmosis.mint.v1beta1.Minter" as const,
+
   encode(
     message: Minter,
     writer: _m0.Writer = _m0.Writer.create()
@@ -93,6 +100,7 @@ export const Minter = {
 
   fromJSON(object: any): Minter {
     return {
+      $type: Minter.$type,
       epochProvisions: isSet(object.epochProvisions)
         ? String(object.epochProvisions)
         : "",
@@ -113,11 +121,19 @@ export const Minter = {
   },
 };
 
+messageTypeRegistry.set(Minter.$type, Minter);
+
 function createBaseWeightedAddress(): WeightedAddress {
-  return { address: "", weight: "" };
+  return {
+    $type: "osmosis.mint.v1beta1.WeightedAddress",
+    address: "",
+    weight: "",
+  };
 }
 
 export const WeightedAddress = {
+  $type: "osmosis.mint.v1beta1.WeightedAddress" as const,
+
   encode(
     message: WeightedAddress,
     writer: _m0.Writer = _m0.Writer.create()
@@ -154,6 +170,7 @@ export const WeightedAddress = {
 
   fromJSON(object: any): WeightedAddress {
     return {
+      $type: WeightedAddress.$type,
       address: isSet(object.address) ? String(object.address) : "",
       weight: isSet(object.weight) ? String(object.weight) : "",
     };
@@ -176,8 +193,11 @@ export const WeightedAddress = {
   },
 };
 
+messageTypeRegistry.set(WeightedAddress.$type, WeightedAddress);
+
 function createBaseDistributionProportions(): DistributionProportions {
   return {
+    $type: "osmosis.mint.v1beta1.DistributionProportions",
     staking: "",
     poolIncentives: "",
     developerRewards: "",
@@ -186,6 +206,8 @@ function createBaseDistributionProportions(): DistributionProportions {
 }
 
 export const DistributionProportions = {
+  $type: "osmosis.mint.v1beta1.DistributionProportions" as const,
+
   encode(
     message: DistributionProportions,
     writer: _m0.Writer = _m0.Writer.create()
@@ -237,6 +259,7 @@ export const DistributionProportions = {
 
   fromJSON(object: any): DistributionProportions {
     return {
+      $type: DistributionProportions.$type,
       staking: isSet(object.staking) ? String(object.staking) : "",
       poolIncentives: isSet(object.poolIncentives)
         ? String(object.poolIncentives)
@@ -274,8 +297,11 @@ export const DistributionProportions = {
   },
 };
 
+messageTypeRegistry.set(DistributionProportions.$type, DistributionProportions);
+
 function createBaseParams(): Params {
   return {
+    $type: "osmosis.mint.v1beta1.Params",
     mintDenom: "",
     genesisEpochProvisions: "",
     epochIdentifier: "",
@@ -288,6 +314,8 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
+  $type: "osmosis.mint.v1beta1.Params" as const,
+
   encode(
     message: Params,
     writer: _m0.Writer = _m0.Writer.create()
@@ -368,6 +396,7 @@ export const Params = {
 
   fromJSON(object: any): Params {
     return {
+      $type: Params.$type,
       mintDenom: isSet(object.mintDenom) ? String(object.mintDenom) : "",
       genesisEpochProvisions: isSet(object.genesisEpochProvisions)
         ? String(object.genesisEpochProvisions)
@@ -460,6 +489,8 @@ export const Params = {
   },
 };
 
+messageTypeRegistry.set(Params.$type, Params);
+
 type Builtin =
   | Date
   | Function
@@ -478,14 +509,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

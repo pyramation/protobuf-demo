@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Params } from "../../osmosis/superfluid/params";
@@ -13,7 +14,8 @@ export const protobufPackage = "osmosis.superfluid";
 
 /** GenesisState defines the module's genesis state. */
 export interface GenesisState {
-  params?: Params;
+  $type: "osmosis.superfluid.GenesisState";
+  params: Params;
   superfluidAssets: SuperfluidAsset[];
   osmoEquivalentMultipliers: OsmoEquivalentMultiplierRecord[];
   intermediaryAccounts: SuperfluidIntermediaryAccount[];
@@ -22,6 +24,7 @@ export interface GenesisState {
 
 function createBaseGenesisState(): GenesisState {
   return {
+    $type: "osmosis.superfluid.GenesisState",
     params: undefined,
     superfluidAssets: [],
     osmoEquivalentMultipliers: [],
@@ -31,6 +34,8 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
+  $type: "osmosis.superfluid.GenesisState" as const,
+
   encode(
     message: GenesisState,
     writer: _m0.Writer = _m0.Writer.create()
@@ -102,6 +107,7 @@ export const GenesisState = {
 
   fromJSON(object: any): GenesisState {
     return {
+      $type: GenesisState.$type,
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
       superfluidAssets: Array.isArray(object?.superfluidAssets)
         ? object.superfluidAssets.map((e: any) => SuperfluidAsset.fromJSON(e))
@@ -190,6 +196,8 @@ export const GenesisState = {
   },
 };
 
+messageTypeRegistry.set(GenesisState.$type, GenesisState);
+
 type Builtin =
   | Date
   | Function
@@ -208,14 +216,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

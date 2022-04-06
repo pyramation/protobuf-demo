@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import {
@@ -23,6 +24,7 @@ export const protobufPackage = "google.api";
  * by the API.
  */
 export interface MonitoredResourceDescriptor {
+  $type: "google.api.MonitoredResourceDescriptor";
   /**
    * Optional. The resource name of the monitored resource descriptor:
    * `"projects/{project_id}/monitoredResourceDescriptors/{type}"` where
@@ -75,6 +77,7 @@ export interface MonitoredResourceDescriptor {
  *                   "zone": "us-central1-a" }}
  */
 export interface MonitoredResource {
+  $type: "google.api.MonitoredResource";
   /**
    * Required. The monitored resource type. This field must match
    * the `type` field of a [MonitoredResourceDescriptor][google.api.MonitoredResourceDescriptor] object. For
@@ -90,6 +93,7 @@ export interface MonitoredResource {
 }
 
 export interface MonitoredResource_LabelsEntry {
+  $type: "google.api.MonitoredResource.LabelsEntry";
   key: string;
   value: string;
 }
@@ -103,6 +107,7 @@ export interface MonitoredResource_LabelsEntry {
  * the metadata in this message.
  */
 export interface MonitoredResourceMetadata {
+  $type: "google.api.MonitoredResourceMetadata";
   /**
    * Output only. Values for predefined system metadata labels.
    * System labels are a kind of metadata extracted by Google, including
@@ -115,18 +120,20 @@ export interface MonitoredResourceMetadata {
    *       "security_group": ["a", "b", "c"],
    *       "spot_instance": false }
    */
-  systemLabels?: { [key: string]: any };
+  systemLabels: { [key: string]: any } | undefined;
   /** Output only. A map of user-defined metadata labels. */
   userLabels: { [key: string]: string };
 }
 
 export interface MonitoredResourceMetadata_UserLabelsEntry {
+  $type: "google.api.MonitoredResourceMetadata.UserLabelsEntry";
   key: string;
   value: string;
 }
 
 function createBaseMonitoredResourceDescriptor(): MonitoredResourceDescriptor {
   return {
+    $type: "google.api.MonitoredResourceDescriptor",
     name: "",
     type: "",
     displayName: "",
@@ -137,6 +144,8 @@ function createBaseMonitoredResourceDescriptor(): MonitoredResourceDescriptor {
 }
 
 export const MonitoredResourceDescriptor = {
+  $type: "google.api.MonitoredResourceDescriptor" as const,
+
   encode(
     message: MonitoredResourceDescriptor,
     writer: _m0.Writer = _m0.Writer.create()
@@ -200,6 +209,7 @@ export const MonitoredResourceDescriptor = {
 
   fromJSON(object: any): MonitoredResourceDescriptor {
     return {
+      $type: MonitoredResourceDescriptor.$type,
       name: isSet(object.name) ? String(object.name) : "",
       type: isSet(object.type) ? String(object.type) : "",
       displayName: isSet(object.displayName) ? String(object.displayName) : "",
@@ -248,11 +258,18 @@ export const MonitoredResourceDescriptor = {
   },
 };
 
+messageTypeRegistry.set(
+  MonitoredResourceDescriptor.$type,
+  MonitoredResourceDescriptor
+);
+
 function createBaseMonitoredResource(): MonitoredResource {
-  return { type: "", labels: {} };
+  return { $type: "google.api.MonitoredResource", type: "", labels: {} };
 }
 
 export const MonitoredResource = {
+  $type: "google.api.MonitoredResource" as const,
+
   encode(
     message: MonitoredResource,
     writer: _m0.Writer = _m0.Writer.create()
@@ -262,7 +279,11 @@ export const MonitoredResource = {
     }
     Object.entries(message.labels).forEach(([key, value]) => {
       MonitoredResource_LabelsEntry.encode(
-        { key: key as any, value },
+        {
+          $type: "google.api.MonitoredResource.LabelsEntry",
+          key: key as any,
+          value,
+        },
         writer.uint32(18).fork()
       ).ldelim();
     });
@@ -298,6 +319,7 @@ export const MonitoredResource = {
 
   fromJSON(object: any): MonitoredResource {
     return {
+      $type: MonitoredResource.$type,
       type: isSet(object.type) ? String(object.type) : "",
       labels: isObject(object.labels)
         ? Object.entries(object.labels).reduce<{ [key: string]: string }>(
@@ -340,11 +362,19 @@ export const MonitoredResource = {
   },
 };
 
+messageTypeRegistry.set(MonitoredResource.$type, MonitoredResource);
+
 function createBaseMonitoredResource_LabelsEntry(): MonitoredResource_LabelsEntry {
-  return { key: "", value: "" };
+  return {
+    $type: "google.api.MonitoredResource.LabelsEntry",
+    key: "",
+    value: "",
+  };
 }
 
 export const MonitoredResource_LabelsEntry = {
+  $type: "google.api.MonitoredResource.LabelsEntry" as const,
+
   encode(
     message: MonitoredResource_LabelsEntry,
     writer: _m0.Writer = _m0.Writer.create()
@@ -384,6 +414,7 @@ export const MonitoredResource_LabelsEntry = {
 
   fromJSON(object: any): MonitoredResource_LabelsEntry {
     return {
+      $type: MonitoredResource_LabelsEntry.$type,
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? String(object.value) : "",
     };
@@ -406,11 +437,22 @@ export const MonitoredResource_LabelsEntry = {
   },
 };
 
+messageTypeRegistry.set(
+  MonitoredResource_LabelsEntry.$type,
+  MonitoredResource_LabelsEntry
+);
+
 function createBaseMonitoredResourceMetadata(): MonitoredResourceMetadata {
-  return { systemLabels: undefined, userLabels: {} };
+  return {
+    $type: "google.api.MonitoredResourceMetadata",
+    systemLabels: undefined,
+    userLabels: {},
+  };
 }
 
 export const MonitoredResourceMetadata = {
+  $type: "google.api.MonitoredResourceMetadata" as const,
+
   encode(
     message: MonitoredResourceMetadata,
     writer: _m0.Writer = _m0.Writer.create()
@@ -423,7 +465,11 @@ export const MonitoredResourceMetadata = {
     }
     Object.entries(message.userLabels).forEach(([key, value]) => {
       MonitoredResourceMetadata_UserLabelsEntry.encode(
-        { key: key as any, value },
+        {
+          $type: "google.api.MonitoredResourceMetadata.UserLabelsEntry",
+          key: key as any,
+          value,
+        },
         writer.uint32(18).fork()
       ).ldelim();
     });
@@ -464,6 +510,7 @@ export const MonitoredResourceMetadata = {
 
   fromJSON(object: any): MonitoredResourceMetadata {
     return {
+      $type: MonitoredResourceMetadata.$type,
       systemLabels: isObject(object.systemLabels)
         ? object.systemLabels
         : undefined,
@@ -509,11 +556,22 @@ export const MonitoredResourceMetadata = {
   },
 };
 
+messageTypeRegistry.set(
+  MonitoredResourceMetadata.$type,
+  MonitoredResourceMetadata
+);
+
 function createBaseMonitoredResourceMetadata_UserLabelsEntry(): MonitoredResourceMetadata_UserLabelsEntry {
-  return { key: "", value: "" };
+  return {
+    $type: "google.api.MonitoredResourceMetadata.UserLabelsEntry",
+    key: "",
+    value: "",
+  };
 }
 
 export const MonitoredResourceMetadata_UserLabelsEntry = {
+  $type: "google.api.MonitoredResourceMetadata.UserLabelsEntry" as const,
+
   encode(
     message: MonitoredResourceMetadata_UserLabelsEntry,
     writer: _m0.Writer = _m0.Writer.create()
@@ -553,6 +611,7 @@ export const MonitoredResourceMetadata_UserLabelsEntry = {
 
   fromJSON(object: any): MonitoredResourceMetadata_UserLabelsEntry {
     return {
+      $type: MonitoredResourceMetadata_UserLabelsEntry.$type,
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? String(object.value) : "",
     };
@@ -575,6 +634,11 @@ export const MonitoredResourceMetadata_UserLabelsEntry = {
   },
 };
 
+messageTypeRegistry.set(
+  MonitoredResourceMetadata_UserLabelsEntry.$type,
+  MonitoredResourceMetadata_UserLabelsEntry
+);
+
 type Builtin =
   | Date
   | Function
@@ -593,14 +657,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

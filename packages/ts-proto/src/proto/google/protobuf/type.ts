@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { SourceContext } from "../../google/protobuf/source_context";
@@ -43,6 +44,7 @@ export function syntaxToJSON(object: Syntax): string {
 
 /** A protocol buffer message type. */
 export interface Type {
+  $type: "google.protobuf.Type";
   /** The fully qualified message name. */
   name: string;
   /** The list of fields. */
@@ -52,13 +54,14 @@ export interface Type {
   /** The protocol buffer options. */
   options: Option[];
   /** The source context. */
-  sourceContext?: SourceContext;
+  sourceContext: SourceContext;
   /** The source syntax. */
   syntax: Syntax;
 }
 
 /** A single field of a message type. */
 export interface Field {
+  $type: "google.protobuf.Field";
   /** The field type. */
   kind: Field_Kind;
   /** The field cardinality. */
@@ -292,6 +295,7 @@ export function field_CardinalityToJSON(object: Field_Cardinality): string {
 
 /** Enum type definition. */
 export interface Enum {
+  $type: "google.protobuf.Enum";
   /** Enum type name. */
   name: string;
   /** Enum value definitions. */
@@ -299,13 +303,14 @@ export interface Enum {
   /** Protocol buffer options. */
   options: Option[];
   /** The source context. */
-  sourceContext?: SourceContext;
+  sourceContext: SourceContext;
   /** The source syntax. */
   syntax: Syntax;
 }
 
 /** Enum value definition. */
 export interface EnumValue {
+  $type: "google.protobuf.EnumValue";
   /** Enum value name. */
   name: string;
   /** Enum value number. */
@@ -319,6 +324,7 @@ export interface EnumValue {
  * enumeration, etc.
  */
 export interface Option {
+  $type: "google.protobuf.Option";
   /**
    * The option's name. For protobuf built-in options (options defined in
    * descriptor.proto), this is the short name. For example, `"map_entry"`.
@@ -332,11 +338,12 @@ export interface Option {
    * should be used. If the value is an enum, it should be stored as an int32
    * value using the google.protobuf.Int32Value type.
    */
-  value?: Any;
+  value: Any;
 }
 
 function createBaseType(): Type {
   return {
+    $type: "google.protobuf.Type",
     name: "",
     fields: [],
     oneofs: [],
@@ -347,6 +354,8 @@ function createBaseType(): Type {
 }
 
 export const Type = {
+  $type: "google.protobuf.Type" as const,
+
   encode(message: Type, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -407,6 +416,7 @@ export const Type = {
 
   fromJSON(object: any): Type {
     return {
+      $type: Type.$type,
       name: isSet(object.name) ? String(object.name) : "",
       fields: Array.isArray(object?.fields)
         ? object.fields.map((e: any) => Field.fromJSON(e))
@@ -467,8 +477,11 @@ export const Type = {
   },
 };
 
+messageTypeRegistry.set(Type.$type, Type);
+
 function createBaseField(): Field {
   return {
+    $type: "google.protobuf.Field",
     kind: 0,
     cardinality: 0,
     number: 0,
@@ -483,6 +496,8 @@ function createBaseField(): Field {
 }
 
 export const Field = {
+  $type: "google.protobuf.Field" as const,
+
   encode(message: Field, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.kind !== 0) {
       writer.uint32(8).int32(message.kind);
@@ -564,6 +579,7 @@ export const Field = {
 
   fromJSON(object: any): Field {
     return {
+      $type: Field.$type,
       kind: isSet(object.kind) ? field_KindFromJSON(object.kind) : 0,
       cardinality: isSet(object.cardinality)
         ? field_CardinalityFromJSON(object.cardinality)
@@ -623,8 +639,11 @@ export const Field = {
   },
 };
 
+messageTypeRegistry.set(Field.$type, Field);
+
 function createBaseEnum(): Enum {
   return {
+    $type: "google.protobuf.Enum",
     name: "",
     enumvalue: [],
     options: [],
@@ -634,6 +653,8 @@ function createBaseEnum(): Enum {
 }
 
 export const Enum = {
+  $type: "google.protobuf.Enum" as const,
+
   encode(message: Enum, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -688,6 +709,7 @@ export const Enum = {
 
   fromJSON(object: any): Enum {
     return {
+      $type: Enum.$type,
       name: isSet(object.name) ? String(object.name) : "",
       enumvalue: Array.isArray(object?.enumvalue)
         ? object.enumvalue.map((e: any) => EnumValue.fromJSON(e))
@@ -742,11 +764,20 @@ export const Enum = {
   },
 };
 
+messageTypeRegistry.set(Enum.$type, Enum);
+
 function createBaseEnumValue(): EnumValue {
-  return { name: "", number: 0, options: [] };
+  return {
+    $type: "google.protobuf.EnumValue",
+    name: "",
+    number: 0,
+    options: [],
+  };
 }
 
 export const EnumValue = {
+  $type: "google.protobuf.EnumValue" as const,
+
   encode(
     message: EnumValue,
     writer: _m0.Writer = _m0.Writer.create()
@@ -789,6 +820,7 @@ export const EnumValue = {
 
   fromJSON(object: any): EnumValue {
     return {
+      $type: EnumValue.$type,
       name: isSet(object.name) ? String(object.name) : "",
       number: isSet(object.number) ? Number(object.number) : 0,
       options: Array.isArray(object?.options)
@@ -822,11 +854,15 @@ export const EnumValue = {
   },
 };
 
+messageTypeRegistry.set(EnumValue.$type, EnumValue);
+
 function createBaseOption(): Option {
-  return { name: "", value: undefined };
+  return { $type: "google.protobuf.Option", name: "", value: undefined };
 }
 
 export const Option = {
+  $type: "google.protobuf.Option" as const,
+
   encode(
     message: Option,
     writer: _m0.Writer = _m0.Writer.create()
@@ -863,6 +899,7 @@ export const Option = {
 
   fromJSON(object: any): Option {
     return {
+      $type: Option.$type,
       name: isSet(object.name) ? String(object.name) : "",
       value: isSet(object.value) ? Any.fromJSON(object.value) : undefined,
     };
@@ -887,6 +924,8 @@ export const Option = {
   },
 };
 
+messageTypeRegistry.set(Option.$type, Option);
+
 type Builtin =
   | Date
   | Function
@@ -905,14 +944,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

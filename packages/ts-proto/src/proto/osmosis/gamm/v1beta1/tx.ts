@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
@@ -10,55 +11,67 @@ export const protobufPackage = "osmosis.gamm.v1beta1";
  * This is really MsgJoinPoolNoSwap
  */
 export interface MsgJoinPool {
+  $type: "osmosis.gamm.v1beta1.MsgJoinPool";
   sender: string;
   poolId: Long;
   shareOutAmount: string;
   tokenInMaxs: Coin[];
 }
 
-export interface MsgJoinPoolResponse {}
+export interface MsgJoinPoolResponse {
+  $type: "osmosis.gamm.v1beta1.MsgJoinPoolResponse";
+}
 
 /** ===================== MsgExitPool */
 export interface MsgExitPool {
+  $type: "osmosis.gamm.v1beta1.MsgExitPool";
   sender: string;
   poolId: Long;
   shareInAmount: string;
   tokenOutMins: Coin[];
 }
 
-export interface MsgExitPoolResponse {}
+export interface MsgExitPoolResponse {
+  $type: "osmosis.gamm.v1beta1.MsgExitPoolResponse";
+}
 
 /** ===================== MsgSwapExactAmountIn */
 export interface SwapAmountInRoute {
+  $type: "osmosis.gamm.v1beta1.SwapAmountInRoute";
   poolId: Long;
   tokenOutDenom: string;
 }
 
 export interface MsgSwapExactAmountIn {
+  $type: "osmosis.gamm.v1beta1.MsgSwapExactAmountIn";
   sender: string;
   routes: SwapAmountInRoute[];
-  tokenIn?: Coin;
+  tokenIn: Coin;
   tokenOutMinAmount: string;
 }
 
 export interface MsgSwapExactAmountInResponse {
+  $type: "osmosis.gamm.v1beta1.MsgSwapExactAmountInResponse";
   tokenOutAmount: string;
 }
 
 /** ===================== MsgSwapExactAmountOut */
 export interface SwapAmountOutRoute {
+  $type: "osmosis.gamm.v1beta1.SwapAmountOutRoute";
   poolId: Long;
   tokenInDenom: string;
 }
 
 export interface MsgSwapExactAmountOut {
+  $type: "osmosis.gamm.v1beta1.MsgSwapExactAmountOut";
   sender: string;
   routes: SwapAmountOutRoute[];
   tokenInMaxAmount: string;
-  tokenOut?: Coin;
+  tokenOut: Coin;
 }
 
 export interface MsgSwapExactAmountOutResponse {
+  $type: "osmosis.gamm.v1beta1.MsgSwapExactAmountOutResponse";
   tokenInAmount: string;
 }
 
@@ -67,9 +80,10 @@ export interface MsgSwapExactAmountOutResponse {
  * TODO: Rename to MsgJoinSwapExactAmountIn
  */
 export interface MsgJoinSwapExternAmountIn {
+  $type: "osmosis.gamm.v1beta1.MsgJoinSwapExternAmountIn";
   sender: string;
   poolId: Long;
-  tokenIn?: Coin;
+  tokenIn: Coin;
   /**
    * reserved 3;
    * reserved "token_in";
@@ -78,11 +92,13 @@ export interface MsgJoinSwapExternAmountIn {
 }
 
 export interface MsgJoinSwapExternAmountInResponse {
+  $type: "osmosis.gamm.v1beta1.MsgJoinSwapExternAmountInResponse";
   shareOutAmount: string;
 }
 
 /** ===================== MsgJoinSwapShareAmountOut */
 export interface MsgJoinSwapShareAmountOut {
+  $type: "osmosis.gamm.v1beta1.MsgJoinSwapShareAmountOut";
   sender: string;
   poolId: Long;
   tokenInDenom: string;
@@ -91,11 +107,13 @@ export interface MsgJoinSwapShareAmountOut {
 }
 
 export interface MsgJoinSwapShareAmountOutResponse {
+  $type: "osmosis.gamm.v1beta1.MsgJoinSwapShareAmountOutResponse";
   tokenInAmount: string;
 }
 
 /** ===================== MsgExitSwapShareAmountIn */
 export interface MsgExitSwapShareAmountIn {
+  $type: "osmosis.gamm.v1beta1.MsgExitSwapShareAmountIn";
   sender: string;
   poolId: Long;
   tokenOutDenom: string;
@@ -104,23 +122,27 @@ export interface MsgExitSwapShareAmountIn {
 }
 
 export interface MsgExitSwapShareAmountInResponse {
+  $type: "osmosis.gamm.v1beta1.MsgExitSwapShareAmountInResponse";
   tokenOutAmount: string;
 }
 
 /** ===================== MsgExitSwapExternAmountOut */
 export interface MsgExitSwapExternAmountOut {
+  $type: "osmosis.gamm.v1beta1.MsgExitSwapExternAmountOut";
   sender: string;
   poolId: Long;
-  tokenOut?: Coin;
+  tokenOut: Coin;
   shareInMaxAmount: string;
 }
 
 export interface MsgExitSwapExternAmountOutResponse {
+  $type: "osmosis.gamm.v1beta1.MsgExitSwapExternAmountOutResponse";
   shareInAmount: string;
 }
 
 function createBaseMsgJoinPool(): MsgJoinPool {
   return {
+    $type: "osmosis.gamm.v1beta1.MsgJoinPool",
     sender: "",
     poolId: Long.UZERO,
     shareOutAmount: "",
@@ -129,6 +151,8 @@ function createBaseMsgJoinPool(): MsgJoinPool {
 }
 
 export const MsgJoinPool = {
+  $type: "osmosis.gamm.v1beta1.MsgJoinPool" as const,
+
   encode(
     message: MsgJoinPool,
     writer: _m0.Writer = _m0.Writer.create()
@@ -177,6 +201,7 @@ export const MsgJoinPool = {
 
   fromJSON(object: any): MsgJoinPool {
     return {
+      $type: MsgJoinPool.$type,
       sender: isSet(object.sender) ? String(object.sender) : "",
       poolId: isSet(object.poolId)
         ? Long.fromString(object.poolId)
@@ -223,11 +248,15 @@ export const MsgJoinPool = {
   },
 };
 
+messageTypeRegistry.set(MsgJoinPool.$type, MsgJoinPool);
+
 function createBaseMsgJoinPoolResponse(): MsgJoinPoolResponse {
-  return {};
+  return { $type: "osmosis.gamm.v1beta1.MsgJoinPoolResponse" };
 }
 
 export const MsgJoinPoolResponse = {
+  $type: "osmosis.gamm.v1beta1.MsgJoinPoolResponse" as const,
+
   encode(
     _: MsgJoinPoolResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -251,7 +280,9 @@ export const MsgJoinPoolResponse = {
   },
 
   fromJSON(_: any): MsgJoinPoolResponse {
-    return {};
+    return {
+      $type: MsgJoinPoolResponse.$type,
+    };
   },
 
   toJSON(_: MsgJoinPoolResponse): unknown {
@@ -267,8 +298,11 @@ export const MsgJoinPoolResponse = {
   },
 };
 
+messageTypeRegistry.set(MsgJoinPoolResponse.$type, MsgJoinPoolResponse);
+
 function createBaseMsgExitPool(): MsgExitPool {
   return {
+    $type: "osmosis.gamm.v1beta1.MsgExitPool",
     sender: "",
     poolId: Long.UZERO,
     shareInAmount: "",
@@ -277,6 +311,8 @@ function createBaseMsgExitPool(): MsgExitPool {
 }
 
 export const MsgExitPool = {
+  $type: "osmosis.gamm.v1beta1.MsgExitPool" as const,
+
   encode(
     message: MsgExitPool,
     writer: _m0.Writer = _m0.Writer.create()
@@ -325,6 +361,7 @@ export const MsgExitPool = {
 
   fromJSON(object: any): MsgExitPool {
     return {
+      $type: MsgExitPool.$type,
       sender: isSet(object.sender) ? String(object.sender) : "",
       poolId: isSet(object.poolId)
         ? Long.fromString(object.poolId)
@@ -371,11 +408,15 @@ export const MsgExitPool = {
   },
 };
 
+messageTypeRegistry.set(MsgExitPool.$type, MsgExitPool);
+
 function createBaseMsgExitPoolResponse(): MsgExitPoolResponse {
-  return {};
+  return { $type: "osmosis.gamm.v1beta1.MsgExitPoolResponse" };
 }
 
 export const MsgExitPoolResponse = {
+  $type: "osmosis.gamm.v1beta1.MsgExitPoolResponse" as const,
+
   encode(
     _: MsgExitPoolResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -399,7 +440,9 @@ export const MsgExitPoolResponse = {
   },
 
   fromJSON(_: any): MsgExitPoolResponse {
-    return {};
+    return {
+      $type: MsgExitPoolResponse.$type,
+    };
   },
 
   toJSON(_: MsgExitPoolResponse): unknown {
@@ -415,11 +458,19 @@ export const MsgExitPoolResponse = {
   },
 };
 
+messageTypeRegistry.set(MsgExitPoolResponse.$type, MsgExitPoolResponse);
+
 function createBaseSwapAmountInRoute(): SwapAmountInRoute {
-  return { poolId: Long.UZERO, tokenOutDenom: "" };
+  return {
+    $type: "osmosis.gamm.v1beta1.SwapAmountInRoute",
+    poolId: Long.UZERO,
+    tokenOutDenom: "",
+  };
 }
 
 export const SwapAmountInRoute = {
+  $type: "osmosis.gamm.v1beta1.SwapAmountInRoute" as const,
+
   encode(
     message: SwapAmountInRoute,
     writer: _m0.Writer = _m0.Writer.create()
@@ -456,6 +507,7 @@ export const SwapAmountInRoute = {
 
   fromJSON(object: any): SwapAmountInRoute {
     return {
+      $type: SwapAmountInRoute.$type,
       poolId: isSet(object.poolId)
         ? Long.fromString(object.poolId)
         : Long.UZERO,
@@ -487,11 +539,21 @@ export const SwapAmountInRoute = {
   },
 };
 
+messageTypeRegistry.set(SwapAmountInRoute.$type, SwapAmountInRoute);
+
 function createBaseMsgSwapExactAmountIn(): MsgSwapExactAmountIn {
-  return { sender: "", routes: [], tokenIn: undefined, tokenOutMinAmount: "" };
+  return {
+    $type: "osmosis.gamm.v1beta1.MsgSwapExactAmountIn",
+    sender: "",
+    routes: [],
+    tokenIn: undefined,
+    tokenOutMinAmount: "",
+  };
 }
 
 export const MsgSwapExactAmountIn = {
+  $type: "osmosis.gamm.v1beta1.MsgSwapExactAmountIn" as const,
+
   encode(
     message: MsgSwapExactAmountIn,
     writer: _m0.Writer = _m0.Writer.create()
@@ -545,6 +607,7 @@ export const MsgSwapExactAmountIn = {
 
   fromJSON(object: any): MsgSwapExactAmountIn {
     return {
+      $type: MsgSwapExactAmountIn.$type,
       sender: isSet(object.sender) ? String(object.sender) : "",
       routes: Array.isArray(object?.routes)
         ? object.routes.map((e: any) => SwapAmountInRoute.fromJSON(e))
@@ -593,11 +656,18 @@ export const MsgSwapExactAmountIn = {
   },
 };
 
+messageTypeRegistry.set(MsgSwapExactAmountIn.$type, MsgSwapExactAmountIn);
+
 function createBaseMsgSwapExactAmountInResponse(): MsgSwapExactAmountInResponse {
-  return { tokenOutAmount: "" };
+  return {
+    $type: "osmosis.gamm.v1beta1.MsgSwapExactAmountInResponse",
+    tokenOutAmount: "",
+  };
 }
 
 export const MsgSwapExactAmountInResponse = {
+  $type: "osmosis.gamm.v1beta1.MsgSwapExactAmountInResponse" as const,
+
   encode(
     message: MsgSwapExactAmountInResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -631,6 +701,7 @@ export const MsgSwapExactAmountInResponse = {
 
   fromJSON(object: any): MsgSwapExactAmountInResponse {
     return {
+      $type: MsgSwapExactAmountInResponse.$type,
       tokenOutAmount: isSet(object.tokenOutAmount)
         ? String(object.tokenOutAmount)
         : "",
@@ -653,11 +724,22 @@ export const MsgSwapExactAmountInResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgSwapExactAmountInResponse.$type,
+  MsgSwapExactAmountInResponse
+);
+
 function createBaseSwapAmountOutRoute(): SwapAmountOutRoute {
-  return { poolId: Long.UZERO, tokenInDenom: "" };
+  return {
+    $type: "osmosis.gamm.v1beta1.SwapAmountOutRoute",
+    poolId: Long.UZERO,
+    tokenInDenom: "",
+  };
 }
 
 export const SwapAmountOutRoute = {
+  $type: "osmosis.gamm.v1beta1.SwapAmountOutRoute" as const,
+
   encode(
     message: SwapAmountOutRoute,
     writer: _m0.Writer = _m0.Writer.create()
@@ -694,6 +776,7 @@ export const SwapAmountOutRoute = {
 
   fromJSON(object: any): SwapAmountOutRoute {
     return {
+      $type: SwapAmountOutRoute.$type,
       poolId: isSet(object.poolId)
         ? Long.fromString(object.poolId)
         : Long.UZERO,
@@ -725,11 +808,21 @@ export const SwapAmountOutRoute = {
   },
 };
 
+messageTypeRegistry.set(SwapAmountOutRoute.$type, SwapAmountOutRoute);
+
 function createBaseMsgSwapExactAmountOut(): MsgSwapExactAmountOut {
-  return { sender: "", routes: [], tokenInMaxAmount: "", tokenOut: undefined };
+  return {
+    $type: "osmosis.gamm.v1beta1.MsgSwapExactAmountOut",
+    sender: "",
+    routes: [],
+    tokenInMaxAmount: "",
+    tokenOut: undefined,
+  };
 }
 
 export const MsgSwapExactAmountOut = {
+  $type: "osmosis.gamm.v1beta1.MsgSwapExactAmountOut" as const,
+
   encode(
     message: MsgSwapExactAmountOut,
     writer: _m0.Writer = _m0.Writer.create()
@@ -783,6 +876,7 @@ export const MsgSwapExactAmountOut = {
 
   fromJSON(object: any): MsgSwapExactAmountOut {
     return {
+      $type: MsgSwapExactAmountOut.$type,
       sender: isSet(object.sender) ? String(object.sender) : "",
       routes: Array.isArray(object?.routes)
         ? object.routes.map((e: any) => SwapAmountOutRoute.fromJSON(e))
@@ -831,11 +925,18 @@ export const MsgSwapExactAmountOut = {
   },
 };
 
+messageTypeRegistry.set(MsgSwapExactAmountOut.$type, MsgSwapExactAmountOut);
+
 function createBaseMsgSwapExactAmountOutResponse(): MsgSwapExactAmountOutResponse {
-  return { tokenInAmount: "" };
+  return {
+    $type: "osmosis.gamm.v1beta1.MsgSwapExactAmountOutResponse",
+    tokenInAmount: "",
+  };
 }
 
 export const MsgSwapExactAmountOutResponse = {
+  $type: "osmosis.gamm.v1beta1.MsgSwapExactAmountOutResponse" as const,
+
   encode(
     message: MsgSwapExactAmountOutResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -869,6 +970,7 @@ export const MsgSwapExactAmountOutResponse = {
 
   fromJSON(object: any): MsgSwapExactAmountOutResponse {
     return {
+      $type: MsgSwapExactAmountOutResponse.$type,
       tokenInAmount: isSet(object.tokenInAmount)
         ? String(object.tokenInAmount)
         : "",
@@ -891,8 +993,14 @@ export const MsgSwapExactAmountOutResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgSwapExactAmountOutResponse.$type,
+  MsgSwapExactAmountOutResponse
+);
+
 function createBaseMsgJoinSwapExternAmountIn(): MsgJoinSwapExternAmountIn {
   return {
+    $type: "osmosis.gamm.v1beta1.MsgJoinSwapExternAmountIn",
     sender: "",
     poolId: Long.UZERO,
     tokenIn: undefined,
@@ -901,6 +1009,8 @@ function createBaseMsgJoinSwapExternAmountIn(): MsgJoinSwapExternAmountIn {
 }
 
 export const MsgJoinSwapExternAmountIn = {
+  $type: "osmosis.gamm.v1beta1.MsgJoinSwapExternAmountIn" as const,
+
   encode(
     message: MsgJoinSwapExternAmountIn,
     writer: _m0.Writer = _m0.Writer.create()
@@ -952,6 +1062,7 @@ export const MsgJoinSwapExternAmountIn = {
 
   fromJSON(object: any): MsgJoinSwapExternAmountIn {
     return {
+      $type: MsgJoinSwapExternAmountIn.$type,
       sender: isSet(object.sender) ? String(object.sender) : "",
       poolId: isSet(object.poolId)
         ? Long.fromString(object.poolId)
@@ -997,11 +1108,21 @@ export const MsgJoinSwapExternAmountIn = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgJoinSwapExternAmountIn.$type,
+  MsgJoinSwapExternAmountIn
+);
+
 function createBaseMsgJoinSwapExternAmountInResponse(): MsgJoinSwapExternAmountInResponse {
-  return { shareOutAmount: "" };
+  return {
+    $type: "osmosis.gamm.v1beta1.MsgJoinSwapExternAmountInResponse",
+    shareOutAmount: "",
+  };
 }
 
 export const MsgJoinSwapExternAmountInResponse = {
+  $type: "osmosis.gamm.v1beta1.MsgJoinSwapExternAmountInResponse" as const,
+
   encode(
     message: MsgJoinSwapExternAmountInResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1035,6 +1156,7 @@ export const MsgJoinSwapExternAmountInResponse = {
 
   fromJSON(object: any): MsgJoinSwapExternAmountInResponse {
     return {
+      $type: MsgJoinSwapExternAmountInResponse.$type,
       shareOutAmount: isSet(object.shareOutAmount)
         ? String(object.shareOutAmount)
         : "",
@@ -1057,8 +1179,14 @@ export const MsgJoinSwapExternAmountInResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgJoinSwapExternAmountInResponse.$type,
+  MsgJoinSwapExternAmountInResponse
+);
+
 function createBaseMsgJoinSwapShareAmountOut(): MsgJoinSwapShareAmountOut {
   return {
+    $type: "osmosis.gamm.v1beta1.MsgJoinSwapShareAmountOut",
     sender: "",
     poolId: Long.UZERO,
     tokenInDenom: "",
@@ -1068,6 +1196,8 @@ function createBaseMsgJoinSwapShareAmountOut(): MsgJoinSwapShareAmountOut {
 }
 
 export const MsgJoinSwapShareAmountOut = {
+  $type: "osmosis.gamm.v1beta1.MsgJoinSwapShareAmountOut" as const,
+
   encode(
     message: MsgJoinSwapShareAmountOut,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1125,6 +1255,7 @@ export const MsgJoinSwapShareAmountOut = {
 
   fromJSON(object: any): MsgJoinSwapShareAmountOut {
     return {
+      $type: MsgJoinSwapShareAmountOut.$type,
       sender: isSet(object.sender) ? String(object.sender) : "",
       poolId: isSet(object.poolId)
         ? Long.fromString(object.poolId)
@@ -1171,11 +1302,21 @@ export const MsgJoinSwapShareAmountOut = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgJoinSwapShareAmountOut.$type,
+  MsgJoinSwapShareAmountOut
+);
+
 function createBaseMsgJoinSwapShareAmountOutResponse(): MsgJoinSwapShareAmountOutResponse {
-  return { tokenInAmount: "" };
+  return {
+    $type: "osmosis.gamm.v1beta1.MsgJoinSwapShareAmountOutResponse",
+    tokenInAmount: "",
+  };
 }
 
 export const MsgJoinSwapShareAmountOutResponse = {
+  $type: "osmosis.gamm.v1beta1.MsgJoinSwapShareAmountOutResponse" as const,
+
   encode(
     message: MsgJoinSwapShareAmountOutResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1209,6 +1350,7 @@ export const MsgJoinSwapShareAmountOutResponse = {
 
   fromJSON(object: any): MsgJoinSwapShareAmountOutResponse {
     return {
+      $type: MsgJoinSwapShareAmountOutResponse.$type,
       tokenInAmount: isSet(object.tokenInAmount)
         ? String(object.tokenInAmount)
         : "",
@@ -1231,8 +1373,14 @@ export const MsgJoinSwapShareAmountOutResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgJoinSwapShareAmountOutResponse.$type,
+  MsgJoinSwapShareAmountOutResponse
+);
+
 function createBaseMsgExitSwapShareAmountIn(): MsgExitSwapShareAmountIn {
   return {
+    $type: "osmosis.gamm.v1beta1.MsgExitSwapShareAmountIn",
     sender: "",
     poolId: Long.UZERO,
     tokenOutDenom: "",
@@ -1242,6 +1390,8 @@ function createBaseMsgExitSwapShareAmountIn(): MsgExitSwapShareAmountIn {
 }
 
 export const MsgExitSwapShareAmountIn = {
+  $type: "osmosis.gamm.v1beta1.MsgExitSwapShareAmountIn" as const,
+
   encode(
     message: MsgExitSwapShareAmountIn,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1299,6 +1449,7 @@ export const MsgExitSwapShareAmountIn = {
 
   fromJSON(object: any): MsgExitSwapShareAmountIn {
     return {
+      $type: MsgExitSwapShareAmountIn.$type,
       sender: isSet(object.sender) ? String(object.sender) : "",
       poolId: isSet(object.poolId)
         ? Long.fromString(object.poolId)
@@ -1345,11 +1496,21 @@ export const MsgExitSwapShareAmountIn = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgExitSwapShareAmountIn.$type,
+  MsgExitSwapShareAmountIn
+);
+
 function createBaseMsgExitSwapShareAmountInResponse(): MsgExitSwapShareAmountInResponse {
-  return { tokenOutAmount: "" };
+  return {
+    $type: "osmosis.gamm.v1beta1.MsgExitSwapShareAmountInResponse",
+    tokenOutAmount: "",
+  };
 }
 
 export const MsgExitSwapShareAmountInResponse = {
+  $type: "osmosis.gamm.v1beta1.MsgExitSwapShareAmountInResponse" as const,
+
   encode(
     message: MsgExitSwapShareAmountInResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1383,6 +1544,7 @@ export const MsgExitSwapShareAmountInResponse = {
 
   fromJSON(object: any): MsgExitSwapShareAmountInResponse {
     return {
+      $type: MsgExitSwapShareAmountInResponse.$type,
       tokenOutAmount: isSet(object.tokenOutAmount)
         ? String(object.tokenOutAmount)
         : "",
@@ -1405,8 +1567,14 @@ export const MsgExitSwapShareAmountInResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgExitSwapShareAmountInResponse.$type,
+  MsgExitSwapShareAmountInResponse
+);
+
 function createBaseMsgExitSwapExternAmountOut(): MsgExitSwapExternAmountOut {
   return {
+    $type: "osmosis.gamm.v1beta1.MsgExitSwapExternAmountOut",
     sender: "",
     poolId: Long.UZERO,
     tokenOut: undefined,
@@ -1415,6 +1583,8 @@ function createBaseMsgExitSwapExternAmountOut(): MsgExitSwapExternAmountOut {
 }
 
 export const MsgExitSwapExternAmountOut = {
+  $type: "osmosis.gamm.v1beta1.MsgExitSwapExternAmountOut" as const,
+
   encode(
     message: MsgExitSwapExternAmountOut,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1466,6 +1636,7 @@ export const MsgExitSwapExternAmountOut = {
 
   fromJSON(object: any): MsgExitSwapExternAmountOut {
     return {
+      $type: MsgExitSwapExternAmountOut.$type,
       sender: isSet(object.sender) ? String(object.sender) : "",
       poolId: isSet(object.poolId)
         ? Long.fromString(object.poolId)
@@ -1511,11 +1682,21 @@ export const MsgExitSwapExternAmountOut = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgExitSwapExternAmountOut.$type,
+  MsgExitSwapExternAmountOut
+);
+
 function createBaseMsgExitSwapExternAmountOutResponse(): MsgExitSwapExternAmountOutResponse {
-  return { shareInAmount: "" };
+  return {
+    $type: "osmosis.gamm.v1beta1.MsgExitSwapExternAmountOutResponse",
+    shareInAmount: "",
+  };
 }
 
 export const MsgExitSwapExternAmountOutResponse = {
+  $type: "osmosis.gamm.v1beta1.MsgExitSwapExternAmountOutResponse" as const,
+
   encode(
     message: MsgExitSwapExternAmountOutResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1549,6 +1730,7 @@ export const MsgExitSwapExternAmountOutResponse = {
 
   fromJSON(object: any): MsgExitSwapExternAmountOutResponse {
     return {
+      $type: MsgExitSwapExternAmountOutResponse.$type,
       shareInAmount: isSet(object.shareInAmount)
         ? String(object.shareInAmount)
         : "",
@@ -1570,6 +1752,11 @@ export const MsgExitSwapExternAmountOutResponse = {
     return message;
   },
 };
+
+messageTypeRegistry.set(
+  MsgExitSwapExternAmountOutResponse.$type,
+  MsgExitSwapExternAmountOutResponse
+);
 
 export interface Msg {
   JoinPool(request: MsgJoinPool): Promise<MsgJoinPoolResponse>;
@@ -1742,14 +1929,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

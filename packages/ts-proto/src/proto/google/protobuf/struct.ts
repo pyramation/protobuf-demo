@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 
@@ -48,13 +49,15 @@ export function nullValueToJSON(object: NullValue): string {
  * The JSON representation for `Struct` is JSON object.
  */
 export interface Struct {
+  $type: "google.protobuf.Struct";
   /** Unordered map of dynamically typed values. */
-  fields: { [key: string]: any };
+  fields: { [key: string]: any | undefined };
 }
 
 export interface Struct_FieldsEntry {
+  $type: "google.protobuf.Struct.FieldsEntry";
   key: string;
-  value?: any;
+  value: any | undefined;
 }
 
 /**
@@ -66,6 +69,7 @@ export interface Struct_FieldsEntry {
  * The JSON representation for `Value` is JSON value.
  */
 export interface Value {
+  $type: "google.protobuf.Value";
   /** Represents a null value. */
   nullValue: NullValue | undefined;
   /** Represents a double value. */
@@ -75,9 +79,9 @@ export interface Value {
   /** Represents a boolean value. */
   boolValue: boolean | undefined;
   /** Represents a structured value. */
-  structValue?: { [key: string]: any };
+  structValue: { [key: string]: any } | undefined;
   /** Represents a repeated `Value`. */
-  listValue?: Array<any>;
+  listValue: Array<any> | undefined;
 }
 
 /**
@@ -86,15 +90,18 @@ export interface Value {
  * The JSON representation for `ListValue` is JSON array.
  */
 export interface ListValue {
+  $type: "google.protobuf.ListValue";
   /** Repeated field of dynamically typed values. */
   values: any[];
 }
 
 function createBaseStruct(): Struct {
-  return { fields: {} };
+  return { $type: "google.protobuf.Struct", fields: {} };
 }
 
 export const Struct = {
+  $type: "google.protobuf.Struct" as const,
+
   encode(
     message: Struct,
     writer: _m0.Writer = _m0.Writer.create()
@@ -102,7 +109,11 @@ export const Struct = {
     Object.entries(message.fields).forEach(([key, value]) => {
       if (value !== undefined) {
         Struct_FieldsEntry.encode(
-          { key: key as any, value },
+          {
+            $type: "google.protobuf.Struct.FieldsEntry",
+            key: key as any,
+            value,
+          },
           writer.uint32(10).fork()
         ).ldelim();
       }
@@ -133,14 +144,14 @@ export const Struct = {
 
   fromJSON(object: any): Struct {
     return {
+      $type: Struct.$type,
       fields: isObject(object.fields)
-        ? Object.entries(object.fields).reduce<{ [key: string]: any }>(
-            (acc, [key, value]) => {
-              acc[key] = value as any;
-              return acc;
-            },
-            {}
-          )
+        ? Object.entries(object.fields).reduce<{
+            [key: string]: any | undefined;
+          }>((acc, [key, value]) => {
+            acc[key] = value as any | undefined;
+            return acc;
+          }, {})
         : {},
     };
   },
@@ -159,7 +170,7 @@ export const Struct = {
   fromPartial<I extends Exact<DeepPartial<Struct>, I>>(object: I): Struct {
     const message = createBaseStruct();
     message.fields = Object.entries(object.fields ?? {}).reduce<{
-      [key: string]: any;
+      [key: string]: any | undefined;
     }>((acc, [key, value]) => {
       if (value !== undefined) {
         acc[key] = value;
@@ -188,11 +199,19 @@ export const Struct = {
   },
 };
 
+messageTypeRegistry.set(Struct.$type, Struct);
+
 function createBaseStruct_FieldsEntry(): Struct_FieldsEntry {
-  return { key: "", value: undefined };
+  return {
+    $type: "google.protobuf.Struct.FieldsEntry",
+    key: "",
+    value: undefined,
+  };
 }
 
 export const Struct_FieldsEntry = {
+  $type: "google.protobuf.Struct.FieldsEntry" as const,
+
   encode(
     message: Struct_FieldsEntry,
     writer: _m0.Writer = _m0.Writer.create()
@@ -232,6 +251,7 @@ export const Struct_FieldsEntry = {
 
   fromJSON(object: any): Struct_FieldsEntry {
     return {
+      $type: Struct_FieldsEntry.$type,
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object?.value) ? object.value : undefined,
     };
@@ -254,8 +274,11 @@ export const Struct_FieldsEntry = {
   },
 };
 
+messageTypeRegistry.set(Struct_FieldsEntry.$type, Struct_FieldsEntry);
+
 function createBaseValue(): Value {
   return {
+    $type: "google.protobuf.Value",
     nullValue: undefined,
     numberValue: undefined,
     stringValue: undefined,
@@ -266,6 +289,8 @@ function createBaseValue(): Value {
 }
 
 export const Value = {
+  $type: "google.protobuf.Value" as const,
+
   encode(message: Value, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.nullValue !== undefined) {
       writer.uint32(8).int32(message.nullValue);
@@ -333,6 +358,7 @@ export const Value = {
 
   fromJSON(object: any): Value {
     return {
+      $type: Value.$type,
       nullValue: isSet(object.nullValue)
         ? nullValueFromJSON(object.nullValue)
         : undefined,
@@ -425,11 +451,15 @@ export const Value = {
   },
 };
 
+messageTypeRegistry.set(Value.$type, Value);
+
 function createBaseListValue(): ListValue {
-  return { values: [] };
+  return { $type: "google.protobuf.ListValue", values: [] };
 }
 
 export const ListValue = {
+  $type: "google.protobuf.ListValue" as const,
+
   encode(
     message: ListValue,
     writer: _m0.Writer = _m0.Writer.create()
@@ -462,6 +492,7 @@ export const ListValue = {
 
   fromJSON(object: any): ListValue {
     return {
+      $type: ListValue.$type,
       values: Array.isArray(object?.values) ? [...object.values] : [],
     };
   },
@@ -497,6 +528,8 @@ export const ListValue = {
   },
 };
 
+messageTypeRegistry.set(ListValue.$type, ListValue);
+
 type Builtin =
   | Date
   | Function
@@ -515,14 +548,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { SourceContext } from "../../google/protobuf/source_context";
@@ -23,6 +24,7 @@ export const protobufPackage = "google.protobuf";
  * detailed terminology.
  */
 export interface Api {
+  $type: "google.protobuf.Api";
   /**
    * The fully qualified name of this interface, including package name
    * followed by the interface's simple name.
@@ -58,7 +60,7 @@ export interface Api {
    * Source context for the protocol buffer service represented by this
    * message.
    */
-  sourceContext?: SourceContext;
+  sourceContext: SourceContext;
   /** Included interfaces. See [Mixin][]. */
   mixins: Mixin[];
   /** The source syntax of the service. */
@@ -67,6 +69,7 @@ export interface Api {
 
 /** Method represents a method of an API interface. */
 export interface Method {
+  $type: "google.protobuf.Method";
   /** The simple name of this method. */
   name: string;
   /** A URL of the input message type. */
@@ -164,6 +167,7 @@ export interface Method {
  *     }
  */
 export interface Mixin {
+  $type: "google.protobuf.Mixin";
   /** The fully qualified name of the interface which is included. */
   name: string;
   /**
@@ -175,6 +179,7 @@ export interface Mixin {
 
 function createBaseApi(): Api {
   return {
+    $type: "google.protobuf.Api",
     name: "",
     methods: [],
     options: [],
@@ -186,6 +191,8 @@ function createBaseApi(): Api {
 }
 
 export const Api = {
+  $type: "google.protobuf.Api" as const,
+
   encode(message: Api, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -252,6 +259,7 @@ export const Api = {
 
   fromJSON(object: any): Api {
     return {
+      $type: Api.$type,
       name: isSet(object.name) ? String(object.name) : "",
       methods: Array.isArray(object?.methods)
         ? object.methods.map((e: any) => Method.fromJSON(e))
@@ -317,8 +325,11 @@ export const Api = {
   },
 };
 
+messageTypeRegistry.set(Api.$type, Api);
+
 function createBaseMethod(): Method {
   return {
+    $type: "google.protobuf.Method",
     name: "",
     requestTypeUrl: "",
     requestStreaming: false,
@@ -330,6 +341,8 @@ function createBaseMethod(): Method {
 }
 
 export const Method = {
+  $type: "google.protobuf.Method" as const,
+
   encode(
     message: Method,
     writer: _m0.Writer = _m0.Writer.create()
@@ -396,6 +409,7 @@ export const Method = {
 
   fromJSON(object: any): Method {
     return {
+      $type: Method.$type,
       name: isSet(object.name) ? String(object.name) : "",
       requestTypeUrl: isSet(object.requestTypeUrl)
         ? String(object.requestTypeUrl)
@@ -451,11 +465,15 @@ export const Method = {
   },
 };
 
+messageTypeRegistry.set(Method.$type, Method);
+
 function createBaseMixin(): Mixin {
-  return { name: "", root: "" };
+  return { $type: "google.protobuf.Mixin", name: "", root: "" };
 }
 
 export const Mixin = {
+  $type: "google.protobuf.Mixin" as const,
+
   encode(message: Mixin, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -489,6 +507,7 @@ export const Mixin = {
 
   fromJSON(object: any): Mixin {
     return {
+      $type: Mixin.$type,
       name: isSet(object.name) ? String(object.name) : "",
       root: isSet(object.root) ? String(object.root) : "",
     };
@@ -509,6 +528,8 @@ export const Mixin = {
   },
 };
 
+messageTypeRegistry.set(Mixin.$type, Mixin);
+
 type Builtin =
   | Date
   | Function
@@ -527,14 +548,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

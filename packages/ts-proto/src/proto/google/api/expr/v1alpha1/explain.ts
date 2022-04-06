@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Value } from "../../../../google/api/expr/v1alpha1/value";
@@ -12,6 +13,7 @@ export const protobufPackage = "google.api.expr.v1alpha1";
  * @deprecated
  */
 export interface Explain {
+  $type: "google.api.expr.v1alpha1.Explain";
   /**
    * All of the observed values.
    *
@@ -31,6 +33,7 @@ export interface Explain {
 
 /** ID and value index of one step. */
 export interface Explain_ExprStep {
+  $type: "google.api.expr.v1alpha1.Explain.ExprStep";
   /** ID of corresponding Expr node. */
   id: Long;
   /** Index of the value in the values list. */
@@ -38,10 +41,16 @@ export interface Explain_ExprStep {
 }
 
 function createBaseExplain(): Explain {
-  return { values: [], exprSteps: [] };
+  return {
+    $type: "google.api.expr.v1alpha1.Explain",
+    values: [],
+    exprSteps: [],
+  };
 }
 
 export const Explain = {
+  $type: "google.api.expr.v1alpha1.Explain" as const,
+
   encode(
     message: Explain,
     writer: _m0.Writer = _m0.Writer.create()
@@ -80,6 +89,7 @@ export const Explain = {
 
   fromJSON(object: any): Explain {
     return {
+      $type: Explain.$type,
       values: Array.isArray(object?.values)
         ? object.values.map((e: any) => Value.fromJSON(e))
         : [],
@@ -115,11 +125,19 @@ export const Explain = {
   },
 };
 
+messageTypeRegistry.set(Explain.$type, Explain);
+
 function createBaseExplain_ExprStep(): Explain_ExprStep {
-  return { id: Long.ZERO, valueIndex: 0 };
+  return {
+    $type: "google.api.expr.v1alpha1.Explain.ExprStep",
+    id: Long.ZERO,
+    valueIndex: 0,
+  };
 }
 
 export const Explain_ExprStep = {
+  $type: "google.api.expr.v1alpha1.Explain.ExprStep" as const,
+
   encode(
     message: Explain_ExprStep,
     writer: _m0.Writer = _m0.Writer.create()
@@ -156,6 +174,7 @@ export const Explain_ExprStep = {
 
   fromJSON(object: any): Explain_ExprStep {
     return {
+      $type: Explain_ExprStep.$type,
       id: isSet(object.id) ? Long.fromString(object.id) : Long.ZERO,
       valueIndex: isSet(object.valueIndex) ? Number(object.valueIndex) : 0,
     };
@@ -182,6 +201,8 @@ export const Explain_ExprStep = {
   },
 };
 
+messageTypeRegistry.set(Explain_ExprStep.$type, Explain_ExprStep);
+
 type Builtin =
   | Date
   | Function
@@ -200,14 +221,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

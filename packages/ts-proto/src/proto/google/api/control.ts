@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 
@@ -10,6 +11,7 @@ export const protobufPackage = "google.api";
  * monitoring, etc.
  */
 export interface Control {
+  $type: "google.api.Control";
   /**
    * The service control environment to use. If empty, no control plane
    * feature (like quota and billing) will be enabled.
@@ -18,10 +20,12 @@ export interface Control {
 }
 
 function createBaseControl(): Control {
-  return { environment: "" };
+  return { $type: "google.api.Control", environment: "" };
 }
 
 export const Control = {
+  $type: "google.api.Control" as const,
+
   encode(
     message: Control,
     writer: _m0.Writer = _m0.Writer.create()
@@ -52,6 +56,7 @@ export const Control = {
 
   fromJSON(object: any): Control {
     return {
+      $type: Control.$type,
       environment: isSet(object.environment) ? String(object.environment) : "",
     };
   },
@@ -69,6 +74,8 @@ export const Control = {
     return message;
   },
 };
+
+messageTypeRegistry.set(Control.$type, Control);
 
 type Builtin =
   | Date
@@ -88,14 +95,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

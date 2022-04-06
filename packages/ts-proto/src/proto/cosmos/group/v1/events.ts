@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import {
@@ -11,48 +12,56 @@ export const protobufPackage = "cosmos.group.v1";
 
 /** EventCreateGroup is an event emitted when a group is created. */
 export interface EventCreateGroup {
+  $type: "cosmos.group.v1.EventCreateGroup";
   /** group_id is the unique ID of the group. */
   groupId: Long;
 }
 
 /** EventUpdateGroup is an event emitted when a group is updated. */
 export interface EventUpdateGroup {
+  $type: "cosmos.group.v1.EventUpdateGroup";
   /** group_id is the unique ID of the group. */
   groupId: Long;
 }
 
 /** EventCreateGroupPolicy is an event emitted when a group policy is created. */
 export interface EventCreateGroupPolicy {
+  $type: "cosmos.group.v1.EventCreateGroupPolicy";
   /** address is the account address of the group policy. */
   address: string;
 }
 
 /** EventUpdateGroupPolicy is an event emitted when a group policy is updated. */
 export interface EventUpdateGroupPolicy {
+  $type: "cosmos.group.v1.EventUpdateGroupPolicy";
   /** address is the account address of the group policy. */
   address: string;
 }
 
 /** EventSubmitProposal is an event emitted when a proposal is created. */
 export interface EventSubmitProposal {
+  $type: "cosmos.group.v1.EventSubmitProposal";
   /** proposal_id is the unique ID of the proposal. */
   proposalId: Long;
 }
 
 /** EventWithdrawProposal is an event emitted when a proposal is withdrawn. */
 export interface EventWithdrawProposal {
+  $type: "cosmos.group.v1.EventWithdrawProposal";
   /** proposal_id is the unique ID of the proposal. */
   proposalId: Long;
 }
 
 /** EventVote is an event emitted when a voter votes on a proposal. */
 export interface EventVote {
+  $type: "cosmos.group.v1.EventVote";
   /** proposal_id is the unique ID of the proposal. */
   proposalId: Long;
 }
 
 /** EventExec is an event emitted when a proposal is executed. */
 export interface EventExec {
+  $type: "cosmos.group.v1.EventExec";
   /** proposal_id is the unique ID of the proposal. */
   proposalId: Long;
   /** result is the proposal execution result. */
@@ -61,6 +70,7 @@ export interface EventExec {
 
 /** EventLeaveGroup is an event emitted when group member leaves the group. */
 export interface EventLeaveGroup {
+  $type: "cosmos.group.v1.EventLeaveGroup";
   /** group_id is the unique ID of the group. */
   groupId: Long;
   /** address is the account address of the group member. */
@@ -68,10 +78,12 @@ export interface EventLeaveGroup {
 }
 
 function createBaseEventCreateGroup(): EventCreateGroup {
-  return { groupId: Long.UZERO };
+  return { $type: "cosmos.group.v1.EventCreateGroup", groupId: Long.UZERO };
 }
 
 export const EventCreateGroup = {
+  $type: "cosmos.group.v1.EventCreateGroup" as const,
+
   encode(
     message: EventCreateGroup,
     writer: _m0.Writer = _m0.Writer.create()
@@ -102,6 +114,7 @@ export const EventCreateGroup = {
 
   fromJSON(object: any): EventCreateGroup {
     return {
+      $type: EventCreateGroup.$type,
       groupId: isSet(object.groupId)
         ? Long.fromString(object.groupId)
         : Long.UZERO,
@@ -127,11 +140,15 @@ export const EventCreateGroup = {
   },
 };
 
+messageTypeRegistry.set(EventCreateGroup.$type, EventCreateGroup);
+
 function createBaseEventUpdateGroup(): EventUpdateGroup {
-  return { groupId: Long.UZERO };
+  return { $type: "cosmos.group.v1.EventUpdateGroup", groupId: Long.UZERO };
 }
 
 export const EventUpdateGroup = {
+  $type: "cosmos.group.v1.EventUpdateGroup" as const,
+
   encode(
     message: EventUpdateGroup,
     writer: _m0.Writer = _m0.Writer.create()
@@ -162,6 +179,7 @@ export const EventUpdateGroup = {
 
   fromJSON(object: any): EventUpdateGroup {
     return {
+      $type: EventUpdateGroup.$type,
       groupId: isSet(object.groupId)
         ? Long.fromString(object.groupId)
         : Long.UZERO,
@@ -187,11 +205,15 @@ export const EventUpdateGroup = {
   },
 };
 
+messageTypeRegistry.set(EventUpdateGroup.$type, EventUpdateGroup);
+
 function createBaseEventCreateGroupPolicy(): EventCreateGroupPolicy {
-  return { address: "" };
+  return { $type: "cosmos.group.v1.EventCreateGroupPolicy", address: "" };
 }
 
 export const EventCreateGroupPolicy = {
+  $type: "cosmos.group.v1.EventCreateGroupPolicy" as const,
+
   encode(
     message: EventCreateGroupPolicy,
     writer: _m0.Writer = _m0.Writer.create()
@@ -225,6 +247,7 @@ export const EventCreateGroupPolicy = {
 
   fromJSON(object: any): EventCreateGroupPolicy {
     return {
+      $type: EventCreateGroupPolicy.$type,
       address: isSet(object.address) ? String(object.address) : "",
     };
   },
@@ -244,11 +267,15 @@ export const EventCreateGroupPolicy = {
   },
 };
 
+messageTypeRegistry.set(EventCreateGroupPolicy.$type, EventCreateGroupPolicy);
+
 function createBaseEventUpdateGroupPolicy(): EventUpdateGroupPolicy {
-  return { address: "" };
+  return { $type: "cosmos.group.v1.EventUpdateGroupPolicy", address: "" };
 }
 
 export const EventUpdateGroupPolicy = {
+  $type: "cosmos.group.v1.EventUpdateGroupPolicy" as const,
+
   encode(
     message: EventUpdateGroupPolicy,
     writer: _m0.Writer = _m0.Writer.create()
@@ -282,6 +309,7 @@ export const EventUpdateGroupPolicy = {
 
   fromJSON(object: any): EventUpdateGroupPolicy {
     return {
+      $type: EventUpdateGroupPolicy.$type,
       address: isSet(object.address) ? String(object.address) : "",
     };
   },
@@ -301,11 +329,18 @@ export const EventUpdateGroupPolicy = {
   },
 };
 
+messageTypeRegistry.set(EventUpdateGroupPolicy.$type, EventUpdateGroupPolicy);
+
 function createBaseEventSubmitProposal(): EventSubmitProposal {
-  return { proposalId: Long.UZERO };
+  return {
+    $type: "cosmos.group.v1.EventSubmitProposal",
+    proposalId: Long.UZERO,
+  };
 }
 
 export const EventSubmitProposal = {
+  $type: "cosmos.group.v1.EventSubmitProposal" as const,
+
   encode(
     message: EventSubmitProposal,
     writer: _m0.Writer = _m0.Writer.create()
@@ -336,6 +371,7 @@ export const EventSubmitProposal = {
 
   fromJSON(object: any): EventSubmitProposal {
     return {
+      $type: EventSubmitProposal.$type,
       proposalId: isSet(object.proposalId)
         ? Long.fromString(object.proposalId)
         : Long.UZERO,
@@ -361,11 +397,18 @@ export const EventSubmitProposal = {
   },
 };
 
+messageTypeRegistry.set(EventSubmitProposal.$type, EventSubmitProposal);
+
 function createBaseEventWithdrawProposal(): EventWithdrawProposal {
-  return { proposalId: Long.UZERO };
+  return {
+    $type: "cosmos.group.v1.EventWithdrawProposal",
+    proposalId: Long.UZERO,
+  };
 }
 
 export const EventWithdrawProposal = {
+  $type: "cosmos.group.v1.EventWithdrawProposal" as const,
+
   encode(
     message: EventWithdrawProposal,
     writer: _m0.Writer = _m0.Writer.create()
@@ -399,6 +442,7 @@ export const EventWithdrawProposal = {
 
   fromJSON(object: any): EventWithdrawProposal {
     return {
+      $type: EventWithdrawProposal.$type,
       proposalId: isSet(object.proposalId)
         ? Long.fromString(object.proposalId)
         : Long.UZERO,
@@ -424,11 +468,15 @@ export const EventWithdrawProposal = {
   },
 };
 
+messageTypeRegistry.set(EventWithdrawProposal.$type, EventWithdrawProposal);
+
 function createBaseEventVote(): EventVote {
-  return { proposalId: Long.UZERO };
+  return { $type: "cosmos.group.v1.EventVote", proposalId: Long.UZERO };
 }
 
 export const EventVote = {
+  $type: "cosmos.group.v1.EventVote" as const,
+
   encode(
     message: EventVote,
     writer: _m0.Writer = _m0.Writer.create()
@@ -459,6 +507,7 @@ export const EventVote = {
 
   fromJSON(object: any): EventVote {
     return {
+      $type: EventVote.$type,
       proposalId: isSet(object.proposalId)
         ? Long.fromString(object.proposalId)
         : Long.UZERO,
@@ -484,11 +533,19 @@ export const EventVote = {
   },
 };
 
+messageTypeRegistry.set(EventVote.$type, EventVote);
+
 function createBaseEventExec(): EventExec {
-  return { proposalId: Long.UZERO, result: 0 };
+  return {
+    $type: "cosmos.group.v1.EventExec",
+    proposalId: Long.UZERO,
+    result: 0,
+  };
 }
 
 export const EventExec = {
+  $type: "cosmos.group.v1.EventExec" as const,
+
   encode(
     message: EventExec,
     writer: _m0.Writer = _m0.Writer.create()
@@ -525,6 +582,7 @@ export const EventExec = {
 
   fromJSON(object: any): EventExec {
     return {
+      $type: EventExec.$type,
       proposalId: isSet(object.proposalId)
         ? Long.fromString(object.proposalId)
         : Long.UZERO,
@@ -556,11 +614,19 @@ export const EventExec = {
   },
 };
 
+messageTypeRegistry.set(EventExec.$type, EventExec);
+
 function createBaseEventLeaveGroup(): EventLeaveGroup {
-  return { groupId: Long.UZERO, address: "" };
+  return {
+    $type: "cosmos.group.v1.EventLeaveGroup",
+    groupId: Long.UZERO,
+    address: "",
+  };
 }
 
 export const EventLeaveGroup = {
+  $type: "cosmos.group.v1.EventLeaveGroup" as const,
+
   encode(
     message: EventLeaveGroup,
     writer: _m0.Writer = _m0.Writer.create()
@@ -597,6 +663,7 @@ export const EventLeaveGroup = {
 
   fromJSON(object: any): EventLeaveGroup {
     return {
+      $type: EventLeaveGroup.$type,
       groupId: isSet(object.groupId)
         ? Long.fromString(object.groupId)
         : Long.UZERO,
@@ -625,6 +692,8 @@ export const EventLeaveGroup = {
   },
 };
 
+messageTypeRegistry.set(EventLeaveGroup.$type, EventLeaveGroup);
+
 type Builtin =
   | Date
   | Function
@@ -643,14 +712,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

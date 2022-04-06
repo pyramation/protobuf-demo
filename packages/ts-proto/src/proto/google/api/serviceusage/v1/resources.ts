@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Documentation } from "../../../../google/api/documentation";
@@ -63,6 +64,7 @@ export function stateToJSON(object: State): string {
 
 /** A service that is available for use by the consumer. */
 export interface Service {
+  $type: "google.api.serviceusage.v1.Service";
   /**
    * The resource name of the consumer and service.
    *
@@ -83,13 +85,14 @@ export interface Service {
    * the `ListServices` method. These fields are present only in responses to
    * the `GetService` method.
    */
-  config?: ServiceConfig;
+  config: ServiceConfig;
   /** Whether or not the service has been enabled for use by the consumer. */
   state: State;
 }
 
 /** The configuration of the service. */
 export interface ServiceConfig {
+  $type: "google.api.serviceusage.v1.ServiceConfig";
   /**
    * The DNS address at which this service is available.
    *
@@ -108,13 +111,13 @@ export interface ServiceConfig {
    * Additional API documentation. Contains only the summary and the
    * documentation URL.
    */
-  documentation?: Documentation;
+  documentation: Documentation;
   /** Quota configuration. */
-  quota?: Quota;
+  quota: Quota;
   /** Auth configuration. Contains only the OAuth rules. */
-  authentication?: Authentication;
+  authentication: Authentication;
   /** Configuration controlling usage of this service. */
-  usage?: Usage;
+  usage: Usage;
   /**
    * Configuration for network endpoints. Contains only the names and aliases
    * of the endpoints.
@@ -129,11 +132,12 @@ export interface ServiceConfig {
    * Monitoring configuration.
    * This should not include the 'producer_destinations' field.
    */
-  monitoring?: Monitoring;
+  monitoring: Monitoring;
 }
 
 /** The operation metadata returned for the batchend services operation. */
 export interface OperationMetadata {
+  $type: "google.api.serviceusage.v1.OperationMetadata";
   /**
    * The full name of the resources that this operation is directly
    * associated with.
@@ -142,10 +146,18 @@ export interface OperationMetadata {
 }
 
 function createBaseService(): Service {
-  return { name: "", parent: "", config: undefined, state: 0 };
+  return {
+    $type: "google.api.serviceusage.v1.Service",
+    name: "",
+    parent: "",
+    config: undefined,
+    state: 0,
+  };
 }
 
 export const Service = {
+  $type: "google.api.serviceusage.v1.Service" as const,
+
   encode(
     message: Service,
     writer: _m0.Writer = _m0.Writer.create()
@@ -194,6 +206,7 @@ export const Service = {
 
   fromJSON(object: any): Service {
     return {
+      $type: Service.$type,
       name: isSet(object.name) ? String(object.name) : "",
       parent: isSet(object.parent) ? String(object.parent) : "",
       config: isSet(object.config)
@@ -228,8 +241,11 @@ export const Service = {
   },
 };
 
+messageTypeRegistry.set(Service.$type, Service);
+
 function createBaseServiceConfig(): ServiceConfig {
   return {
+    $type: "google.api.serviceusage.v1.ServiceConfig",
     name: "",
     title: "",
     apis: [],
@@ -244,6 +260,8 @@ function createBaseServiceConfig(): ServiceConfig {
 }
 
 export const ServiceConfig = {
+  $type: "google.api.serviceusage.v1.ServiceConfig" as const,
+
   encode(
     message: ServiceConfig,
     writer: _m0.Writer = _m0.Writer.create()
@@ -342,6 +360,7 @@ export const ServiceConfig = {
 
   fromJSON(object: any): ServiceConfig {
     return {
+      $type: ServiceConfig.$type,
       name: isSet(object.name) ? String(object.name) : "",
       title: isSet(object.title) ? String(object.title) : "",
       apis: Array.isArray(object?.apis)
@@ -448,11 +467,18 @@ export const ServiceConfig = {
   },
 };
 
+messageTypeRegistry.set(ServiceConfig.$type, ServiceConfig);
+
 function createBaseOperationMetadata(): OperationMetadata {
-  return { resourceNames: [] };
+  return {
+    $type: "google.api.serviceusage.v1.OperationMetadata",
+    resourceNames: [],
+  };
 }
 
 export const OperationMetadata = {
+  $type: "google.api.serviceusage.v1.OperationMetadata" as const,
+
   encode(
     message: OperationMetadata,
     writer: _m0.Writer = _m0.Writer.create()
@@ -483,6 +509,7 @@ export const OperationMetadata = {
 
   fromJSON(object: any): OperationMetadata {
     return {
+      $type: OperationMetadata.$type,
       resourceNames: Array.isArray(object?.resourceNames)
         ? object.resourceNames.map((e: any) => String(e))
         : [],
@@ -508,6 +535,8 @@ export const OperationMetadata = {
   },
 };
 
+messageTypeRegistry.set(OperationMetadata.$type, OperationMetadata);
+
 type Builtin =
   | Date
   | Function
@@ -526,14 +555,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

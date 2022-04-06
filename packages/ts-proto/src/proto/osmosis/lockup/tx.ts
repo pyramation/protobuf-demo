@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Duration } from "../../google/protobuf/duration";
@@ -8,24 +9,29 @@ import { PeriodLock } from "../../osmosis/lockup/lock";
 export const protobufPackage = "osmosis.lockup";
 
 export interface MsgLockTokens {
+  $type: "osmosis.lockup.MsgLockTokens";
   owner: string;
-  duration?: Duration;
+  duration: Duration;
   coins: Coin[];
 }
 
 export interface MsgLockTokensResponse {
+  $type: "osmosis.lockup.MsgLockTokensResponse";
   ID: Long;
 }
 
 export interface MsgBeginUnlockingAll {
+  $type: "osmosis.lockup.MsgBeginUnlockingAll";
   owner: string;
 }
 
 export interface MsgBeginUnlockingAllResponse {
+  $type: "osmosis.lockup.MsgBeginUnlockingAllResponse";
   unlocks: PeriodLock[];
 }
 
 export interface MsgBeginUnlocking {
+  $type: "osmosis.lockup.MsgBeginUnlocking";
   owner: string;
   ID: Long;
   /** Amount of unlocking coins. Unlock all if not set. */
@@ -33,14 +39,22 @@ export interface MsgBeginUnlocking {
 }
 
 export interface MsgBeginUnlockingResponse {
+  $type: "osmosis.lockup.MsgBeginUnlockingResponse";
   success: boolean;
 }
 
 function createBaseMsgLockTokens(): MsgLockTokens {
-  return { owner: "", duration: undefined, coins: [] };
+  return {
+    $type: "osmosis.lockup.MsgLockTokens",
+    owner: "",
+    duration: undefined,
+    coins: [],
+  };
 }
 
 export const MsgLockTokens = {
+  $type: "osmosis.lockup.MsgLockTokens" as const,
+
   encode(
     message: MsgLockTokens,
     writer: _m0.Writer = _m0.Writer.create()
@@ -83,6 +97,7 @@ export const MsgLockTokens = {
 
   fromJSON(object: any): MsgLockTokens {
     return {
+      $type: MsgLockTokens.$type,
       owner: isSet(object.owner) ? String(object.owner) : "",
       duration: isSet(object.duration)
         ? Duration.fromJSON(object.duration)
@@ -122,11 +137,15 @@ export const MsgLockTokens = {
   },
 };
 
+messageTypeRegistry.set(MsgLockTokens.$type, MsgLockTokens);
+
 function createBaseMsgLockTokensResponse(): MsgLockTokensResponse {
-  return { ID: Long.UZERO };
+  return { $type: "osmosis.lockup.MsgLockTokensResponse", ID: Long.UZERO };
 }
 
 export const MsgLockTokensResponse = {
+  $type: "osmosis.lockup.MsgLockTokensResponse" as const,
+
   encode(
     message: MsgLockTokensResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -160,6 +179,7 @@ export const MsgLockTokensResponse = {
 
   fromJSON(object: any): MsgLockTokensResponse {
     return {
+      $type: MsgLockTokensResponse.$type,
       ID: isSet(object.ID) ? Long.fromString(object.ID) : Long.UZERO,
     };
   },
@@ -183,11 +203,15 @@ export const MsgLockTokensResponse = {
   },
 };
 
+messageTypeRegistry.set(MsgLockTokensResponse.$type, MsgLockTokensResponse);
+
 function createBaseMsgBeginUnlockingAll(): MsgBeginUnlockingAll {
-  return { owner: "" };
+  return { $type: "osmosis.lockup.MsgBeginUnlockingAll", owner: "" };
 }
 
 export const MsgBeginUnlockingAll = {
+  $type: "osmosis.lockup.MsgBeginUnlockingAll" as const,
+
   encode(
     message: MsgBeginUnlockingAll,
     writer: _m0.Writer = _m0.Writer.create()
@@ -221,6 +245,7 @@ export const MsgBeginUnlockingAll = {
 
   fromJSON(object: any): MsgBeginUnlockingAll {
     return {
+      $type: MsgBeginUnlockingAll.$type,
       owner: isSet(object.owner) ? String(object.owner) : "",
     };
   },
@@ -240,11 +265,15 @@ export const MsgBeginUnlockingAll = {
   },
 };
 
+messageTypeRegistry.set(MsgBeginUnlockingAll.$type, MsgBeginUnlockingAll);
+
 function createBaseMsgBeginUnlockingAllResponse(): MsgBeginUnlockingAllResponse {
-  return { unlocks: [] };
+  return { $type: "osmosis.lockup.MsgBeginUnlockingAllResponse", unlocks: [] };
 }
 
 export const MsgBeginUnlockingAllResponse = {
+  $type: "osmosis.lockup.MsgBeginUnlockingAllResponse" as const,
+
   encode(
     message: MsgBeginUnlockingAllResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -278,6 +307,7 @@ export const MsgBeginUnlockingAllResponse = {
 
   fromJSON(object: any): MsgBeginUnlockingAllResponse {
     return {
+      $type: MsgBeginUnlockingAllResponse.$type,
       unlocks: Array.isArray(object?.unlocks)
         ? object.unlocks.map((e: any) => PeriodLock.fromJSON(e))
         : [],
@@ -306,11 +336,23 @@ export const MsgBeginUnlockingAllResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgBeginUnlockingAllResponse.$type,
+  MsgBeginUnlockingAllResponse
+);
+
 function createBaseMsgBeginUnlocking(): MsgBeginUnlocking {
-  return { owner: "", ID: Long.UZERO, coins: [] };
+  return {
+    $type: "osmosis.lockup.MsgBeginUnlocking",
+    owner: "",
+    ID: Long.UZERO,
+    coins: [],
+  };
 }
 
 export const MsgBeginUnlocking = {
+  $type: "osmosis.lockup.MsgBeginUnlocking" as const,
+
   encode(
     message: MsgBeginUnlocking,
     writer: _m0.Writer = _m0.Writer.create()
@@ -353,6 +395,7 @@ export const MsgBeginUnlocking = {
 
   fromJSON(object: any): MsgBeginUnlocking {
     return {
+      $type: MsgBeginUnlocking.$type,
       owner: isSet(object.owner) ? String(object.owner) : "",
       ID: isSet(object.ID) ? Long.fromString(object.ID) : Long.UZERO,
       coins: Array.isArray(object?.coins)
@@ -388,11 +431,15 @@ export const MsgBeginUnlocking = {
   },
 };
 
+messageTypeRegistry.set(MsgBeginUnlocking.$type, MsgBeginUnlocking);
+
 function createBaseMsgBeginUnlockingResponse(): MsgBeginUnlockingResponse {
-  return { success: false };
+  return { $type: "osmosis.lockup.MsgBeginUnlockingResponse", success: false };
 }
 
 export const MsgBeginUnlockingResponse = {
+  $type: "osmosis.lockup.MsgBeginUnlockingResponse" as const,
+
   encode(
     message: MsgBeginUnlockingResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -426,6 +473,7 @@ export const MsgBeginUnlockingResponse = {
 
   fromJSON(object: any): MsgBeginUnlockingResponse {
     return {
+      $type: MsgBeginUnlockingResponse.$type,
       success: isSet(object.success) ? Boolean(object.success) : false,
     };
   },
@@ -444,6 +492,11 @@ export const MsgBeginUnlockingResponse = {
     return message;
   },
 };
+
+messageTypeRegistry.set(
+  MsgBeginUnlockingResponse.$type,
+  MsgBeginUnlockingResponse
+);
 
 /** Msg defines the Msg service. */
 export interface Msg {
@@ -530,14 +583,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

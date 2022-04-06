@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 
@@ -23,6 +24,7 @@ export const protobufPackage = "google.api";
  *       allow_cors: true
  */
 export interface Endpoint {
+  $type: "google.api.Endpoint";
   /** The canonical name of this endpoint. */
   name: string;
   /**
@@ -57,10 +59,18 @@ export interface Endpoint {
 }
 
 function createBaseEndpoint(): Endpoint {
-  return { name: "", aliases: [], target: "", allowCors: false };
+  return {
+    $type: "google.api.Endpoint",
+    name: "",
+    aliases: [],
+    target: "",
+    allowCors: false,
+  };
 }
 
 export const Endpoint = {
+  $type: "google.api.Endpoint" as const,
+
   encode(
     message: Endpoint,
     writer: _m0.Writer = _m0.Writer.create()
@@ -109,6 +119,7 @@ export const Endpoint = {
 
   fromJSON(object: any): Endpoint {
     return {
+      $type: Endpoint.$type,
       name: isSet(object.name) ? String(object.name) : "",
       aliases: Array.isArray(object?.aliases)
         ? object.aliases.map((e: any) => String(e))
@@ -141,6 +152,8 @@ export const Endpoint = {
   },
 };
 
+messageTypeRegistry.set(Endpoint.$type, Endpoint);
+
 type Builtin =
   | Date
   | Function
@@ -159,14 +172,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Timestamp } from "../../../../google/protobuf/timestamp";
@@ -8,6 +9,7 @@ export const protobufPackage = "google.api.servicecontrol.v1";
 
 /** Represents a single metric value. */
 export interface MetricValue {
+  $type: "google.api.servicecontrol.v1.MetricValue";
   /**
    * The labels describing the metric value.
    * See comments on [google.api.servicecontrol.v1.Operation.labels][google.api.servicecontrol.v1.Operation.labels] for
@@ -22,13 +24,13 @@ export interface MetricValue {
    * documentation in the service configuration for details. If not specified,
    * [google.api.servicecontrol.v1.Operation.start_time][google.api.servicecontrol.v1.Operation.start_time] will be used.
    */
-  startTime?: Date;
+  startTime: Date;
   /**
    * The end of the time period over which this metric value's measurement
    * applies.  If not specified,
    * [google.api.servicecontrol.v1.Operation.end_time][google.api.servicecontrol.v1.Operation.end_time] will be used.
    */
-  endTime?: Date;
+  endTime: Date;
   /** A boolean value. */
   boolValue: boolean | undefined;
   /** A signed 64-bit integer value. */
@@ -38,10 +40,11 @@ export interface MetricValue {
   /** A text string value. */
   stringValue: string | undefined;
   /** A distribution value. */
-  distributionValue?: Distribution | undefined;
+  distributionValue: Distribution | undefined;
 }
 
 export interface MetricValue_LabelsEntry {
+  $type: "google.api.servicecontrol.v1.MetricValue.LabelsEntry";
   key: string;
   value: string;
 }
@@ -52,6 +55,7 @@ export interface MetricValue_LabelsEntry {
  * end time, and label values.
  */
 export interface MetricValueSet {
+  $type: "google.api.servicecontrol.v1.MetricValueSet";
   /** The metric name defined in the service configuration. */
   metricName: string;
   /** The values in this metric. */
@@ -60,6 +64,7 @@ export interface MetricValueSet {
 
 function createBaseMetricValue(): MetricValue {
   return {
+    $type: "google.api.servicecontrol.v1.MetricValue",
     labels: {},
     startTime: undefined,
     endTime: undefined,
@@ -72,13 +77,19 @@ function createBaseMetricValue(): MetricValue {
 }
 
 export const MetricValue = {
+  $type: "google.api.servicecontrol.v1.MetricValue" as const,
+
   encode(
     message: MetricValue,
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
     Object.entries(message.labels).forEach(([key, value]) => {
       MetricValue_LabelsEntry.encode(
-        { key: key as any, value },
+        {
+          $type: "google.api.servicecontrol.v1.MetricValue.LabelsEntry",
+          key: key as any,
+          value,
+        },
         writer.uint32(10).fork()
       ).ldelim();
     });
@@ -169,6 +180,7 @@ export const MetricValue = {
 
   fromJSON(object: any): MetricValue {
     return {
+      $type: MetricValue.$type,
       labels: isObject(object.labels)
         ? Object.entries(object.labels).reduce<{ [key: string]: string }>(
             (acc, [key, value]) => {
@@ -258,11 +270,19 @@ export const MetricValue = {
   },
 };
 
+messageTypeRegistry.set(MetricValue.$type, MetricValue);
+
 function createBaseMetricValue_LabelsEntry(): MetricValue_LabelsEntry {
-  return { key: "", value: "" };
+  return {
+    $type: "google.api.servicecontrol.v1.MetricValue.LabelsEntry",
+    key: "",
+    value: "",
+  };
 }
 
 export const MetricValue_LabelsEntry = {
+  $type: "google.api.servicecontrol.v1.MetricValue.LabelsEntry" as const,
+
   encode(
     message: MetricValue_LabelsEntry,
     writer: _m0.Writer = _m0.Writer.create()
@@ -302,6 +322,7 @@ export const MetricValue_LabelsEntry = {
 
   fromJSON(object: any): MetricValue_LabelsEntry {
     return {
+      $type: MetricValue_LabelsEntry.$type,
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? String(object.value) : "",
     };
@@ -324,11 +345,19 @@ export const MetricValue_LabelsEntry = {
   },
 };
 
+messageTypeRegistry.set(MetricValue_LabelsEntry.$type, MetricValue_LabelsEntry);
+
 function createBaseMetricValueSet(): MetricValueSet {
-  return { metricName: "", metricValues: [] };
+  return {
+    $type: "google.api.servicecontrol.v1.MetricValueSet",
+    metricName: "",
+    metricValues: [],
+  };
 }
 
 export const MetricValueSet = {
+  $type: "google.api.servicecontrol.v1.MetricValueSet" as const,
+
   encode(
     message: MetricValueSet,
     writer: _m0.Writer = _m0.Writer.create()
@@ -367,6 +396,7 @@ export const MetricValueSet = {
 
   fromJSON(object: any): MetricValueSet {
     return {
+      $type: MetricValueSet.$type,
       metricName: isSet(object.metricName) ? String(object.metricName) : "",
       metricValues: Array.isArray(object?.metricValues)
         ? object.metricValues.map((e: any) => MetricValue.fromJSON(e))
@@ -398,6 +428,8 @@ export const MetricValueSet = {
   },
 };
 
+messageTypeRegistry.set(MetricValueSet.$type, MetricValueSet);
+
 type Builtin =
   | Date
   | Function
@@ -416,21 +448,21 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = (date.getTime() % 1_000) * 1_000_000;
-  return { seconds, nanos };
+  return { $type: "google.protobuf.Timestamp", seconds, nanos };
 }
 
 function fromTimestamp(t: Timestamp): Date {

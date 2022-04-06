@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 
@@ -91,6 +92,7 @@ export function storageTypeToJSON(object: StorageType): string {
 
 /** ModuleSchemaDescriptor describe's a module's ORM schema. */
 export interface ModuleSchemaDescriptor {
+  $type: "cosmos.orm.v1alpha1.ModuleSchemaDescriptor";
   schemaFile: ModuleSchemaDescriptor_FileEntry[];
   /**
    * prefix is an optional prefix that precedes all keys in this module's
@@ -101,6 +103,7 @@ export interface ModuleSchemaDescriptor {
 
 /** FileEntry describes an ORM file used in a module. */
 export interface ModuleSchemaDescriptor_FileEntry {
+  $type: "cosmos.orm.v1alpha1.ModuleSchemaDescriptor.FileEntry";
   /**
    * id is a prefix that will be varint encoded and prepended to all the
    * table keys specified in the file's tables.
@@ -121,10 +124,16 @@ export interface ModuleSchemaDescriptor_FileEntry {
 }
 
 function createBaseModuleSchemaDescriptor(): ModuleSchemaDescriptor {
-  return { schemaFile: [], prefix: new Uint8Array() };
+  return {
+    $type: "cosmos.orm.v1alpha1.ModuleSchemaDescriptor",
+    schemaFile: [],
+    prefix: new Uint8Array(),
+  };
 }
 
 export const ModuleSchemaDescriptor = {
+  $type: "cosmos.orm.v1alpha1.ModuleSchemaDescriptor" as const,
+
   encode(
     message: ModuleSchemaDescriptor,
     writer: _m0.Writer = _m0.Writer.create()
@@ -169,6 +178,7 @@ export const ModuleSchemaDescriptor = {
 
   fromJSON(object: any): ModuleSchemaDescriptor {
     return {
+      $type: ModuleSchemaDescriptor.$type,
       schemaFile: Array.isArray(object?.schemaFile)
         ? object.schemaFile.map((e: any) =>
             ModuleSchemaDescriptor_FileEntry.fromJSON(e)
@@ -209,11 +219,20 @@ export const ModuleSchemaDescriptor = {
   },
 };
 
+messageTypeRegistry.set(ModuleSchemaDescriptor.$type, ModuleSchemaDescriptor);
+
 function createBaseModuleSchemaDescriptor_FileEntry(): ModuleSchemaDescriptor_FileEntry {
-  return { id: 0, protoFileName: "", storageType: 0 };
+  return {
+    $type: "cosmos.orm.v1alpha1.ModuleSchemaDescriptor.FileEntry",
+    id: 0,
+    protoFileName: "",
+    storageType: 0,
+  };
 }
 
 export const ModuleSchemaDescriptor_FileEntry = {
+  $type: "cosmos.orm.v1alpha1.ModuleSchemaDescriptor.FileEntry" as const,
+
   encode(
     message: ModuleSchemaDescriptor_FileEntry,
     writer: _m0.Writer = _m0.Writer.create()
@@ -259,6 +278,7 @@ export const ModuleSchemaDescriptor_FileEntry = {
 
   fromJSON(object: any): ModuleSchemaDescriptor_FileEntry {
     return {
+      $type: ModuleSchemaDescriptor_FileEntry.$type,
       id: isSet(object.id) ? Number(object.id) : 0,
       protoFileName: isSet(object.protoFileName)
         ? String(object.protoFileName)
@@ -289,6 +309,11 @@ export const ModuleSchemaDescriptor_FileEntry = {
     return message;
   },
 };
+
+messageTypeRegistry.set(
+  ModuleSchemaDescriptor_FileEntry.$type,
+  ModuleSchemaDescriptor_FileEntry
+);
 
 declare var self: any | undefined;
 declare var window: any | undefined;
@@ -342,14 +367,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

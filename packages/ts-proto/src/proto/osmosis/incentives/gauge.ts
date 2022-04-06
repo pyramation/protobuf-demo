@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { QueryCondition } from "../../osmosis/lockup/lock";
@@ -9,6 +10,7 @@ import { Duration } from "../../google/protobuf/duration";
 export const protobufPackage = "osmosis.incentives";
 
 export interface Gauge {
+  $type: "osmosis.incentives.Gauge";
   /** unique ID of a Gauge */
   id: Long;
   /**
@@ -20,14 +22,14 @@ export interface Gauge {
    * Rewards are distributed to lockups that are are returned by at least one of
    * these queries
    */
-  distributeTo?: QueryCondition;
+  distributeTo: QueryCondition;
   /**
    * total amount of Coins that has been in the gauge.
    * can distribute multiple coins
    */
   coins: Coin[];
   /** distribution start time */
-  startTime?: Date;
+  startTime: Date;
   /** number of epochs distribution will be done */
   numEpochsPaidOver: Long;
   /** number of epochs distributed already */
@@ -37,11 +39,13 @@ export interface Gauge {
 }
 
 export interface LockableDurationsInfo {
+  $type: "osmosis.incentives.LockableDurationsInfo";
   lockableDurations: Duration[];
 }
 
 function createBaseGauge(): Gauge {
   return {
+    $type: "osmosis.incentives.Gauge",
     id: Long.UZERO,
     isPerpetual: false,
     distributeTo: undefined,
@@ -54,6 +58,8 @@ function createBaseGauge(): Gauge {
 }
 
 export const Gauge = {
+  $type: "osmosis.incentives.Gauge" as const,
+
   encode(message: Gauge, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.id.isZero()) {
       writer.uint32(8).uint64(message.id);
@@ -131,6 +137,7 @@ export const Gauge = {
 
   fromJSON(object: any): Gauge {
     return {
+      $type: Gauge.$type,
       id: isSet(object.id) ? Long.fromString(object.id) : Long.UZERO,
       isPerpetual: isSet(object.isPerpetual)
         ? Boolean(object.isPerpetual)
@@ -217,11 +224,18 @@ export const Gauge = {
   },
 };
 
+messageTypeRegistry.set(Gauge.$type, Gauge);
+
 function createBaseLockableDurationsInfo(): LockableDurationsInfo {
-  return { lockableDurations: [] };
+  return {
+    $type: "osmosis.incentives.LockableDurationsInfo",
+    lockableDurations: [],
+  };
 }
 
 export const LockableDurationsInfo = {
+  $type: "osmosis.incentives.LockableDurationsInfo" as const,
+
   encode(
     message: LockableDurationsInfo,
     writer: _m0.Writer = _m0.Writer.create()
@@ -257,6 +271,7 @@ export const LockableDurationsInfo = {
 
   fromJSON(object: any): LockableDurationsInfo {
     return {
+      $type: LockableDurationsInfo.$type,
       lockableDurations: Array.isArray(object?.lockableDurations)
         ? object.lockableDurations.map((e: any) => Duration.fromJSON(e))
         : [],
@@ -285,6 +300,8 @@ export const LockableDurationsInfo = {
   },
 };
 
+messageTypeRegistry.set(LockableDurationsInfo.$type, LockableDurationsInfo);
+
 type Builtin =
   | Date
   | Function
@@ -303,21 +320,21 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = (date.getTime() % 1_000) * 1_000_000;
-  return { seconds, nanos };
+  return { $type: "google.protobuf.Timestamp", seconds, nanos };
 }
 
 function fromTimestamp(t: Timestamp): Date {

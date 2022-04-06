@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 
@@ -366,6 +367,7 @@ export const protobufPackage = "google.api";
  *     table_location=instances/instance_bar&routing_id=prof_qux
  */
 export interface RoutingRule {
+  $type: "google.api.RoutingRule";
   /**
    * A collection of Routing Parameter specifications.
    * **NOTE:** If multiple Routing Parameters describe the same key
@@ -379,6 +381,7 @@ export interface RoutingRule {
 
 /** A projection from an input message to the GRPC or REST header. */
 export interface RoutingParameter {
+  $type: "google.api.RoutingParameter";
   /** A request field to extract the header key-value pair from. */
   field: string;
   /**
@@ -441,10 +444,12 @@ export interface RoutingParameter {
 }
 
 function createBaseRoutingRule(): RoutingRule {
-  return { routingParameters: [] };
+  return { $type: "google.api.RoutingRule", routingParameters: [] };
 }
 
 export const RoutingRule = {
+  $type: "google.api.RoutingRule" as const,
+
   encode(
     message: RoutingRule,
     writer: _m0.Writer = _m0.Writer.create()
@@ -477,6 +482,7 @@ export const RoutingRule = {
 
   fromJSON(object: any): RoutingRule {
     return {
+      $type: RoutingRule.$type,
       routingParameters: Array.isArray(object?.routingParameters)
         ? object.routingParameters.map((e: any) => RoutingParameter.fromJSON(e))
         : [],
@@ -506,11 +512,15 @@ export const RoutingRule = {
   },
 };
 
+messageTypeRegistry.set(RoutingRule.$type, RoutingRule);
+
 function createBaseRoutingParameter(): RoutingParameter {
-  return { field: "", pathTemplate: "" };
+  return { $type: "google.api.RoutingParameter", field: "", pathTemplate: "" };
 }
 
 export const RoutingParameter = {
+  $type: "google.api.RoutingParameter" as const,
+
   encode(
     message: RoutingParameter,
     writer: _m0.Writer = _m0.Writer.create()
@@ -547,6 +557,7 @@ export const RoutingParameter = {
 
   fromJSON(object: any): RoutingParameter {
     return {
+      $type: RoutingParameter.$type,
       field: isSet(object.field) ? String(object.field) : "",
       pathTemplate: isSet(object.pathTemplate)
         ? String(object.pathTemplate)
@@ -572,6 +583,8 @@ export const RoutingParameter = {
   },
 };
 
+messageTypeRegistry.set(RoutingParameter.$type, RoutingParameter);
+
 type Builtin =
   | Date
   | Function
@@ -590,14 +603,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

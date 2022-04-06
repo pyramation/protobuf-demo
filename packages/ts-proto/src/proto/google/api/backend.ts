@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 
@@ -6,6 +7,7 @@ export const protobufPackage = "google.api";
 
 /** `Backend` defines the backend configuration for a service. */
 export interface Backend {
+  $type: "google.api.Backend";
   /**
    * A list of API backend rules that apply to individual API methods.
    *
@@ -16,6 +18,7 @@ export interface Backend {
 
 /** A backend rule provides configuration for an individual API element. */
 export interface BackendRule {
+  $type: "google.api.BackendRule";
   /**
    * Selects the methods to which this rule applies.
    *
@@ -198,10 +201,12 @@ export function backendRule_PathTranslationToJSON(
 }
 
 function createBaseBackend(): Backend {
-  return { rules: [] };
+  return { $type: "google.api.Backend", rules: [] };
 }
 
 export const Backend = {
+  $type: "google.api.Backend" as const,
+
   encode(
     message: Backend,
     writer: _m0.Writer = _m0.Writer.create()
@@ -232,6 +237,7 @@ export const Backend = {
 
   fromJSON(object: any): Backend {
     return {
+      $type: Backend.$type,
       rules: Array.isArray(object?.rules)
         ? object.rules.map((e: any) => BackendRule.fromJSON(e))
         : [],
@@ -257,8 +263,11 @@ export const Backend = {
   },
 };
 
+messageTypeRegistry.set(Backend.$type, Backend);
+
 function createBaseBackendRule(): BackendRule {
   return {
+    $type: "google.api.BackendRule",
     selector: "",
     address: "",
     deadline: 0,
@@ -272,6 +281,8 @@ function createBaseBackendRule(): BackendRule {
 }
 
 export const BackendRule = {
+  $type: "google.api.BackendRule" as const,
+
   encode(
     message: BackendRule,
     writer: _m0.Writer = _m0.Writer.create()
@@ -350,6 +361,7 @@ export const BackendRule = {
 
   fromJSON(object: any): BackendRule {
     return {
+      $type: BackendRule.$type,
       selector: isSet(object.selector) ? String(object.selector) : "",
       address: isSet(object.address) ? String(object.address) : "",
       deadline: isSet(object.deadline) ? Number(object.deadline) : 0,
@@ -408,6 +420,8 @@ export const BackendRule = {
   },
 };
 
+messageTypeRegistry.set(BackendRule.$type, BackendRule);
+
 type Builtin =
   | Date
   | Function
@@ -426,14 +440,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

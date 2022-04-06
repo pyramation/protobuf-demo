@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import {
@@ -13,11 +14,14 @@ import {
 export const protobufPackage = "cosmos.slashing.v1beta1";
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method */
-export interface QueryParamsRequest {}
+export interface QueryParamsRequest {
+  $type: "cosmos.slashing.v1beta1.QueryParamsRequest";
+}
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method */
 export interface QueryParamsResponse {
-  params?: Params;
+  $type: "cosmos.slashing.v1beta1.QueryParamsResponse";
+  params: Params;
 }
 
 /**
@@ -25,6 +29,7 @@ export interface QueryParamsResponse {
  * method
  */
 export interface QuerySigningInfoRequest {
+  $type: "cosmos.slashing.v1beta1.QuerySigningInfoRequest";
   /** cons_address is the address to query signing info of */
   consAddress: string;
 }
@@ -34,8 +39,9 @@ export interface QuerySigningInfoRequest {
  * method
  */
 export interface QuerySigningInfoResponse {
+  $type: "cosmos.slashing.v1beta1.QuerySigningInfoResponse";
   /** val_signing_info is the signing info of requested val cons address */
-  valSigningInfo?: ValidatorSigningInfo;
+  valSigningInfo: ValidatorSigningInfo;
 }
 
 /**
@@ -43,7 +49,8 @@ export interface QuerySigningInfoResponse {
  * method
  */
 export interface QuerySigningInfosRequest {
-  pagination?: PageRequest;
+  $type: "cosmos.slashing.v1beta1.QuerySigningInfosRequest";
+  pagination: PageRequest;
 }
 
 /**
@@ -51,16 +58,19 @@ export interface QuerySigningInfosRequest {
  * method
  */
 export interface QuerySigningInfosResponse {
+  $type: "cosmos.slashing.v1beta1.QuerySigningInfosResponse";
   /** info is the signing info of all validators */
   info: ValidatorSigningInfo[];
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 
 function createBaseQueryParamsRequest(): QueryParamsRequest {
-  return {};
+  return { $type: "cosmos.slashing.v1beta1.QueryParamsRequest" };
 }
 
 export const QueryParamsRequest = {
+  $type: "cosmos.slashing.v1beta1.QueryParamsRequest" as const,
+
   encode(
     _: QueryParamsRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -84,7 +94,9 @@ export const QueryParamsRequest = {
   },
 
   fromJSON(_: any): QueryParamsRequest {
-    return {};
+    return {
+      $type: QueryParamsRequest.$type,
+    };
   },
 
   toJSON(_: QueryParamsRequest): unknown {
@@ -100,11 +112,18 @@ export const QueryParamsRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryParamsRequest.$type, QueryParamsRequest);
+
 function createBaseQueryParamsResponse(): QueryParamsResponse {
-  return { params: undefined };
+  return {
+    $type: "cosmos.slashing.v1beta1.QueryParamsResponse",
+    params: undefined,
+  };
 }
 
 export const QueryParamsResponse = {
+  $type: "cosmos.slashing.v1beta1.QueryParamsResponse" as const,
+
   encode(
     message: QueryParamsResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -135,6 +154,7 @@ export const QueryParamsResponse = {
 
   fromJSON(object: any): QueryParamsResponse {
     return {
+      $type: QueryParamsResponse.$type,
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
     };
   },
@@ -158,11 +178,18 @@ export const QueryParamsResponse = {
   },
 };
 
+messageTypeRegistry.set(QueryParamsResponse.$type, QueryParamsResponse);
+
 function createBaseQuerySigningInfoRequest(): QuerySigningInfoRequest {
-  return { consAddress: "" };
+  return {
+    $type: "cosmos.slashing.v1beta1.QuerySigningInfoRequest",
+    consAddress: "",
+  };
 }
 
 export const QuerySigningInfoRequest = {
+  $type: "cosmos.slashing.v1beta1.QuerySigningInfoRequest" as const,
+
   encode(
     message: QuerySigningInfoRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -196,6 +223,7 @@ export const QuerySigningInfoRequest = {
 
   fromJSON(object: any): QuerySigningInfoRequest {
     return {
+      $type: QuerySigningInfoRequest.$type,
       consAddress: isSet(object.consAddress) ? String(object.consAddress) : "",
     };
   },
@@ -216,11 +244,18 @@ export const QuerySigningInfoRequest = {
   },
 };
 
+messageTypeRegistry.set(QuerySigningInfoRequest.$type, QuerySigningInfoRequest);
+
 function createBaseQuerySigningInfoResponse(): QuerySigningInfoResponse {
-  return { valSigningInfo: undefined };
+  return {
+    $type: "cosmos.slashing.v1beta1.QuerySigningInfoResponse",
+    valSigningInfo: undefined,
+  };
 }
 
 export const QuerySigningInfoResponse = {
+  $type: "cosmos.slashing.v1beta1.QuerySigningInfoResponse" as const,
+
   encode(
     message: QuerySigningInfoResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -260,6 +295,7 @@ export const QuerySigningInfoResponse = {
 
   fromJSON(object: any): QuerySigningInfoResponse {
     return {
+      $type: QuerySigningInfoResponse.$type,
       valSigningInfo: isSet(object.valSigningInfo)
         ? ValidatorSigningInfo.fromJSON(object.valSigningInfo)
         : undefined,
@@ -287,11 +323,21 @@ export const QuerySigningInfoResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  QuerySigningInfoResponse.$type,
+  QuerySigningInfoResponse
+);
+
 function createBaseQuerySigningInfosRequest(): QuerySigningInfosRequest {
-  return { pagination: undefined };
+  return {
+    $type: "cosmos.slashing.v1beta1.QuerySigningInfosRequest",
+    pagination: undefined,
+  };
 }
 
 export const QuerySigningInfosRequest = {
+  $type: "cosmos.slashing.v1beta1.QuerySigningInfosRequest" as const,
+
   encode(
     message: QuerySigningInfosRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -325,6 +371,7 @@ export const QuerySigningInfosRequest = {
 
   fromJSON(object: any): QuerySigningInfosRequest {
     return {
+      $type: QuerySigningInfosRequest.$type,
       pagination: isSet(object.pagination)
         ? PageRequest.fromJSON(object.pagination)
         : undefined,
@@ -352,11 +399,22 @@ export const QuerySigningInfosRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  QuerySigningInfosRequest.$type,
+  QuerySigningInfosRequest
+);
+
 function createBaseQuerySigningInfosResponse(): QuerySigningInfosResponse {
-  return { info: [], pagination: undefined };
+  return {
+    $type: "cosmos.slashing.v1beta1.QuerySigningInfosResponse",
+    info: [],
+    pagination: undefined,
+  };
 }
 
 export const QuerySigningInfosResponse = {
+  $type: "cosmos.slashing.v1beta1.QuerySigningInfosResponse" as const,
+
   encode(
     message: QuerySigningInfosResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -401,6 +459,7 @@ export const QuerySigningInfosResponse = {
 
   fromJSON(object: any): QuerySigningInfosResponse {
     return {
+      $type: QuerySigningInfosResponse.$type,
       info: Array.isArray(object?.info)
         ? object.info.map((e: any) => ValidatorSigningInfo.fromJSON(e))
         : [],
@@ -439,6 +498,11 @@ export const QuerySigningInfosResponse = {
     return message;
   },
 };
+
+messageTypeRegistry.set(
+  QuerySigningInfosResponse.$type,
+  QuerySigningInfosResponse
+);
 
 /** Query provides defines the gRPC querier service */
 export interface Query {
@@ -529,14 +593,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

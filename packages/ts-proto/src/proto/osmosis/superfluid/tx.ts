@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
@@ -6,26 +7,35 @@ import { Coin } from "../../cosmos/base/v1beta1/coin";
 export const protobufPackage = "osmosis.superfluid";
 
 export interface MsgSuperfluidDelegate {
+  $type: "osmosis.superfluid.MsgSuperfluidDelegate";
   sender: string;
   lockId: Long;
   valAddr: string;
 }
 
-export interface MsgSuperfluidDelegateResponse {}
+export interface MsgSuperfluidDelegateResponse {
+  $type: "osmosis.superfluid.MsgSuperfluidDelegateResponse";
+}
 
 export interface MsgSuperfluidUndelegate {
+  $type: "osmosis.superfluid.MsgSuperfluidUndelegate";
   sender: string;
   lockId: Long;
 }
 
-export interface MsgSuperfluidUndelegateResponse {}
+export interface MsgSuperfluidUndelegateResponse {
+  $type: "osmosis.superfluid.MsgSuperfluidUndelegateResponse";
+}
 
 export interface MsgSuperfluidUnbondLock {
+  $type: "osmosis.superfluid.MsgSuperfluidUnbondLock";
   sender: string;
   lockId: Long;
 }
 
-export interface MsgSuperfluidUnbondLockResponse {}
+export interface MsgSuperfluidUnbondLockResponse {
+  $type: "osmosis.superfluid.MsgSuperfluidUnbondLockResponse";
+}
 
 /**
  * MsgLockAndSuperfluidDelegate locks coins with the unbonding period duration,
@@ -33,20 +43,29 @@ export interface MsgSuperfluidUnbondLockResponse {}
  * specified validator addr.
  */
 export interface MsgLockAndSuperfluidDelegate {
+  $type: "osmosis.superfluid.MsgLockAndSuperfluidDelegate";
   sender: string;
   coins: Coin[];
   valAddr: string;
 }
 
 export interface MsgLockAndSuperfluidDelegateResponse {
+  $type: "osmosis.superfluid.MsgLockAndSuperfluidDelegateResponse";
   ID: Long;
 }
 
 function createBaseMsgSuperfluidDelegate(): MsgSuperfluidDelegate {
-  return { sender: "", lockId: Long.UZERO, valAddr: "" };
+  return {
+    $type: "osmosis.superfluid.MsgSuperfluidDelegate",
+    sender: "",
+    lockId: Long.UZERO,
+    valAddr: "",
+  };
 }
 
 export const MsgSuperfluidDelegate = {
+  $type: "osmosis.superfluid.MsgSuperfluidDelegate" as const,
+
   encode(
     message: MsgSuperfluidDelegate,
     writer: _m0.Writer = _m0.Writer.create()
@@ -92,6 +111,7 @@ export const MsgSuperfluidDelegate = {
 
   fromJSON(object: any): MsgSuperfluidDelegate {
     return {
+      $type: MsgSuperfluidDelegate.$type,
       sender: isSet(object.sender) ? String(object.sender) : "",
       lockId: isSet(object.lockId)
         ? Long.fromString(object.lockId)
@@ -123,11 +143,15 @@ export const MsgSuperfluidDelegate = {
   },
 };
 
+messageTypeRegistry.set(MsgSuperfluidDelegate.$type, MsgSuperfluidDelegate);
+
 function createBaseMsgSuperfluidDelegateResponse(): MsgSuperfluidDelegateResponse {
-  return {};
+  return { $type: "osmosis.superfluid.MsgSuperfluidDelegateResponse" };
 }
 
 export const MsgSuperfluidDelegateResponse = {
+  $type: "osmosis.superfluid.MsgSuperfluidDelegateResponse" as const,
+
   encode(
     _: MsgSuperfluidDelegateResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -154,7 +178,9 @@ export const MsgSuperfluidDelegateResponse = {
   },
 
   fromJSON(_: any): MsgSuperfluidDelegateResponse {
-    return {};
+    return {
+      $type: MsgSuperfluidDelegateResponse.$type,
+    };
   },
 
   toJSON(_: MsgSuperfluidDelegateResponse): unknown {
@@ -170,11 +196,22 @@ export const MsgSuperfluidDelegateResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgSuperfluidDelegateResponse.$type,
+  MsgSuperfluidDelegateResponse
+);
+
 function createBaseMsgSuperfluidUndelegate(): MsgSuperfluidUndelegate {
-  return { sender: "", lockId: Long.UZERO };
+  return {
+    $type: "osmosis.superfluid.MsgSuperfluidUndelegate",
+    sender: "",
+    lockId: Long.UZERO,
+  };
 }
 
 export const MsgSuperfluidUndelegate = {
+  $type: "osmosis.superfluid.MsgSuperfluidUndelegate" as const,
+
   encode(
     message: MsgSuperfluidUndelegate,
     writer: _m0.Writer = _m0.Writer.create()
@@ -214,6 +251,7 @@ export const MsgSuperfluidUndelegate = {
 
   fromJSON(object: any): MsgSuperfluidUndelegate {
     return {
+      $type: MsgSuperfluidUndelegate.$type,
       sender: isSet(object.sender) ? String(object.sender) : "",
       lockId: isSet(object.lockId)
         ? Long.fromString(object.lockId)
@@ -242,11 +280,15 @@ export const MsgSuperfluidUndelegate = {
   },
 };
 
+messageTypeRegistry.set(MsgSuperfluidUndelegate.$type, MsgSuperfluidUndelegate);
+
 function createBaseMsgSuperfluidUndelegateResponse(): MsgSuperfluidUndelegateResponse {
-  return {};
+  return { $type: "osmosis.superfluid.MsgSuperfluidUndelegateResponse" };
 }
 
 export const MsgSuperfluidUndelegateResponse = {
+  $type: "osmosis.superfluid.MsgSuperfluidUndelegateResponse" as const,
+
   encode(
     _: MsgSuperfluidUndelegateResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -273,7 +315,9 @@ export const MsgSuperfluidUndelegateResponse = {
   },
 
   fromJSON(_: any): MsgSuperfluidUndelegateResponse {
-    return {};
+    return {
+      $type: MsgSuperfluidUndelegateResponse.$type,
+    };
   },
 
   toJSON(_: MsgSuperfluidUndelegateResponse): unknown {
@@ -289,11 +333,22 @@ export const MsgSuperfluidUndelegateResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgSuperfluidUndelegateResponse.$type,
+  MsgSuperfluidUndelegateResponse
+);
+
 function createBaseMsgSuperfluidUnbondLock(): MsgSuperfluidUnbondLock {
-  return { sender: "", lockId: Long.UZERO };
+  return {
+    $type: "osmosis.superfluid.MsgSuperfluidUnbondLock",
+    sender: "",
+    lockId: Long.UZERO,
+  };
 }
 
 export const MsgSuperfluidUnbondLock = {
+  $type: "osmosis.superfluid.MsgSuperfluidUnbondLock" as const,
+
   encode(
     message: MsgSuperfluidUnbondLock,
     writer: _m0.Writer = _m0.Writer.create()
@@ -333,6 +388,7 @@ export const MsgSuperfluidUnbondLock = {
 
   fromJSON(object: any): MsgSuperfluidUnbondLock {
     return {
+      $type: MsgSuperfluidUnbondLock.$type,
       sender: isSet(object.sender) ? String(object.sender) : "",
       lockId: isSet(object.lockId)
         ? Long.fromString(object.lockId)
@@ -361,11 +417,15 @@ export const MsgSuperfluidUnbondLock = {
   },
 };
 
+messageTypeRegistry.set(MsgSuperfluidUnbondLock.$type, MsgSuperfluidUnbondLock);
+
 function createBaseMsgSuperfluidUnbondLockResponse(): MsgSuperfluidUnbondLockResponse {
-  return {};
+  return { $type: "osmosis.superfluid.MsgSuperfluidUnbondLockResponse" };
 }
 
 export const MsgSuperfluidUnbondLockResponse = {
+  $type: "osmosis.superfluid.MsgSuperfluidUnbondLockResponse" as const,
+
   encode(
     _: MsgSuperfluidUnbondLockResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -392,7 +452,9 @@ export const MsgSuperfluidUnbondLockResponse = {
   },
 
   fromJSON(_: any): MsgSuperfluidUnbondLockResponse {
-    return {};
+    return {
+      $type: MsgSuperfluidUnbondLockResponse.$type,
+    };
   },
 
   toJSON(_: MsgSuperfluidUnbondLockResponse): unknown {
@@ -408,11 +470,23 @@ export const MsgSuperfluidUnbondLockResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgSuperfluidUnbondLockResponse.$type,
+  MsgSuperfluidUnbondLockResponse
+);
+
 function createBaseMsgLockAndSuperfluidDelegate(): MsgLockAndSuperfluidDelegate {
-  return { sender: "", coins: [], valAddr: "" };
+  return {
+    $type: "osmosis.superfluid.MsgLockAndSuperfluidDelegate",
+    sender: "",
+    coins: [],
+    valAddr: "",
+  };
 }
 
 export const MsgLockAndSuperfluidDelegate = {
+  $type: "osmosis.superfluid.MsgLockAndSuperfluidDelegate" as const,
+
   encode(
     message: MsgLockAndSuperfluidDelegate,
     writer: _m0.Writer = _m0.Writer.create()
@@ -458,6 +532,7 @@ export const MsgLockAndSuperfluidDelegate = {
 
   fromJSON(object: any): MsgLockAndSuperfluidDelegate {
     return {
+      $type: MsgLockAndSuperfluidDelegate.$type,
       sender: isSet(object.sender) ? String(object.sender) : "",
       coins: Array.isArray(object?.coins)
         ? object.coins.map((e: any) => Coin.fromJSON(e))
@@ -489,11 +564,21 @@ export const MsgLockAndSuperfluidDelegate = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgLockAndSuperfluidDelegate.$type,
+  MsgLockAndSuperfluidDelegate
+);
+
 function createBaseMsgLockAndSuperfluidDelegateResponse(): MsgLockAndSuperfluidDelegateResponse {
-  return { ID: Long.UZERO };
+  return {
+    $type: "osmosis.superfluid.MsgLockAndSuperfluidDelegateResponse",
+    ID: Long.UZERO,
+  };
 }
 
 export const MsgLockAndSuperfluidDelegateResponse = {
+  $type: "osmosis.superfluid.MsgLockAndSuperfluidDelegateResponse" as const,
+
   encode(
     message: MsgLockAndSuperfluidDelegateResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -527,6 +612,7 @@ export const MsgLockAndSuperfluidDelegateResponse = {
 
   fromJSON(object: any): MsgLockAndSuperfluidDelegateResponse {
     return {
+      $type: MsgLockAndSuperfluidDelegateResponse.$type,
       ID: isSet(object.ID) ? Long.fromString(object.ID) : Long.UZERO,
     };
   },
@@ -549,6 +635,11 @@ export const MsgLockAndSuperfluidDelegateResponse = {
     return message;
   },
 };
+
+messageTypeRegistry.set(
+  MsgLockAndSuperfluidDelegateResponse.$type,
+  MsgLockAndSuperfluidDelegateResponse
+);
 
 /** Msg defines the Msg service. */
 export interface Msg {
@@ -665,14 +756,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

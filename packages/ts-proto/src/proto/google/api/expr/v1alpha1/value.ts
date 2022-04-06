@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import {
@@ -17,6 +18,7 @@ export const protobufPackage = "google.api.expr.v1alpha1";
  * range of values.
  */
 export interface Value {
+  $type: "google.api.expr.v1alpha1.Value";
   /** Null value. */
   nullValue: NullValue | undefined;
   /** Boolean value. */
@@ -32,19 +34,20 @@ export interface Value {
   /** Byte string value. */
   bytesValue: Uint8Array | undefined;
   /** An enum value. */
-  enumValue?: EnumValue | undefined;
+  enumValue: EnumValue | undefined;
   /** The proto message backing an object value. */
-  objectValue?: Any | undefined;
+  objectValue: Any | undefined;
   /** Map value. */
-  mapValue?: MapValue | undefined;
+  mapValue: MapValue | undefined;
   /** List value. */
-  listValue?: ListValue | undefined;
+  listValue: ListValue | undefined;
   /** Type value. */
   typeValue: string | undefined;
 }
 
 /** An enum value. */
 export interface EnumValue {
+  $type: "google.api.expr.v1alpha1.EnumValue";
   /** The fully qualified name of the enum type. */
   type: string;
   /** The value of the enum. */
@@ -58,6 +61,7 @@ export interface EnumValue {
  * required for use in a 'oneof'.
  */
 export interface ListValue {
+  $type: "google.api.expr.v1alpha1.ListValue";
   /** The ordered values in the list. */
   values: Value[];
 }
@@ -69,6 +73,7 @@ export interface ListValue {
  * required for use in a 'oneof'.
  */
 export interface MapValue {
+  $type: "google.api.expr.v1alpha1.MapValue";
   /**
    * The set of map entries.
    *
@@ -80,19 +85,21 @@ export interface MapValue {
 
 /** An entry in the map. */
 export interface MapValue_Entry {
+  $type: "google.api.expr.v1alpha1.MapValue.Entry";
   /**
    * The key.
    *
    * Must be unique with in the map.
    * Currently only boolean, int, uint, and string values can be keys.
    */
-  key?: Value;
+  key: Value;
   /** The value. */
-  value?: Value;
+  value: Value;
 }
 
 function createBaseValue(): Value {
   return {
+    $type: "google.api.expr.v1alpha1.Value",
     nullValue: undefined,
     boolValue: undefined,
     int64Value: undefined,
@@ -109,6 +116,8 @@ function createBaseValue(): Value {
 }
 
 export const Value = {
+  $type: "google.api.expr.v1alpha1.Value" as const,
+
   encode(message: Value, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.nullValue !== undefined) {
       writer.uint32(8).int32(message.nullValue);
@@ -202,6 +211,7 @@ export const Value = {
 
   fromJSON(object: any): Value {
     return {
+      $type: Value.$type,
       nullValue: isSet(object.nullValue)
         ? nullValueFromJSON(object.nullValue)
         : undefined,
@@ -316,11 +326,15 @@ export const Value = {
   },
 };
 
+messageTypeRegistry.set(Value.$type, Value);
+
 function createBaseEnumValue(): EnumValue {
-  return { type: "", value: 0 };
+  return { $type: "google.api.expr.v1alpha1.EnumValue", type: "", value: 0 };
 }
 
 export const EnumValue = {
+  $type: "google.api.expr.v1alpha1.EnumValue" as const,
+
   encode(
     message: EnumValue,
     writer: _m0.Writer = _m0.Writer.create()
@@ -357,6 +371,7 @@ export const EnumValue = {
 
   fromJSON(object: any): EnumValue {
     return {
+      $type: EnumValue.$type,
       type: isSet(object.type) ? String(object.type) : "",
       value: isSet(object.value) ? Number(object.value) : 0,
     };
@@ -379,11 +394,15 @@ export const EnumValue = {
   },
 };
 
+messageTypeRegistry.set(EnumValue.$type, EnumValue);
+
 function createBaseListValue(): ListValue {
-  return { values: [] };
+  return { $type: "google.api.expr.v1alpha1.ListValue", values: [] };
 }
 
 export const ListValue = {
+  $type: "google.api.expr.v1alpha1.ListValue" as const,
+
   encode(
     message: ListValue,
     writer: _m0.Writer = _m0.Writer.create()
@@ -414,6 +433,7 @@ export const ListValue = {
 
   fromJSON(object: any): ListValue {
     return {
+      $type: ListValue.$type,
       values: Array.isArray(object?.values)
         ? object.values.map((e: any) => Value.fromJSON(e))
         : [],
@@ -439,11 +459,15 @@ export const ListValue = {
   },
 };
 
+messageTypeRegistry.set(ListValue.$type, ListValue);
+
 function createBaseMapValue(): MapValue {
-  return { entries: [] };
+  return { $type: "google.api.expr.v1alpha1.MapValue", entries: [] };
 }
 
 export const MapValue = {
+  $type: "google.api.expr.v1alpha1.MapValue" as const,
+
   encode(
     message: MapValue,
     writer: _m0.Writer = _m0.Writer.create()
@@ -474,6 +498,7 @@ export const MapValue = {
 
   fromJSON(object: any): MapValue {
     return {
+      $type: MapValue.$type,
       entries: Array.isArray(object?.entries)
         ? object.entries.map((e: any) => MapValue_Entry.fromJSON(e))
         : [],
@@ -500,11 +525,19 @@ export const MapValue = {
   },
 };
 
+messageTypeRegistry.set(MapValue.$type, MapValue);
+
 function createBaseMapValue_Entry(): MapValue_Entry {
-  return { key: undefined, value: undefined };
+  return {
+    $type: "google.api.expr.v1alpha1.MapValue.Entry",
+    key: undefined,
+    value: undefined,
+  };
 }
 
 export const MapValue_Entry = {
+  $type: "google.api.expr.v1alpha1.MapValue.Entry" as const,
+
   encode(
     message: MapValue_Entry,
     writer: _m0.Writer = _m0.Writer.create()
@@ -541,6 +574,7 @@ export const MapValue_Entry = {
 
   fromJSON(object: any): MapValue_Entry {
     return {
+      $type: MapValue_Entry.$type,
       key: isSet(object.key) ? Value.fromJSON(object.key) : undefined,
       value: isSet(object.value) ? Value.fromJSON(object.value) : undefined,
     };
@@ -570,6 +604,8 @@ export const MapValue_Entry = {
     return message;
   },
 };
+
+messageTypeRegistry.set(MapValue_Entry.$type, MapValue_Entry);
 
 declare var self: any | undefined;
 declare var window: any | undefined;
@@ -623,14 +659,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

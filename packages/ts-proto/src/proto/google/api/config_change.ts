@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 
@@ -74,6 +75,7 @@ export function changeTypeToJSON(object: ChangeType): string {
  * backwards-incompatibility.
  */
 export interface ConfigChange {
+  $type: "google.api.ConfigChange";
   /**
    * Object hierarchy path to the change, with levels separated by a '.'
    * character. For repeated fields, an applicable unique identifier field is
@@ -110,6 +112,7 @@ export interface ConfigChange {
  * information about how a change will affect the existing service.
  */
 export interface Advice {
+  $type: "google.api.Advice";
   /**
    * Useful description for why this advice was applied and what actions should
    * be taken to mitigate any implied risks.
@@ -119,6 +122,7 @@ export interface Advice {
 
 function createBaseConfigChange(): ConfigChange {
   return {
+    $type: "google.api.ConfigChange",
     element: "",
     oldValue: "",
     newValue: "",
@@ -128,6 +132,8 @@ function createBaseConfigChange(): ConfigChange {
 }
 
 export const ConfigChange = {
+  $type: "google.api.ConfigChange" as const,
+
   encode(
     message: ConfigChange,
     writer: _m0.Writer = _m0.Writer.create()
@@ -182,6 +188,7 @@ export const ConfigChange = {
 
   fromJSON(object: any): ConfigChange {
     return {
+      $type: ConfigChange.$type,
       element: isSet(object.element) ? String(object.element) : "",
       oldValue: isSet(object.oldValue) ? String(object.oldValue) : "",
       newValue: isSet(object.newValue) ? String(object.newValue) : "",
@@ -224,11 +231,15 @@ export const ConfigChange = {
   },
 };
 
+messageTypeRegistry.set(ConfigChange.$type, ConfigChange);
+
 function createBaseAdvice(): Advice {
-  return { description: "" };
+  return { $type: "google.api.Advice", description: "" };
 }
 
 export const Advice = {
+  $type: "google.api.Advice" as const,
+
   encode(
     message: Advice,
     writer: _m0.Writer = _m0.Writer.create()
@@ -259,6 +270,7 @@ export const Advice = {
 
   fromJSON(object: any): Advice {
     return {
+      $type: Advice.$type,
       description: isSet(object.description) ? String(object.description) : "",
     };
   },
@@ -276,6 +288,8 @@ export const Advice = {
     return message;
   },
 };
+
+messageTypeRegistry.set(Advice.$type, Advice);
 
 type Builtin =
   | Date
@@ -295,14 +309,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

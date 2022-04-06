@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import {
@@ -24,17 +25,20 @@ export const protobufPackage = "cosmos.gov.v1";
 
 /** QueryProposalRequest is the request type for the Query/Proposal RPC method. */
 export interface QueryProposalRequest {
+  $type: "cosmos.gov.v1.QueryProposalRequest";
   /** proposal_id defines the unique id of the proposal. */
   proposalId: Long;
 }
 
 /** QueryProposalResponse is the response type for the Query/Proposal RPC method. */
 export interface QueryProposalResponse {
-  proposal?: Proposal;
+  $type: "cosmos.gov.v1.QueryProposalResponse";
+  proposal: Proposal;
 }
 
 /** QueryProposalsRequest is the request type for the Query/Proposals RPC method. */
 export interface QueryProposalsRequest {
+  $type: "cosmos.gov.v1.QueryProposalsRequest";
   /** proposal_status defines the status of the proposals. */
   proposalStatus: ProposalStatus;
   /** voter defines the voter address for the proposals. */
@@ -42,7 +46,7 @@ export interface QueryProposalsRequest {
   /** depositor defines the deposit addresses from the proposals. */
   depositor: string;
   /** pagination defines an optional pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 
 /**
@@ -50,13 +54,15 @@ export interface QueryProposalsRequest {
  * method.
  */
 export interface QueryProposalsResponse {
+  $type: "cosmos.gov.v1.QueryProposalsResponse";
   proposals: Proposal[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 
 /** QueryVoteRequest is the request type for the Query/Vote RPC method. */
 export interface QueryVoteRequest {
+  $type: "cosmos.gov.v1.QueryVoteRequest";
   /** proposal_id defines the unique id of the proposal. */
   proposalId: Long;
   /** voter defines the oter address for the proposals. */
@@ -65,28 +71,32 @@ export interface QueryVoteRequest {
 
 /** QueryVoteResponse is the response type for the Query/Vote RPC method. */
 export interface QueryVoteResponse {
+  $type: "cosmos.gov.v1.QueryVoteResponse";
   /** vote defined the queried vote. */
-  vote?: Vote;
+  vote: Vote;
 }
 
 /** QueryVotesRequest is the request type for the Query/Votes RPC method. */
 export interface QueryVotesRequest {
+  $type: "cosmos.gov.v1.QueryVotesRequest";
   /** proposal_id defines the unique id of the proposal. */
   proposalId: Long;
   /** pagination defines an optional pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 
 /** QueryVotesResponse is the response type for the Query/Votes RPC method. */
 export interface QueryVotesResponse {
+  $type: "cosmos.gov.v1.QueryVotesResponse";
   /** votes defined the queried votes. */
   votes: Vote[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {
+  $type: "cosmos.gov.v1.QueryParamsRequest";
   /**
    * params_type defines which parameters to query for, can be one of "voting",
    * "tallying" or "deposit".
@@ -96,16 +106,18 @@ export interface QueryParamsRequest {
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
+  $type: "cosmos.gov.v1.QueryParamsResponse";
   /** voting_params defines the parameters related to voting. */
-  votingParams?: VotingParams;
+  votingParams: VotingParams;
   /** deposit_params defines the parameters related to deposit. */
-  depositParams?: DepositParams;
+  depositParams: DepositParams;
   /** tally_params defines the parameters related to tally. */
-  tallyParams?: TallyParams;
+  tallyParams: TallyParams;
 }
 
 /** QueryDepositRequest is the request type for the Query/Deposit RPC method. */
 export interface QueryDepositRequest {
+  $type: "cosmos.gov.v1.QueryDepositRequest";
   /** proposal_id defines the unique id of the proposal. */
   proposalId: Long;
   /** depositor defines the deposit addresses from the proposals. */
@@ -114,42 +126,52 @@ export interface QueryDepositRequest {
 
 /** QueryDepositResponse is the response type for the Query/Deposit RPC method. */
 export interface QueryDepositResponse {
+  $type: "cosmos.gov.v1.QueryDepositResponse";
   /** deposit defines the requested deposit. */
-  deposit?: Deposit;
+  deposit: Deposit;
 }
 
 /** QueryDepositsRequest is the request type for the Query/Deposits RPC method. */
 export interface QueryDepositsRequest {
+  $type: "cosmos.gov.v1.QueryDepositsRequest";
   /** proposal_id defines the unique id of the proposal. */
   proposalId: Long;
   /** pagination defines an optional pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 
 /** QueryDepositsResponse is the response type for the Query/Deposits RPC method. */
 export interface QueryDepositsResponse {
+  $type: "cosmos.gov.v1.QueryDepositsResponse";
   deposits: Deposit[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 
 /** QueryTallyResultRequest is the request type for the Query/Tally RPC method. */
 export interface QueryTallyResultRequest {
+  $type: "cosmos.gov.v1.QueryTallyResultRequest";
   /** proposal_id defines the unique id of the proposal. */
   proposalId: Long;
 }
 
 /** QueryTallyResultResponse is the response type for the Query/Tally RPC method. */
 export interface QueryTallyResultResponse {
+  $type: "cosmos.gov.v1.QueryTallyResultResponse";
   /** tally defines the requested tally. */
-  tally?: TallyResult;
+  tally: TallyResult;
 }
 
 function createBaseQueryProposalRequest(): QueryProposalRequest {
-  return { proposalId: Long.UZERO };
+  return {
+    $type: "cosmos.gov.v1.QueryProposalRequest",
+    proposalId: Long.UZERO,
+  };
 }
 
 export const QueryProposalRequest = {
+  $type: "cosmos.gov.v1.QueryProposalRequest" as const,
+
   encode(
     message: QueryProposalRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -183,6 +205,7 @@ export const QueryProposalRequest = {
 
   fromJSON(object: any): QueryProposalRequest {
     return {
+      $type: QueryProposalRequest.$type,
       proposalId: isSet(object.proposalId)
         ? Long.fromString(object.proposalId)
         : Long.UZERO,
@@ -208,11 +231,15 @@ export const QueryProposalRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryProposalRequest.$type, QueryProposalRequest);
+
 function createBaseQueryProposalResponse(): QueryProposalResponse {
-  return { proposal: undefined };
+  return { $type: "cosmos.gov.v1.QueryProposalResponse", proposal: undefined };
 }
 
 export const QueryProposalResponse = {
+  $type: "cosmos.gov.v1.QueryProposalResponse" as const,
+
   encode(
     message: QueryProposalResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -246,6 +273,7 @@ export const QueryProposalResponse = {
 
   fromJSON(object: any): QueryProposalResponse {
     return {
+      $type: QueryProposalResponse.$type,
       proposal: isSet(object.proposal)
         ? Proposal.fromJSON(object.proposal)
         : undefined,
@@ -273,11 +301,21 @@ export const QueryProposalResponse = {
   },
 };
 
+messageTypeRegistry.set(QueryProposalResponse.$type, QueryProposalResponse);
+
 function createBaseQueryProposalsRequest(): QueryProposalsRequest {
-  return { proposalStatus: 0, voter: "", depositor: "", pagination: undefined };
+  return {
+    $type: "cosmos.gov.v1.QueryProposalsRequest",
+    proposalStatus: 0,
+    voter: "",
+    depositor: "",
+    pagination: undefined,
+  };
 }
 
 export const QueryProposalsRequest = {
+  $type: "cosmos.gov.v1.QueryProposalsRequest" as const,
+
   encode(
     message: QueryProposalsRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -329,6 +367,7 @@ export const QueryProposalsRequest = {
 
   fromJSON(object: any): QueryProposalsRequest {
     return {
+      $type: QueryProposalsRequest.$type,
       proposalStatus: isSet(object.proposalStatus)
         ? proposalStatusFromJSON(object.proposalStatus)
         : 0,
@@ -368,11 +407,19 @@ export const QueryProposalsRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryProposalsRequest.$type, QueryProposalsRequest);
+
 function createBaseQueryProposalsResponse(): QueryProposalsResponse {
-  return { proposals: [], pagination: undefined };
+  return {
+    $type: "cosmos.gov.v1.QueryProposalsResponse",
+    proposals: [],
+    pagination: undefined,
+  };
 }
 
 export const QueryProposalsResponse = {
+  $type: "cosmos.gov.v1.QueryProposalsResponse" as const,
+
   encode(
     message: QueryProposalsResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -415,6 +462,7 @@ export const QueryProposalsResponse = {
 
   fromJSON(object: any): QueryProposalsResponse {
     return {
+      $type: QueryProposalsResponse.$type,
       proposals: Array.isArray(object?.proposals)
         ? object.proposals.map((e: any) => Proposal.fromJSON(e))
         : [],
@@ -454,11 +502,19 @@ export const QueryProposalsResponse = {
   },
 };
 
+messageTypeRegistry.set(QueryProposalsResponse.$type, QueryProposalsResponse);
+
 function createBaseQueryVoteRequest(): QueryVoteRequest {
-  return { proposalId: Long.UZERO, voter: "" };
+  return {
+    $type: "cosmos.gov.v1.QueryVoteRequest",
+    proposalId: Long.UZERO,
+    voter: "",
+  };
 }
 
 export const QueryVoteRequest = {
+  $type: "cosmos.gov.v1.QueryVoteRequest" as const,
+
   encode(
     message: QueryVoteRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -495,6 +551,7 @@ export const QueryVoteRequest = {
 
   fromJSON(object: any): QueryVoteRequest {
     return {
+      $type: QueryVoteRequest.$type,
       proposalId: isSet(object.proposalId)
         ? Long.fromString(object.proposalId)
         : Long.UZERO,
@@ -523,11 +580,15 @@ export const QueryVoteRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryVoteRequest.$type, QueryVoteRequest);
+
 function createBaseQueryVoteResponse(): QueryVoteResponse {
-  return { vote: undefined };
+  return { $type: "cosmos.gov.v1.QueryVoteResponse", vote: undefined };
 }
 
 export const QueryVoteResponse = {
+  $type: "cosmos.gov.v1.QueryVoteResponse" as const,
+
   encode(
     message: QueryVoteResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -558,6 +619,7 @@ export const QueryVoteResponse = {
 
   fromJSON(object: any): QueryVoteResponse {
     return {
+      $type: QueryVoteResponse.$type,
       vote: isSet(object.vote) ? Vote.fromJSON(object.vote) : undefined,
     };
   },
@@ -581,11 +643,19 @@ export const QueryVoteResponse = {
   },
 };
 
+messageTypeRegistry.set(QueryVoteResponse.$type, QueryVoteResponse);
+
 function createBaseQueryVotesRequest(): QueryVotesRequest {
-  return { proposalId: Long.UZERO, pagination: undefined };
+  return {
+    $type: "cosmos.gov.v1.QueryVotesRequest",
+    proposalId: Long.UZERO,
+    pagination: undefined,
+  };
 }
 
 export const QueryVotesRequest = {
+  $type: "cosmos.gov.v1.QueryVotesRequest" as const,
+
   encode(
     message: QueryVotesRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -622,6 +692,7 @@ export const QueryVotesRequest = {
 
   fromJSON(object: any): QueryVotesRequest {
     return {
+      $type: QueryVotesRequest.$type,
       proposalId: isSet(object.proposalId)
         ? Long.fromString(object.proposalId)
         : Long.UZERO,
@@ -658,11 +729,19 @@ export const QueryVotesRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryVotesRequest.$type, QueryVotesRequest);
+
 function createBaseQueryVotesResponse(): QueryVotesResponse {
-  return { votes: [], pagination: undefined };
+  return {
+    $type: "cosmos.gov.v1.QueryVotesResponse",
+    votes: [],
+    pagination: undefined,
+  };
 }
 
 export const QueryVotesResponse = {
+  $type: "cosmos.gov.v1.QueryVotesResponse" as const,
+
   encode(
     message: QueryVotesResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -702,6 +781,7 @@ export const QueryVotesResponse = {
 
   fromJSON(object: any): QueryVotesResponse {
     return {
+      $type: QueryVotesResponse.$type,
       votes: Array.isArray(object?.votes)
         ? object.votes.map((e: any) => Vote.fromJSON(e))
         : [],
@@ -738,11 +818,15 @@ export const QueryVotesResponse = {
   },
 };
 
+messageTypeRegistry.set(QueryVotesResponse.$type, QueryVotesResponse);
+
 function createBaseQueryParamsRequest(): QueryParamsRequest {
-  return { paramsType: "" };
+  return { $type: "cosmos.gov.v1.QueryParamsRequest", paramsType: "" };
 }
 
 export const QueryParamsRequest = {
+  $type: "cosmos.gov.v1.QueryParamsRequest" as const,
+
   encode(
     message: QueryParamsRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -773,6 +857,7 @@ export const QueryParamsRequest = {
 
   fromJSON(object: any): QueryParamsRequest {
     return {
+      $type: QueryParamsRequest.$type,
       paramsType: isSet(object.paramsType) ? String(object.paramsType) : "",
     };
   },
@@ -792,8 +877,11 @@ export const QueryParamsRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryParamsRequest.$type, QueryParamsRequest);
+
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
+    $type: "cosmos.gov.v1.QueryParamsResponse",
     votingParams: undefined,
     depositParams: undefined,
     tallyParams: undefined,
@@ -801,6 +889,8 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 
 export const QueryParamsResponse = {
+  $type: "cosmos.gov.v1.QueryParamsResponse" as const,
+
   encode(
     message: QueryParamsResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -852,6 +942,7 @@ export const QueryParamsResponse = {
 
   fromJSON(object: any): QueryParamsResponse {
     return {
+      $type: QueryParamsResponse.$type,
       votingParams: isSet(object.votingParams)
         ? VotingParams.fromJSON(object.votingParams)
         : undefined,
@@ -901,11 +992,19 @@ export const QueryParamsResponse = {
   },
 };
 
+messageTypeRegistry.set(QueryParamsResponse.$type, QueryParamsResponse);
+
 function createBaseQueryDepositRequest(): QueryDepositRequest {
-  return { proposalId: Long.UZERO, depositor: "" };
+  return {
+    $type: "cosmos.gov.v1.QueryDepositRequest",
+    proposalId: Long.UZERO,
+    depositor: "",
+  };
 }
 
 export const QueryDepositRequest = {
+  $type: "cosmos.gov.v1.QueryDepositRequest" as const,
+
   encode(
     message: QueryDepositRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -942,6 +1041,7 @@ export const QueryDepositRequest = {
 
   fromJSON(object: any): QueryDepositRequest {
     return {
+      $type: QueryDepositRequest.$type,
       proposalId: isSet(object.proposalId)
         ? Long.fromString(object.proposalId)
         : Long.UZERO,
@@ -970,11 +1070,15 @@ export const QueryDepositRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryDepositRequest.$type, QueryDepositRequest);
+
 function createBaseQueryDepositResponse(): QueryDepositResponse {
-  return { deposit: undefined };
+  return { $type: "cosmos.gov.v1.QueryDepositResponse", deposit: undefined };
 }
 
 export const QueryDepositResponse = {
+  $type: "cosmos.gov.v1.QueryDepositResponse" as const,
+
   encode(
     message: QueryDepositResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1008,6 +1112,7 @@ export const QueryDepositResponse = {
 
   fromJSON(object: any): QueryDepositResponse {
     return {
+      $type: QueryDepositResponse.$type,
       deposit: isSet(object.deposit)
         ? Deposit.fromJSON(object.deposit)
         : undefined,
@@ -1035,11 +1140,19 @@ export const QueryDepositResponse = {
   },
 };
 
+messageTypeRegistry.set(QueryDepositResponse.$type, QueryDepositResponse);
+
 function createBaseQueryDepositsRequest(): QueryDepositsRequest {
-  return { proposalId: Long.UZERO, pagination: undefined };
+  return {
+    $type: "cosmos.gov.v1.QueryDepositsRequest",
+    proposalId: Long.UZERO,
+    pagination: undefined,
+  };
 }
 
 export const QueryDepositsRequest = {
+  $type: "cosmos.gov.v1.QueryDepositsRequest" as const,
+
   encode(
     message: QueryDepositsRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1079,6 +1192,7 @@ export const QueryDepositsRequest = {
 
   fromJSON(object: any): QueryDepositsRequest {
     return {
+      $type: QueryDepositsRequest.$type,
       proposalId: isSet(object.proposalId)
         ? Long.fromString(object.proposalId)
         : Long.UZERO,
@@ -1115,11 +1229,19 @@ export const QueryDepositsRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryDepositsRequest.$type, QueryDepositsRequest);
+
 function createBaseQueryDepositsResponse(): QueryDepositsResponse {
-  return { deposits: [], pagination: undefined };
+  return {
+    $type: "cosmos.gov.v1.QueryDepositsResponse",
+    deposits: [],
+    pagination: undefined,
+  };
 }
 
 export const QueryDepositsResponse = {
+  $type: "cosmos.gov.v1.QueryDepositsResponse" as const,
+
   encode(
     message: QueryDepositsResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1162,6 +1284,7 @@ export const QueryDepositsResponse = {
 
   fromJSON(object: any): QueryDepositsResponse {
     return {
+      $type: QueryDepositsResponse.$type,
       deposits: Array.isArray(object?.deposits)
         ? object.deposits.map((e: any) => Deposit.fromJSON(e))
         : [],
@@ -1201,11 +1324,18 @@ export const QueryDepositsResponse = {
   },
 };
 
+messageTypeRegistry.set(QueryDepositsResponse.$type, QueryDepositsResponse);
+
 function createBaseQueryTallyResultRequest(): QueryTallyResultRequest {
-  return { proposalId: Long.UZERO };
+  return {
+    $type: "cosmos.gov.v1.QueryTallyResultRequest",
+    proposalId: Long.UZERO,
+  };
 }
 
 export const QueryTallyResultRequest = {
+  $type: "cosmos.gov.v1.QueryTallyResultRequest" as const,
+
   encode(
     message: QueryTallyResultRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1239,6 +1369,7 @@ export const QueryTallyResultRequest = {
 
   fromJSON(object: any): QueryTallyResultRequest {
     return {
+      $type: QueryTallyResultRequest.$type,
       proposalId: isSet(object.proposalId)
         ? Long.fromString(object.proposalId)
         : Long.UZERO,
@@ -1264,11 +1395,15 @@ export const QueryTallyResultRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryTallyResultRequest.$type, QueryTallyResultRequest);
+
 function createBaseQueryTallyResultResponse(): QueryTallyResultResponse {
-  return { tally: undefined };
+  return { $type: "cosmos.gov.v1.QueryTallyResultResponse", tally: undefined };
 }
 
 export const QueryTallyResultResponse = {
+  $type: "cosmos.gov.v1.QueryTallyResultResponse" as const,
+
   encode(
     message: QueryTallyResultResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1302,6 +1437,7 @@ export const QueryTallyResultResponse = {
 
   fromJSON(object: any): QueryTallyResultResponse {
     return {
+      $type: QueryTallyResultResponse.$type,
       tally: isSet(object.tally)
         ? TallyResult.fromJSON(object.tally)
         : undefined,
@@ -1328,6 +1464,11 @@ export const QueryTallyResultResponse = {
     return message;
   },
 };
+
+messageTypeRegistry.set(
+  QueryTallyResultResponse.$type,
+  QueryTallyResultResponse
+);
 
 /** Query defines the gRPC querier service for gov module */
 export interface Query {
@@ -1461,14 +1602,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

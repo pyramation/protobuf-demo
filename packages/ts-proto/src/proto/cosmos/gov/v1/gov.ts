@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Duration } from "../../../google/protobuf/duration";
@@ -146,6 +147,7 @@ export function proposalStatusToJSON(object: ProposalStatus): string {
 
 /** WeightedVoteOption defines a unit of vote for vote split. */
 export interface WeightedVoteOption {
+  $type: "cosmos.gov.v1.WeightedVoteOption";
   option: VoteOption;
   weight: string;
 }
@@ -155,6 +157,7 @@ export interface WeightedVoteOption {
  * proposal.
  */
 export interface Deposit {
+  $type: "cosmos.gov.v1.Deposit";
   proposalId: Long;
   depositor: string;
   amount: Coin[];
@@ -162,6 +165,7 @@ export interface Deposit {
 
 /** Proposal defines the core field members of a governance proposal. */
 export interface Proposal {
+  $type: "cosmos.gov.v1.Proposal";
   id: Long;
   messages: Any[];
   status: ProposalStatus;
@@ -170,18 +174,19 @@ export interface Proposal {
    * querying a proposal via gRPC, this field is not populated until the
    * proposal's voting period has ended.
    */
-  finalTallyResult?: TallyResult;
-  submitTime?: Date;
-  depositEndTime?: Date;
+  finalTallyResult: TallyResult;
+  submitTime: Date;
+  depositEndTime: Date;
   totalDeposit: Coin[];
-  votingStartTime?: Date;
-  votingEndTime?: Date;
+  votingStartTime: Date;
+  votingEndTime: Date;
   /** metadata is any arbitrary metadata attached to the proposal. */
   metadata: string;
 }
 
 /** TallyResult defines a standard tally for a governance proposal. */
 export interface TallyResult {
+  $type: "cosmos.gov.v1.TallyResult";
   yesCount: string;
   abstainCount: string;
   noCount: string;
@@ -193,6 +198,7 @@ export interface TallyResult {
  * A Vote consists of a proposal ID, the voter, and the vote option.
  */
 export interface Vote {
+  $type: "cosmos.gov.v1.Vote";
   proposalId: Long;
   voter: string;
   options: WeightedVoteOption[];
@@ -202,23 +208,26 @@ export interface Vote {
 
 /** DepositParams defines the params for deposits on governance proposals. */
 export interface DepositParams {
+  $type: "cosmos.gov.v1.DepositParams";
   /** Minimum deposit for a proposal to enter voting period. */
   minDeposit: Coin[];
   /**
    * Maximum period for Atom holders to deposit on a proposal. Initial value: 2
    *  months.
    */
-  maxDepositPeriod?: Duration;
+  maxDepositPeriod: Duration;
 }
 
 /** VotingParams defines the params for voting on governance proposals. */
 export interface VotingParams {
+  $type: "cosmos.gov.v1.VotingParams";
   /** Length of the voting period. */
-  votingPeriod?: Duration;
+  votingPeriod: Duration;
 }
 
 /** TallyParams defines the params for tallying votes on governance proposals. */
 export interface TallyParams {
+  $type: "cosmos.gov.v1.TallyParams";
   /**
    * Minimum percentage of total stake needed to vote for a result to be
    *  considered valid.
@@ -234,10 +243,12 @@ export interface TallyParams {
 }
 
 function createBaseWeightedVoteOption(): WeightedVoteOption {
-  return { option: 0, weight: "" };
+  return { $type: "cosmos.gov.v1.WeightedVoteOption", option: 0, weight: "" };
 }
 
 export const WeightedVoteOption = {
+  $type: "cosmos.gov.v1.WeightedVoteOption" as const,
+
   encode(
     message: WeightedVoteOption,
     writer: _m0.Writer = _m0.Writer.create()
@@ -274,6 +285,7 @@ export const WeightedVoteOption = {
 
   fromJSON(object: any): WeightedVoteOption {
     return {
+      $type: WeightedVoteOption.$type,
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
       weight: isSet(object.weight) ? String(object.weight) : "",
     };
@@ -297,11 +309,20 @@ export const WeightedVoteOption = {
   },
 };
 
+messageTypeRegistry.set(WeightedVoteOption.$type, WeightedVoteOption);
+
 function createBaseDeposit(): Deposit {
-  return { proposalId: Long.UZERO, depositor: "", amount: [] };
+  return {
+    $type: "cosmos.gov.v1.Deposit",
+    proposalId: Long.UZERO,
+    depositor: "",
+    amount: [],
+  };
 }
 
 export const Deposit = {
+  $type: "cosmos.gov.v1.Deposit" as const,
+
   encode(
     message: Deposit,
     writer: _m0.Writer = _m0.Writer.create()
@@ -344,6 +365,7 @@ export const Deposit = {
 
   fromJSON(object: any): Deposit {
     return {
+      $type: Deposit.$type,
       proposalId: isSet(object.proposalId)
         ? Long.fromString(object.proposalId)
         : Long.UZERO,
@@ -379,8 +401,11 @@ export const Deposit = {
   },
 };
 
+messageTypeRegistry.set(Deposit.$type, Deposit);
+
 function createBaseProposal(): Proposal {
   return {
+    $type: "cosmos.gov.v1.Proposal",
     id: Long.UZERO,
     messages: [],
     status: 0,
@@ -395,6 +420,8 @@ function createBaseProposal(): Proposal {
 }
 
 export const Proposal = {
+  $type: "cosmos.gov.v1.Proposal" as const,
+
   encode(
     message: Proposal,
     writer: _m0.Writer = _m0.Writer.create()
@@ -505,6 +532,7 @@ export const Proposal = {
 
   fromJSON(object: any): Proposal {
     return {
+      $type: Proposal.$type,
       id: isSet(object.id) ? Long.fromString(object.id) : Long.UZERO,
       messages: Array.isArray(object?.messages)
         ? object.messages.map((e: any) => Any.fromJSON(e))
@@ -591,11 +619,21 @@ export const Proposal = {
   },
 };
 
+messageTypeRegistry.set(Proposal.$type, Proposal);
+
 function createBaseTallyResult(): TallyResult {
-  return { yesCount: "", abstainCount: "", noCount: "", noWithVetoCount: "" };
+  return {
+    $type: "cosmos.gov.v1.TallyResult",
+    yesCount: "",
+    abstainCount: "",
+    noCount: "",
+    noWithVetoCount: "",
+  };
 }
 
 export const TallyResult = {
+  $type: "cosmos.gov.v1.TallyResult" as const,
+
   encode(
     message: TallyResult,
     writer: _m0.Writer = _m0.Writer.create()
@@ -644,6 +682,7 @@ export const TallyResult = {
 
   fromJSON(object: any): TallyResult {
     return {
+      $type: TallyResult.$type,
       yesCount: isSet(object.yesCount) ? String(object.yesCount) : "",
       abstainCount: isSet(object.abstainCount)
         ? String(object.abstainCount)
@@ -678,11 +717,21 @@ export const TallyResult = {
   },
 };
 
+messageTypeRegistry.set(TallyResult.$type, TallyResult);
+
 function createBaseVote(): Vote {
-  return { proposalId: Long.UZERO, voter: "", options: [], metadata: "" };
+  return {
+    $type: "cosmos.gov.v1.Vote",
+    proposalId: Long.UZERO,
+    voter: "",
+    options: [],
+    metadata: "",
+  };
 }
 
 export const Vote = {
+  $type: "cosmos.gov.v1.Vote" as const,
+
   encode(message: Vote, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
@@ -730,6 +779,7 @@ export const Vote = {
 
   fromJSON(object: any): Vote {
     return {
+      $type: Vote.$type,
       proposalId: isSet(object.proposalId)
         ? Long.fromString(object.proposalId)
         : Long.UZERO,
@@ -771,11 +821,19 @@ export const Vote = {
   },
 };
 
+messageTypeRegistry.set(Vote.$type, Vote);
+
 function createBaseDepositParams(): DepositParams {
-  return { minDeposit: [], maxDepositPeriod: undefined };
+  return {
+    $type: "cosmos.gov.v1.DepositParams",
+    minDeposit: [],
+    maxDepositPeriod: undefined,
+  };
 }
 
 export const DepositParams = {
+  $type: "cosmos.gov.v1.DepositParams" as const,
+
   encode(
     message: DepositParams,
     writer: _m0.Writer = _m0.Writer.create()
@@ -815,6 +873,7 @@ export const DepositParams = {
 
   fromJSON(object: any): DepositParams {
     return {
+      $type: DepositParams.$type,
       minDeposit: Array.isArray(object?.minDeposit)
         ? object.minDeposit.map((e: any) => Coin.fromJSON(e))
         : [],
@@ -854,11 +913,15 @@ export const DepositParams = {
   },
 };
 
+messageTypeRegistry.set(DepositParams.$type, DepositParams);
+
 function createBaseVotingParams(): VotingParams {
-  return { votingPeriod: undefined };
+  return { $type: "cosmos.gov.v1.VotingParams", votingPeriod: undefined };
 }
 
 export const VotingParams = {
+  $type: "cosmos.gov.v1.VotingParams" as const,
+
   encode(
     message: VotingParams,
     writer: _m0.Writer = _m0.Writer.create()
@@ -889,6 +952,7 @@ export const VotingParams = {
 
   fromJSON(object: any): VotingParams {
     return {
+      $type: VotingParams.$type,
       votingPeriod: isSet(object.votingPeriod)
         ? Duration.fromJSON(object.votingPeriod)
         : undefined,
@@ -916,11 +980,20 @@ export const VotingParams = {
   },
 };
 
+messageTypeRegistry.set(VotingParams.$type, VotingParams);
+
 function createBaseTallyParams(): TallyParams {
-  return { quorum: "", threshold: "", vetoThreshold: "" };
+  return {
+    $type: "cosmos.gov.v1.TallyParams",
+    quorum: "",
+    threshold: "",
+    vetoThreshold: "",
+  };
 }
 
 export const TallyParams = {
+  $type: "cosmos.gov.v1.TallyParams" as const,
+
   encode(
     message: TallyParams,
     writer: _m0.Writer = _m0.Writer.create()
@@ -963,6 +1036,7 @@ export const TallyParams = {
 
   fromJSON(object: any): TallyParams {
     return {
+      $type: TallyParams.$type,
       quorum: isSet(object.quorum) ? String(object.quorum) : "",
       threshold: isSet(object.threshold) ? String(object.threshold) : "",
       vetoThreshold: isSet(object.vetoThreshold)
@@ -991,6 +1065,8 @@ export const TallyParams = {
   },
 };
 
+messageTypeRegistry.set(TallyParams.$type, TallyParams);
+
 type Builtin =
   | Date
   | Function
@@ -1009,21 +1085,21 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = (date.getTime() % 1_000) * 1_000_000;
-  return { seconds, nanos };
+  return { $type: "google.protobuf.Timestamp", seconds, nanos };
 }
 
 function fromTimestamp(t: Timestamp): Date {

@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import {
@@ -10,8 +11,9 @@ export const protobufPackage = "cosmos.slashing.v1beta1";
 
 /** GenesisState defines the slashing module's genesis state. */
 export interface GenesisState {
+  $type: "cosmos.slashing.v1beta1.GenesisState";
   /** params defines all the paramaters of related to deposit. */
-  params?: Params;
+  params: Params;
   /**
    * signing_infos represents a map between validator addresses and their
    * signing infos.
@@ -26,10 +28,11 @@ export interface GenesisState {
 
 /** SigningInfo stores validator signing info of corresponding address. */
 export interface SigningInfo {
+  $type: "cosmos.slashing.v1beta1.SigningInfo";
   /** address is the validator address. */
   address: string;
   /** validator_signing_info represents the signing info of this validator. */
-  validatorSigningInfo?: ValidatorSigningInfo;
+  validatorSigningInfo: ValidatorSigningInfo;
 }
 
 /**
@@ -37,6 +40,7 @@ export interface SigningInfo {
  * address.
  */
 export interface ValidatorMissedBlocks {
+  $type: "cosmos.slashing.v1beta1.ValidatorMissedBlocks";
   /** address is the validator address. */
   address: string;
   /** missed_blocks is an array of missed blocks by the validator. */
@@ -45,6 +49,7 @@ export interface ValidatorMissedBlocks {
 
 /** MissedBlock contains height and missed status as boolean. */
 export interface MissedBlock {
+  $type: "cosmos.slashing.v1beta1.MissedBlock";
   /** index is the height at which the block was missed. */
   index: Long;
   /** missed is the missed status. */
@@ -52,10 +57,17 @@ export interface MissedBlock {
 }
 
 function createBaseGenesisState(): GenesisState {
-  return { params: undefined, signingInfos: [], missedBlocks: [] };
+  return {
+    $type: "cosmos.slashing.v1beta1.GenesisState",
+    params: undefined,
+    signingInfos: [],
+    missedBlocks: [],
+  };
 }
 
 export const GenesisState = {
+  $type: "cosmos.slashing.v1beta1.GenesisState" as const,
+
   encode(
     message: GenesisState,
     writer: _m0.Writer = _m0.Writer.create()
@@ -102,6 +114,7 @@ export const GenesisState = {
 
   fromJSON(object: any): GenesisState {
     return {
+      $type: GenesisState.$type,
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
       signingInfos: Array.isArray(object?.signingInfos)
         ? object.signingInfos.map((e: any) => SigningInfo.fromJSON(e))
@@ -150,11 +163,19 @@ export const GenesisState = {
   },
 };
 
+messageTypeRegistry.set(GenesisState.$type, GenesisState);
+
 function createBaseSigningInfo(): SigningInfo {
-  return { address: "", validatorSigningInfo: undefined };
+  return {
+    $type: "cosmos.slashing.v1beta1.SigningInfo",
+    address: "",
+    validatorSigningInfo: undefined,
+  };
 }
 
 export const SigningInfo = {
+  $type: "cosmos.slashing.v1beta1.SigningInfo" as const,
+
   encode(
     message: SigningInfo,
     writer: _m0.Writer = _m0.Writer.create()
@@ -197,6 +218,7 @@ export const SigningInfo = {
 
   fromJSON(object: any): SigningInfo {
     return {
+      $type: SigningInfo.$type,
       address: isSet(object.address) ? String(object.address) : "",
       validatorSigningInfo: isSet(object.validatorSigningInfo)
         ? ValidatorSigningInfo.fromJSON(object.validatorSigningInfo)
@@ -228,11 +250,19 @@ export const SigningInfo = {
   },
 };
 
+messageTypeRegistry.set(SigningInfo.$type, SigningInfo);
+
 function createBaseValidatorMissedBlocks(): ValidatorMissedBlocks {
-  return { address: "", missedBlocks: [] };
+  return {
+    $type: "cosmos.slashing.v1beta1.ValidatorMissedBlocks",
+    address: "",
+    missedBlocks: [],
+  };
 }
 
 export const ValidatorMissedBlocks = {
+  $type: "cosmos.slashing.v1beta1.ValidatorMissedBlocks" as const,
+
   encode(
     message: ValidatorMissedBlocks,
     writer: _m0.Writer = _m0.Writer.create()
@@ -274,6 +304,7 @@ export const ValidatorMissedBlocks = {
 
   fromJSON(object: any): ValidatorMissedBlocks {
     return {
+      $type: ValidatorMissedBlocks.$type,
       address: isSet(object.address) ? String(object.address) : "",
       missedBlocks: Array.isArray(object?.missedBlocks)
         ? object.missedBlocks.map((e: any) => MissedBlock.fromJSON(e))
@@ -305,11 +336,19 @@ export const ValidatorMissedBlocks = {
   },
 };
 
+messageTypeRegistry.set(ValidatorMissedBlocks.$type, ValidatorMissedBlocks);
+
 function createBaseMissedBlock(): MissedBlock {
-  return { index: Long.ZERO, missed: false };
+  return {
+    $type: "cosmos.slashing.v1beta1.MissedBlock",
+    index: Long.ZERO,
+    missed: false,
+  };
 }
 
 export const MissedBlock = {
+  $type: "cosmos.slashing.v1beta1.MissedBlock" as const,
+
   encode(
     message: MissedBlock,
     writer: _m0.Writer = _m0.Writer.create()
@@ -346,6 +385,7 @@ export const MissedBlock = {
 
   fromJSON(object: any): MissedBlock {
     return {
+      $type: MissedBlock.$type,
       index: isSet(object.index) ? Long.fromString(object.index) : Long.ZERO,
       missed: isSet(object.missed) ? Boolean(object.missed) : false,
     };
@@ -372,6 +412,8 @@ export const MissedBlock = {
   },
 };
 
+messageTypeRegistry.set(MissedBlock.$type, MissedBlock);
+
 type Builtin =
   | Date
   | Function
@@ -390,14 +432,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Params } from "../../osmosis/incentives/params";
@@ -9,8 +10,9 @@ export const protobufPackage = "osmosis.incentives";
 
 /** GenesisState defines the incentives module's genesis state. */
 export interface GenesisState {
+  $type: "osmosis.incentives.GenesisState";
   /** params defines all the parameters of the module */
-  params?: Params;
+  params: Params;
   gauges: Gauge[];
   lockableDurations: Duration[];
   lastGaugeId: Long;
@@ -18,6 +20,7 @@ export interface GenesisState {
 
 function createBaseGenesisState(): GenesisState {
   return {
+    $type: "osmosis.incentives.GenesisState",
     params: undefined,
     gauges: [],
     lockableDurations: [],
@@ -26,6 +29,8 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
+  $type: "osmosis.incentives.GenesisState" as const,
+
   encode(
     message: GenesisState,
     writer: _m0.Writer = _m0.Writer.create()
@@ -76,6 +81,7 @@ export const GenesisState = {
 
   fromJSON(object: any): GenesisState {
     return {
+      $type: GenesisState.$type,
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
       gauges: Array.isArray(object?.gauges)
         ? object.gauges.map((e: any) => Gauge.fromJSON(e))
@@ -129,6 +135,8 @@ export const GenesisState = {
   },
 };
 
+messageTypeRegistry.set(GenesisState.$type, GenesisState);
+
 type Builtin =
   | Date
   | Function
@@ -147,14 +155,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

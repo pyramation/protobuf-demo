@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Any } from "../../../google/protobuf/any";
@@ -56,6 +57,7 @@ export function execToJSON(object: Exec): string {
 
 /** MsgCreateGroup is the Msg/CreateGroup request type. */
 export interface MsgCreateGroup {
+  $type: "cosmos.group.v1.MsgCreateGroup";
   /** admin is the account address of the group admin. */
   admin: string;
   /** members defines the group members. */
@@ -66,12 +68,14 @@ export interface MsgCreateGroup {
 
 /** MsgCreateGroupResponse is the Msg/CreateGroup response type. */
 export interface MsgCreateGroupResponse {
+  $type: "cosmos.group.v1.MsgCreateGroupResponse";
   /** group_id is the unique ID of the newly created group. */
   groupId: Long;
 }
 
 /** MsgUpdateGroupMembers is the Msg/UpdateGroupMembers request type. */
 export interface MsgUpdateGroupMembers {
+  $type: "cosmos.group.v1.MsgUpdateGroupMembers";
   /** admin is the account address of the group admin. */
   admin: string;
   /** group_id is the unique ID of the group. */
@@ -84,10 +88,13 @@ export interface MsgUpdateGroupMembers {
 }
 
 /** MsgUpdateGroupMembersResponse is the Msg/UpdateGroupMembers response type. */
-export interface MsgUpdateGroupMembersResponse {}
+export interface MsgUpdateGroupMembersResponse {
+  $type: "cosmos.group.v1.MsgUpdateGroupMembersResponse";
+}
 
 /** MsgUpdateGroupAdmin is the Msg/UpdateGroupAdmin request type. */
 export interface MsgUpdateGroupAdmin {
+  $type: "cosmos.group.v1.MsgUpdateGroupAdmin";
   /** admin is the current account address of the group admin. */
   admin: string;
   /** group_id is the unique ID of the group. */
@@ -97,10 +104,13 @@ export interface MsgUpdateGroupAdmin {
 }
 
 /** MsgUpdateGroupAdminResponse is the Msg/UpdateGroupAdmin response type. */
-export interface MsgUpdateGroupAdminResponse {}
+export interface MsgUpdateGroupAdminResponse {
+  $type: "cosmos.group.v1.MsgUpdateGroupAdminResponse";
+}
 
 /** MsgUpdateGroupMetadata is the Msg/UpdateGroupMetadata request type. */
 export interface MsgUpdateGroupMetadata {
+  $type: "cosmos.group.v1.MsgUpdateGroupMetadata";
   /** admin is the account address of the group admin. */
   admin: string;
   /** group_id is the unique ID of the group. */
@@ -110,10 +120,13 @@ export interface MsgUpdateGroupMetadata {
 }
 
 /** MsgUpdateGroupMetadataResponse is the Msg/UpdateGroupMetadata response type. */
-export interface MsgUpdateGroupMetadataResponse {}
+export interface MsgUpdateGroupMetadataResponse {
+  $type: "cosmos.group.v1.MsgUpdateGroupMetadataResponse";
+}
 
 /** MsgCreateGroupPolicy is the Msg/CreateGroupPolicy request type. */
 export interface MsgCreateGroupPolicy {
+  $type: "cosmos.group.v1.MsgCreateGroupPolicy";
   /** admin is the account address of the group admin. */
   admin: string;
   /** group_id is the unique ID of the group. */
@@ -121,17 +134,19 @@ export interface MsgCreateGroupPolicy {
   /** metadata is any arbitrary metadata attached to the group policy. */
   metadata: string;
   /** decision_policy specifies the group policy's decision policy. */
-  decisionPolicy?: Any;
+  decisionPolicy: Any;
 }
 
 /** MsgCreateGroupPolicyResponse is the Msg/CreateGroupPolicy response type. */
 export interface MsgCreateGroupPolicyResponse {
+  $type: "cosmos.group.v1.MsgCreateGroupPolicyResponse";
   /** address is the account address of the newly created group policy. */
   address: string;
 }
 
 /** MsgUpdateGroupPolicyAdmin is the Msg/UpdateGroupPolicyAdmin request type. */
 export interface MsgUpdateGroupPolicyAdmin {
+  $type: "cosmos.group.v1.MsgUpdateGroupPolicyAdmin";
   /** admin is the account address of the group admin. */
   admin: string;
   /** address is the account address of the group policy. */
@@ -142,6 +157,7 @@ export interface MsgUpdateGroupPolicyAdmin {
 
 /** MsgCreateGroupWithPolicy is the Msg/CreateGroupWithPolicy request type. */
 export interface MsgCreateGroupWithPolicy {
+  $type: "cosmos.group.v1.MsgCreateGroupWithPolicy";
   /** admin is the account address of the group and group policy admin. */
   admin: string;
   /** members defines the group members. */
@@ -153,11 +169,12 @@ export interface MsgCreateGroupWithPolicy {
   /** group_policy_as_admin is a boolean field, if set to true, the group policy account address will be used as group and group policy admin. */
   groupPolicyAsAdmin: boolean;
   /** decision_policy specifies the group policy's decision policy. */
-  decisionPolicy?: Any;
+  decisionPolicy: Any;
 }
 
 /** MsgCreateGroupWithPolicyResponse is the Msg/CreateGroupWithPolicy response type. */
 export interface MsgCreateGroupWithPolicyResponse {
+  $type: "cosmos.group.v1.MsgCreateGroupWithPolicyResponse";
   /** group_id is the unique ID of the newly created group with policy. */
   groupId: Long;
   /** group_policy_address is the account address of the newly created group policy. */
@@ -165,23 +182,29 @@ export interface MsgCreateGroupWithPolicyResponse {
 }
 
 /** MsgUpdateGroupPolicyAdminResponse is the Msg/UpdateGroupPolicyAdmin response type. */
-export interface MsgUpdateGroupPolicyAdminResponse {}
+export interface MsgUpdateGroupPolicyAdminResponse {
+  $type: "cosmos.group.v1.MsgUpdateGroupPolicyAdminResponse";
+}
 
 /** MsgUpdateGroupPolicyDecisionPolicy is the Msg/UpdateGroupPolicyDecisionPolicy request type. */
 export interface MsgUpdateGroupPolicyDecisionPolicy {
+  $type: "cosmos.group.v1.MsgUpdateGroupPolicyDecisionPolicy";
   /** admin is the account address of the group admin. */
   admin: string;
   /** address is the account address of group policy. */
   address: string;
   /** decision_policy is the updated group policy's decision policy. */
-  decisionPolicy?: Any;
+  decisionPolicy: Any;
 }
 
 /** MsgUpdateGroupPolicyDecisionPolicyResponse is the Msg/UpdateGroupPolicyDecisionPolicy response type. */
-export interface MsgUpdateGroupPolicyDecisionPolicyResponse {}
+export interface MsgUpdateGroupPolicyDecisionPolicyResponse {
+  $type: "cosmos.group.v1.MsgUpdateGroupPolicyDecisionPolicyResponse";
+}
 
 /** MsgUpdateGroupPolicyMetadata is the Msg/UpdateGroupPolicyMetadata request type. */
 export interface MsgUpdateGroupPolicyMetadata {
+  $type: "cosmos.group.v1.MsgUpdateGroupPolicyMetadata";
   /** admin is the account address of the group admin. */
   admin: string;
   /** address is the account address of group policy. */
@@ -191,10 +214,13 @@ export interface MsgUpdateGroupPolicyMetadata {
 }
 
 /** MsgUpdateGroupPolicyMetadataResponse is the Msg/UpdateGroupPolicyMetadata response type. */
-export interface MsgUpdateGroupPolicyMetadataResponse {}
+export interface MsgUpdateGroupPolicyMetadataResponse {
+  $type: "cosmos.group.v1.MsgUpdateGroupPolicyMetadataResponse";
+}
 
 /** MsgSubmitProposal is the Msg/SubmitProposal request type. */
 export interface MsgSubmitProposal {
+  $type: "cosmos.group.v1.MsgSubmitProposal";
   /** address is the account address of group policy. */
   address: string;
   /**
@@ -216,12 +242,14 @@ export interface MsgSubmitProposal {
 
 /** MsgSubmitProposalResponse is the Msg/SubmitProposal response type. */
 export interface MsgSubmitProposalResponse {
+  $type: "cosmos.group.v1.MsgSubmitProposalResponse";
   /** proposal is the unique ID of the proposal. */
   proposalId: Long;
 }
 
 /** MsgWithdrawProposal is the Msg/WithdrawProposal request type. */
 export interface MsgWithdrawProposal {
+  $type: "cosmos.group.v1.MsgWithdrawProposal";
   /** proposal is the unique ID of the proposal. */
   proposalId: Long;
   /** address is the admin of the group policy or one of the proposer of the proposal. */
@@ -229,10 +257,13 @@ export interface MsgWithdrawProposal {
 }
 
 /** MsgWithdrawProposalResponse is the Msg/WithdrawProposal response type. */
-export interface MsgWithdrawProposalResponse {}
+export interface MsgWithdrawProposalResponse {
+  $type: "cosmos.group.v1.MsgWithdrawProposalResponse";
+}
 
 /** MsgVote is the Msg/Vote request type. */
 export interface MsgVote {
+  $type: "cosmos.group.v1.MsgVote";
   /** proposal is the unique ID of the proposal. */
   proposalId: Long;
   /** voter is the voter account address. */
@@ -249,10 +280,13 @@ export interface MsgVote {
 }
 
 /** MsgVoteResponse is the Msg/Vote response type. */
-export interface MsgVoteResponse {}
+export interface MsgVoteResponse {
+  $type: "cosmos.group.v1.MsgVoteResponse";
+}
 
 /** MsgExec is the Msg/Exec request type. */
 export interface MsgExec {
+  $type: "cosmos.group.v1.MsgExec";
   /** proposal is the unique ID of the proposal. */
   proposalId: Long;
   /** signer is the account address used to execute the proposal. */
@@ -260,10 +294,13 @@ export interface MsgExec {
 }
 
 /** MsgExecResponse is the Msg/Exec request type. */
-export interface MsgExecResponse {}
+export interface MsgExecResponse {
+  $type: "cosmos.group.v1.MsgExecResponse";
+}
 
 /** MsgLeaveGroup is the Msg/LeaveGroup request type. */
 export interface MsgLeaveGroup {
+  $type: "cosmos.group.v1.MsgLeaveGroup";
   /** address is the account address of the group member. */
   address: string;
   /** group_id is the unique ID of the group. */
@@ -271,13 +308,22 @@ export interface MsgLeaveGroup {
 }
 
 /** MsgLeaveGroupResponse is the Msg/LeaveGroup response type. */
-export interface MsgLeaveGroupResponse {}
+export interface MsgLeaveGroupResponse {
+  $type: "cosmos.group.v1.MsgLeaveGroupResponse";
+}
 
 function createBaseMsgCreateGroup(): MsgCreateGroup {
-  return { admin: "", members: [], metadata: "" };
+  return {
+    $type: "cosmos.group.v1.MsgCreateGroup",
+    admin: "",
+    members: [],
+    metadata: "",
+  };
 }
 
 export const MsgCreateGroup = {
+  $type: "cosmos.group.v1.MsgCreateGroup" as const,
+
   encode(
     message: MsgCreateGroup,
     writer: _m0.Writer = _m0.Writer.create()
@@ -320,6 +366,7 @@ export const MsgCreateGroup = {
 
   fromJSON(object: any): MsgCreateGroup {
     return {
+      $type: MsgCreateGroup.$type,
       admin: isSet(object.admin) ? String(object.admin) : "",
       members: Array.isArray(object?.members)
         ? object.members.map((e: any) => Member.fromJSON(e))
@@ -353,11 +400,18 @@ export const MsgCreateGroup = {
   },
 };
 
+messageTypeRegistry.set(MsgCreateGroup.$type, MsgCreateGroup);
+
 function createBaseMsgCreateGroupResponse(): MsgCreateGroupResponse {
-  return { groupId: Long.UZERO };
+  return {
+    $type: "cosmos.group.v1.MsgCreateGroupResponse",
+    groupId: Long.UZERO,
+  };
 }
 
 export const MsgCreateGroupResponse = {
+  $type: "cosmos.group.v1.MsgCreateGroupResponse" as const,
+
   encode(
     message: MsgCreateGroupResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -391,6 +445,7 @@ export const MsgCreateGroupResponse = {
 
   fromJSON(object: any): MsgCreateGroupResponse {
     return {
+      $type: MsgCreateGroupResponse.$type,
       groupId: isSet(object.groupId)
         ? Long.fromString(object.groupId)
         : Long.UZERO,
@@ -416,11 +471,20 @@ export const MsgCreateGroupResponse = {
   },
 };
 
+messageTypeRegistry.set(MsgCreateGroupResponse.$type, MsgCreateGroupResponse);
+
 function createBaseMsgUpdateGroupMembers(): MsgUpdateGroupMembers {
-  return { admin: "", groupId: Long.UZERO, memberUpdates: [] };
+  return {
+    $type: "cosmos.group.v1.MsgUpdateGroupMembers",
+    admin: "",
+    groupId: Long.UZERO,
+    memberUpdates: [],
+  };
 }
 
 export const MsgUpdateGroupMembers = {
+  $type: "cosmos.group.v1.MsgUpdateGroupMembers" as const,
+
   encode(
     message: MsgUpdateGroupMembers,
     writer: _m0.Writer = _m0.Writer.create()
@@ -466,6 +530,7 @@ export const MsgUpdateGroupMembers = {
 
   fromJSON(object: any): MsgUpdateGroupMembers {
     return {
+      $type: MsgUpdateGroupMembers.$type,
       admin: isSet(object.admin) ? String(object.admin) : "",
       groupId: isSet(object.groupId)
         ? Long.fromString(object.groupId)
@@ -506,11 +571,15 @@ export const MsgUpdateGroupMembers = {
   },
 };
 
+messageTypeRegistry.set(MsgUpdateGroupMembers.$type, MsgUpdateGroupMembers);
+
 function createBaseMsgUpdateGroupMembersResponse(): MsgUpdateGroupMembersResponse {
-  return {};
+  return { $type: "cosmos.group.v1.MsgUpdateGroupMembersResponse" };
 }
 
 export const MsgUpdateGroupMembersResponse = {
+  $type: "cosmos.group.v1.MsgUpdateGroupMembersResponse" as const,
+
   encode(
     _: MsgUpdateGroupMembersResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -537,7 +606,9 @@ export const MsgUpdateGroupMembersResponse = {
   },
 
   fromJSON(_: any): MsgUpdateGroupMembersResponse {
-    return {};
+    return {
+      $type: MsgUpdateGroupMembersResponse.$type,
+    };
   },
 
   toJSON(_: MsgUpdateGroupMembersResponse): unknown {
@@ -553,11 +624,23 @@ export const MsgUpdateGroupMembersResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgUpdateGroupMembersResponse.$type,
+  MsgUpdateGroupMembersResponse
+);
+
 function createBaseMsgUpdateGroupAdmin(): MsgUpdateGroupAdmin {
-  return { admin: "", groupId: Long.UZERO, newAdmin: "" };
+  return {
+    $type: "cosmos.group.v1.MsgUpdateGroupAdmin",
+    admin: "",
+    groupId: Long.UZERO,
+    newAdmin: "",
+  };
 }
 
 export const MsgUpdateGroupAdmin = {
+  $type: "cosmos.group.v1.MsgUpdateGroupAdmin" as const,
+
   encode(
     message: MsgUpdateGroupAdmin,
     writer: _m0.Writer = _m0.Writer.create()
@@ -600,6 +683,7 @@ export const MsgUpdateGroupAdmin = {
 
   fromJSON(object: any): MsgUpdateGroupAdmin {
     return {
+      $type: MsgUpdateGroupAdmin.$type,
       admin: isSet(object.admin) ? String(object.admin) : "",
       groupId: isSet(object.groupId)
         ? Long.fromString(object.groupId)
@@ -631,11 +715,15 @@ export const MsgUpdateGroupAdmin = {
   },
 };
 
+messageTypeRegistry.set(MsgUpdateGroupAdmin.$type, MsgUpdateGroupAdmin);
+
 function createBaseMsgUpdateGroupAdminResponse(): MsgUpdateGroupAdminResponse {
-  return {};
+  return { $type: "cosmos.group.v1.MsgUpdateGroupAdminResponse" };
 }
 
 export const MsgUpdateGroupAdminResponse = {
+  $type: "cosmos.group.v1.MsgUpdateGroupAdminResponse" as const,
+
   encode(
     _: MsgUpdateGroupAdminResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -662,7 +750,9 @@ export const MsgUpdateGroupAdminResponse = {
   },
 
   fromJSON(_: any): MsgUpdateGroupAdminResponse {
-    return {};
+    return {
+      $type: MsgUpdateGroupAdminResponse.$type,
+    };
   },
 
   toJSON(_: MsgUpdateGroupAdminResponse): unknown {
@@ -678,11 +768,23 @@ export const MsgUpdateGroupAdminResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgUpdateGroupAdminResponse.$type,
+  MsgUpdateGroupAdminResponse
+);
+
 function createBaseMsgUpdateGroupMetadata(): MsgUpdateGroupMetadata {
-  return { admin: "", groupId: Long.UZERO, metadata: "" };
+  return {
+    $type: "cosmos.group.v1.MsgUpdateGroupMetadata",
+    admin: "",
+    groupId: Long.UZERO,
+    metadata: "",
+  };
 }
 
 export const MsgUpdateGroupMetadata = {
+  $type: "cosmos.group.v1.MsgUpdateGroupMetadata" as const,
+
   encode(
     message: MsgUpdateGroupMetadata,
     writer: _m0.Writer = _m0.Writer.create()
@@ -728,6 +830,7 @@ export const MsgUpdateGroupMetadata = {
 
   fromJSON(object: any): MsgUpdateGroupMetadata {
     return {
+      $type: MsgUpdateGroupMetadata.$type,
       admin: isSet(object.admin) ? String(object.admin) : "",
       groupId: isSet(object.groupId)
         ? Long.fromString(object.groupId)
@@ -759,11 +862,15 @@ export const MsgUpdateGroupMetadata = {
   },
 };
 
+messageTypeRegistry.set(MsgUpdateGroupMetadata.$type, MsgUpdateGroupMetadata);
+
 function createBaseMsgUpdateGroupMetadataResponse(): MsgUpdateGroupMetadataResponse {
-  return {};
+  return { $type: "cosmos.group.v1.MsgUpdateGroupMetadataResponse" };
 }
 
 export const MsgUpdateGroupMetadataResponse = {
+  $type: "cosmos.group.v1.MsgUpdateGroupMetadataResponse" as const,
+
   encode(
     _: MsgUpdateGroupMetadataResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -790,7 +897,9 @@ export const MsgUpdateGroupMetadataResponse = {
   },
 
   fromJSON(_: any): MsgUpdateGroupMetadataResponse {
-    return {};
+    return {
+      $type: MsgUpdateGroupMetadataResponse.$type,
+    };
   },
 
   toJSON(_: MsgUpdateGroupMetadataResponse): unknown {
@@ -806,8 +915,14 @@ export const MsgUpdateGroupMetadataResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgUpdateGroupMetadataResponse.$type,
+  MsgUpdateGroupMetadataResponse
+);
+
 function createBaseMsgCreateGroupPolicy(): MsgCreateGroupPolicy {
   return {
+    $type: "cosmos.group.v1.MsgCreateGroupPolicy",
     admin: "",
     groupId: Long.UZERO,
     metadata: "",
@@ -816,6 +931,8 @@ function createBaseMsgCreateGroupPolicy(): MsgCreateGroupPolicy {
 }
 
 export const MsgCreateGroupPolicy = {
+  $type: "cosmos.group.v1.MsgCreateGroupPolicy" as const,
+
   encode(
     message: MsgCreateGroupPolicy,
     writer: _m0.Writer = _m0.Writer.create()
@@ -867,6 +984,7 @@ export const MsgCreateGroupPolicy = {
 
   fromJSON(object: any): MsgCreateGroupPolicy {
     return {
+      $type: MsgCreateGroupPolicy.$type,
       admin: isSet(object.admin) ? String(object.admin) : "",
       groupId: isSet(object.groupId)
         ? Long.fromString(object.groupId)
@@ -909,11 +1027,15 @@ export const MsgCreateGroupPolicy = {
   },
 };
 
+messageTypeRegistry.set(MsgCreateGroupPolicy.$type, MsgCreateGroupPolicy);
+
 function createBaseMsgCreateGroupPolicyResponse(): MsgCreateGroupPolicyResponse {
-  return { address: "" };
+  return { $type: "cosmos.group.v1.MsgCreateGroupPolicyResponse", address: "" };
 }
 
 export const MsgCreateGroupPolicyResponse = {
+  $type: "cosmos.group.v1.MsgCreateGroupPolicyResponse" as const,
+
   encode(
     message: MsgCreateGroupPolicyResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -947,6 +1069,7 @@ export const MsgCreateGroupPolicyResponse = {
 
   fromJSON(object: any): MsgCreateGroupPolicyResponse {
     return {
+      $type: MsgCreateGroupPolicyResponse.$type,
       address: isSet(object.address) ? String(object.address) : "",
     };
   },
@@ -966,11 +1089,23 @@ export const MsgCreateGroupPolicyResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgCreateGroupPolicyResponse.$type,
+  MsgCreateGroupPolicyResponse
+);
+
 function createBaseMsgUpdateGroupPolicyAdmin(): MsgUpdateGroupPolicyAdmin {
-  return { admin: "", address: "", newAdmin: "" };
+  return {
+    $type: "cosmos.group.v1.MsgUpdateGroupPolicyAdmin",
+    admin: "",
+    address: "",
+    newAdmin: "",
+  };
 }
 
 export const MsgUpdateGroupPolicyAdmin = {
+  $type: "cosmos.group.v1.MsgUpdateGroupPolicyAdmin" as const,
+
   encode(
     message: MsgUpdateGroupPolicyAdmin,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1016,6 +1151,7 @@ export const MsgUpdateGroupPolicyAdmin = {
 
   fromJSON(object: any): MsgUpdateGroupPolicyAdmin {
     return {
+      $type: MsgUpdateGroupPolicyAdmin.$type,
       admin: isSet(object.admin) ? String(object.admin) : "",
       address: isSet(object.address) ? String(object.address) : "",
       newAdmin: isSet(object.newAdmin) ? String(object.newAdmin) : "",
@@ -1041,8 +1177,14 @@ export const MsgUpdateGroupPolicyAdmin = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgUpdateGroupPolicyAdmin.$type,
+  MsgUpdateGroupPolicyAdmin
+);
+
 function createBaseMsgCreateGroupWithPolicy(): MsgCreateGroupWithPolicy {
   return {
+    $type: "cosmos.group.v1.MsgCreateGroupWithPolicy",
     admin: "",
     members: [],
     groupMetadata: "",
@@ -1053,6 +1195,8 @@ function createBaseMsgCreateGroupWithPolicy(): MsgCreateGroupWithPolicy {
 }
 
 export const MsgCreateGroupWithPolicy = {
+  $type: "cosmos.group.v1.MsgCreateGroupWithPolicy" as const,
+
   encode(
     message: MsgCreateGroupWithPolicy,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1116,6 +1260,7 @@ export const MsgCreateGroupWithPolicy = {
 
   fromJSON(object: any): MsgCreateGroupWithPolicy {
     return {
+      $type: MsgCreateGroupWithPolicy.$type,
       admin: isSet(object.admin) ? String(object.admin) : "",
       members: Array.isArray(object?.members)
         ? object.members.map((e: any) => Member.fromJSON(e))
@@ -1175,11 +1320,22 @@ export const MsgCreateGroupWithPolicy = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgCreateGroupWithPolicy.$type,
+  MsgCreateGroupWithPolicy
+);
+
 function createBaseMsgCreateGroupWithPolicyResponse(): MsgCreateGroupWithPolicyResponse {
-  return { groupId: Long.UZERO, groupPolicyAddress: "" };
+  return {
+    $type: "cosmos.group.v1.MsgCreateGroupWithPolicyResponse",
+    groupId: Long.UZERO,
+    groupPolicyAddress: "",
+  };
 }
 
 export const MsgCreateGroupWithPolicyResponse = {
+  $type: "cosmos.group.v1.MsgCreateGroupWithPolicyResponse" as const,
+
   encode(
     message: MsgCreateGroupWithPolicyResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1219,6 +1375,7 @@ export const MsgCreateGroupWithPolicyResponse = {
 
   fromJSON(object: any): MsgCreateGroupWithPolicyResponse {
     return {
+      $type: MsgCreateGroupWithPolicyResponse.$type,
       groupId: isSet(object.groupId)
         ? Long.fromString(object.groupId)
         : Long.UZERO,
@@ -1250,11 +1407,18 @@ export const MsgCreateGroupWithPolicyResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgCreateGroupWithPolicyResponse.$type,
+  MsgCreateGroupWithPolicyResponse
+);
+
 function createBaseMsgUpdateGroupPolicyAdminResponse(): MsgUpdateGroupPolicyAdminResponse {
-  return {};
+  return { $type: "cosmos.group.v1.MsgUpdateGroupPolicyAdminResponse" };
 }
 
 export const MsgUpdateGroupPolicyAdminResponse = {
+  $type: "cosmos.group.v1.MsgUpdateGroupPolicyAdminResponse" as const,
+
   encode(
     _: MsgUpdateGroupPolicyAdminResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1281,7 +1445,9 @@ export const MsgUpdateGroupPolicyAdminResponse = {
   },
 
   fromJSON(_: any): MsgUpdateGroupPolicyAdminResponse {
-    return {};
+    return {
+      $type: MsgUpdateGroupPolicyAdminResponse.$type,
+    };
   },
 
   toJSON(_: MsgUpdateGroupPolicyAdminResponse): unknown {
@@ -1297,11 +1463,23 @@ export const MsgUpdateGroupPolicyAdminResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgUpdateGroupPolicyAdminResponse.$type,
+  MsgUpdateGroupPolicyAdminResponse
+);
+
 function createBaseMsgUpdateGroupPolicyDecisionPolicy(): MsgUpdateGroupPolicyDecisionPolicy {
-  return { admin: "", address: "", decisionPolicy: undefined };
+  return {
+    $type: "cosmos.group.v1.MsgUpdateGroupPolicyDecisionPolicy",
+    admin: "",
+    address: "",
+    decisionPolicy: undefined,
+  };
 }
 
 export const MsgUpdateGroupPolicyDecisionPolicy = {
+  $type: "cosmos.group.v1.MsgUpdateGroupPolicyDecisionPolicy" as const,
+
   encode(
     message: MsgUpdateGroupPolicyDecisionPolicy,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1347,6 +1525,7 @@ export const MsgUpdateGroupPolicyDecisionPolicy = {
 
   fromJSON(object: any): MsgUpdateGroupPolicyDecisionPolicy {
     return {
+      $type: MsgUpdateGroupPolicyDecisionPolicy.$type,
       admin: isSet(object.admin) ? String(object.admin) : "",
       address: isSet(object.address) ? String(object.address) : "",
       decisionPolicy: isSet(object.decisionPolicy)
@@ -1380,11 +1559,20 @@ export const MsgUpdateGroupPolicyDecisionPolicy = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgUpdateGroupPolicyDecisionPolicy.$type,
+  MsgUpdateGroupPolicyDecisionPolicy
+);
+
 function createBaseMsgUpdateGroupPolicyDecisionPolicyResponse(): MsgUpdateGroupPolicyDecisionPolicyResponse {
-  return {};
+  return {
+    $type: "cosmos.group.v1.MsgUpdateGroupPolicyDecisionPolicyResponse",
+  };
 }
 
 export const MsgUpdateGroupPolicyDecisionPolicyResponse = {
+  $type: "cosmos.group.v1.MsgUpdateGroupPolicyDecisionPolicyResponse" as const,
+
   encode(
     _: MsgUpdateGroupPolicyDecisionPolicyResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1411,7 +1599,9 @@ export const MsgUpdateGroupPolicyDecisionPolicyResponse = {
   },
 
   fromJSON(_: any): MsgUpdateGroupPolicyDecisionPolicyResponse {
-    return {};
+    return {
+      $type: MsgUpdateGroupPolicyDecisionPolicyResponse.$type,
+    };
   },
 
   toJSON(_: MsgUpdateGroupPolicyDecisionPolicyResponse): unknown {
@@ -1427,11 +1617,23 @@ export const MsgUpdateGroupPolicyDecisionPolicyResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgUpdateGroupPolicyDecisionPolicyResponse.$type,
+  MsgUpdateGroupPolicyDecisionPolicyResponse
+);
+
 function createBaseMsgUpdateGroupPolicyMetadata(): MsgUpdateGroupPolicyMetadata {
-  return { admin: "", address: "", metadata: "" };
+  return {
+    $type: "cosmos.group.v1.MsgUpdateGroupPolicyMetadata",
+    admin: "",
+    address: "",
+    metadata: "",
+  };
 }
 
 export const MsgUpdateGroupPolicyMetadata = {
+  $type: "cosmos.group.v1.MsgUpdateGroupPolicyMetadata" as const,
+
   encode(
     message: MsgUpdateGroupPolicyMetadata,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1477,6 +1679,7 @@ export const MsgUpdateGroupPolicyMetadata = {
 
   fromJSON(object: any): MsgUpdateGroupPolicyMetadata {
     return {
+      $type: MsgUpdateGroupPolicyMetadata.$type,
       admin: isSet(object.admin) ? String(object.admin) : "",
       address: isSet(object.address) ? String(object.address) : "",
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
@@ -1502,11 +1705,18 @@ export const MsgUpdateGroupPolicyMetadata = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgUpdateGroupPolicyMetadata.$type,
+  MsgUpdateGroupPolicyMetadata
+);
+
 function createBaseMsgUpdateGroupPolicyMetadataResponse(): MsgUpdateGroupPolicyMetadataResponse {
-  return {};
+  return { $type: "cosmos.group.v1.MsgUpdateGroupPolicyMetadataResponse" };
 }
 
 export const MsgUpdateGroupPolicyMetadataResponse = {
+  $type: "cosmos.group.v1.MsgUpdateGroupPolicyMetadataResponse" as const,
+
   encode(
     _: MsgUpdateGroupPolicyMetadataResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1533,7 +1743,9 @@ export const MsgUpdateGroupPolicyMetadataResponse = {
   },
 
   fromJSON(_: any): MsgUpdateGroupPolicyMetadataResponse {
-    return {};
+    return {
+      $type: MsgUpdateGroupPolicyMetadataResponse.$type,
+    };
   },
 
   toJSON(_: MsgUpdateGroupPolicyMetadataResponse): unknown {
@@ -1549,11 +1761,25 @@ export const MsgUpdateGroupPolicyMetadataResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgUpdateGroupPolicyMetadataResponse.$type,
+  MsgUpdateGroupPolicyMetadataResponse
+);
+
 function createBaseMsgSubmitProposal(): MsgSubmitProposal {
-  return { address: "", proposers: [], metadata: "", messages: [], exec: 0 };
+  return {
+    $type: "cosmos.group.v1.MsgSubmitProposal",
+    address: "",
+    proposers: [],
+    metadata: "",
+    messages: [],
+    exec: 0,
+  };
 }
 
 export const MsgSubmitProposal = {
+  $type: "cosmos.group.v1.MsgSubmitProposal" as const,
+
   encode(
     message: MsgSubmitProposal,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1608,6 +1834,7 @@ export const MsgSubmitProposal = {
 
   fromJSON(object: any): MsgSubmitProposal {
     return {
+      $type: MsgSubmitProposal.$type,
       address: isSet(object.address) ? String(object.address) : "",
       proposers: Array.isArray(object?.proposers)
         ? object.proposers.map((e: any) => String(e))
@@ -1653,11 +1880,18 @@ export const MsgSubmitProposal = {
   },
 };
 
+messageTypeRegistry.set(MsgSubmitProposal.$type, MsgSubmitProposal);
+
 function createBaseMsgSubmitProposalResponse(): MsgSubmitProposalResponse {
-  return { proposalId: Long.UZERO };
+  return {
+    $type: "cosmos.group.v1.MsgSubmitProposalResponse",
+    proposalId: Long.UZERO,
+  };
 }
 
 export const MsgSubmitProposalResponse = {
+  $type: "cosmos.group.v1.MsgSubmitProposalResponse" as const,
+
   encode(
     message: MsgSubmitProposalResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1691,6 +1925,7 @@ export const MsgSubmitProposalResponse = {
 
   fromJSON(object: any): MsgSubmitProposalResponse {
     return {
+      $type: MsgSubmitProposalResponse.$type,
       proposalId: isSet(object.proposalId)
         ? Long.fromString(object.proposalId)
         : Long.UZERO,
@@ -1716,11 +1951,22 @@ export const MsgSubmitProposalResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgSubmitProposalResponse.$type,
+  MsgSubmitProposalResponse
+);
+
 function createBaseMsgWithdrawProposal(): MsgWithdrawProposal {
-  return { proposalId: Long.UZERO, address: "" };
+  return {
+    $type: "cosmos.group.v1.MsgWithdrawProposal",
+    proposalId: Long.UZERO,
+    address: "",
+  };
 }
 
 export const MsgWithdrawProposal = {
+  $type: "cosmos.group.v1.MsgWithdrawProposal" as const,
+
   encode(
     message: MsgWithdrawProposal,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1757,6 +2003,7 @@ export const MsgWithdrawProposal = {
 
   fromJSON(object: any): MsgWithdrawProposal {
     return {
+      $type: MsgWithdrawProposal.$type,
       proposalId: isSet(object.proposalId)
         ? Long.fromString(object.proposalId)
         : Long.UZERO,
@@ -1785,11 +2032,15 @@ export const MsgWithdrawProposal = {
   },
 };
 
+messageTypeRegistry.set(MsgWithdrawProposal.$type, MsgWithdrawProposal);
+
 function createBaseMsgWithdrawProposalResponse(): MsgWithdrawProposalResponse {
-  return {};
+  return { $type: "cosmos.group.v1.MsgWithdrawProposalResponse" };
 }
 
 export const MsgWithdrawProposalResponse = {
+  $type: "cosmos.group.v1.MsgWithdrawProposalResponse" as const,
+
   encode(
     _: MsgWithdrawProposalResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1816,7 +2067,9 @@ export const MsgWithdrawProposalResponse = {
   },
 
   fromJSON(_: any): MsgWithdrawProposalResponse {
-    return {};
+    return {
+      $type: MsgWithdrawProposalResponse.$type,
+    };
   },
 
   toJSON(_: MsgWithdrawProposalResponse): unknown {
@@ -1832,8 +2085,14 @@ export const MsgWithdrawProposalResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgWithdrawProposalResponse.$type,
+  MsgWithdrawProposalResponse
+);
+
 function createBaseMsgVote(): MsgVote {
   return {
+    $type: "cosmos.group.v1.MsgVote",
     proposalId: Long.UZERO,
     voter: "",
     option: 0,
@@ -1843,6 +2102,8 @@ function createBaseMsgVote(): MsgVote {
 }
 
 export const MsgVote = {
+  $type: "cosmos.group.v1.MsgVote" as const,
+
   encode(
     message: MsgVote,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1897,6 +2158,7 @@ export const MsgVote = {
 
   fromJSON(object: any): MsgVote {
     return {
+      $type: MsgVote.$type,
       proposalId: isSet(object.proposalId)
         ? Long.fromString(object.proposalId)
         : Long.UZERO,
@@ -1933,11 +2195,15 @@ export const MsgVote = {
   },
 };
 
+messageTypeRegistry.set(MsgVote.$type, MsgVote);
+
 function createBaseMsgVoteResponse(): MsgVoteResponse {
-  return {};
+  return { $type: "cosmos.group.v1.MsgVoteResponse" };
 }
 
 export const MsgVoteResponse = {
+  $type: "cosmos.group.v1.MsgVoteResponse" as const,
+
   encode(
     _: MsgVoteResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1961,7 +2227,9 @@ export const MsgVoteResponse = {
   },
 
   fromJSON(_: any): MsgVoteResponse {
-    return {};
+    return {
+      $type: MsgVoteResponse.$type,
+    };
   },
 
   toJSON(_: MsgVoteResponse): unknown {
@@ -1977,11 +2245,19 @@ export const MsgVoteResponse = {
   },
 };
 
+messageTypeRegistry.set(MsgVoteResponse.$type, MsgVoteResponse);
+
 function createBaseMsgExec(): MsgExec {
-  return { proposalId: Long.UZERO, signer: "" };
+  return {
+    $type: "cosmos.group.v1.MsgExec",
+    proposalId: Long.UZERO,
+    signer: "",
+  };
 }
 
 export const MsgExec = {
+  $type: "cosmos.group.v1.MsgExec" as const,
+
   encode(
     message: MsgExec,
     writer: _m0.Writer = _m0.Writer.create()
@@ -2018,6 +2294,7 @@ export const MsgExec = {
 
   fromJSON(object: any): MsgExec {
     return {
+      $type: MsgExec.$type,
       proposalId: isSet(object.proposalId)
         ? Long.fromString(object.proposalId)
         : Long.UZERO,
@@ -2044,11 +2321,15 @@ export const MsgExec = {
   },
 };
 
+messageTypeRegistry.set(MsgExec.$type, MsgExec);
+
 function createBaseMsgExecResponse(): MsgExecResponse {
-  return {};
+  return { $type: "cosmos.group.v1.MsgExecResponse" };
 }
 
 export const MsgExecResponse = {
+  $type: "cosmos.group.v1.MsgExecResponse" as const,
+
   encode(
     _: MsgExecResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -2072,7 +2353,9 @@ export const MsgExecResponse = {
   },
 
   fromJSON(_: any): MsgExecResponse {
-    return {};
+    return {
+      $type: MsgExecResponse.$type,
+    };
   },
 
   toJSON(_: MsgExecResponse): unknown {
@@ -2088,11 +2371,19 @@ export const MsgExecResponse = {
   },
 };
 
+messageTypeRegistry.set(MsgExecResponse.$type, MsgExecResponse);
+
 function createBaseMsgLeaveGroup(): MsgLeaveGroup {
-  return { address: "", groupId: Long.UZERO };
+  return {
+    $type: "cosmos.group.v1.MsgLeaveGroup",
+    address: "",
+    groupId: Long.UZERO,
+  };
 }
 
 export const MsgLeaveGroup = {
+  $type: "cosmos.group.v1.MsgLeaveGroup" as const,
+
   encode(
     message: MsgLeaveGroup,
     writer: _m0.Writer = _m0.Writer.create()
@@ -2129,6 +2420,7 @@ export const MsgLeaveGroup = {
 
   fromJSON(object: any): MsgLeaveGroup {
     return {
+      $type: MsgLeaveGroup.$type,
       address: isSet(object.address) ? String(object.address) : "",
       groupId: isSet(object.groupId)
         ? Long.fromString(object.groupId)
@@ -2157,11 +2449,15 @@ export const MsgLeaveGroup = {
   },
 };
 
+messageTypeRegistry.set(MsgLeaveGroup.$type, MsgLeaveGroup);
+
 function createBaseMsgLeaveGroupResponse(): MsgLeaveGroupResponse {
-  return {};
+  return { $type: "cosmos.group.v1.MsgLeaveGroupResponse" };
 }
 
 export const MsgLeaveGroupResponse = {
+  $type: "cosmos.group.v1.MsgLeaveGroupResponse" as const,
+
   encode(
     _: MsgLeaveGroupResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -2188,7 +2484,9 @@ export const MsgLeaveGroupResponse = {
   },
 
   fromJSON(_: any): MsgLeaveGroupResponse {
-    return {};
+    return {
+      $type: MsgLeaveGroupResponse.$type,
+    };
   },
 
   toJSON(_: MsgLeaveGroupResponse): unknown {
@@ -2203,6 +2501,8 @@ export const MsgLeaveGroupResponse = {
     return message;
   },
 };
+
+messageTypeRegistry.set(MsgLeaveGroupResponse.$type, MsgLeaveGroupResponse);
 
 /** Msg is the cosmos.group.v1 Msg service. */
 export interface Msg {
@@ -2475,14 +2775,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

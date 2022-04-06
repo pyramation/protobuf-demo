@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Timestamp } from "../../../../google/protobuf/timestamp";
@@ -13,10 +14,11 @@ export const protobufPackage = "google.api.expr.v1alpha1";
 
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExpr {
+  $type: "google.api.expr.v1alpha1.ParsedExpr";
   /** The parsed expression. */
-  expr?: Expr;
+  expr: Expr;
   /** The source info derived from input that generated the parsed `expr`. */
-  sourceInfo?: SourceInfo;
+  sourceInfo: SourceInfo;
 }
 
 /**
@@ -37,6 +39,7 @@ export interface ParsedExpr {
  * the function declaration `startsWith`.
  */
 export interface Expr {
+  $type: "google.api.expr.v1alpha1.Expr";
   /**
    * Required. An id assigned to this node by the parser which is unique in a
    * given expression tree. This is used to associate type information and other
@@ -44,23 +47,24 @@ export interface Expr {
    */
   id: Long;
   /** A literal expression. */
-  constExpr?: Constant | undefined;
+  constExpr: Constant | undefined;
   /** An identifier expression. */
-  identExpr?: Expr_Ident | undefined;
+  identExpr: Expr_Ident | undefined;
   /** A field selection expression, e.g. `request.auth`. */
-  selectExpr?: Expr_Select | undefined;
+  selectExpr: Expr_Select | undefined;
   /** A call expression, including calls to predefined functions and operators. */
-  callExpr?: Expr_Call | undefined;
+  callExpr: Expr_Call | undefined;
   /** A list creation expression. */
-  listExpr?: Expr_CreateList | undefined;
+  listExpr: Expr_CreateList | undefined;
   /** A map or message creation expression. */
-  structExpr?: Expr_CreateStruct | undefined;
+  structExpr: Expr_CreateStruct | undefined;
   /** A comprehension expression. */
-  comprehensionExpr?: Expr_Comprehension | undefined;
+  comprehensionExpr: Expr_Comprehension | undefined;
 }
 
 /** An identifier expression. e.g. `request`. */
 export interface Expr_Ident {
+  $type: "google.api.expr.v1alpha1.Expr.Ident";
   /**
    * Required. Holds a single, unqualified identifier, possibly preceded by a
    * '.'.
@@ -72,13 +76,14 @@ export interface Expr_Ident {
 
 /** A field selection expression. e.g. `request.auth`. */
 export interface Expr_Select {
+  $type: "google.api.expr.v1alpha1.Expr.Select";
   /**
    * Required. The target of the selection expression.
    *
    * For example, in the select expression `request.auth`, the `request`
    * portion of the expression is the `operand`.
    */
-  operand?: Expr;
+  operand: Expr;
   /**
    * Required. The name of the field to select.
    *
@@ -100,11 +105,12 @@ export interface Expr_Select {
  * For example, `value == 10`, `size(map_value)`.
  */
 export interface Expr_Call {
+  $type: "google.api.expr.v1alpha1.Expr.Call";
   /**
    * The target of an method call-style expression. For example, `x` in
    * `x.f()`.
    */
-  target?: Expr;
+  target: Expr;
   /** Required. The name of the function or method being called. */
   function: string;
   /** The arguments. */
@@ -118,6 +124,7 @@ export interface Expr_Call {
  * `dyn([1, 'hello', 2.0])`
  */
 export interface Expr_CreateList {
+  $type: "google.api.expr.v1alpha1.Expr.CreateList";
   /** The elements part of the list. */
   elements: Expr[];
 }
@@ -130,6 +137,7 @@ export interface Expr_CreateList {
  * `types.MyType{field_id: 'value'}`.
  */
 export interface Expr_CreateStruct {
+  $type: "google.api.expr.v1alpha1.Expr.CreateStruct";
   /**
    * The type name of the message to be created, empty when creating map
    * literals.
@@ -141,6 +149,7 @@ export interface Expr_CreateStruct {
 
 /** Represents an entry. */
 export interface Expr_CreateStruct_Entry {
+  $type: "google.api.expr.v1alpha1.Expr.CreateStruct.Entry";
   /**
    * Required. An id assigned to this node by the parser which is unique
    * in a given expression tree. This is used to associate type
@@ -150,9 +159,9 @@ export interface Expr_CreateStruct_Entry {
   /** The field key for a message creator statement. */
   fieldKey: string | undefined;
   /** The key expression for a map creation statement. */
-  mapKey?: Expr | undefined;
+  mapKey: Expr | undefined;
   /** Required. The value assigned to the key. */
-  value?: Expr;
+  value: Expr;
 }
 
 /**
@@ -184,33 +193,34 @@ export interface Expr_CreateStruct_Entry {
  * types, the macro tests whether the property `x` is defined on `m`.
  */
 export interface Expr_Comprehension {
+  $type: "google.api.expr.v1alpha1.Expr.Comprehension";
   /** The name of the iteration variable. */
   iterVar: string;
   /** The range over which var iterates. */
-  iterRange?: Expr;
+  iterRange: Expr;
   /** The name of the variable used for accumulation of the result. */
   accuVar: string;
   /** The initial value of the accumulator. */
-  accuInit?: Expr;
+  accuInit: Expr;
   /**
    * An expression which can contain iter_var and accu_var.
    *
    * Returns false when the result has been computed and may be used as
    * a hint to short-circuit the remainder of the comprehension.
    */
-  loopCondition?: Expr;
+  loopCondition: Expr;
   /**
    * An expression which can contain iter_var and accu_var.
    *
    * Computes the next value of accu_var.
    */
-  loopStep?: Expr;
+  loopStep: Expr;
   /**
    * An expression which can contain accu_var.
    *
    * Computes the result.
    */
-  result?: Expr;
+  result: Expr;
 }
 
 /**
@@ -229,6 +239,7 @@ export interface Expr_Comprehension {
  * `true`, `null`.
  */
 export interface Constant {
+  $type: "google.api.expr.v1alpha1.Constant";
   /** null value. */
   nullValue: NullValue | undefined;
   /** boolean value. */
@@ -250,7 +261,7 @@ export interface Constant {
    *
    * @deprecated
    */
-  durationValue?: Duration | undefined;
+  durationValue: Duration | undefined;
   /**
    * protobuf.Timestamp value.
    *
@@ -258,11 +269,12 @@ export interface Constant {
    *
    * @deprecated
    */
-  timestampValue?: Date | undefined;
+  timestampValue: Date | undefined;
 }
 
 /** Source information collected at parse time. */
 export interface SourceInfo {
+  $type: "google.api.expr.v1alpha1.SourceInfo";
   /** The syntax version of the source, e.g. `cel1`. */
   syntaxVersion: string;
   /**
@@ -301,17 +313,20 @@ export interface SourceInfo {
 }
 
 export interface SourceInfo_PositionsEntry {
+  $type: "google.api.expr.v1alpha1.SourceInfo.PositionsEntry";
   key: Long;
   value: number;
 }
 
 export interface SourceInfo_MacroCallsEntry {
+  $type: "google.api.expr.v1alpha1.SourceInfo.MacroCallsEntry";
   key: Long;
-  value?: Expr;
+  value: Expr;
 }
 
 /** A specific position in source. */
 export interface SourcePosition {
+  $type: "google.api.expr.v1alpha1.SourcePosition";
   /** The soucre location name (e.g. file name). */
   location: string;
   /** The UTF-8 code unit offset. */
@@ -329,10 +344,16 @@ export interface SourcePosition {
 }
 
 function createBaseParsedExpr(): ParsedExpr {
-  return { expr: undefined, sourceInfo: undefined };
+  return {
+    $type: "google.api.expr.v1alpha1.ParsedExpr",
+    expr: undefined,
+    sourceInfo: undefined,
+  };
 }
 
 export const ParsedExpr = {
+  $type: "google.api.expr.v1alpha1.ParsedExpr" as const,
+
   encode(
     message: ParsedExpr,
     writer: _m0.Writer = _m0.Writer.create()
@@ -369,6 +390,7 @@ export const ParsedExpr = {
 
   fromJSON(object: any): ParsedExpr {
     return {
+      $type: ParsedExpr.$type,
       expr: isSet(object.expr) ? Expr.fromJSON(object.expr) : undefined,
       sourceInfo: isSet(object.sourceInfo)
         ? SourceInfo.fromJSON(object.sourceInfo)
@@ -403,8 +425,11 @@ export const ParsedExpr = {
   },
 };
 
+messageTypeRegistry.set(ParsedExpr.$type, ParsedExpr);
+
 function createBaseExpr(): Expr {
   return {
+    $type: "google.api.expr.v1alpha1.Expr",
     id: Long.ZERO,
     constExpr: undefined,
     identExpr: undefined,
@@ -417,6 +442,8 @@ function createBaseExpr(): Expr {
 }
 
 export const Expr = {
+  $type: "google.api.expr.v1alpha1.Expr" as const,
+
   encode(message: Expr, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.id.isZero()) {
       writer.uint32(16).int64(message.id);
@@ -501,6 +528,7 @@ export const Expr = {
 
   fromJSON(object: any): Expr {
     return {
+      $type: Expr.$type,
       id: isSet(object.id) ? Long.fromString(object.id) : Long.ZERO,
       constExpr: isSet(object.constExpr)
         ? Constant.fromJSON(object.constExpr)
@@ -599,11 +627,15 @@ export const Expr = {
   },
 };
 
+messageTypeRegistry.set(Expr.$type, Expr);
+
 function createBaseExpr_Ident(): Expr_Ident {
-  return { name: "" };
+  return { $type: "google.api.expr.v1alpha1.Expr.Ident", name: "" };
 }
 
 export const Expr_Ident = {
+  $type: "google.api.expr.v1alpha1.Expr.Ident" as const,
+
   encode(
     message: Expr_Ident,
     writer: _m0.Writer = _m0.Writer.create()
@@ -634,6 +666,7 @@ export const Expr_Ident = {
 
   fromJSON(object: any): Expr_Ident {
     return {
+      $type: Expr_Ident.$type,
       name: isSet(object.name) ? String(object.name) : "",
     };
   },
@@ -653,11 +686,20 @@ export const Expr_Ident = {
   },
 };
 
+messageTypeRegistry.set(Expr_Ident.$type, Expr_Ident);
+
 function createBaseExpr_Select(): Expr_Select {
-  return { operand: undefined, field: "", testOnly: false };
+  return {
+    $type: "google.api.expr.v1alpha1.Expr.Select",
+    operand: undefined,
+    field: "",
+    testOnly: false,
+  };
 }
 
 export const Expr_Select = {
+  $type: "google.api.expr.v1alpha1.Expr.Select" as const,
+
   encode(
     message: Expr_Select,
     writer: _m0.Writer = _m0.Writer.create()
@@ -700,6 +742,7 @@ export const Expr_Select = {
 
   fromJSON(object: any): Expr_Select {
     return {
+      $type: Expr_Select.$type,
       operand: isSet(object.operand)
         ? Expr.fromJSON(object.operand)
         : undefined,
@@ -733,11 +776,20 @@ export const Expr_Select = {
   },
 };
 
+messageTypeRegistry.set(Expr_Select.$type, Expr_Select);
+
 function createBaseExpr_Call(): Expr_Call {
-  return { target: undefined, function: "", args: [] };
+  return {
+    $type: "google.api.expr.v1alpha1.Expr.Call",
+    target: undefined,
+    function: "",
+    args: [],
+  };
 }
 
 export const Expr_Call = {
+  $type: "google.api.expr.v1alpha1.Expr.Call" as const,
+
   encode(
     message: Expr_Call,
     writer: _m0.Writer = _m0.Writer.create()
@@ -780,6 +832,7 @@ export const Expr_Call = {
 
   fromJSON(object: any): Expr_Call {
     return {
+      $type: Expr_Call.$type,
       target: isSet(object.target) ? Expr.fromJSON(object.target) : undefined,
       function: isSet(object.function) ? String(object.function) : "",
       args: Array.isArray(object?.args)
@@ -815,11 +868,15 @@ export const Expr_Call = {
   },
 };
 
+messageTypeRegistry.set(Expr_Call.$type, Expr_Call);
+
 function createBaseExpr_CreateList(): Expr_CreateList {
-  return { elements: [] };
+  return { $type: "google.api.expr.v1alpha1.Expr.CreateList", elements: [] };
 }
 
 export const Expr_CreateList = {
+  $type: "google.api.expr.v1alpha1.Expr.CreateList" as const,
+
   encode(
     message: Expr_CreateList,
     writer: _m0.Writer = _m0.Writer.create()
@@ -850,6 +907,7 @@ export const Expr_CreateList = {
 
   fromJSON(object: any): Expr_CreateList {
     return {
+      $type: Expr_CreateList.$type,
       elements: Array.isArray(object?.elements)
         ? object.elements.map((e: any) => Expr.fromJSON(e))
         : [],
@@ -877,11 +935,19 @@ export const Expr_CreateList = {
   },
 };
 
+messageTypeRegistry.set(Expr_CreateList.$type, Expr_CreateList);
+
 function createBaseExpr_CreateStruct(): Expr_CreateStruct {
-  return { messageName: "", entries: [] };
+  return {
+    $type: "google.api.expr.v1alpha1.Expr.CreateStruct",
+    messageName: "",
+    entries: [],
+  };
 }
 
 export const Expr_CreateStruct = {
+  $type: "google.api.expr.v1alpha1.Expr.CreateStruct" as const,
+
   encode(
     message: Expr_CreateStruct,
     writer: _m0.Writer = _m0.Writer.create()
@@ -920,6 +986,7 @@ export const Expr_CreateStruct = {
 
   fromJSON(object: any): Expr_CreateStruct {
     return {
+      $type: Expr_CreateStruct.$type,
       messageName: isSet(object.messageName) ? String(object.messageName) : "",
       entries: Array.isArray(object?.entries)
         ? object.entries.map((e: any) => Expr_CreateStruct_Entry.fromJSON(e))
@@ -952,8 +1019,11 @@ export const Expr_CreateStruct = {
   },
 };
 
+messageTypeRegistry.set(Expr_CreateStruct.$type, Expr_CreateStruct);
+
 function createBaseExpr_CreateStruct_Entry(): Expr_CreateStruct_Entry {
   return {
+    $type: "google.api.expr.v1alpha1.Expr.CreateStruct.Entry",
     id: Long.ZERO,
     fieldKey: undefined,
     mapKey: undefined,
@@ -962,6 +1032,8 @@ function createBaseExpr_CreateStruct_Entry(): Expr_CreateStruct_Entry {
 }
 
 export const Expr_CreateStruct_Entry = {
+  $type: "google.api.expr.v1alpha1.Expr.CreateStruct.Entry" as const,
+
   encode(
     message: Expr_CreateStruct_Entry,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1013,6 +1085,7 @@ export const Expr_CreateStruct_Entry = {
 
   fromJSON(object: any): Expr_CreateStruct_Entry {
     return {
+      $type: Expr_CreateStruct_Entry.$type,
       id: isSet(object.id) ? Long.fromString(object.id) : Long.ZERO,
       fieldKey: isSet(object.fieldKey) ? String(object.fieldKey) : undefined,
       mapKey: isSet(object.mapKey) ? Expr.fromJSON(object.mapKey) : undefined,
@@ -1052,8 +1125,11 @@ export const Expr_CreateStruct_Entry = {
   },
 };
 
+messageTypeRegistry.set(Expr_CreateStruct_Entry.$type, Expr_CreateStruct_Entry);
+
 function createBaseExpr_Comprehension(): Expr_Comprehension {
   return {
+    $type: "google.api.expr.v1alpha1.Expr.Comprehension",
     iterVar: "",
     iterRange: undefined,
     accuVar: "",
@@ -1065,6 +1141,8 @@ function createBaseExpr_Comprehension(): Expr_Comprehension {
 }
 
 export const Expr_Comprehension = {
+  $type: "google.api.expr.v1alpha1.Expr.Comprehension" as const,
+
   encode(
     message: Expr_Comprehension,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1131,6 +1209,7 @@ export const Expr_Comprehension = {
 
   fromJSON(object: any): Expr_Comprehension {
     return {
+      $type: Expr_Comprehension.$type,
       iterVar: isSet(object.iterVar) ? String(object.iterVar) : "",
       iterRange: isSet(object.iterRange)
         ? Expr.fromJSON(object.iterRange)
@@ -1204,8 +1283,11 @@ export const Expr_Comprehension = {
   },
 };
 
+messageTypeRegistry.set(Expr_Comprehension.$type, Expr_Comprehension);
+
 function createBaseConstant(): Constant {
   return {
+    $type: "google.api.expr.v1alpha1.Constant",
     nullValue: undefined,
     boolValue: undefined,
     int64Value: undefined,
@@ -1219,6 +1301,8 @@ function createBaseConstant(): Constant {
 }
 
 export const Constant = {
+  $type: "google.api.expr.v1alpha1.Constant" as const,
+
   encode(
     message: Constant,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1302,6 +1386,7 @@ export const Constant = {
 
   fromJSON(object: any): Constant {
     return {
+      $type: Constant.$type,
       nullValue: isSet(object.nullValue)
         ? nullValueFromJSON(object.nullValue)
         : undefined,
@@ -1386,8 +1471,11 @@ export const Constant = {
   },
 };
 
+messageTypeRegistry.set(Constant.$type, Constant);
+
 function createBaseSourceInfo(): SourceInfo {
   return {
+    $type: "google.api.expr.v1alpha1.SourceInfo",
     syntaxVersion: "",
     location: "",
     lineOffsets: [],
@@ -1397,6 +1485,8 @@ function createBaseSourceInfo(): SourceInfo {
 }
 
 export const SourceInfo = {
+  $type: "google.api.expr.v1alpha1.SourceInfo" as const,
+
   encode(
     message: SourceInfo,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1414,13 +1504,21 @@ export const SourceInfo = {
     writer.ldelim();
     Object.entries(message.positions).forEach(([key, value]) => {
       SourceInfo_PositionsEntry.encode(
-        { key: key as any, value },
+        {
+          $type: "google.api.expr.v1alpha1.SourceInfo.PositionsEntry",
+          key: key as any,
+          value,
+        },
         writer.uint32(34).fork()
       ).ldelim();
     });
     Object.entries(message.macroCalls).forEach(([key, value]) => {
       SourceInfo_MacroCallsEntry.encode(
-        { key: key as any, value },
+        {
+          $type: "google.api.expr.v1alpha1.SourceInfo.MacroCallsEntry",
+          key: key as any,
+          value,
+        },
         writer.uint32(42).fork()
       ).ldelim();
     });
@@ -1478,6 +1576,7 @@ export const SourceInfo = {
 
   fromJSON(object: any): SourceInfo {
     return {
+      $type: SourceInfo.$type,
       syntaxVersion: isSet(object.syntaxVersion)
         ? String(object.syntaxVersion)
         : "",
@@ -1558,11 +1657,19 @@ export const SourceInfo = {
   },
 };
 
+messageTypeRegistry.set(SourceInfo.$type, SourceInfo);
+
 function createBaseSourceInfo_PositionsEntry(): SourceInfo_PositionsEntry {
-  return { key: Long.ZERO, value: 0 };
+  return {
+    $type: "google.api.expr.v1alpha1.SourceInfo.PositionsEntry",
+    key: Long.ZERO,
+    value: 0,
+  };
 }
 
 export const SourceInfo_PositionsEntry = {
+  $type: "google.api.expr.v1alpha1.SourceInfo.PositionsEntry" as const,
+
   encode(
     message: SourceInfo_PositionsEntry,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1602,6 +1709,7 @@ export const SourceInfo_PositionsEntry = {
 
   fromJSON(object: any): SourceInfo_PositionsEntry {
     return {
+      $type: SourceInfo_PositionsEntry.$type,
       key: isSet(object.key) ? Long.fromString(object.key) : Long.ZERO,
       value: isSet(object.value) ? Number(object.value) : 0,
     };
@@ -1628,11 +1736,22 @@ export const SourceInfo_PositionsEntry = {
   },
 };
 
+messageTypeRegistry.set(
+  SourceInfo_PositionsEntry.$type,
+  SourceInfo_PositionsEntry
+);
+
 function createBaseSourceInfo_MacroCallsEntry(): SourceInfo_MacroCallsEntry {
-  return { key: Long.ZERO, value: undefined };
+  return {
+    $type: "google.api.expr.v1alpha1.SourceInfo.MacroCallsEntry",
+    key: Long.ZERO,
+    value: undefined,
+  };
 }
 
 export const SourceInfo_MacroCallsEntry = {
+  $type: "google.api.expr.v1alpha1.SourceInfo.MacroCallsEntry" as const,
+
   encode(
     message: SourceInfo_MacroCallsEntry,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1672,6 +1791,7 @@ export const SourceInfo_MacroCallsEntry = {
 
   fromJSON(object: any): SourceInfo_MacroCallsEntry {
     return {
+      $type: SourceInfo_MacroCallsEntry.$type,
       key: isSet(object.key) ? Long.fromString(object.key) : Long.ZERO,
       value: isSet(object.value) ? Expr.fromJSON(object.value) : undefined,
     };
@@ -1702,11 +1822,24 @@ export const SourceInfo_MacroCallsEntry = {
   },
 };
 
+messageTypeRegistry.set(
+  SourceInfo_MacroCallsEntry.$type,
+  SourceInfo_MacroCallsEntry
+);
+
 function createBaseSourcePosition(): SourcePosition {
-  return { location: "", offset: 0, line: 0, column: 0 };
+  return {
+    $type: "google.api.expr.v1alpha1.SourcePosition",
+    location: "",
+    offset: 0,
+    line: 0,
+    column: 0,
+  };
 }
 
 export const SourcePosition = {
+  $type: "google.api.expr.v1alpha1.SourcePosition" as const,
+
   encode(
     message: SourcePosition,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1755,6 +1888,7 @@ export const SourcePosition = {
 
   fromJSON(object: any): SourcePosition {
     return {
+      $type: SourcePosition.$type,
       location: isSet(object.location) ? String(object.location) : "",
       offset: isSet(object.offset) ? Number(object.offset) : 0,
       line: isSet(object.line) ? Number(object.line) : 0,
@@ -1782,6 +1916,8 @@ export const SourcePosition = {
     return message;
   },
 };
+
+messageTypeRegistry.set(SourcePosition.$type, SourcePosition);
 
 declare var self: any | undefined;
 declare var window: any | undefined;
@@ -1835,21 +1971,21 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = (date.getTime() % 1_000) * 1_000_000;
-  return { seconds, nanos };
+  return { $type: "google.protobuf.Timestamp", seconds, nanos };
 }
 
 function fromTimestamp(t: Timestamp): Date {

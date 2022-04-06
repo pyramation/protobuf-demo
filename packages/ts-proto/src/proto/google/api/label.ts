@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 
@@ -6,6 +7,7 @@ export const protobufPackage = "google.api";
 
 /** A description of a label. */
 export interface LabelDescriptor {
+  $type: "google.api.LabelDescriptor";
   /** The label key. */
   key: string;
   /** The type of data that can be assigned to the label. */
@@ -61,10 +63,17 @@ export function labelDescriptor_ValueTypeToJSON(
 }
 
 function createBaseLabelDescriptor(): LabelDescriptor {
-  return { key: "", valueType: 0, description: "" };
+  return {
+    $type: "google.api.LabelDescriptor",
+    key: "",
+    valueType: 0,
+    description: "",
+  };
 }
 
 export const LabelDescriptor = {
+  $type: "google.api.LabelDescriptor" as const,
+
   encode(
     message: LabelDescriptor,
     writer: _m0.Writer = _m0.Writer.create()
@@ -107,6 +116,7 @@ export const LabelDescriptor = {
 
   fromJSON(object: any): LabelDescriptor {
     return {
+      $type: LabelDescriptor.$type,
       key: isSet(object.key) ? String(object.key) : "",
       valueType: isSet(object.valueType)
         ? labelDescriptor_ValueTypeFromJSON(object.valueType)
@@ -136,6 +146,8 @@ export const LabelDescriptor = {
   },
 };
 
+messageTypeRegistry.set(LabelDescriptor.$type, LabelDescriptor);
+
 type Builtin =
   | Date
   | Function
@@ -154,14 +166,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

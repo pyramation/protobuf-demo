@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
@@ -51,6 +52,7 @@ export function actionToJSON(object: Action): string {
 
 /** A Claim Records is the metadata of claim data per address */
 export interface ClaimRecord {
+  $type: "osmosis.claim.v1beta1.ClaimRecord";
   /** address of claim user */
   address: string;
   /** total initial claimable amount for the user */
@@ -63,10 +65,17 @@ export interface ClaimRecord {
 }
 
 function createBaseClaimRecord(): ClaimRecord {
-  return { address: "", initialClaimableAmount: [], actionCompleted: [] };
+  return {
+    $type: "osmosis.claim.v1beta1.ClaimRecord",
+    address: "",
+    initialClaimableAmount: [],
+    actionCompleted: [],
+  };
 }
 
 export const ClaimRecord = {
+  $type: "osmosis.claim.v1beta1.ClaimRecord" as const,
+
   encode(
     message: ClaimRecord,
     writer: _m0.Writer = _m0.Writer.create()
@@ -120,6 +129,7 @@ export const ClaimRecord = {
 
   fromJSON(object: any): ClaimRecord {
     return {
+      $type: ClaimRecord.$type,
       address: isSet(object.address) ? String(object.address) : "",
       initialClaimableAmount: Array.isArray(object?.initialClaimableAmount)
         ? object.initialClaimableAmount.map((e: any) => Coin.fromJSON(e))
@@ -160,6 +170,8 @@ export const ClaimRecord = {
   },
 };
 
+messageTypeRegistry.set(ClaimRecord.$type, ClaimRecord);
+
 type Builtin =
   | Date
   | Function
@@ -178,14 +190,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

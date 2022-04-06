@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Timestamp } from "../../../../google/protobuf/timestamp";
@@ -11,6 +12,7 @@ export const protobufPackage = "google.api.servicemanagement.v1";
  * Google Service Management.
  */
 export interface ManagedService {
+  $type: "google.api.servicemanagement.v1.ManagedService";
   /**
    * The name of the service. See the [overview](/service-management/overview)
    * for naming requirements.
@@ -22,6 +24,7 @@ export interface ManagedService {
 
 /** The metadata associated with a long running operation resource. */
 export interface OperationMetadata {
+  $type: "google.api.servicemanagement.v1.OperationMetadata";
   /**
    * The full name of the resources that this operation is directly
    * associated with.
@@ -32,7 +35,7 @@ export interface OperationMetadata {
   /** Percentage of completion of this operation, ranging from 0 to 100. */
   progressPercentage: number;
   /** The start time of the operation. */
-  startTime?: Date;
+  startTime: Date;
 }
 
 /** Code describes the status of the operation (or one of its steps). */
@@ -107,6 +110,7 @@ export function operationMetadata_StatusToJSON(
 
 /** Represents the status of one operation step. */
 export interface OperationMetadata_Step {
+  $type: "google.api.servicemanagement.v1.OperationMetadata.Step";
   /** The short description of the step. */
   description: string;
   /** The status code. */
@@ -115,6 +119,7 @@ export interface OperationMetadata_Step {
 
 /** Represents a diagnostic message (error or warning) */
 export interface Diagnostic {
+  $type: "google.api.servicemanagement.v1.Diagnostic";
   /** File name and line number of the error or warning. */
   location: string;
   /** The kind of diagnostic information provided. */
@@ -163,6 +168,7 @@ export function diagnostic_KindToJSON(object: Diagnostic_Kind): string {
  * defined by `google.api.Service`.
  */
 export interface ConfigSource {
+  $type: "google.api.servicemanagement.v1.ConfigSource";
   /**
    * A unique ID for a specific instance of this message, typically assigned
    * by the client for tracking purpose. If empty, the server may choose to
@@ -178,6 +184,7 @@ export interface ConfigSource {
 
 /** Generic specification of a source configuration file */
 export interface ConfigFile {
+  $type: "google.api.servicemanagement.v1.ConfigFile";
   /** The file name of the configuration file (full or relative path). */
   filePath: string;
   /** The bytes that constitute the file. */
@@ -264,6 +271,7 @@ export function configFile_FileTypeToJSON(object: ConfigFile_FileType): string {
 
 /** Represents a service configuration with its name and id. */
 export interface ConfigRef {
+  $type: "google.api.servicemanagement.v1.ConfigRef";
   /**
    * Resource name of a service config. It must have the following
    * format: "services/{service name}/configs/{config id}".
@@ -278,6 +286,7 @@ export interface ConfigRef {
  * two service configurations.
  */
 export interface ChangeReport {
+  $type: "google.api.servicemanagement.v1.ChangeReport";
   /**
    * List of changes between two service configurations.
    * The changes will be alphabetically sorted based on the identifier
@@ -294,6 +303,7 @@ export interface ChangeReport {
  * service config, and then create a Rollout to push the service config.
  */
 export interface Rollout {
+  $type: "google.api.servicemanagement.v1.Rollout";
   /**
    * Optional. Unique identifier of this Rollout. Must be no longer than 63 characters
    * and only lower case letters, digits, '.', '_' and '-' are allowed.
@@ -306,7 +316,7 @@ export interface Rollout {
    */
   rolloutId: string;
   /** Creation time of the rollout. Readonly. */
-  createTime?: Date;
+  createTime: Date;
   /** The user who created the Rollout. Readonly. */
   createdBy: string;
   /**
@@ -319,12 +329,12 @@ export interface Rollout {
    * Google Service Control selects service configurations based on
    * traffic percentage.
    */
-  trafficPercentStrategy?: Rollout_TrafficPercentStrategy | undefined;
+  trafficPercentStrategy: Rollout_TrafficPercentStrategy | undefined;
   /**
    * The strategy associated with a rollout to delete a `ManagedService`.
    * Readonly.
    */
-  deleteServiceStrategy?: Rollout_DeleteServiceStrategy | undefined;
+  deleteServiceStrategy: Rollout_DeleteServiceStrategy | undefined;
   /** The name of the service associated with this Rollout. */
   serviceName: string;
 }
@@ -442,6 +452,7 @@ export function rollout_RolloutStatusToJSON(
  *     }
  */
 export interface Rollout_TrafficPercentStrategy {
+  $type: "google.api.servicemanagement.v1.Rollout.TrafficPercentStrategy";
   /**
    * Maps service configuration IDs to their corresponding traffic percentage.
    * Key is the service configuration ID, Value is the traffic percentage
@@ -451,6 +462,7 @@ export interface Rollout_TrafficPercentStrategy {
 }
 
 export interface Rollout_TrafficPercentStrategy_PercentagesEntry {
+  $type: "google.api.servicemanagement.v1.Rollout.TrafficPercentStrategy.PercentagesEntry";
   key: string;
   value: number;
 }
@@ -459,13 +471,21 @@ export interface Rollout_TrafficPercentStrategy_PercentagesEntry {
  * Strategy used to delete a service. This strategy is a placeholder only
  * used by the system generated rollout to delete a service.
  */
-export interface Rollout_DeleteServiceStrategy {}
+export interface Rollout_DeleteServiceStrategy {
+  $type: "google.api.servicemanagement.v1.Rollout.DeleteServiceStrategy";
+}
 
 function createBaseManagedService(): ManagedService {
-  return { serviceName: "", producerProjectId: "" };
+  return {
+    $type: "google.api.servicemanagement.v1.ManagedService",
+    serviceName: "",
+    producerProjectId: "",
+  };
 }
 
 export const ManagedService = {
+  $type: "google.api.servicemanagement.v1.ManagedService" as const,
+
   encode(
     message: ManagedService,
     writer: _m0.Writer = _m0.Writer.create()
@@ -502,6 +522,7 @@ export const ManagedService = {
 
   fromJSON(object: any): ManagedService {
     return {
+      $type: ManagedService.$type,
       serviceName: isSet(object.serviceName) ? String(object.serviceName) : "",
       producerProjectId: isSet(object.producerProjectId)
         ? String(object.producerProjectId)
@@ -528,8 +549,11 @@ export const ManagedService = {
   },
 };
 
+messageTypeRegistry.set(ManagedService.$type, ManagedService);
+
 function createBaseOperationMetadata(): OperationMetadata {
   return {
+    $type: "google.api.servicemanagement.v1.OperationMetadata",
     resourceNames: [],
     steps: [],
     progressPercentage: 0,
@@ -538,6 +562,8 @@ function createBaseOperationMetadata(): OperationMetadata {
 }
 
 export const OperationMetadata = {
+  $type: "google.api.servicemanagement.v1.OperationMetadata" as const,
+
   encode(
     message: OperationMetadata,
     writer: _m0.Writer = _m0.Writer.create()
@@ -593,6 +619,7 @@ export const OperationMetadata = {
 
   fromJSON(object: any): OperationMetadata {
     return {
+      $type: OperationMetadata.$type,
       resourceNames: Array.isArray(object?.resourceNames)
         ? object.resourceNames.map((e: any) => String(e))
         : [],
@@ -642,11 +669,19 @@ export const OperationMetadata = {
   },
 };
 
+messageTypeRegistry.set(OperationMetadata.$type, OperationMetadata);
+
 function createBaseOperationMetadata_Step(): OperationMetadata_Step {
-  return { description: "", status: 0 };
+  return {
+    $type: "google.api.servicemanagement.v1.OperationMetadata.Step",
+    description: "",
+    status: 0,
+  };
 }
 
 export const OperationMetadata_Step = {
+  $type: "google.api.servicemanagement.v1.OperationMetadata.Step" as const,
+
   encode(
     message: OperationMetadata_Step,
     writer: _m0.Writer = _m0.Writer.create()
@@ -686,6 +721,7 @@ export const OperationMetadata_Step = {
 
   fromJSON(object: any): OperationMetadata_Step {
     return {
+      $type: OperationMetadata_Step.$type,
       description: isSet(object.description) ? String(object.description) : "",
       status: isSet(object.status)
         ? operationMetadata_StatusFromJSON(object.status)
@@ -712,11 +748,20 @@ export const OperationMetadata_Step = {
   },
 };
 
+messageTypeRegistry.set(OperationMetadata_Step.$type, OperationMetadata_Step);
+
 function createBaseDiagnostic(): Diagnostic {
-  return { location: "", kind: 0, message: "" };
+  return {
+    $type: "google.api.servicemanagement.v1.Diagnostic",
+    location: "",
+    kind: 0,
+    message: "",
+  };
 }
 
 export const Diagnostic = {
+  $type: "google.api.servicemanagement.v1.Diagnostic" as const,
+
   encode(
     message: Diagnostic,
     writer: _m0.Writer = _m0.Writer.create()
@@ -759,6 +804,7 @@ export const Diagnostic = {
 
   fromJSON(object: any): Diagnostic {
     return {
+      $type: Diagnostic.$type,
       location: isSet(object.location) ? String(object.location) : "",
       kind: isSet(object.kind) ? diagnostic_KindFromJSON(object.kind) : 0,
       message: isSet(object.message) ? String(object.message) : "",
@@ -785,11 +831,19 @@ export const Diagnostic = {
   },
 };
 
+messageTypeRegistry.set(Diagnostic.$type, Diagnostic);
+
 function createBaseConfigSource(): ConfigSource {
-  return { id: "", files: [] };
+  return {
+    $type: "google.api.servicemanagement.v1.ConfigSource",
+    id: "",
+    files: [],
+  };
 }
 
 export const ConfigSource = {
+  $type: "google.api.servicemanagement.v1.ConfigSource" as const,
+
   encode(
     message: ConfigSource,
     writer: _m0.Writer = _m0.Writer.create()
@@ -826,6 +880,7 @@ export const ConfigSource = {
 
   fromJSON(object: any): ConfigSource {
     return {
+      $type: ConfigSource.$type,
       id: isSet(object.id) ? String(object.id) : "",
       files: Array.isArray(object?.files)
         ? object.files.map((e: any) => ConfigFile.fromJSON(e))
@@ -856,11 +911,20 @@ export const ConfigSource = {
   },
 };
 
+messageTypeRegistry.set(ConfigSource.$type, ConfigSource);
+
 function createBaseConfigFile(): ConfigFile {
-  return { filePath: "", fileContents: new Uint8Array(), fileType: 0 };
+  return {
+    $type: "google.api.servicemanagement.v1.ConfigFile",
+    filePath: "",
+    fileContents: new Uint8Array(),
+    fileType: 0,
+  };
 }
 
 export const ConfigFile = {
+  $type: "google.api.servicemanagement.v1.ConfigFile" as const,
+
   encode(
     message: ConfigFile,
     writer: _m0.Writer = _m0.Writer.create()
@@ -903,6 +967,7 @@ export const ConfigFile = {
 
   fromJSON(object: any): ConfigFile {
     return {
+      $type: ConfigFile.$type,
       filePath: isSet(object.filePath) ? String(object.filePath) : "",
       fileContents: isSet(object.fileContents)
         ? bytesFromBase64(object.fileContents)
@@ -938,11 +1003,15 @@ export const ConfigFile = {
   },
 };
 
+messageTypeRegistry.set(ConfigFile.$type, ConfigFile);
+
 function createBaseConfigRef(): ConfigRef {
-  return { name: "" };
+  return { $type: "google.api.servicemanagement.v1.ConfigRef", name: "" };
 }
 
 export const ConfigRef = {
+  $type: "google.api.servicemanagement.v1.ConfigRef" as const,
+
   encode(
     message: ConfigRef,
     writer: _m0.Writer = _m0.Writer.create()
@@ -973,6 +1042,7 @@ export const ConfigRef = {
 
   fromJSON(object: any): ConfigRef {
     return {
+      $type: ConfigRef.$type,
       name: isSet(object.name) ? String(object.name) : "",
     };
   },
@@ -992,11 +1062,18 @@ export const ConfigRef = {
   },
 };
 
+messageTypeRegistry.set(ConfigRef.$type, ConfigRef);
+
 function createBaseChangeReport(): ChangeReport {
-  return { configChanges: [] };
+  return {
+    $type: "google.api.servicemanagement.v1.ChangeReport",
+    configChanges: [],
+  };
 }
 
 export const ChangeReport = {
+  $type: "google.api.servicemanagement.v1.ChangeReport" as const,
+
   encode(
     message: ChangeReport,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1029,6 +1106,7 @@ export const ChangeReport = {
 
   fromJSON(object: any): ChangeReport {
     return {
+      $type: ChangeReport.$type,
       configChanges: Array.isArray(object?.configChanges)
         ? object.configChanges.map((e: any) => ConfigChange.fromJSON(e))
         : [],
@@ -1057,8 +1135,11 @@ export const ChangeReport = {
   },
 };
 
+messageTypeRegistry.set(ChangeReport.$type, ChangeReport);
+
 function createBaseRollout(): Rollout {
   return {
+    $type: "google.api.servicemanagement.v1.Rollout",
     rolloutId: "",
     createTime: undefined,
     createdBy: "",
@@ -1070,6 +1151,8 @@ function createBaseRollout(): Rollout {
 }
 
 export const Rollout = {
+  $type: "google.api.servicemanagement.v1.Rollout" as const,
+
   encode(
     message: Rollout,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1151,6 +1234,7 @@ export const Rollout = {
 
   fromJSON(object: any): Rollout {
     return {
+      $type: Rollout.$type,
       rolloutId: isSet(object.rolloutId) ? String(object.rolloutId) : "",
       createTime: isSet(object.createTime)
         ? fromJsonTimestamp(object.createTime)
@@ -1215,18 +1299,31 @@ export const Rollout = {
   },
 };
 
+messageTypeRegistry.set(Rollout.$type, Rollout);
+
 function createBaseRollout_TrafficPercentStrategy(): Rollout_TrafficPercentStrategy {
-  return { percentages: {} };
+  return {
+    $type: "google.api.servicemanagement.v1.Rollout.TrafficPercentStrategy",
+    percentages: {},
+  };
 }
 
 export const Rollout_TrafficPercentStrategy = {
+  $type:
+    "google.api.servicemanagement.v1.Rollout.TrafficPercentStrategy" as const,
+
   encode(
     message: Rollout_TrafficPercentStrategy,
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
     Object.entries(message.percentages).forEach(([key, value]) => {
       Rollout_TrafficPercentStrategy_PercentagesEntry.encode(
-        { key: key as any, value },
+        {
+          $type:
+            "google.api.servicemanagement.v1.Rollout.TrafficPercentStrategy.PercentagesEntry",
+          key: key as any,
+          value,
+        },
         writer.uint32(10).fork()
       ).ldelim();
     });
@@ -1262,6 +1359,7 @@ export const Rollout_TrafficPercentStrategy = {
 
   fromJSON(object: any): Rollout_TrafficPercentStrategy {
     return {
+      $type: Rollout_TrafficPercentStrategy.$type,
       percentages: isObject(object.percentages)
         ? Object.entries(object.percentages).reduce<{ [key: string]: number }>(
             (acc, [key, value]) => {
@@ -1301,11 +1399,24 @@ export const Rollout_TrafficPercentStrategy = {
   },
 };
 
+messageTypeRegistry.set(
+  Rollout_TrafficPercentStrategy.$type,
+  Rollout_TrafficPercentStrategy
+);
+
 function createBaseRollout_TrafficPercentStrategy_PercentagesEntry(): Rollout_TrafficPercentStrategy_PercentagesEntry {
-  return { key: "", value: 0 };
+  return {
+    $type:
+      "google.api.servicemanagement.v1.Rollout.TrafficPercentStrategy.PercentagesEntry",
+    key: "",
+    value: 0,
+  };
 }
 
 export const Rollout_TrafficPercentStrategy_PercentagesEntry = {
+  $type:
+    "google.api.servicemanagement.v1.Rollout.TrafficPercentStrategy.PercentagesEntry" as const,
+
   encode(
     message: Rollout_TrafficPercentStrategy_PercentagesEntry,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1345,6 +1456,7 @@ export const Rollout_TrafficPercentStrategy_PercentagesEntry = {
 
   fromJSON(object: any): Rollout_TrafficPercentStrategy_PercentagesEntry {
     return {
+      $type: Rollout_TrafficPercentStrategy_PercentagesEntry.$type,
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? Number(object.value) : 0,
     };
@@ -1370,11 +1482,21 @@ export const Rollout_TrafficPercentStrategy_PercentagesEntry = {
   },
 };
 
+messageTypeRegistry.set(
+  Rollout_TrafficPercentStrategy_PercentagesEntry.$type,
+  Rollout_TrafficPercentStrategy_PercentagesEntry
+);
+
 function createBaseRollout_DeleteServiceStrategy(): Rollout_DeleteServiceStrategy {
-  return {};
+  return {
+    $type: "google.api.servicemanagement.v1.Rollout.DeleteServiceStrategy",
+  };
 }
 
 export const Rollout_DeleteServiceStrategy = {
+  $type:
+    "google.api.servicemanagement.v1.Rollout.DeleteServiceStrategy" as const,
+
   encode(
     _: Rollout_DeleteServiceStrategy,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1401,7 +1523,9 @@ export const Rollout_DeleteServiceStrategy = {
   },
 
   fromJSON(_: any): Rollout_DeleteServiceStrategy {
-    return {};
+    return {
+      $type: Rollout_DeleteServiceStrategy.$type,
+    };
   },
 
   toJSON(_: Rollout_DeleteServiceStrategy): unknown {
@@ -1416,6 +1540,11 @@ export const Rollout_DeleteServiceStrategy = {
     return message;
   },
 };
+
+messageTypeRegistry.set(
+  Rollout_DeleteServiceStrategy.$type,
+  Rollout_DeleteServiceStrategy
+);
 
 declare var self: any | undefined;
 declare var window: any | undefined;
@@ -1469,21 +1598,21 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = (date.getTime() % 1_000) * 1_000_000;
-  return { seconds, nanos };
+  return { $type: "google.protobuf.Timestamp", seconds, nanos };
 }
 
 function fromTimestamp(t: Timestamp): Date {

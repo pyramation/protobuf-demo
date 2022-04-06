@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Class, NFT } from "../../../cosmos/nft/v1beta1/nft";
@@ -7,6 +8,7 @@ export const protobufPackage = "cosmos.nft.v1beta1";
 
 /** GenesisState defines the nft module's genesis state. */
 export interface GenesisState {
+  $type: "cosmos.nft.v1beta1.GenesisState";
   /** class defines the class of the nft type. */
   classes: Class[];
   entries: Entry[];
@@ -14,6 +16,7 @@ export interface GenesisState {
 
 /** Entry Defines all nft owned by a person */
 export interface Entry {
+  $type: "cosmos.nft.v1beta1.Entry";
   /** owner is the owner address of the following nft */
   owner: string;
   /** nfts is a group of nfts of the same owner */
@@ -21,10 +24,12 @@ export interface Entry {
 }
 
 function createBaseGenesisState(): GenesisState {
-  return { classes: [], entries: [] };
+  return { $type: "cosmos.nft.v1beta1.GenesisState", classes: [], entries: [] };
 }
 
 export const GenesisState = {
+  $type: "cosmos.nft.v1beta1.GenesisState" as const,
+
   encode(
     message: GenesisState,
     writer: _m0.Writer = _m0.Writer.create()
@@ -61,6 +66,7 @@ export const GenesisState = {
 
   fromJSON(object: any): GenesisState {
     return {
+      $type: GenesisState.$type,
       classes: Array.isArray(object?.classes)
         ? object.classes.map((e: any) => Class.fromJSON(e))
         : [],
@@ -99,11 +105,15 @@ export const GenesisState = {
   },
 };
 
+messageTypeRegistry.set(GenesisState.$type, GenesisState);
+
 function createBaseEntry(): Entry {
-  return { owner: "", nfts: [] };
+  return { $type: "cosmos.nft.v1beta1.Entry", owner: "", nfts: [] };
 }
 
 export const Entry = {
+  $type: "cosmos.nft.v1beta1.Entry" as const,
+
   encode(message: Entry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -137,6 +147,7 @@ export const Entry = {
 
   fromJSON(object: any): Entry {
     return {
+      $type: Entry.$type,
       owner: isSet(object.owner) ? String(object.owner) : "",
       nfts: Array.isArray(object?.nfts)
         ? object.nfts.map((e: any) => NFT.fromJSON(e))
@@ -163,6 +174,8 @@ export const Entry = {
   },
 };
 
+messageTypeRegistry.set(Entry.$type, Entry);
+
 type Builtin =
   | Date
   | Function
@@ -181,14 +194,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

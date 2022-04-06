@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import {
@@ -16,8 +17,9 @@ export const protobufPackage = "cosmos.auth.v1beta1";
  * Since: cosmos-sdk 0.43
  */
 export interface QueryAccountsRequest {
+  $type: "cosmos.auth.v1beta1.QueryAccountsRequest";
   /** pagination defines an optional pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 
 /**
@@ -26,74 +28,95 @@ export interface QueryAccountsRequest {
  * Since: cosmos-sdk 0.43
  */
 export interface QueryAccountsResponse {
+  $type: "cosmos.auth.v1beta1.QueryAccountsResponse";
   /** accounts are the existing accounts */
   accounts: Any[];
   /** pagination defines the pagination in the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 
 /** QueryAccountRequest is the request type for the Query/Account RPC method. */
 export interface QueryAccountRequest {
+  $type: "cosmos.auth.v1beta1.QueryAccountRequest";
   /** address defines the address to query for. */
   address: string;
 }
 
 /** QueryModuleAccountsRequest is the request type for the Query/ModuleAccounts RPC method. */
-export interface QueryModuleAccountsRequest {}
+export interface QueryModuleAccountsRequest {
+  $type: "cosmos.auth.v1beta1.QueryModuleAccountsRequest";
+}
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
+  $type: "cosmos.auth.v1beta1.QueryParamsResponse";
   /** params defines the parameters of the module. */
-  params?: Params;
+  params: Params;
 }
 
 /** QueryAccountResponse is the response type for the Query/Account RPC method. */
 export interface QueryAccountResponse {
+  $type: "cosmos.auth.v1beta1.QueryAccountResponse";
   /** account defines the account of the corresponding address. */
-  account?: Any;
+  account: Any;
 }
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
-export interface QueryParamsRequest {}
+export interface QueryParamsRequest {
+  $type: "cosmos.auth.v1beta1.QueryParamsRequest";
+}
 
 /** QueryModuleAccountsResponse is the response type for the Query/ModuleAccounts RPC method. */
 export interface QueryModuleAccountsResponse {
+  $type: "cosmos.auth.v1beta1.QueryModuleAccountsResponse";
   accounts: Any[];
 }
 
 /** Bech32PrefixRequest is the request type for Bech32Prefix rpc method */
-export interface Bech32PrefixRequest {}
+export interface Bech32PrefixRequest {
+  $type: "cosmos.auth.v1beta1.Bech32PrefixRequest";
+}
 
 /** Bech32PrefixResponse is the response type for Bech32Prefix rpc method */
 export interface Bech32PrefixResponse {
+  $type: "cosmos.auth.v1beta1.Bech32PrefixResponse";
   bech32Prefix: string;
 }
 
 /** AddressBytesToStringRequest is the request type for AddressString rpc method */
 export interface AddressBytesToStringRequest {
+  $type: "cosmos.auth.v1beta1.AddressBytesToStringRequest";
   addressBytes: Uint8Array;
 }
 
 /** AddressBytesToStringResponse is the response type for AddressString rpc method */
 export interface AddressBytesToStringResponse {
+  $type: "cosmos.auth.v1beta1.AddressBytesToStringResponse";
   addressString: string;
 }
 
 /** AddressStringToBytesRequest is the request type for AccountBytes rpc method */
 export interface AddressStringToBytesRequest {
+  $type: "cosmos.auth.v1beta1.AddressStringToBytesRequest";
   addressString: string;
 }
 
 /** AddressStringToBytesResponse is the response type for AddressBytes rpc method */
 export interface AddressStringToBytesResponse {
+  $type: "cosmos.auth.v1beta1.AddressStringToBytesResponse";
   addressBytes: Uint8Array;
 }
 
 function createBaseQueryAccountsRequest(): QueryAccountsRequest {
-  return { pagination: undefined };
+  return {
+    $type: "cosmos.auth.v1beta1.QueryAccountsRequest",
+    pagination: undefined,
+  };
 }
 
 export const QueryAccountsRequest = {
+  $type: "cosmos.auth.v1beta1.QueryAccountsRequest" as const,
+
   encode(
     message: QueryAccountsRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -127,6 +150,7 @@ export const QueryAccountsRequest = {
 
   fromJSON(object: any): QueryAccountsRequest {
     return {
+      $type: QueryAccountsRequest.$type,
       pagination: isSet(object.pagination)
         ? PageRequest.fromJSON(object.pagination)
         : undefined,
@@ -154,11 +178,19 @@ export const QueryAccountsRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryAccountsRequest.$type, QueryAccountsRequest);
+
 function createBaseQueryAccountsResponse(): QueryAccountsResponse {
-  return { accounts: [], pagination: undefined };
+  return {
+    $type: "cosmos.auth.v1beta1.QueryAccountsResponse",
+    accounts: [],
+    pagination: undefined,
+  };
 }
 
 export const QueryAccountsResponse = {
+  $type: "cosmos.auth.v1beta1.QueryAccountsResponse" as const,
+
   encode(
     message: QueryAccountsResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -201,6 +233,7 @@ export const QueryAccountsResponse = {
 
   fromJSON(object: any): QueryAccountsResponse {
     return {
+      $type: QueryAccountsResponse.$type,
       accounts: Array.isArray(object?.accounts)
         ? object.accounts.map((e: any) => Any.fromJSON(e))
         : [],
@@ -239,11 +272,15 @@ export const QueryAccountsResponse = {
   },
 };
 
+messageTypeRegistry.set(QueryAccountsResponse.$type, QueryAccountsResponse);
+
 function createBaseQueryAccountRequest(): QueryAccountRequest {
-  return { address: "" };
+  return { $type: "cosmos.auth.v1beta1.QueryAccountRequest", address: "" };
 }
 
 export const QueryAccountRequest = {
+  $type: "cosmos.auth.v1beta1.QueryAccountRequest" as const,
+
   encode(
     message: QueryAccountRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -274,6 +311,7 @@ export const QueryAccountRequest = {
 
   fromJSON(object: any): QueryAccountRequest {
     return {
+      $type: QueryAccountRequest.$type,
       address: isSet(object.address) ? String(object.address) : "",
     };
   },
@@ -293,11 +331,15 @@ export const QueryAccountRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryAccountRequest.$type, QueryAccountRequest);
+
 function createBaseQueryModuleAccountsRequest(): QueryModuleAccountsRequest {
-  return {};
+  return { $type: "cosmos.auth.v1beta1.QueryModuleAccountsRequest" };
 }
 
 export const QueryModuleAccountsRequest = {
+  $type: "cosmos.auth.v1beta1.QueryModuleAccountsRequest" as const,
+
   encode(
     _: QueryModuleAccountsRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -324,7 +366,9 @@ export const QueryModuleAccountsRequest = {
   },
 
   fromJSON(_: any): QueryModuleAccountsRequest {
-    return {};
+    return {
+      $type: QueryModuleAccountsRequest.$type,
+    };
   },
 
   toJSON(_: QueryModuleAccountsRequest): unknown {
@@ -340,11 +384,21 @@ export const QueryModuleAccountsRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryModuleAccountsRequest.$type,
+  QueryModuleAccountsRequest
+);
+
 function createBaseQueryParamsResponse(): QueryParamsResponse {
-  return { params: undefined };
+  return {
+    $type: "cosmos.auth.v1beta1.QueryParamsResponse",
+    params: undefined,
+  };
 }
 
 export const QueryParamsResponse = {
+  $type: "cosmos.auth.v1beta1.QueryParamsResponse" as const,
+
   encode(
     message: QueryParamsResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -375,6 +429,7 @@ export const QueryParamsResponse = {
 
   fromJSON(object: any): QueryParamsResponse {
     return {
+      $type: QueryParamsResponse.$type,
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
     };
   },
@@ -398,11 +453,18 @@ export const QueryParamsResponse = {
   },
 };
 
+messageTypeRegistry.set(QueryParamsResponse.$type, QueryParamsResponse);
+
 function createBaseQueryAccountResponse(): QueryAccountResponse {
-  return { account: undefined };
+  return {
+    $type: "cosmos.auth.v1beta1.QueryAccountResponse",
+    account: undefined,
+  };
 }
 
 export const QueryAccountResponse = {
+  $type: "cosmos.auth.v1beta1.QueryAccountResponse" as const,
+
   encode(
     message: QueryAccountResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -436,6 +498,7 @@ export const QueryAccountResponse = {
 
   fromJSON(object: any): QueryAccountResponse {
     return {
+      $type: QueryAccountResponse.$type,
       account: isSet(object.account) ? Any.fromJSON(object.account) : undefined,
     };
   },
@@ -459,11 +522,15 @@ export const QueryAccountResponse = {
   },
 };
 
+messageTypeRegistry.set(QueryAccountResponse.$type, QueryAccountResponse);
+
 function createBaseQueryParamsRequest(): QueryParamsRequest {
-  return {};
+  return { $type: "cosmos.auth.v1beta1.QueryParamsRequest" };
 }
 
 export const QueryParamsRequest = {
+  $type: "cosmos.auth.v1beta1.QueryParamsRequest" as const,
+
   encode(
     _: QueryParamsRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -487,7 +554,9 @@ export const QueryParamsRequest = {
   },
 
   fromJSON(_: any): QueryParamsRequest {
-    return {};
+    return {
+      $type: QueryParamsRequest.$type,
+    };
   },
 
   toJSON(_: QueryParamsRequest): unknown {
@@ -503,11 +572,18 @@ export const QueryParamsRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryParamsRequest.$type, QueryParamsRequest);
+
 function createBaseQueryModuleAccountsResponse(): QueryModuleAccountsResponse {
-  return { accounts: [] };
+  return {
+    $type: "cosmos.auth.v1beta1.QueryModuleAccountsResponse",
+    accounts: [],
+  };
 }
 
 export const QueryModuleAccountsResponse = {
+  $type: "cosmos.auth.v1beta1.QueryModuleAccountsResponse" as const,
+
   encode(
     message: QueryModuleAccountsResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -541,6 +617,7 @@ export const QueryModuleAccountsResponse = {
 
   fromJSON(object: any): QueryModuleAccountsResponse {
     return {
+      $type: QueryModuleAccountsResponse.$type,
       accounts: Array.isArray(object?.accounts)
         ? object.accounts.map((e: any) => Any.fromJSON(e))
         : [],
@@ -568,11 +645,18 @@ export const QueryModuleAccountsResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryModuleAccountsResponse.$type,
+  QueryModuleAccountsResponse
+);
+
 function createBaseBech32PrefixRequest(): Bech32PrefixRequest {
-  return {};
+  return { $type: "cosmos.auth.v1beta1.Bech32PrefixRequest" };
 }
 
 export const Bech32PrefixRequest = {
+  $type: "cosmos.auth.v1beta1.Bech32PrefixRequest" as const,
+
   encode(
     _: Bech32PrefixRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -596,7 +680,9 @@ export const Bech32PrefixRequest = {
   },
 
   fromJSON(_: any): Bech32PrefixRequest {
-    return {};
+    return {
+      $type: Bech32PrefixRequest.$type,
+    };
   },
 
   toJSON(_: Bech32PrefixRequest): unknown {
@@ -612,11 +698,18 @@ export const Bech32PrefixRequest = {
   },
 };
 
+messageTypeRegistry.set(Bech32PrefixRequest.$type, Bech32PrefixRequest);
+
 function createBaseBech32PrefixResponse(): Bech32PrefixResponse {
-  return { bech32Prefix: "" };
+  return {
+    $type: "cosmos.auth.v1beta1.Bech32PrefixResponse",
+    bech32Prefix: "",
+  };
 }
 
 export const Bech32PrefixResponse = {
+  $type: "cosmos.auth.v1beta1.Bech32PrefixResponse" as const,
+
   encode(
     message: Bech32PrefixResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -650,6 +743,7 @@ export const Bech32PrefixResponse = {
 
   fromJSON(object: any): Bech32PrefixResponse {
     return {
+      $type: Bech32PrefixResponse.$type,
       bech32Prefix: isSet(object.bech32Prefix)
         ? String(object.bech32Prefix)
         : "",
@@ -672,11 +766,18 @@ export const Bech32PrefixResponse = {
   },
 };
 
+messageTypeRegistry.set(Bech32PrefixResponse.$type, Bech32PrefixResponse);
+
 function createBaseAddressBytesToStringRequest(): AddressBytesToStringRequest {
-  return { addressBytes: new Uint8Array() };
+  return {
+    $type: "cosmos.auth.v1beta1.AddressBytesToStringRequest",
+    addressBytes: new Uint8Array(),
+  };
 }
 
 export const AddressBytesToStringRequest = {
+  $type: "cosmos.auth.v1beta1.AddressBytesToStringRequest" as const,
+
   encode(
     message: AddressBytesToStringRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -710,6 +811,7 @@ export const AddressBytesToStringRequest = {
 
   fromJSON(object: any): AddressBytesToStringRequest {
     return {
+      $type: AddressBytesToStringRequest.$type,
       addressBytes: isSet(object.addressBytes)
         ? bytesFromBase64(object.addressBytes)
         : new Uint8Array(),
@@ -736,11 +838,21 @@ export const AddressBytesToStringRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  AddressBytesToStringRequest.$type,
+  AddressBytesToStringRequest
+);
+
 function createBaseAddressBytesToStringResponse(): AddressBytesToStringResponse {
-  return { addressString: "" };
+  return {
+    $type: "cosmos.auth.v1beta1.AddressBytesToStringResponse",
+    addressString: "",
+  };
 }
 
 export const AddressBytesToStringResponse = {
+  $type: "cosmos.auth.v1beta1.AddressBytesToStringResponse" as const,
+
   encode(
     message: AddressBytesToStringResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -774,6 +886,7 @@ export const AddressBytesToStringResponse = {
 
   fromJSON(object: any): AddressBytesToStringResponse {
     return {
+      $type: AddressBytesToStringResponse.$type,
       addressString: isSet(object.addressString)
         ? String(object.addressString)
         : "",
@@ -796,11 +909,21 @@ export const AddressBytesToStringResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  AddressBytesToStringResponse.$type,
+  AddressBytesToStringResponse
+);
+
 function createBaseAddressStringToBytesRequest(): AddressStringToBytesRequest {
-  return { addressString: "" };
+  return {
+    $type: "cosmos.auth.v1beta1.AddressStringToBytesRequest",
+    addressString: "",
+  };
 }
 
 export const AddressStringToBytesRequest = {
+  $type: "cosmos.auth.v1beta1.AddressStringToBytesRequest" as const,
+
   encode(
     message: AddressStringToBytesRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -834,6 +957,7 @@ export const AddressStringToBytesRequest = {
 
   fromJSON(object: any): AddressStringToBytesRequest {
     return {
+      $type: AddressStringToBytesRequest.$type,
       addressString: isSet(object.addressString)
         ? String(object.addressString)
         : "",
@@ -856,11 +980,21 @@ export const AddressStringToBytesRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  AddressStringToBytesRequest.$type,
+  AddressStringToBytesRequest
+);
+
 function createBaseAddressStringToBytesResponse(): AddressStringToBytesResponse {
-  return { addressBytes: new Uint8Array() };
+  return {
+    $type: "cosmos.auth.v1beta1.AddressStringToBytesResponse",
+    addressBytes: new Uint8Array(),
+  };
 }
 
 export const AddressStringToBytesResponse = {
+  $type: "cosmos.auth.v1beta1.AddressStringToBytesResponse" as const,
+
   encode(
     message: AddressStringToBytesResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -894,6 +1028,7 @@ export const AddressStringToBytesResponse = {
 
   fromJSON(object: any): AddressStringToBytesResponse {
     return {
+      $type: AddressStringToBytesResponse.$type,
       addressBytes: isSet(object.addressBytes)
         ? bytesFromBase64(object.addressBytes)
         : new Uint8Array(),
@@ -919,6 +1054,11 @@ export const AddressStringToBytesResponse = {
     return message;
   },
 };
+
+messageTypeRegistry.set(
+  AddressStringToBytesResponse.$type,
+  AddressStringToBytesResponse
+);
 
 /** Query defines the gRPC querier service. */
 export interface Query {
@@ -1111,14 +1251,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

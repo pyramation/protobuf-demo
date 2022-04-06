@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 
@@ -6,6 +7,7 @@ export const protobufPackage = "google.api";
 
 /** Configuration controlling usage of a service. */
 export interface Usage {
+  $type: "google.api.Usage";
   /**
    * Requirements that must be satisfied before a consumer project can use the
    * service. Each requirement is of the form <service.name>/<requirement-id>;
@@ -65,6 +67,7 @@ export interface Usage {
  *         allow_unregistered_calls: true
  */
 export interface UsageRule {
+  $type: "google.api.UsageRule";
   /**
    * Selects the methods to which this rule applies. Use '*' to indicate all
    * methods in all APIs.
@@ -87,10 +90,17 @@ export interface UsageRule {
 }
 
 function createBaseUsage(): Usage {
-  return { requirements: [], rules: [], producerNotificationChannel: "" };
+  return {
+    $type: "google.api.Usage",
+    requirements: [],
+    rules: [],
+    producerNotificationChannel: "",
+  };
 }
 
 export const Usage = {
+  $type: "google.api.Usage" as const,
+
   encode(message: Usage, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.requirements) {
       writer.uint32(10).string(v!);
@@ -130,6 +140,7 @@ export const Usage = {
 
   fromJSON(object: any): Usage {
     return {
+      $type: Usage.$type,
       requirements: Array.isArray(object?.requirements)
         ? object.requirements.map((e: any) => String(e))
         : [],
@@ -171,8 +182,11 @@ export const Usage = {
   },
 };
 
+messageTypeRegistry.set(Usage.$type, Usage);
+
 function createBaseUsageRule(): UsageRule {
   return {
+    $type: "google.api.UsageRule",
     selector: "",
     allowUnregisteredCalls: false,
     skipServiceControl: false,
@@ -180,6 +194,8 @@ function createBaseUsageRule(): UsageRule {
 }
 
 export const UsageRule = {
+  $type: "google.api.UsageRule" as const,
+
   encode(
     message: UsageRule,
     writer: _m0.Writer = _m0.Writer.create()
@@ -222,6 +238,7 @@ export const UsageRule = {
 
   fromJSON(object: any): UsageRule {
     return {
+      $type: UsageRule.$type,
       selector: isSet(object.selector) ? String(object.selector) : "",
       allowUnregisteredCalls: isSet(object.allowUnregisteredCalls)
         ? Boolean(object.allowUnregisteredCalls)
@@ -253,6 +270,8 @@ export const UsageRule = {
   },
 };
 
+messageTypeRegistry.set(UsageRule.$type, UsageRule);
+
 type Builtin =
   | Date
   | Function
@@ -271,14 +290,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 
@@ -6,6 +7,7 @@ export const protobufPackage = "cosmos.nft.v1beta1";
 
 /** MsgSend represents a message to send a nft from one account to another account. */
 export interface MsgSend {
+  $type: "cosmos.nft.v1beta1.MsgSend";
   /** class_id defines the unique identifier of the nft classification, similar to the contract address of ERC721 */
   classId: string;
   /** id defines the unique identification of nft */
@@ -17,13 +19,23 @@ export interface MsgSend {
 }
 
 /** MsgSendResponse defines the Msg/Send response type. */
-export interface MsgSendResponse {}
+export interface MsgSendResponse {
+  $type: "cosmos.nft.v1beta1.MsgSendResponse";
+}
 
 function createBaseMsgSend(): MsgSend {
-  return { classId: "", id: "", sender: "", receiver: "" };
+  return {
+    $type: "cosmos.nft.v1beta1.MsgSend",
+    classId: "",
+    id: "",
+    sender: "",
+    receiver: "",
+  };
 }
 
 export const MsgSend = {
+  $type: "cosmos.nft.v1beta1.MsgSend" as const,
+
   encode(
     message: MsgSend,
     writer: _m0.Writer = _m0.Writer.create()
@@ -72,6 +84,7 @@ export const MsgSend = {
 
   fromJSON(object: any): MsgSend {
     return {
+      $type: MsgSend.$type,
       classId: isSet(object.classId) ? String(object.classId) : "",
       id: isSet(object.id) ? String(object.id) : "",
       sender: isSet(object.sender) ? String(object.sender) : "",
@@ -98,11 +111,15 @@ export const MsgSend = {
   },
 };
 
+messageTypeRegistry.set(MsgSend.$type, MsgSend);
+
 function createBaseMsgSendResponse(): MsgSendResponse {
-  return {};
+  return { $type: "cosmos.nft.v1beta1.MsgSendResponse" };
 }
 
 export const MsgSendResponse = {
+  $type: "cosmos.nft.v1beta1.MsgSendResponse" as const,
+
   encode(
     _: MsgSendResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -126,7 +143,9 @@ export const MsgSendResponse = {
   },
 
   fromJSON(_: any): MsgSendResponse {
-    return {};
+    return {
+      $type: MsgSendResponse.$type,
+    };
   },
 
   toJSON(_: MsgSendResponse): unknown {
@@ -141,6 +160,8 @@ export const MsgSendResponse = {
     return message;
   },
 };
+
+messageTypeRegistry.set(MsgSendResponse.$type, MsgSendResponse);
 
 /** Msg defines the nft Msg service. */
 export interface Msg {
@@ -187,14 +208,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

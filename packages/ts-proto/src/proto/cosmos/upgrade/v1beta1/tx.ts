@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Plan } from "../../../cosmos/upgrade/v1beta1/upgrade";
@@ -11,10 +12,11 @@ export const protobufPackage = "cosmos.upgrade.v1beta1";
  * Since: cosmos-sdk 0.46
  */
 export interface MsgSoftwareUpgrade {
+  $type: "cosmos.upgrade.v1beta1.MsgSoftwareUpgrade";
   /** authority is the address of the governance account. */
   authority: string;
   /** plan is the upgrade plan. */
-  plan?: Plan;
+  plan: Plan;
 }
 
 /**
@@ -22,7 +24,9 @@ export interface MsgSoftwareUpgrade {
  *
  * Since: cosmos-sdk 0.46
  */
-export interface MsgSoftwareUpgradeResponse {}
+export interface MsgSoftwareUpgradeResponse {
+  $type: "cosmos.upgrade.v1beta1.MsgSoftwareUpgradeResponse";
+}
 
 /**
  * MsgCancelUpgrade is the Msg/CancelUpgrade request type.
@@ -30,6 +34,7 @@ export interface MsgSoftwareUpgradeResponse {}
  * Since: cosmos-sdk 0.46
  */
 export interface MsgCancelUpgrade {
+  $type: "cosmos.upgrade.v1beta1.MsgCancelUpgrade";
   /** authority is the address of the governance account. */
   authority: string;
 }
@@ -39,13 +44,21 @@ export interface MsgCancelUpgrade {
  *
  * Since: cosmos-sdk 0.46
  */
-export interface MsgCancelUpgradeResponse {}
+export interface MsgCancelUpgradeResponse {
+  $type: "cosmos.upgrade.v1beta1.MsgCancelUpgradeResponse";
+}
 
 function createBaseMsgSoftwareUpgrade(): MsgSoftwareUpgrade {
-  return { authority: "", plan: undefined };
+  return {
+    $type: "cosmos.upgrade.v1beta1.MsgSoftwareUpgrade",
+    authority: "",
+    plan: undefined,
+  };
 }
 
 export const MsgSoftwareUpgrade = {
+  $type: "cosmos.upgrade.v1beta1.MsgSoftwareUpgrade" as const,
+
   encode(
     message: MsgSoftwareUpgrade,
     writer: _m0.Writer = _m0.Writer.create()
@@ -82,6 +95,7 @@ export const MsgSoftwareUpgrade = {
 
   fromJSON(object: any): MsgSoftwareUpgrade {
     return {
+      $type: MsgSoftwareUpgrade.$type,
       authority: isSet(object.authority) ? String(object.authority) : "",
       plan: isSet(object.plan) ? Plan.fromJSON(object.plan) : undefined,
     };
@@ -108,11 +122,15 @@ export const MsgSoftwareUpgrade = {
   },
 };
 
+messageTypeRegistry.set(MsgSoftwareUpgrade.$type, MsgSoftwareUpgrade);
+
 function createBaseMsgSoftwareUpgradeResponse(): MsgSoftwareUpgradeResponse {
-  return {};
+  return { $type: "cosmos.upgrade.v1beta1.MsgSoftwareUpgradeResponse" };
 }
 
 export const MsgSoftwareUpgradeResponse = {
+  $type: "cosmos.upgrade.v1beta1.MsgSoftwareUpgradeResponse" as const,
+
   encode(
     _: MsgSoftwareUpgradeResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -139,7 +157,9 @@ export const MsgSoftwareUpgradeResponse = {
   },
 
   fromJSON(_: any): MsgSoftwareUpgradeResponse {
-    return {};
+    return {
+      $type: MsgSoftwareUpgradeResponse.$type,
+    };
   },
 
   toJSON(_: MsgSoftwareUpgradeResponse): unknown {
@@ -155,11 +175,18 @@ export const MsgSoftwareUpgradeResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgSoftwareUpgradeResponse.$type,
+  MsgSoftwareUpgradeResponse
+);
+
 function createBaseMsgCancelUpgrade(): MsgCancelUpgrade {
-  return { authority: "" };
+  return { $type: "cosmos.upgrade.v1beta1.MsgCancelUpgrade", authority: "" };
 }
 
 export const MsgCancelUpgrade = {
+  $type: "cosmos.upgrade.v1beta1.MsgCancelUpgrade" as const,
+
   encode(
     message: MsgCancelUpgrade,
     writer: _m0.Writer = _m0.Writer.create()
@@ -190,6 +217,7 @@ export const MsgCancelUpgrade = {
 
   fromJSON(object: any): MsgCancelUpgrade {
     return {
+      $type: MsgCancelUpgrade.$type,
       authority: isSet(object.authority) ? String(object.authority) : "",
     };
   },
@@ -209,11 +237,15 @@ export const MsgCancelUpgrade = {
   },
 };
 
+messageTypeRegistry.set(MsgCancelUpgrade.$type, MsgCancelUpgrade);
+
 function createBaseMsgCancelUpgradeResponse(): MsgCancelUpgradeResponse {
-  return {};
+  return { $type: "cosmos.upgrade.v1beta1.MsgCancelUpgradeResponse" };
 }
 
 export const MsgCancelUpgradeResponse = {
+  $type: "cosmos.upgrade.v1beta1.MsgCancelUpgradeResponse" as const,
+
   encode(
     _: MsgCancelUpgradeResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -240,7 +272,9 @@ export const MsgCancelUpgradeResponse = {
   },
 
   fromJSON(_: any): MsgCancelUpgradeResponse {
-    return {};
+    return {
+      $type: MsgCancelUpgradeResponse.$type,
+    };
   },
 
   toJSON(_: MsgCancelUpgradeResponse): unknown {
@@ -255,6 +289,11 @@ export const MsgCancelUpgradeResponse = {
     return message;
   },
 };
+
+messageTypeRegistry.set(
+  MsgCancelUpgradeResponse.$type,
+  MsgCancelUpgradeResponse
+);
 
 /** Msg defines the upgrade Msg service. */
 export interface Msg {
@@ -335,14 +374,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import {
@@ -17,6 +18,7 @@ export const protobufPackage = "google.api";
  * existing data unusable.
  */
 export interface MetricDescriptor {
+  $type: "google.api.MetricDescriptor";
   /** The resource name of the metric descriptor. */
   name: string;
   /**
@@ -164,7 +166,7 @@ export interface MetricDescriptor {
    */
   displayName: string;
   /** Optional. Metadata which can be used to guide usage of the metric. */
-  metadata?: MetricDescriptor_MetricDescriptorMetadata;
+  metadata: MetricDescriptor_MetricDescriptorMetadata;
   /** Optional. The launch stage of the metric definition. */
   launchStage: LaunchStage;
   /**
@@ -322,6 +324,7 @@ export function metricDescriptor_ValueTypeToJSON(
 
 /** Additional annotations that can be used to guide the usage of a metric. */
 export interface MetricDescriptor_MetricDescriptorMetadata {
+  $type: "google.api.MetricDescriptor.MetricDescriptorMetadata";
   /**
    * Deprecated. Must use the [MetricDescriptor.launch_stage][google.api.MetricDescriptor.launch_stage] instead.
    *
@@ -334,13 +337,13 @@ export interface MetricDescriptor_MetricDescriptorMetadata {
    * excluding data loss due to errors. Metrics with a higher granularity have
    * a smaller sampling period.
    */
-  samplePeriod?: Duration;
+  samplePeriod: Duration;
   /**
    * The delay of data points caused by ingestion. Data points older than this
    * age are guaranteed to be ingested and available to be read, excluding
    * data loss due to errors.
    */
-  ingestDelay?: Duration;
+  ingestDelay: Duration;
 }
 
 /**
@@ -348,6 +351,7 @@ export interface MetricDescriptor_MetricDescriptorMetadata {
  * labels of a [`MetricDescriptor`][google.api.MetricDescriptor].
  */
 export interface Metric {
+  $type: "google.api.Metric";
   /**
    * An existing metric type, see [google.api.MetricDescriptor][google.api.MetricDescriptor].
    * For example, `custom.googleapis.com/invoice/paid/amount`.
@@ -361,12 +365,14 @@ export interface Metric {
 }
 
 export interface Metric_LabelsEntry {
+  $type: "google.api.Metric.LabelsEntry";
   key: string;
   value: string;
 }
 
 function createBaseMetricDescriptor(): MetricDescriptor {
   return {
+    $type: "google.api.MetricDescriptor",
     name: "",
     type: "",
     labels: [],
@@ -382,6 +388,8 @@ function createBaseMetricDescriptor(): MetricDescriptor {
 }
 
 export const MetricDescriptor = {
+  $type: "google.api.MetricDescriptor" as const,
+
   encode(
     message: MetricDescriptor,
     writer: _m0.Writer = _m0.Writer.create()
@@ -478,6 +486,7 @@ export const MetricDescriptor = {
 
   fromJSON(object: any): MetricDescriptor {
     return {
+      $type: MetricDescriptor.$type,
       name: isSet(object.name) ? String(object.name) : "",
       type: isSet(object.type) ? String(object.type) : "",
       labels: Array.isArray(object?.labels)
@@ -562,11 +571,20 @@ export const MetricDescriptor = {
   },
 };
 
+messageTypeRegistry.set(MetricDescriptor.$type, MetricDescriptor);
+
 function createBaseMetricDescriptor_MetricDescriptorMetadata(): MetricDescriptor_MetricDescriptorMetadata {
-  return { launchStage: 0, samplePeriod: undefined, ingestDelay: undefined };
+  return {
+    $type: "google.api.MetricDescriptor.MetricDescriptorMetadata",
+    launchStage: 0,
+    samplePeriod: undefined,
+    ingestDelay: undefined,
+  };
 }
 
 export const MetricDescriptor_MetricDescriptorMetadata = {
+  $type: "google.api.MetricDescriptor.MetricDescriptorMetadata" as const,
+
   encode(
     message: MetricDescriptor_MetricDescriptorMetadata,
     writer: _m0.Writer = _m0.Writer.create()
@@ -612,6 +630,7 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
 
   fromJSON(object: any): MetricDescriptor_MetricDescriptorMetadata {
     return {
+      $type: MetricDescriptor_MetricDescriptorMetadata.$type,
       launchStage: isSet(object.launchStage)
         ? launchStageFromJSON(object.launchStage)
         : 0,
@@ -656,11 +675,18 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
   },
 };
 
+messageTypeRegistry.set(
+  MetricDescriptor_MetricDescriptorMetadata.$type,
+  MetricDescriptor_MetricDescriptorMetadata
+);
+
 function createBaseMetric(): Metric {
-  return { type: "", labels: {} };
+  return { $type: "google.api.Metric", type: "", labels: {} };
 }
 
 export const Metric = {
+  $type: "google.api.Metric" as const,
+
   encode(
     message: Metric,
     writer: _m0.Writer = _m0.Writer.create()
@@ -670,7 +696,7 @@ export const Metric = {
     }
     Object.entries(message.labels).forEach(([key, value]) => {
       Metric_LabelsEntry.encode(
-        { key: key as any, value },
+        { $type: "google.api.Metric.LabelsEntry", key: key as any, value },
         writer.uint32(18).fork()
       ).ldelim();
     });
@@ -703,6 +729,7 @@ export const Metric = {
 
   fromJSON(object: any): Metric {
     return {
+      $type: Metric.$type,
       type: isSet(object.type) ? String(object.type) : "",
       labels: isObject(object.labels)
         ? Object.entries(object.labels).reduce<{ [key: string]: string }>(
@@ -743,11 +770,15 @@ export const Metric = {
   },
 };
 
+messageTypeRegistry.set(Metric.$type, Metric);
+
 function createBaseMetric_LabelsEntry(): Metric_LabelsEntry {
-  return { key: "", value: "" };
+  return { $type: "google.api.Metric.LabelsEntry", key: "", value: "" };
 }
 
 export const Metric_LabelsEntry = {
+  $type: "google.api.Metric.LabelsEntry" as const,
+
   encode(
     message: Metric_LabelsEntry,
     writer: _m0.Writer = _m0.Writer.create()
@@ -784,6 +815,7 @@ export const Metric_LabelsEntry = {
 
   fromJSON(object: any): Metric_LabelsEntry {
     return {
+      $type: Metric_LabelsEntry.$type,
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? String(object.value) : "",
     };
@@ -806,6 +838,8 @@ export const Metric_LabelsEntry = {
   },
 };
 
+messageTypeRegistry.set(Metric_LabelsEntry.$type, Metric_LabelsEntry);
+
 type Builtin =
   | Date
   | Function
@@ -824,14 +858,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

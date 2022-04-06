@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Timestamp } from "../../google/protobuf/timestamp";
@@ -6,45 +7,57 @@ import { Timestamp } from "../../google/protobuf/timestamp";
 export const protobufPackage = "tendermint.p2p";
 
 export interface ProtocolVersion {
+  $type: "tendermint.p2p.ProtocolVersion";
   p2p: Long;
   block: Long;
   app: Long;
 }
 
 export interface NodeInfo {
-  protocolVersion?: ProtocolVersion;
+  $type: "tendermint.p2p.NodeInfo";
+  protocolVersion: ProtocolVersion;
   nodeId: string;
   listenAddr: string;
   network: string;
   version: string;
   channels: Uint8Array;
   moniker: string;
-  other?: NodeInfoOther;
+  other: NodeInfoOther;
 }
 
 export interface NodeInfoOther {
+  $type: "tendermint.p2p.NodeInfoOther";
   txIndex: string;
   rpcAddress: string;
 }
 
 export interface PeerInfo {
+  $type: "tendermint.p2p.PeerInfo";
   id: string;
   addressInfo: PeerAddressInfo[];
-  lastConnected?: Date;
+  lastConnected: Date;
 }
 
 export interface PeerAddressInfo {
+  $type: "tendermint.p2p.PeerAddressInfo";
   address: string;
-  lastDialSuccess?: Date;
-  lastDialFailure?: Date;
+  lastDialSuccess: Date;
+  lastDialFailure: Date;
   dialFailures: number;
 }
 
 function createBaseProtocolVersion(): ProtocolVersion {
-  return { p2p: Long.UZERO, block: Long.UZERO, app: Long.UZERO };
+  return {
+    $type: "tendermint.p2p.ProtocolVersion",
+    p2p: Long.UZERO,
+    block: Long.UZERO,
+    app: Long.UZERO,
+  };
 }
 
 export const ProtocolVersion = {
+  $type: "tendermint.p2p.ProtocolVersion" as const,
+
   encode(
     message: ProtocolVersion,
     writer: _m0.Writer = _m0.Writer.create()
@@ -87,6 +100,7 @@ export const ProtocolVersion = {
 
   fromJSON(object: any): ProtocolVersion {
     return {
+      $type: ProtocolVersion.$type,
       p2p: isSet(object.p2p) ? Long.fromString(object.p2p) : Long.UZERO,
       block: isSet(object.block) ? Long.fromString(object.block) : Long.UZERO,
       app: isSet(object.app) ? Long.fromString(object.app) : Long.UZERO,
@@ -124,8 +138,11 @@ export const ProtocolVersion = {
   },
 };
 
+messageTypeRegistry.set(ProtocolVersion.$type, ProtocolVersion);
+
 function createBaseNodeInfo(): NodeInfo {
   return {
+    $type: "tendermint.p2p.NodeInfo",
     protocolVersion: undefined,
     nodeId: "",
     listenAddr: "",
@@ -138,6 +155,8 @@ function createBaseNodeInfo(): NodeInfo {
 }
 
 export const NodeInfo = {
+  $type: "tendermint.p2p.NodeInfo" as const,
+
   encode(
     message: NodeInfo,
     writer: _m0.Writer = _m0.Writer.create()
@@ -216,6 +235,7 @@ export const NodeInfo = {
 
   fromJSON(object: any): NodeInfo {
     return {
+      $type: NodeInfo.$type,
       protocolVersion: isSet(object.protocolVersion)
         ? ProtocolVersion.fromJSON(object.protocolVersion)
         : undefined,
@@ -275,11 +295,15 @@ export const NodeInfo = {
   },
 };
 
+messageTypeRegistry.set(NodeInfo.$type, NodeInfo);
+
 function createBaseNodeInfoOther(): NodeInfoOther {
-  return { txIndex: "", rpcAddress: "" };
+  return { $type: "tendermint.p2p.NodeInfoOther", txIndex: "", rpcAddress: "" };
 }
 
 export const NodeInfoOther = {
+  $type: "tendermint.p2p.NodeInfoOther" as const,
+
   encode(
     message: NodeInfoOther,
     writer: _m0.Writer = _m0.Writer.create()
@@ -316,6 +340,7 @@ export const NodeInfoOther = {
 
   fromJSON(object: any): NodeInfoOther {
     return {
+      $type: NodeInfoOther.$type,
       txIndex: isSet(object.txIndex) ? String(object.txIndex) : "",
       rpcAddress: isSet(object.rpcAddress) ? String(object.rpcAddress) : "",
     };
@@ -338,11 +363,20 @@ export const NodeInfoOther = {
   },
 };
 
+messageTypeRegistry.set(NodeInfoOther.$type, NodeInfoOther);
+
 function createBasePeerInfo(): PeerInfo {
-  return { id: "", addressInfo: [], lastConnected: undefined };
+  return {
+    $type: "tendermint.p2p.PeerInfo",
+    id: "",
+    addressInfo: [],
+    lastConnected: undefined,
+  };
 }
 
 export const PeerInfo = {
+  $type: "tendermint.p2p.PeerInfo" as const,
+
   encode(
     message: PeerInfo,
     writer: _m0.Writer = _m0.Writer.create()
@@ -392,6 +426,7 @@ export const PeerInfo = {
 
   fromJSON(object: any): PeerInfo {
     return {
+      $type: PeerInfo.$type,
       id: isSet(object.id) ? String(object.id) : "",
       addressInfo: Array.isArray(object?.addressInfo)
         ? object.addressInfo.map((e: any) => PeerAddressInfo.fromJSON(e))
@@ -427,8 +462,11 @@ export const PeerInfo = {
   },
 };
 
+messageTypeRegistry.set(PeerInfo.$type, PeerInfo);
+
 function createBasePeerAddressInfo(): PeerAddressInfo {
   return {
+    $type: "tendermint.p2p.PeerAddressInfo",
     address: "",
     lastDialSuccess: undefined,
     lastDialFailure: undefined,
@@ -437,6 +475,8 @@ function createBasePeerAddressInfo(): PeerAddressInfo {
 }
 
 export const PeerAddressInfo = {
+  $type: "tendermint.p2p.PeerAddressInfo" as const,
+
   encode(
     message: PeerAddressInfo,
     writer: _m0.Writer = _m0.Writer.create()
@@ -495,6 +535,7 @@ export const PeerAddressInfo = {
 
   fromJSON(object: any): PeerAddressInfo {
     return {
+      $type: PeerAddressInfo.$type,
       address: isSet(object.address) ? String(object.address) : "",
       lastDialSuccess: isSet(object.lastDialSuccess)
         ? fromJsonTimestamp(object.lastDialSuccess)
@@ -531,6 +572,8 @@ export const PeerAddressInfo = {
     return message;
   },
 };
+
+messageTypeRegistry.set(PeerAddressInfo.$type, PeerAddressInfo);
 
 declare var self: any | undefined;
 declare var window: any | undefined;
@@ -584,21 +627,21 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = (date.getTime() % 1_000) * 1_000_000;
-  return { seconds, nanos };
+  return { $type: "google.protobuf.Timestamp", seconds, nanos };
 }
 
 function fromTimestamp(t: Timestamp): Date {

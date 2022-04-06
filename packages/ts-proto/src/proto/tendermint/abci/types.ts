@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Header } from "../../tendermint/types/types";
@@ -84,30 +85,35 @@ export function evidenceTypeToJSON(object: EvidenceType): string {
 }
 
 export interface Request {
-  echo?: RequestEcho | undefined;
-  flush?: RequestFlush | undefined;
-  info?: RequestInfo | undefined;
-  setOption?: RequestSetOption | undefined;
-  initChain?: RequestInitChain | undefined;
-  query?: RequestQuery | undefined;
-  beginBlock?: RequestBeginBlock | undefined;
-  checkTx?: RequestCheckTx | undefined;
-  deliverTx?: RequestDeliverTx | undefined;
-  endBlock?: RequestEndBlock | undefined;
-  commit?: RequestCommit | undefined;
-  listSnapshots?: RequestListSnapshots | undefined;
-  offerSnapshot?: RequestOfferSnapshot | undefined;
-  loadSnapshotChunk?: RequestLoadSnapshotChunk | undefined;
-  applySnapshotChunk?: RequestApplySnapshotChunk | undefined;
+  $type: "tendermint.abci.Request";
+  echo: RequestEcho | undefined;
+  flush: RequestFlush | undefined;
+  info: RequestInfo | undefined;
+  setOption: RequestSetOption | undefined;
+  initChain: RequestInitChain | undefined;
+  query: RequestQuery | undefined;
+  beginBlock: RequestBeginBlock | undefined;
+  checkTx: RequestCheckTx | undefined;
+  deliverTx: RequestDeliverTx | undefined;
+  endBlock: RequestEndBlock | undefined;
+  commit: RequestCommit | undefined;
+  listSnapshots: RequestListSnapshots | undefined;
+  offerSnapshot: RequestOfferSnapshot | undefined;
+  loadSnapshotChunk: RequestLoadSnapshotChunk | undefined;
+  applySnapshotChunk: RequestApplySnapshotChunk | undefined;
 }
 
 export interface RequestEcho {
+  $type: "tendermint.abci.RequestEcho";
   message: string;
 }
 
-export interface RequestFlush {}
+export interface RequestFlush {
+  $type: "tendermint.abci.RequestFlush";
+}
 
 export interface RequestInfo {
+  $type: "tendermint.abci.RequestInfo";
   version: string;
   blockVersion: Long;
   p2pVersion: Long;
@@ -115,20 +121,23 @@ export interface RequestInfo {
 
 /** nondeterministic */
 export interface RequestSetOption {
+  $type: "tendermint.abci.RequestSetOption";
   key: string;
   value: string;
 }
 
 export interface RequestInitChain {
-  time?: Date;
+  $type: "tendermint.abci.RequestInitChain";
+  time: Date;
   chainId: string;
-  consensusParams?: ConsensusParams;
+  consensusParams: ConsensusParams;
   validators: ValidatorUpdate[];
   appStateBytes: Uint8Array;
   initialHeight: Long;
 }
 
 export interface RequestQuery {
+  $type: "tendermint.abci.RequestQuery";
   data: Uint8Array;
   path: string;
   height: Long;
@@ -136,40 +145,50 @@ export interface RequestQuery {
 }
 
 export interface RequestBeginBlock {
+  $type: "tendermint.abci.RequestBeginBlock";
   hash: Uint8Array;
-  header?: Header;
-  lastCommitInfo?: LastCommitInfo;
+  header: Header;
+  lastCommitInfo: LastCommitInfo;
   byzantineValidators: Evidence[];
 }
 
 export interface RequestCheckTx {
+  $type: "tendermint.abci.RequestCheckTx";
   tx: Uint8Array;
   type: CheckTxType;
 }
 
 export interface RequestDeliverTx {
+  $type: "tendermint.abci.RequestDeliverTx";
   tx: Uint8Array;
 }
 
 export interface RequestEndBlock {
+  $type: "tendermint.abci.RequestEndBlock";
   height: Long;
 }
 
-export interface RequestCommit {}
+export interface RequestCommit {
+  $type: "tendermint.abci.RequestCommit";
+}
 
 /** lists available snapshots */
-export interface RequestListSnapshots {}
+export interface RequestListSnapshots {
+  $type: "tendermint.abci.RequestListSnapshots";
+}
 
 /** offers a snapshot to the application */
 export interface RequestOfferSnapshot {
+  $type: "tendermint.abci.RequestOfferSnapshot";
   /** snapshot offered by peers */
-  snapshot?: Snapshot;
+  snapshot: Snapshot;
   /** light client-verified app hash for snapshot height */
   appHash: Uint8Array;
 }
 
 /** loads a snapshot chunk */
 export interface RequestLoadSnapshotChunk {
+  $type: "tendermint.abci.RequestLoadSnapshotChunk";
   height: Long;
   format: number;
   chunk: number;
@@ -177,42 +196,49 @@ export interface RequestLoadSnapshotChunk {
 
 /** Applies a snapshot chunk */
 export interface RequestApplySnapshotChunk {
+  $type: "tendermint.abci.RequestApplySnapshotChunk";
   index: number;
   chunk: Uint8Array;
   sender: string;
 }
 
 export interface Response {
-  exception?: ResponseException | undefined;
-  echo?: ResponseEcho | undefined;
-  flush?: ResponseFlush | undefined;
-  info?: ResponseInfo | undefined;
-  setOption?: ResponseSetOption | undefined;
-  initChain?: ResponseInitChain | undefined;
-  query?: ResponseQuery | undefined;
-  beginBlock?: ResponseBeginBlock | undefined;
-  checkTx?: ResponseCheckTx | undefined;
-  deliverTx?: ResponseDeliverTx | undefined;
-  endBlock?: ResponseEndBlock | undefined;
-  commit?: ResponseCommit | undefined;
-  listSnapshots?: ResponseListSnapshots | undefined;
-  offerSnapshot?: ResponseOfferSnapshot | undefined;
-  loadSnapshotChunk?: ResponseLoadSnapshotChunk | undefined;
-  applySnapshotChunk?: ResponseApplySnapshotChunk | undefined;
+  $type: "tendermint.abci.Response";
+  exception: ResponseException | undefined;
+  echo: ResponseEcho | undefined;
+  flush: ResponseFlush | undefined;
+  info: ResponseInfo | undefined;
+  setOption: ResponseSetOption | undefined;
+  initChain: ResponseInitChain | undefined;
+  query: ResponseQuery | undefined;
+  beginBlock: ResponseBeginBlock | undefined;
+  checkTx: ResponseCheckTx | undefined;
+  deliverTx: ResponseDeliverTx | undefined;
+  endBlock: ResponseEndBlock | undefined;
+  commit: ResponseCommit | undefined;
+  listSnapshots: ResponseListSnapshots | undefined;
+  offerSnapshot: ResponseOfferSnapshot | undefined;
+  loadSnapshotChunk: ResponseLoadSnapshotChunk | undefined;
+  applySnapshotChunk: ResponseApplySnapshotChunk | undefined;
 }
 
 /** nondeterministic */
 export interface ResponseException {
+  $type: "tendermint.abci.ResponseException";
   error: string;
 }
 
 export interface ResponseEcho {
+  $type: "tendermint.abci.ResponseEcho";
   message: string;
 }
 
-export interface ResponseFlush {}
+export interface ResponseFlush {
+  $type: "tendermint.abci.ResponseFlush";
+}
 
 export interface ResponseInfo {
+  $type: "tendermint.abci.ResponseInfo";
   data: string;
   version: string;
   appVersion: Long;
@@ -222,6 +248,7 @@ export interface ResponseInfo {
 
 /** nondeterministic */
 export interface ResponseSetOption {
+  $type: "tendermint.abci.ResponseSetOption";
   code: number;
   /** bytes data = 2; */
   log: string;
@@ -229,12 +256,14 @@ export interface ResponseSetOption {
 }
 
 export interface ResponseInitChain {
-  consensusParams?: ConsensusParams;
+  $type: "tendermint.abci.ResponseInitChain";
+  consensusParams: ConsensusParams;
   validators: ValidatorUpdate[];
   appHash: Uint8Array;
 }
 
 export interface ResponseQuery {
+  $type: "tendermint.abci.ResponseQuery";
   code: number;
   /** bytes data = 2; // use "value" instead. */
   log: string;
@@ -243,16 +272,18 @@ export interface ResponseQuery {
   index: Long;
   key: Uint8Array;
   value: Uint8Array;
-  proofOps?: ProofOps;
+  proofOps: ProofOps;
   height: Long;
   codespace: string;
 }
 
 export interface ResponseBeginBlock {
+  $type: "tendermint.abci.ResponseBeginBlock";
   events: Event[];
 }
 
 export interface ResponseCheckTx {
+  $type: "tendermint.abci.ResponseCheckTx";
   code: number;
   data: Uint8Array;
   /** nondeterministic */
@@ -266,6 +297,7 @@ export interface ResponseCheckTx {
 }
 
 export interface ResponseDeliverTx {
+  $type: "tendermint.abci.ResponseDeliverTx";
   code: number;
   data: Uint8Array;
   /** nondeterministic */
@@ -279,22 +311,26 @@ export interface ResponseDeliverTx {
 }
 
 export interface ResponseEndBlock {
+  $type: "tendermint.abci.ResponseEndBlock";
   validatorUpdates: ValidatorUpdate[];
-  consensusParamUpdates?: ConsensusParams;
+  consensusParamUpdates: ConsensusParams;
   events: Event[];
 }
 
 export interface ResponseCommit {
+  $type: "tendermint.abci.ResponseCommit";
   /** reserve 1 */
   data: Uint8Array;
   retainHeight: Long;
 }
 
 export interface ResponseListSnapshots {
+  $type: "tendermint.abci.ResponseListSnapshots";
   snapshots: Snapshot[];
 }
 
 export interface ResponseOfferSnapshot {
+  $type: "tendermint.abci.ResponseOfferSnapshot";
   result: ResponseOfferSnapshot_Result;
 }
 
@@ -365,10 +401,12 @@ export function responseOfferSnapshot_ResultToJSON(
 }
 
 export interface ResponseLoadSnapshotChunk {
+  $type: "tendermint.abci.ResponseLoadSnapshotChunk";
   chunk: Uint8Array;
 }
 
 export interface ResponseApplySnapshotChunk {
+  $type: "tendermint.abci.ResponseApplySnapshotChunk";
   result: ResponseApplySnapshotChunk_Result;
   /** Chunks to refetch and reapply */
   refetchChunks: number[];
@@ -447,14 +485,16 @@ export function responseApplySnapshotChunk_ResultToJSON(
  * that can be adjusted by the abci app
  */
 export interface ConsensusParams {
-  block?: BlockParams;
-  evidence?: EvidenceParams;
-  validator?: ValidatorParams;
-  version?: VersionParams;
+  $type: "tendermint.abci.ConsensusParams";
+  block: BlockParams;
+  evidence: EvidenceParams;
+  validator: ValidatorParams;
+  version: VersionParams;
 }
 
 /** BlockParams contains limits on the block size. */
 export interface BlockParams {
+  $type: "tendermint.abci.BlockParams";
   /** Note: must be greater than 0 */
   maxBytes: Long;
   /** Note: must be greater or equal to -1 */
@@ -462,6 +502,7 @@ export interface BlockParams {
 }
 
 export interface LastCommitInfo {
+  $type: "tendermint.abci.LastCommitInfo";
   round: number;
   votes: VoteInfo[];
 }
@@ -472,12 +513,14 @@ export interface LastCommitInfo {
  * Later, transactions may be queried using these events.
  */
 export interface Event {
+  $type: "tendermint.abci.Event";
   type: string;
   attributes: EventAttribute[];
 }
 
 /** EventAttribute is a single key-value pair, associated with an event. */
 export interface EventAttribute {
+  $type: "tendermint.abci.EventAttribute";
   key: Uint8Array;
   value: Uint8Array;
   /** nondeterministic */
@@ -490,14 +533,16 @@ export interface EventAttribute {
  * One usage is indexing transaction results.
  */
 export interface TxResult {
+  $type: "tendermint.abci.TxResult";
   height: Long;
   index: number;
   tx: Uint8Array;
-  result?: ResponseDeliverTx;
+  result: ResponseDeliverTx;
 }
 
 /** Validator */
 export interface Validator {
+  $type: "tendermint.abci.Validator";
   /** The first 20 bytes of SHA256(public key) */
   address: Uint8Array;
   /** PubKey pub_key = 2 [(gogoproto.nullable)=false]; */
@@ -506,24 +551,27 @@ export interface Validator {
 
 /** ValidatorUpdate */
 export interface ValidatorUpdate {
-  pubKey?: PublicKey;
+  $type: "tendermint.abci.ValidatorUpdate";
+  pubKey: PublicKey;
   power: Long;
 }
 
 /** VoteInfo */
 export interface VoteInfo {
-  validator?: Validator;
+  $type: "tendermint.abci.VoteInfo";
+  validator: Validator;
   signedLastBlock: boolean;
 }
 
 export interface Evidence {
+  $type: "tendermint.abci.Evidence";
   type: EvidenceType;
   /** The offending validator */
-  validator?: Validator;
+  validator: Validator;
   /** The height when the offense occurred */
   height: Long;
   /** The corresponding time where the offense occurred */
-  time?: Date;
+  time: Date;
   /**
    * Total voting power of the validator set in case the ABCI application does
    * not store historical validators.
@@ -533,6 +581,7 @@ export interface Evidence {
 }
 
 export interface Snapshot {
+  $type: "tendermint.abci.Snapshot";
   /** The height at which the snapshot was taken */
   height: Long;
   /** The application-specific snapshot format */
@@ -547,6 +596,7 @@ export interface Snapshot {
 
 function createBaseRequest(): Request {
   return {
+    $type: "tendermint.abci.Request",
     echo: undefined,
     flush: undefined,
     info: undefined,
@@ -566,6 +616,8 @@ function createBaseRequest(): Request {
 }
 
 export const Request = {
+  $type: "tendermint.abci.Request" as const,
+
   encode(
     message: Request,
     writer: _m0.Writer = _m0.Writer.create()
@@ -722,6 +774,7 @@ export const Request = {
 
   fromJSON(object: any): Request {
     return {
+      $type: Request.$type,
       echo: isSet(object.echo) ? RequestEcho.fromJSON(object.echo) : undefined,
       flush: isSet(object.flush)
         ? RequestFlush.fromJSON(object.flush)
@@ -895,11 +948,15 @@ export const Request = {
   },
 };
 
+messageTypeRegistry.set(Request.$type, Request);
+
 function createBaseRequestEcho(): RequestEcho {
-  return { message: "" };
+  return { $type: "tendermint.abci.RequestEcho", message: "" };
 }
 
 export const RequestEcho = {
+  $type: "tendermint.abci.RequestEcho" as const,
+
   encode(
     message: RequestEcho,
     writer: _m0.Writer = _m0.Writer.create()
@@ -930,6 +987,7 @@ export const RequestEcho = {
 
   fromJSON(object: any): RequestEcho {
     return {
+      $type: RequestEcho.$type,
       message: isSet(object.message) ? String(object.message) : "",
     };
   },
@@ -949,11 +1007,15 @@ export const RequestEcho = {
   },
 };
 
+messageTypeRegistry.set(RequestEcho.$type, RequestEcho);
+
 function createBaseRequestFlush(): RequestFlush {
-  return {};
+  return { $type: "tendermint.abci.RequestFlush" };
 }
 
 export const RequestFlush = {
+  $type: "tendermint.abci.RequestFlush" as const,
+
   encode(
     _: RequestFlush,
     writer: _m0.Writer = _m0.Writer.create()
@@ -977,7 +1039,9 @@ export const RequestFlush = {
   },
 
   fromJSON(_: any): RequestFlush {
-    return {};
+    return {
+      $type: RequestFlush.$type,
+    };
   },
 
   toJSON(_: RequestFlush): unknown {
@@ -993,11 +1057,20 @@ export const RequestFlush = {
   },
 };
 
+messageTypeRegistry.set(RequestFlush.$type, RequestFlush);
+
 function createBaseRequestInfo(): RequestInfo {
-  return { version: "", blockVersion: Long.UZERO, p2pVersion: Long.UZERO };
+  return {
+    $type: "tendermint.abci.RequestInfo",
+    version: "",
+    blockVersion: Long.UZERO,
+    p2pVersion: Long.UZERO,
+  };
 }
 
 export const RequestInfo = {
+  $type: "tendermint.abci.RequestInfo" as const,
+
   encode(
     message: RequestInfo,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1040,6 +1113,7 @@ export const RequestInfo = {
 
   fromJSON(object: any): RequestInfo {
     return {
+      $type: RequestInfo.$type,
       version: isSet(object.version) ? String(object.version) : "",
       blockVersion: isSet(object.blockVersion)
         ? Long.fromString(object.blockVersion)
@@ -1077,11 +1151,15 @@ export const RequestInfo = {
   },
 };
 
+messageTypeRegistry.set(RequestInfo.$type, RequestInfo);
+
 function createBaseRequestSetOption(): RequestSetOption {
-  return { key: "", value: "" };
+  return { $type: "tendermint.abci.RequestSetOption", key: "", value: "" };
 }
 
 export const RequestSetOption = {
+  $type: "tendermint.abci.RequestSetOption" as const,
+
   encode(
     message: RequestSetOption,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1118,6 +1196,7 @@ export const RequestSetOption = {
 
   fromJSON(object: any): RequestSetOption {
     return {
+      $type: RequestSetOption.$type,
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? String(object.value) : "",
     };
@@ -1140,8 +1219,11 @@ export const RequestSetOption = {
   },
 };
 
+messageTypeRegistry.set(RequestSetOption.$type, RequestSetOption);
+
 function createBaseRequestInitChain(): RequestInitChain {
   return {
+    $type: "tendermint.abci.RequestInitChain",
     time: undefined,
     chainId: "",
     consensusParams: undefined,
@@ -1152,6 +1234,8 @@ function createBaseRequestInitChain(): RequestInitChain {
 }
 
 export const RequestInitChain = {
+  $type: "tendermint.abci.RequestInitChain" as const,
+
   encode(
     message: RequestInitChain,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1225,6 +1309,7 @@ export const RequestInitChain = {
 
   fromJSON(object: any): RequestInitChain {
     return {
+      $type: RequestInitChain.$type,
       time: isSet(object.time) ? fromJsonTimestamp(object.time) : undefined,
       chainId: isSet(object.chainId) ? String(object.chainId) : "",
       consensusParams: isSet(object.consensusParams)
@@ -1289,11 +1374,21 @@ export const RequestInitChain = {
   },
 };
 
+messageTypeRegistry.set(RequestInitChain.$type, RequestInitChain);
+
 function createBaseRequestQuery(): RequestQuery {
-  return { data: new Uint8Array(), path: "", height: Long.ZERO, prove: false };
+  return {
+    $type: "tendermint.abci.RequestQuery",
+    data: new Uint8Array(),
+    path: "",
+    height: Long.ZERO,
+    prove: false,
+  };
 }
 
 export const RequestQuery = {
+  $type: "tendermint.abci.RequestQuery" as const,
+
   encode(
     message: RequestQuery,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1342,6 +1437,7 @@ export const RequestQuery = {
 
   fromJSON(object: any): RequestQuery {
     return {
+      $type: RequestQuery.$type,
       data: isSet(object.data)
         ? bytesFromBase64(object.data)
         : new Uint8Array(),
@@ -1379,8 +1475,11 @@ export const RequestQuery = {
   },
 };
 
+messageTypeRegistry.set(RequestQuery.$type, RequestQuery);
+
 function createBaseRequestBeginBlock(): RequestBeginBlock {
   return {
+    $type: "tendermint.abci.RequestBeginBlock",
     hash: new Uint8Array(),
     header: undefined,
     lastCommitInfo: undefined,
@@ -1389,6 +1488,8 @@ function createBaseRequestBeginBlock(): RequestBeginBlock {
 }
 
 export const RequestBeginBlock = {
+  $type: "tendermint.abci.RequestBeginBlock" as const,
+
   encode(
     message: RequestBeginBlock,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1445,6 +1546,7 @@ export const RequestBeginBlock = {
 
   fromJSON(object: any): RequestBeginBlock {
     return {
+      $type: RequestBeginBlock.$type,
       hash: isSet(object.hash)
         ? bytesFromBase64(object.hash)
         : new Uint8Array(),
@@ -1499,11 +1601,19 @@ export const RequestBeginBlock = {
   },
 };
 
+messageTypeRegistry.set(RequestBeginBlock.$type, RequestBeginBlock);
+
 function createBaseRequestCheckTx(): RequestCheckTx {
-  return { tx: new Uint8Array(), type: 0 };
+  return {
+    $type: "tendermint.abci.RequestCheckTx",
+    tx: new Uint8Array(),
+    type: 0,
+  };
 }
 
 export const RequestCheckTx = {
+  $type: "tendermint.abci.RequestCheckTx" as const,
+
   encode(
     message: RequestCheckTx,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1540,6 +1650,7 @@ export const RequestCheckTx = {
 
   fromJSON(object: any): RequestCheckTx {
     return {
+      $type: RequestCheckTx.$type,
       tx: isSet(object.tx) ? bytesFromBase64(object.tx) : new Uint8Array(),
       type: isSet(object.type) ? checkTxTypeFromJSON(object.type) : 0,
     };
@@ -1565,11 +1676,15 @@ export const RequestCheckTx = {
   },
 };
 
+messageTypeRegistry.set(RequestCheckTx.$type, RequestCheckTx);
+
 function createBaseRequestDeliverTx(): RequestDeliverTx {
-  return { tx: new Uint8Array() };
+  return { $type: "tendermint.abci.RequestDeliverTx", tx: new Uint8Array() };
 }
 
 export const RequestDeliverTx = {
+  $type: "tendermint.abci.RequestDeliverTx" as const,
+
   encode(
     message: RequestDeliverTx,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1600,6 +1715,7 @@ export const RequestDeliverTx = {
 
   fromJSON(object: any): RequestDeliverTx {
     return {
+      $type: RequestDeliverTx.$type,
       tx: isSet(object.tx) ? bytesFromBase64(object.tx) : new Uint8Array(),
     };
   },
@@ -1622,11 +1738,15 @@ export const RequestDeliverTx = {
   },
 };
 
+messageTypeRegistry.set(RequestDeliverTx.$type, RequestDeliverTx);
+
 function createBaseRequestEndBlock(): RequestEndBlock {
-  return { height: Long.ZERO };
+  return { $type: "tendermint.abci.RequestEndBlock", height: Long.ZERO };
 }
 
 export const RequestEndBlock = {
+  $type: "tendermint.abci.RequestEndBlock" as const,
+
   encode(
     message: RequestEndBlock,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1657,6 +1777,7 @@ export const RequestEndBlock = {
 
   fromJSON(object: any): RequestEndBlock {
     return {
+      $type: RequestEndBlock.$type,
       height: isSet(object.height) ? Long.fromString(object.height) : Long.ZERO,
     };
   },
@@ -1680,11 +1801,15 @@ export const RequestEndBlock = {
   },
 };
 
+messageTypeRegistry.set(RequestEndBlock.$type, RequestEndBlock);
+
 function createBaseRequestCommit(): RequestCommit {
-  return {};
+  return { $type: "tendermint.abci.RequestCommit" };
 }
 
 export const RequestCommit = {
+  $type: "tendermint.abci.RequestCommit" as const,
+
   encode(
     _: RequestCommit,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1708,7 +1833,9 @@ export const RequestCommit = {
   },
 
   fromJSON(_: any): RequestCommit {
-    return {};
+    return {
+      $type: RequestCommit.$type,
+    };
   },
 
   toJSON(_: RequestCommit): unknown {
@@ -1724,11 +1851,15 @@ export const RequestCommit = {
   },
 };
 
+messageTypeRegistry.set(RequestCommit.$type, RequestCommit);
+
 function createBaseRequestListSnapshots(): RequestListSnapshots {
-  return {};
+  return { $type: "tendermint.abci.RequestListSnapshots" };
 }
 
 export const RequestListSnapshots = {
+  $type: "tendermint.abci.RequestListSnapshots" as const,
+
   encode(
     _: RequestListSnapshots,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1755,7 +1886,9 @@ export const RequestListSnapshots = {
   },
 
   fromJSON(_: any): RequestListSnapshots {
-    return {};
+    return {
+      $type: RequestListSnapshots.$type,
+    };
   },
 
   toJSON(_: RequestListSnapshots): unknown {
@@ -1771,11 +1904,19 @@ export const RequestListSnapshots = {
   },
 };
 
+messageTypeRegistry.set(RequestListSnapshots.$type, RequestListSnapshots);
+
 function createBaseRequestOfferSnapshot(): RequestOfferSnapshot {
-  return { snapshot: undefined, appHash: new Uint8Array() };
+  return {
+    $type: "tendermint.abci.RequestOfferSnapshot",
+    snapshot: undefined,
+    appHash: new Uint8Array(),
+  };
 }
 
 export const RequestOfferSnapshot = {
+  $type: "tendermint.abci.RequestOfferSnapshot" as const,
+
   encode(
     message: RequestOfferSnapshot,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1815,6 +1956,7 @@ export const RequestOfferSnapshot = {
 
   fromJSON(object: any): RequestOfferSnapshot {
     return {
+      $type: RequestOfferSnapshot.$type,
       snapshot: isSet(object.snapshot)
         ? Snapshot.fromJSON(object.snapshot)
         : undefined,
@@ -1850,11 +1992,20 @@ export const RequestOfferSnapshot = {
   },
 };
 
+messageTypeRegistry.set(RequestOfferSnapshot.$type, RequestOfferSnapshot);
+
 function createBaseRequestLoadSnapshotChunk(): RequestLoadSnapshotChunk {
-  return { height: Long.UZERO, format: 0, chunk: 0 };
+  return {
+    $type: "tendermint.abci.RequestLoadSnapshotChunk",
+    height: Long.UZERO,
+    format: 0,
+    chunk: 0,
+  };
 }
 
 export const RequestLoadSnapshotChunk = {
+  $type: "tendermint.abci.RequestLoadSnapshotChunk" as const,
+
   encode(
     message: RequestLoadSnapshotChunk,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1900,6 +2051,7 @@ export const RequestLoadSnapshotChunk = {
 
   fromJSON(object: any): RequestLoadSnapshotChunk {
     return {
+      $type: RequestLoadSnapshotChunk.$type,
       height: isSet(object.height)
         ? Long.fromString(object.height)
         : Long.UZERO,
@@ -1931,11 +2083,23 @@ export const RequestLoadSnapshotChunk = {
   },
 };
 
+messageTypeRegistry.set(
+  RequestLoadSnapshotChunk.$type,
+  RequestLoadSnapshotChunk
+);
+
 function createBaseRequestApplySnapshotChunk(): RequestApplySnapshotChunk {
-  return { index: 0, chunk: new Uint8Array(), sender: "" };
+  return {
+    $type: "tendermint.abci.RequestApplySnapshotChunk",
+    index: 0,
+    chunk: new Uint8Array(),
+    sender: "",
+  };
 }
 
 export const RequestApplySnapshotChunk = {
+  $type: "tendermint.abci.RequestApplySnapshotChunk" as const,
+
   encode(
     message: RequestApplySnapshotChunk,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1981,6 +2145,7 @@ export const RequestApplySnapshotChunk = {
 
   fromJSON(object: any): RequestApplySnapshotChunk {
     return {
+      $type: RequestApplySnapshotChunk.$type,
       index: isSet(object.index) ? Number(object.index) : 0,
       chunk: isSet(object.chunk)
         ? bytesFromBase64(object.chunk)
@@ -2011,8 +2176,14 @@ export const RequestApplySnapshotChunk = {
   },
 };
 
+messageTypeRegistry.set(
+  RequestApplySnapshotChunk.$type,
+  RequestApplySnapshotChunk
+);
+
 function createBaseResponse(): Response {
   return {
+    $type: "tendermint.abci.Response",
     exception: undefined,
     echo: undefined,
     flush: undefined,
@@ -2033,6 +2204,8 @@ function createBaseResponse(): Response {
 }
 
 export const Response = {
+  $type: "tendermint.abci.Response" as const,
+
   encode(
     message: Response,
     writer: _m0.Writer = _m0.Writer.create()
@@ -2201,6 +2374,7 @@ export const Response = {
 
   fromJSON(object: any): Response {
     return {
+      $type: Response.$type,
       exception: isSet(object.exception)
         ? ResponseException.fromJSON(object.exception)
         : undefined,
@@ -2385,11 +2559,15 @@ export const Response = {
   },
 };
 
+messageTypeRegistry.set(Response.$type, Response);
+
 function createBaseResponseException(): ResponseException {
-  return { error: "" };
+  return { $type: "tendermint.abci.ResponseException", error: "" };
 }
 
 export const ResponseException = {
+  $type: "tendermint.abci.ResponseException" as const,
+
   encode(
     message: ResponseException,
     writer: _m0.Writer = _m0.Writer.create()
@@ -2420,6 +2598,7 @@ export const ResponseException = {
 
   fromJSON(object: any): ResponseException {
     return {
+      $type: ResponseException.$type,
       error: isSet(object.error) ? String(object.error) : "",
     };
   },
@@ -2439,11 +2618,15 @@ export const ResponseException = {
   },
 };
 
+messageTypeRegistry.set(ResponseException.$type, ResponseException);
+
 function createBaseResponseEcho(): ResponseEcho {
-  return { message: "" };
+  return { $type: "tendermint.abci.ResponseEcho", message: "" };
 }
 
 export const ResponseEcho = {
+  $type: "tendermint.abci.ResponseEcho" as const,
+
   encode(
     message: ResponseEcho,
     writer: _m0.Writer = _m0.Writer.create()
@@ -2474,6 +2657,7 @@ export const ResponseEcho = {
 
   fromJSON(object: any): ResponseEcho {
     return {
+      $type: ResponseEcho.$type,
       message: isSet(object.message) ? String(object.message) : "",
     };
   },
@@ -2493,11 +2677,15 @@ export const ResponseEcho = {
   },
 };
 
+messageTypeRegistry.set(ResponseEcho.$type, ResponseEcho);
+
 function createBaseResponseFlush(): ResponseFlush {
-  return {};
+  return { $type: "tendermint.abci.ResponseFlush" };
 }
 
 export const ResponseFlush = {
+  $type: "tendermint.abci.ResponseFlush" as const,
+
   encode(
     _: ResponseFlush,
     writer: _m0.Writer = _m0.Writer.create()
@@ -2521,7 +2709,9 @@ export const ResponseFlush = {
   },
 
   fromJSON(_: any): ResponseFlush {
-    return {};
+    return {
+      $type: ResponseFlush.$type,
+    };
   },
 
   toJSON(_: ResponseFlush): unknown {
@@ -2537,8 +2727,11 @@ export const ResponseFlush = {
   },
 };
 
+messageTypeRegistry.set(ResponseFlush.$type, ResponseFlush);
+
 function createBaseResponseInfo(): ResponseInfo {
   return {
+    $type: "tendermint.abci.ResponseInfo",
     data: "",
     version: "",
     appVersion: Long.UZERO,
@@ -2548,6 +2741,8 @@ function createBaseResponseInfo(): ResponseInfo {
 }
 
 export const ResponseInfo = {
+  $type: "tendermint.abci.ResponseInfo" as const,
+
   encode(
     message: ResponseInfo,
     writer: _m0.Writer = _m0.Writer.create()
@@ -2602,6 +2797,7 @@ export const ResponseInfo = {
 
   fromJSON(object: any): ResponseInfo {
     return {
+      $type: ResponseInfo.$type,
       data: isSet(object.data) ? String(object.data) : "",
       version: isSet(object.version) ? String(object.version) : "",
       appVersion: isSet(object.appVersion)
@@ -2652,11 +2848,20 @@ export const ResponseInfo = {
   },
 };
 
+messageTypeRegistry.set(ResponseInfo.$type, ResponseInfo);
+
 function createBaseResponseSetOption(): ResponseSetOption {
-  return { code: 0, log: "", info: "" };
+  return {
+    $type: "tendermint.abci.ResponseSetOption",
+    code: 0,
+    log: "",
+    info: "",
+  };
 }
 
 export const ResponseSetOption = {
+  $type: "tendermint.abci.ResponseSetOption" as const,
+
   encode(
     message: ResponseSetOption,
     writer: _m0.Writer = _m0.Writer.create()
@@ -2699,6 +2904,7 @@ export const ResponseSetOption = {
 
   fromJSON(object: any): ResponseSetOption {
     return {
+      $type: ResponseSetOption.$type,
       code: isSet(object.code) ? Number(object.code) : 0,
       log: isSet(object.log) ? String(object.log) : "",
       info: isSet(object.info) ? String(object.info) : "",
@@ -2724,8 +2930,11 @@ export const ResponseSetOption = {
   },
 };
 
+messageTypeRegistry.set(ResponseSetOption.$type, ResponseSetOption);
+
 function createBaseResponseInitChain(): ResponseInitChain {
   return {
+    $type: "tendermint.abci.ResponseInitChain",
     consensusParams: undefined,
     validators: [],
     appHash: new Uint8Array(),
@@ -2733,6 +2942,8 @@ function createBaseResponseInitChain(): ResponseInitChain {
 }
 
 export const ResponseInitChain = {
+  $type: "tendermint.abci.ResponseInitChain" as const,
+
   encode(
     message: ResponseInitChain,
     writer: _m0.Writer = _m0.Writer.create()
@@ -2783,6 +2994,7 @@ export const ResponseInitChain = {
 
   fromJSON(object: any): ResponseInitChain {
     return {
+      $type: ResponseInitChain.$type,
       consensusParams: isSet(object.consensusParams)
         ? ConsensusParams.fromJSON(object.consensusParams)
         : undefined,
@@ -2830,8 +3042,11 @@ export const ResponseInitChain = {
   },
 };
 
+messageTypeRegistry.set(ResponseInitChain.$type, ResponseInitChain);
+
 function createBaseResponseQuery(): ResponseQuery {
   return {
+    $type: "tendermint.abci.ResponseQuery",
     code: 0,
     log: "",
     info: "",
@@ -2845,6 +3060,8 @@ function createBaseResponseQuery(): ResponseQuery {
 }
 
 export const ResponseQuery = {
+  $type: "tendermint.abci.ResponseQuery" as const,
+
   encode(
     message: ResponseQuery,
     writer: _m0.Writer = _m0.Writer.create()
@@ -2923,6 +3140,7 @@ export const ResponseQuery = {
 
   fromJSON(object: any): ResponseQuery {
     return {
+      $type: ResponseQuery.$type,
       code: isSet(object.code) ? Number(object.code) : 0,
       log: isSet(object.log) ? String(object.log) : "",
       info: isSet(object.info) ? String(object.info) : "",
@@ -2990,11 +3208,15 @@ export const ResponseQuery = {
   },
 };
 
+messageTypeRegistry.set(ResponseQuery.$type, ResponseQuery);
+
 function createBaseResponseBeginBlock(): ResponseBeginBlock {
-  return { events: [] };
+  return { $type: "tendermint.abci.ResponseBeginBlock", events: [] };
 }
 
 export const ResponseBeginBlock = {
+  $type: "tendermint.abci.ResponseBeginBlock" as const,
+
   encode(
     message: ResponseBeginBlock,
     writer: _m0.Writer = _m0.Writer.create()
@@ -3025,6 +3247,7 @@ export const ResponseBeginBlock = {
 
   fromJSON(object: any): ResponseBeginBlock {
     return {
+      $type: ResponseBeginBlock.$type,
       events: Array.isArray(object?.events)
         ? object.events.map((e: any) => Event.fromJSON(e))
         : [],
@@ -3050,8 +3273,11 @@ export const ResponseBeginBlock = {
   },
 };
 
+messageTypeRegistry.set(ResponseBeginBlock.$type, ResponseBeginBlock);
+
 function createBaseResponseCheckTx(): ResponseCheckTx {
   return {
+    $type: "tendermint.abci.ResponseCheckTx",
     code: 0,
     data: new Uint8Array(),
     log: "",
@@ -3064,6 +3290,8 @@ function createBaseResponseCheckTx(): ResponseCheckTx {
 }
 
 export const ResponseCheckTx = {
+  $type: "tendermint.abci.ResponseCheckTx" as const,
+
   encode(
     message: ResponseCheckTx,
     writer: _m0.Writer = _m0.Writer.create()
@@ -3136,6 +3364,7 @@ export const ResponseCheckTx = {
 
   fromJSON(object: any): ResponseCheckTx {
     return {
+      $type: ResponseCheckTx.$type,
       code: isSet(object.code) ? Number(object.code) : 0,
       data: isSet(object.data)
         ? bytesFromBase64(object.data)
@@ -3199,8 +3428,11 @@ export const ResponseCheckTx = {
   },
 };
 
+messageTypeRegistry.set(ResponseCheckTx.$type, ResponseCheckTx);
+
 function createBaseResponseDeliverTx(): ResponseDeliverTx {
   return {
+    $type: "tendermint.abci.ResponseDeliverTx",
     code: 0,
     data: new Uint8Array(),
     log: "",
@@ -3213,6 +3445,8 @@ function createBaseResponseDeliverTx(): ResponseDeliverTx {
 }
 
 export const ResponseDeliverTx = {
+  $type: "tendermint.abci.ResponseDeliverTx" as const,
+
   encode(
     message: ResponseDeliverTx,
     writer: _m0.Writer = _m0.Writer.create()
@@ -3285,6 +3519,7 @@ export const ResponseDeliverTx = {
 
   fromJSON(object: any): ResponseDeliverTx {
     return {
+      $type: ResponseDeliverTx.$type,
       code: isSet(object.code) ? Number(object.code) : 0,
       data: isSet(object.data)
         ? bytesFromBase64(object.data)
@@ -3348,11 +3583,20 @@ export const ResponseDeliverTx = {
   },
 };
 
+messageTypeRegistry.set(ResponseDeliverTx.$type, ResponseDeliverTx);
+
 function createBaseResponseEndBlock(): ResponseEndBlock {
-  return { validatorUpdates: [], consensusParamUpdates: undefined, events: [] };
+  return {
+    $type: "tendermint.abci.ResponseEndBlock",
+    validatorUpdates: [],
+    consensusParamUpdates: undefined,
+    events: [],
+  };
 }
 
 export const ResponseEndBlock = {
+  $type: "tendermint.abci.ResponseEndBlock" as const,
+
   encode(
     message: ResponseEndBlock,
     writer: _m0.Writer = _m0.Writer.create()
@@ -3403,6 +3647,7 @@ export const ResponseEndBlock = {
 
   fromJSON(object: any): ResponseEndBlock {
     return {
+      $type: ResponseEndBlock.$type,
       validatorUpdates: Array.isArray(object?.validatorUpdates)
         ? object.validatorUpdates.map((e: any) => ValidatorUpdate.fromJSON(e))
         : [],
@@ -3452,11 +3697,19 @@ export const ResponseEndBlock = {
   },
 };
 
+messageTypeRegistry.set(ResponseEndBlock.$type, ResponseEndBlock);
+
 function createBaseResponseCommit(): ResponseCommit {
-  return { data: new Uint8Array(), retainHeight: Long.ZERO };
+  return {
+    $type: "tendermint.abci.ResponseCommit",
+    data: new Uint8Array(),
+    retainHeight: Long.ZERO,
+  };
 }
 
 export const ResponseCommit = {
+  $type: "tendermint.abci.ResponseCommit" as const,
+
   encode(
     message: ResponseCommit,
     writer: _m0.Writer = _m0.Writer.create()
@@ -3493,6 +3746,7 @@ export const ResponseCommit = {
 
   fromJSON(object: any): ResponseCommit {
     return {
+      $type: ResponseCommit.$type,
       data: isSet(object.data)
         ? bytesFromBase64(object.data)
         : new Uint8Array(),
@@ -3526,11 +3780,15 @@ export const ResponseCommit = {
   },
 };
 
+messageTypeRegistry.set(ResponseCommit.$type, ResponseCommit);
+
 function createBaseResponseListSnapshots(): ResponseListSnapshots {
-  return { snapshots: [] };
+  return { $type: "tendermint.abci.ResponseListSnapshots", snapshots: [] };
 }
 
 export const ResponseListSnapshots = {
+  $type: "tendermint.abci.ResponseListSnapshots" as const,
+
   encode(
     message: ResponseListSnapshots,
     writer: _m0.Writer = _m0.Writer.create()
@@ -3564,6 +3822,7 @@ export const ResponseListSnapshots = {
 
   fromJSON(object: any): ResponseListSnapshots {
     return {
+      $type: ResponseListSnapshots.$type,
       snapshots: Array.isArray(object?.snapshots)
         ? object.snapshots.map((e: any) => Snapshot.fromJSON(e))
         : [],
@@ -3592,11 +3851,15 @@ export const ResponseListSnapshots = {
   },
 };
 
+messageTypeRegistry.set(ResponseListSnapshots.$type, ResponseListSnapshots);
+
 function createBaseResponseOfferSnapshot(): ResponseOfferSnapshot {
-  return { result: 0 };
+  return { $type: "tendermint.abci.ResponseOfferSnapshot", result: 0 };
 }
 
 export const ResponseOfferSnapshot = {
+  $type: "tendermint.abci.ResponseOfferSnapshot" as const,
+
   encode(
     message: ResponseOfferSnapshot,
     writer: _m0.Writer = _m0.Writer.create()
@@ -3630,6 +3893,7 @@ export const ResponseOfferSnapshot = {
 
   fromJSON(object: any): ResponseOfferSnapshot {
     return {
+      $type: ResponseOfferSnapshot.$type,
       result: isSet(object.result)
         ? responseOfferSnapshot_ResultFromJSON(object.result)
         : 0,
@@ -3652,11 +3916,18 @@ export const ResponseOfferSnapshot = {
   },
 };
 
+messageTypeRegistry.set(ResponseOfferSnapshot.$type, ResponseOfferSnapshot);
+
 function createBaseResponseLoadSnapshotChunk(): ResponseLoadSnapshotChunk {
-  return { chunk: new Uint8Array() };
+  return {
+    $type: "tendermint.abci.ResponseLoadSnapshotChunk",
+    chunk: new Uint8Array(),
+  };
 }
 
 export const ResponseLoadSnapshotChunk = {
+  $type: "tendermint.abci.ResponseLoadSnapshotChunk" as const,
+
   encode(
     message: ResponseLoadSnapshotChunk,
     writer: _m0.Writer = _m0.Writer.create()
@@ -3690,6 +3961,7 @@ export const ResponseLoadSnapshotChunk = {
 
   fromJSON(object: any): ResponseLoadSnapshotChunk {
     return {
+      $type: ResponseLoadSnapshotChunk.$type,
       chunk: isSet(object.chunk)
         ? bytesFromBase64(object.chunk)
         : new Uint8Array(),
@@ -3714,11 +3986,23 @@ export const ResponseLoadSnapshotChunk = {
   },
 };
 
+messageTypeRegistry.set(
+  ResponseLoadSnapshotChunk.$type,
+  ResponseLoadSnapshotChunk
+);
+
 function createBaseResponseApplySnapshotChunk(): ResponseApplySnapshotChunk {
-  return { result: 0, refetchChunks: [], rejectSenders: [] };
+  return {
+    $type: "tendermint.abci.ResponseApplySnapshotChunk",
+    result: 0,
+    refetchChunks: [],
+    rejectSenders: [],
+  };
 }
 
 export const ResponseApplySnapshotChunk = {
+  $type: "tendermint.abci.ResponseApplySnapshotChunk" as const,
+
   encode(
     message: ResponseApplySnapshotChunk,
     writer: _m0.Writer = _m0.Writer.create()
@@ -3773,6 +4057,7 @@ export const ResponseApplySnapshotChunk = {
 
   fromJSON(object: any): ResponseApplySnapshotChunk {
     return {
+      $type: ResponseApplySnapshotChunk.$type,
       result: isSet(object.result)
         ? responseApplySnapshotChunk_ResultFromJSON(object.result)
         : 0,
@@ -3813,8 +4098,14 @@ export const ResponseApplySnapshotChunk = {
   },
 };
 
+messageTypeRegistry.set(
+  ResponseApplySnapshotChunk.$type,
+  ResponseApplySnapshotChunk
+);
+
 function createBaseConsensusParams(): ConsensusParams {
   return {
+    $type: "tendermint.abci.ConsensusParams",
     block: undefined,
     evidence: undefined,
     validator: undefined,
@@ -3823,6 +4114,8 @@ function createBaseConsensusParams(): ConsensusParams {
 }
 
 export const ConsensusParams = {
+  $type: "tendermint.abci.ConsensusParams" as const,
+
   encode(
     message: ConsensusParams,
     writer: _m0.Writer = _m0.Writer.create()
@@ -3877,6 +4170,7 @@ export const ConsensusParams = {
 
   fromJSON(object: any): ConsensusParams {
     return {
+      $type: ConsensusParams.$type,
       block: isSet(object.block)
         ? BlockParams.fromJSON(object.block)
         : undefined,
@@ -3937,11 +4231,19 @@ export const ConsensusParams = {
   },
 };
 
+messageTypeRegistry.set(ConsensusParams.$type, ConsensusParams);
+
 function createBaseBlockParams(): BlockParams {
-  return { maxBytes: Long.ZERO, maxGas: Long.ZERO };
+  return {
+    $type: "tendermint.abci.BlockParams",
+    maxBytes: Long.ZERO,
+    maxGas: Long.ZERO,
+  };
 }
 
 export const BlockParams = {
+  $type: "tendermint.abci.BlockParams" as const,
+
   encode(
     message: BlockParams,
     writer: _m0.Writer = _m0.Writer.create()
@@ -3978,6 +4280,7 @@ export const BlockParams = {
 
   fromJSON(object: any): BlockParams {
     return {
+      $type: BlockParams.$type,
       maxBytes: isSet(object.maxBytes)
         ? Long.fromString(object.maxBytes)
         : Long.ZERO,
@@ -4010,11 +4313,15 @@ export const BlockParams = {
   },
 };
 
+messageTypeRegistry.set(BlockParams.$type, BlockParams);
+
 function createBaseLastCommitInfo(): LastCommitInfo {
-  return { round: 0, votes: [] };
+  return { $type: "tendermint.abci.LastCommitInfo", round: 0, votes: [] };
 }
 
 export const LastCommitInfo = {
+  $type: "tendermint.abci.LastCommitInfo" as const,
+
   encode(
     message: LastCommitInfo,
     writer: _m0.Writer = _m0.Writer.create()
@@ -4051,6 +4358,7 @@ export const LastCommitInfo = {
 
   fromJSON(object: any): LastCommitInfo {
     return {
+      $type: LastCommitInfo.$type,
       round: isSet(object.round) ? Number(object.round) : 0,
       votes: Array.isArray(object?.votes)
         ? object.votes.map((e: any) => VoteInfo.fromJSON(e))
@@ -4081,11 +4389,15 @@ export const LastCommitInfo = {
   },
 };
 
+messageTypeRegistry.set(LastCommitInfo.$type, LastCommitInfo);
+
 function createBaseEvent(): Event {
-  return { type: "", attributes: [] };
+  return { $type: "tendermint.abci.Event", type: "", attributes: [] };
 }
 
 export const Event = {
+  $type: "tendermint.abci.Event" as const,
+
   encode(message: Event, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== "") {
       writer.uint32(10).string(message.type);
@@ -4121,6 +4433,7 @@ export const Event = {
 
   fromJSON(object: any): Event {
     return {
+      $type: Event.$type,
       type: isSet(object.type) ? String(object.type) : "",
       attributes: Array.isArray(object?.attributes)
         ? object.attributes.map((e: any) => EventAttribute.fromJSON(e))
@@ -4150,11 +4463,20 @@ export const Event = {
   },
 };
 
+messageTypeRegistry.set(Event.$type, Event);
+
 function createBaseEventAttribute(): EventAttribute {
-  return { key: new Uint8Array(), value: new Uint8Array(), index: false };
+  return {
+    $type: "tendermint.abci.EventAttribute",
+    key: new Uint8Array(),
+    value: new Uint8Array(),
+    index: false,
+  };
 }
 
 export const EventAttribute = {
+  $type: "tendermint.abci.EventAttribute" as const,
+
   encode(
     message: EventAttribute,
     writer: _m0.Writer = _m0.Writer.create()
@@ -4197,6 +4519,7 @@ export const EventAttribute = {
 
   fromJSON(object: any): EventAttribute {
     return {
+      $type: EventAttribute.$type,
       key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
       value: isSet(object.value)
         ? bytesFromBase64(object.value)
@@ -4230,8 +4553,11 @@ export const EventAttribute = {
   },
 };
 
+messageTypeRegistry.set(EventAttribute.$type, EventAttribute);
+
 function createBaseTxResult(): TxResult {
   return {
+    $type: "tendermint.abci.TxResult",
     height: Long.ZERO,
     index: 0,
     tx: new Uint8Array(),
@@ -4240,6 +4566,8 @@ function createBaseTxResult(): TxResult {
 }
 
 export const TxResult = {
+  $type: "tendermint.abci.TxResult" as const,
+
   encode(
     message: TxResult,
     writer: _m0.Writer = _m0.Writer.create()
@@ -4291,6 +4619,7 @@ export const TxResult = {
 
   fromJSON(object: any): TxResult {
     return {
+      $type: TxResult.$type,
       height: isSet(object.height) ? Long.fromString(object.height) : Long.ZERO,
       index: isSet(object.index) ? Number(object.index) : 0,
       tx: isSet(object.tx) ? bytesFromBase64(object.tx) : new Uint8Array(),
@@ -4332,11 +4661,19 @@ export const TxResult = {
   },
 };
 
+messageTypeRegistry.set(TxResult.$type, TxResult);
+
 function createBaseValidator(): Validator {
-  return { address: new Uint8Array(), power: Long.ZERO };
+  return {
+    $type: "tendermint.abci.Validator",
+    address: new Uint8Array(),
+    power: Long.ZERO,
+  };
 }
 
 export const Validator = {
+  $type: "tendermint.abci.Validator" as const,
+
   encode(
     message: Validator,
     writer: _m0.Writer = _m0.Writer.create()
@@ -4373,6 +4710,7 @@ export const Validator = {
 
   fromJSON(object: any): Validator {
     return {
+      $type: Validator.$type,
       address: isSet(object.address)
         ? bytesFromBase64(object.address)
         : new Uint8Array(),
@@ -4404,11 +4742,19 @@ export const Validator = {
   },
 };
 
+messageTypeRegistry.set(Validator.$type, Validator);
+
 function createBaseValidatorUpdate(): ValidatorUpdate {
-  return { pubKey: undefined, power: Long.ZERO };
+  return {
+    $type: "tendermint.abci.ValidatorUpdate",
+    pubKey: undefined,
+    power: Long.ZERO,
+  };
 }
 
 export const ValidatorUpdate = {
+  $type: "tendermint.abci.ValidatorUpdate" as const,
+
   encode(
     message: ValidatorUpdate,
     writer: _m0.Writer = _m0.Writer.create()
@@ -4445,6 +4791,7 @@ export const ValidatorUpdate = {
 
   fromJSON(object: any): ValidatorUpdate {
     return {
+      $type: ValidatorUpdate.$type,
       pubKey: isSet(object.pubKey)
         ? PublicKey.fromJSON(object.pubKey)
         : undefined,
@@ -4479,11 +4826,19 @@ export const ValidatorUpdate = {
   },
 };
 
+messageTypeRegistry.set(ValidatorUpdate.$type, ValidatorUpdate);
+
 function createBaseVoteInfo(): VoteInfo {
-  return { validator: undefined, signedLastBlock: false };
+  return {
+    $type: "tendermint.abci.VoteInfo",
+    validator: undefined,
+    signedLastBlock: false,
+  };
 }
 
 export const VoteInfo = {
+  $type: "tendermint.abci.VoteInfo" as const,
+
   encode(
     message: VoteInfo,
     writer: _m0.Writer = _m0.Writer.create()
@@ -4520,6 +4875,7 @@ export const VoteInfo = {
 
   fromJSON(object: any): VoteInfo {
     return {
+      $type: VoteInfo.$type,
       validator: isSet(object.validator)
         ? Validator.fromJSON(object.validator)
         : undefined,
@@ -4551,8 +4907,11 @@ export const VoteInfo = {
   },
 };
 
+messageTypeRegistry.set(VoteInfo.$type, VoteInfo);
+
 function createBaseEvidence(): Evidence {
   return {
+    $type: "tendermint.abci.Evidence",
     type: 0,
     validator: undefined,
     height: Long.ZERO,
@@ -4562,6 +4921,8 @@ function createBaseEvidence(): Evidence {
 }
 
 export const Evidence = {
+  $type: "tendermint.abci.Evidence" as const,
+
   encode(
     message: Evidence,
     writer: _m0.Writer = _m0.Writer.create()
@@ -4621,6 +4982,7 @@ export const Evidence = {
 
   fromJSON(object: any): Evidence {
     return {
+      $type: Evidence.$type,
       type: isSet(object.type) ? evidenceTypeFromJSON(object.type) : 0,
       validator: isSet(object.validator)
         ? Validator.fromJSON(object.validator)
@@ -4670,8 +5032,11 @@ export const Evidence = {
   },
 };
 
+messageTypeRegistry.set(Evidence.$type, Evidence);
+
 function createBaseSnapshot(): Snapshot {
   return {
+    $type: "tendermint.abci.Snapshot",
     height: Long.UZERO,
     format: 0,
     chunks: 0,
@@ -4681,6 +5046,8 @@ function createBaseSnapshot(): Snapshot {
 }
 
 export const Snapshot = {
+  $type: "tendermint.abci.Snapshot" as const,
+
   encode(
     message: Snapshot,
     writer: _m0.Writer = _m0.Writer.create()
@@ -4735,6 +5102,7 @@ export const Snapshot = {
 
   fromJSON(object: any): Snapshot {
     return {
+      $type: Snapshot.$type,
       height: isSet(object.height)
         ? Long.fromString(object.height)
         : Long.UZERO,
@@ -4779,6 +5147,8 @@ export const Snapshot = {
     return message;
   },
 };
+
+messageTypeRegistry.set(Snapshot.$type, Snapshot);
 
 export interface ABCIApplication {
   Echo(request: RequestEcho): Promise<ResponseEcho>;
@@ -5055,21 +5425,21 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = (date.getTime() % 1_000) * 1_000_000;
-  return { seconds, nanos };
+  return { $type: "google.protobuf.Timestamp", seconds, nanos };
 }
 
 function fromTimestamp(t: Timestamp): Date {

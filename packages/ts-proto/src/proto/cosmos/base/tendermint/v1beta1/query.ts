@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import {
@@ -14,80 +15,97 @@ export const protobufPackage = "cosmos.base.tendermint.v1beta1";
 
 /** GetValidatorSetByHeightRequest is the request type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetValidatorSetByHeightRequest {
+  $type: "cosmos.base.tendermint.v1beta1.GetValidatorSetByHeightRequest";
   height: Long;
   /** pagination defines an pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 
 /** GetValidatorSetByHeightResponse is the response type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetValidatorSetByHeightResponse {
+  $type: "cosmos.base.tendermint.v1beta1.GetValidatorSetByHeightResponse";
   blockHeight: Long;
   validators: Validator[];
   /** pagination defines an pagination for the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 
 /** GetLatestValidatorSetRequest is the request type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetLatestValidatorSetRequest {
+  $type: "cosmos.base.tendermint.v1beta1.GetLatestValidatorSetRequest";
   /** pagination defines an pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 
 /** GetLatestValidatorSetResponse is the response type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetLatestValidatorSetResponse {
+  $type: "cosmos.base.tendermint.v1beta1.GetLatestValidatorSetResponse";
   blockHeight: Long;
   validators: Validator[];
   /** pagination defines an pagination for the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 
 /** Validator is the type for the validator-set. */
 export interface Validator {
+  $type: "cosmos.base.tendermint.v1beta1.Validator";
   address: string;
-  pubKey?: Any;
+  pubKey: Any;
   votingPower: Long;
   proposerPriority: Long;
 }
 
 /** GetBlockByHeightRequest is the request type for the Query/GetBlockByHeight RPC method. */
 export interface GetBlockByHeightRequest {
+  $type: "cosmos.base.tendermint.v1beta1.GetBlockByHeightRequest";
   height: Long;
 }
 
 /** GetBlockByHeightResponse is the response type for the Query/GetBlockByHeight RPC method. */
 export interface GetBlockByHeightResponse {
-  blockId?: BlockID;
-  block?: Block;
+  $type: "cosmos.base.tendermint.v1beta1.GetBlockByHeightResponse";
+  blockId: BlockID;
+  block: Block;
 }
 
 /** GetLatestBlockRequest is the request type for the Query/GetLatestBlock RPC method. */
-export interface GetLatestBlockRequest {}
+export interface GetLatestBlockRequest {
+  $type: "cosmos.base.tendermint.v1beta1.GetLatestBlockRequest";
+}
 
 /** GetLatestBlockResponse is the response type for the Query/GetLatestBlock RPC method. */
 export interface GetLatestBlockResponse {
-  blockId?: BlockID;
-  block?: Block;
+  $type: "cosmos.base.tendermint.v1beta1.GetLatestBlockResponse";
+  blockId: BlockID;
+  block: Block;
 }
 
 /** GetSyncingRequest is the request type for the Query/GetSyncing RPC method. */
-export interface GetSyncingRequest {}
+export interface GetSyncingRequest {
+  $type: "cosmos.base.tendermint.v1beta1.GetSyncingRequest";
+}
 
 /** GetSyncingResponse is the response type for the Query/GetSyncing RPC method. */
 export interface GetSyncingResponse {
+  $type: "cosmos.base.tendermint.v1beta1.GetSyncingResponse";
   syncing: boolean;
 }
 
 /** GetNodeInfoRequest is the request type for the Query/GetNodeInfo RPC method. */
-export interface GetNodeInfoRequest {}
+export interface GetNodeInfoRequest {
+  $type: "cosmos.base.tendermint.v1beta1.GetNodeInfoRequest";
+}
 
 /** GetNodeInfoResponse is the response type for the Query/GetNodeInfo RPC method. */
 export interface GetNodeInfoResponse {
-  nodeInfo?: NodeInfo;
-  applicationVersion?: VersionInfo;
+  $type: "cosmos.base.tendermint.v1beta1.GetNodeInfoResponse";
+  nodeInfo: NodeInfo;
+  applicationVersion: VersionInfo;
 }
 
 /** VersionInfo is the type for the GetNodeInfoResponse message. */
 export interface VersionInfo {
+  $type: "cosmos.base.tendermint.v1beta1.VersionInfo";
   name: string;
   appName: string;
   version: string;
@@ -101,6 +119,7 @@ export interface VersionInfo {
 
 /** Module is the type for VersionInfo */
 export interface Module {
+  $type: "cosmos.base.tendermint.v1beta1.Module";
   /** module path */
   path: string;
   /** module version */
@@ -110,10 +129,17 @@ export interface Module {
 }
 
 function createBaseGetValidatorSetByHeightRequest(): GetValidatorSetByHeightRequest {
-  return { height: Long.ZERO, pagination: undefined };
+  return {
+    $type: "cosmos.base.tendermint.v1beta1.GetValidatorSetByHeightRequest",
+    height: Long.ZERO,
+    pagination: undefined,
+  };
 }
 
 export const GetValidatorSetByHeightRequest = {
+  $type:
+    "cosmos.base.tendermint.v1beta1.GetValidatorSetByHeightRequest" as const,
+
   encode(
     message: GetValidatorSetByHeightRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -153,6 +179,7 @@ export const GetValidatorSetByHeightRequest = {
 
   fromJSON(object: any): GetValidatorSetByHeightRequest {
     return {
+      $type: GetValidatorSetByHeightRequest.$type,
       height: isSet(object.height) ? Long.fromString(object.height) : Long.ZERO,
       pagination: isSet(object.pagination)
         ? PageRequest.fromJSON(object.pagination)
@@ -187,11 +214,24 @@ export const GetValidatorSetByHeightRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  GetValidatorSetByHeightRequest.$type,
+  GetValidatorSetByHeightRequest
+);
+
 function createBaseGetValidatorSetByHeightResponse(): GetValidatorSetByHeightResponse {
-  return { blockHeight: Long.ZERO, validators: [], pagination: undefined };
+  return {
+    $type: "cosmos.base.tendermint.v1beta1.GetValidatorSetByHeightResponse",
+    blockHeight: Long.ZERO,
+    validators: [],
+    pagination: undefined,
+  };
 }
 
 export const GetValidatorSetByHeightResponse = {
+  $type:
+    "cosmos.base.tendermint.v1beta1.GetValidatorSetByHeightResponse" as const,
+
   encode(
     message: GetValidatorSetByHeightResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -240,6 +280,7 @@ export const GetValidatorSetByHeightResponse = {
 
   fromJSON(object: any): GetValidatorSetByHeightResponse {
     return {
+      $type: GetValidatorSetByHeightResponse.$type,
       blockHeight: isSet(object.blockHeight)
         ? Long.fromString(object.blockHeight)
         : Long.ZERO,
@@ -288,11 +329,21 @@ export const GetValidatorSetByHeightResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  GetValidatorSetByHeightResponse.$type,
+  GetValidatorSetByHeightResponse
+);
+
 function createBaseGetLatestValidatorSetRequest(): GetLatestValidatorSetRequest {
-  return { pagination: undefined };
+  return {
+    $type: "cosmos.base.tendermint.v1beta1.GetLatestValidatorSetRequest",
+    pagination: undefined,
+  };
 }
 
 export const GetLatestValidatorSetRequest = {
+  $type: "cosmos.base.tendermint.v1beta1.GetLatestValidatorSetRequest" as const,
+
   encode(
     message: GetLatestValidatorSetRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -326,6 +377,7 @@ export const GetLatestValidatorSetRequest = {
 
   fromJSON(object: any): GetLatestValidatorSetRequest {
     return {
+      $type: GetLatestValidatorSetRequest.$type,
       pagination: isSet(object.pagination)
         ? PageRequest.fromJSON(object.pagination)
         : undefined,
@@ -353,11 +405,24 @@ export const GetLatestValidatorSetRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  GetLatestValidatorSetRequest.$type,
+  GetLatestValidatorSetRequest
+);
+
 function createBaseGetLatestValidatorSetResponse(): GetLatestValidatorSetResponse {
-  return { blockHeight: Long.ZERO, validators: [], pagination: undefined };
+  return {
+    $type: "cosmos.base.tendermint.v1beta1.GetLatestValidatorSetResponse",
+    blockHeight: Long.ZERO,
+    validators: [],
+    pagination: undefined,
+  };
 }
 
 export const GetLatestValidatorSetResponse = {
+  $type:
+    "cosmos.base.tendermint.v1beta1.GetLatestValidatorSetResponse" as const,
+
   encode(
     message: GetLatestValidatorSetResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -406,6 +471,7 @@ export const GetLatestValidatorSetResponse = {
 
   fromJSON(object: any): GetLatestValidatorSetResponse {
     return {
+      $type: GetLatestValidatorSetResponse.$type,
       blockHeight: isSet(object.blockHeight)
         ? Long.fromString(object.blockHeight)
         : Long.ZERO,
@@ -454,8 +520,14 @@ export const GetLatestValidatorSetResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  GetLatestValidatorSetResponse.$type,
+  GetLatestValidatorSetResponse
+);
+
 function createBaseValidator(): Validator {
   return {
+    $type: "cosmos.base.tendermint.v1beta1.Validator",
     address: "",
     pubKey: undefined,
     votingPower: Long.ZERO,
@@ -464,6 +536,8 @@ function createBaseValidator(): Validator {
 }
 
 export const Validator = {
+  $type: "cosmos.base.tendermint.v1beta1.Validator" as const,
+
   encode(
     message: Validator,
     writer: _m0.Writer = _m0.Writer.create()
@@ -512,6 +586,7 @@ export const Validator = {
 
   fromJSON(object: any): Validator {
     return {
+      $type: Validator.$type,
       address: isSet(object.address) ? String(object.address) : "",
       pubKey: isSet(object.pubKey) ? Any.fromJSON(object.pubKey) : undefined,
       votingPower: isSet(object.votingPower)
@@ -558,11 +633,18 @@ export const Validator = {
   },
 };
 
+messageTypeRegistry.set(Validator.$type, Validator);
+
 function createBaseGetBlockByHeightRequest(): GetBlockByHeightRequest {
-  return { height: Long.ZERO };
+  return {
+    $type: "cosmos.base.tendermint.v1beta1.GetBlockByHeightRequest",
+    height: Long.ZERO,
+  };
 }
 
 export const GetBlockByHeightRequest = {
+  $type: "cosmos.base.tendermint.v1beta1.GetBlockByHeightRequest" as const,
+
   encode(
     message: GetBlockByHeightRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -596,6 +678,7 @@ export const GetBlockByHeightRequest = {
 
   fromJSON(object: any): GetBlockByHeightRequest {
     return {
+      $type: GetBlockByHeightRequest.$type,
       height: isSet(object.height) ? Long.fromString(object.height) : Long.ZERO,
     };
   },
@@ -619,11 +702,19 @@ export const GetBlockByHeightRequest = {
   },
 };
 
+messageTypeRegistry.set(GetBlockByHeightRequest.$type, GetBlockByHeightRequest);
+
 function createBaseGetBlockByHeightResponse(): GetBlockByHeightResponse {
-  return { blockId: undefined, block: undefined };
+  return {
+    $type: "cosmos.base.tendermint.v1beta1.GetBlockByHeightResponse",
+    blockId: undefined,
+    block: undefined,
+  };
 }
 
 export const GetBlockByHeightResponse = {
+  $type: "cosmos.base.tendermint.v1beta1.GetBlockByHeightResponse" as const,
+
   encode(
     message: GetBlockByHeightResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -663,6 +754,7 @@ export const GetBlockByHeightResponse = {
 
   fromJSON(object: any): GetBlockByHeightResponse {
     return {
+      $type: GetBlockByHeightResponse.$type,
       blockId: isSet(object.blockId)
         ? BlockID.fromJSON(object.blockId)
         : undefined,
@@ -697,11 +789,18 @@ export const GetBlockByHeightResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  GetBlockByHeightResponse.$type,
+  GetBlockByHeightResponse
+);
+
 function createBaseGetLatestBlockRequest(): GetLatestBlockRequest {
-  return {};
+  return { $type: "cosmos.base.tendermint.v1beta1.GetLatestBlockRequest" };
 }
 
 export const GetLatestBlockRequest = {
+  $type: "cosmos.base.tendermint.v1beta1.GetLatestBlockRequest" as const,
+
   encode(
     _: GetLatestBlockRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -728,7 +827,9 @@ export const GetLatestBlockRequest = {
   },
 
   fromJSON(_: any): GetLatestBlockRequest {
-    return {};
+    return {
+      $type: GetLatestBlockRequest.$type,
+    };
   },
 
   toJSON(_: GetLatestBlockRequest): unknown {
@@ -744,11 +845,19 @@ export const GetLatestBlockRequest = {
   },
 };
 
+messageTypeRegistry.set(GetLatestBlockRequest.$type, GetLatestBlockRequest);
+
 function createBaseGetLatestBlockResponse(): GetLatestBlockResponse {
-  return { blockId: undefined, block: undefined };
+  return {
+    $type: "cosmos.base.tendermint.v1beta1.GetLatestBlockResponse",
+    blockId: undefined,
+    block: undefined,
+  };
 }
 
 export const GetLatestBlockResponse = {
+  $type: "cosmos.base.tendermint.v1beta1.GetLatestBlockResponse" as const,
+
   encode(
     message: GetLatestBlockResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -788,6 +897,7 @@ export const GetLatestBlockResponse = {
 
   fromJSON(object: any): GetLatestBlockResponse {
     return {
+      $type: GetLatestBlockResponse.$type,
       blockId: isSet(object.blockId)
         ? BlockID.fromJSON(object.blockId)
         : undefined,
@@ -822,11 +932,15 @@ export const GetLatestBlockResponse = {
   },
 };
 
+messageTypeRegistry.set(GetLatestBlockResponse.$type, GetLatestBlockResponse);
+
 function createBaseGetSyncingRequest(): GetSyncingRequest {
-  return {};
+  return { $type: "cosmos.base.tendermint.v1beta1.GetSyncingRequest" };
 }
 
 export const GetSyncingRequest = {
+  $type: "cosmos.base.tendermint.v1beta1.GetSyncingRequest" as const,
+
   encode(
     _: GetSyncingRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -850,7 +964,9 @@ export const GetSyncingRequest = {
   },
 
   fromJSON(_: any): GetSyncingRequest {
-    return {};
+    return {
+      $type: GetSyncingRequest.$type,
+    };
   },
 
   toJSON(_: GetSyncingRequest): unknown {
@@ -866,11 +982,18 @@ export const GetSyncingRequest = {
   },
 };
 
+messageTypeRegistry.set(GetSyncingRequest.$type, GetSyncingRequest);
+
 function createBaseGetSyncingResponse(): GetSyncingResponse {
-  return { syncing: false };
+  return {
+    $type: "cosmos.base.tendermint.v1beta1.GetSyncingResponse",
+    syncing: false,
+  };
 }
 
 export const GetSyncingResponse = {
+  $type: "cosmos.base.tendermint.v1beta1.GetSyncingResponse" as const,
+
   encode(
     message: GetSyncingResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -901,6 +1024,7 @@ export const GetSyncingResponse = {
 
   fromJSON(object: any): GetSyncingResponse {
     return {
+      $type: GetSyncingResponse.$type,
       syncing: isSet(object.syncing) ? Boolean(object.syncing) : false,
     };
   },
@@ -920,11 +1044,15 @@ export const GetSyncingResponse = {
   },
 };
 
+messageTypeRegistry.set(GetSyncingResponse.$type, GetSyncingResponse);
+
 function createBaseGetNodeInfoRequest(): GetNodeInfoRequest {
-  return {};
+  return { $type: "cosmos.base.tendermint.v1beta1.GetNodeInfoRequest" };
 }
 
 export const GetNodeInfoRequest = {
+  $type: "cosmos.base.tendermint.v1beta1.GetNodeInfoRequest" as const,
+
   encode(
     _: GetNodeInfoRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -948,7 +1076,9 @@ export const GetNodeInfoRequest = {
   },
 
   fromJSON(_: any): GetNodeInfoRequest {
-    return {};
+    return {
+      $type: GetNodeInfoRequest.$type,
+    };
   },
 
   toJSON(_: GetNodeInfoRequest): unknown {
@@ -964,11 +1094,19 @@ export const GetNodeInfoRequest = {
   },
 };
 
+messageTypeRegistry.set(GetNodeInfoRequest.$type, GetNodeInfoRequest);
+
 function createBaseGetNodeInfoResponse(): GetNodeInfoResponse {
-  return { nodeInfo: undefined, applicationVersion: undefined };
+  return {
+    $type: "cosmos.base.tendermint.v1beta1.GetNodeInfoResponse",
+    nodeInfo: undefined,
+    applicationVersion: undefined,
+  };
 }
 
 export const GetNodeInfoResponse = {
+  $type: "cosmos.base.tendermint.v1beta1.GetNodeInfoResponse" as const,
+
   encode(
     message: GetNodeInfoResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1011,6 +1149,7 @@ export const GetNodeInfoResponse = {
 
   fromJSON(object: any): GetNodeInfoResponse {
     return {
+      $type: GetNodeInfoResponse.$type,
       nodeInfo: isSet(object.nodeInfo)
         ? NodeInfo.fromJSON(object.nodeInfo)
         : undefined,
@@ -1050,8 +1189,11 @@ export const GetNodeInfoResponse = {
   },
 };
 
+messageTypeRegistry.set(GetNodeInfoResponse.$type, GetNodeInfoResponse);
+
 function createBaseVersionInfo(): VersionInfo {
   return {
+    $type: "cosmos.base.tendermint.v1beta1.VersionInfo",
     name: "",
     appName: "",
     version: "",
@@ -1064,6 +1206,8 @@ function createBaseVersionInfo(): VersionInfo {
 }
 
 export const VersionInfo = {
+  $type: "cosmos.base.tendermint.v1beta1.VersionInfo" as const,
+
   encode(
     message: VersionInfo,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1136,6 +1280,7 @@ export const VersionInfo = {
 
   fromJSON(object: any): VersionInfo {
     return {
+      $type: VersionInfo.$type,
       name: isSet(object.name) ? String(object.name) : "",
       appName: isSet(object.appName) ? String(object.appName) : "",
       version: isSet(object.version) ? String(object.version) : "",
@@ -1188,11 +1333,20 @@ export const VersionInfo = {
   },
 };
 
+messageTypeRegistry.set(VersionInfo.$type, VersionInfo);
+
 function createBaseModule(): Module {
-  return { path: "", version: "", sum: "" };
+  return {
+    $type: "cosmos.base.tendermint.v1beta1.Module",
+    path: "",
+    version: "",
+    sum: "",
+  };
 }
 
 export const Module = {
+  $type: "cosmos.base.tendermint.v1beta1.Module" as const,
+
   encode(
     message: Module,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1235,6 +1389,7 @@ export const Module = {
 
   fromJSON(object: any): Module {
     return {
+      $type: Module.$type,
       path: isSet(object.path) ? String(object.path) : "",
       version: isSet(object.version) ? String(object.version) : "",
       sum: isSet(object.sum) ? String(object.sum) : "",
@@ -1257,6 +1412,8 @@ export const Module = {
     return message;
   },
 };
+
+messageTypeRegistry.set(Module.$type, Module);
 
 /** Service defines the gRPC querier service for tendermint queries. */
 export interface Service {
@@ -1400,14 +1557,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

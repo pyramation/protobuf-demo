@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 
@@ -56,6 +57,7 @@ export const protobufPackage = "google.api";
  *        value_type: INT64
  */
 export interface Quota {
+  $type: "google.api.Quota";
   /** List of `QuotaLimit` definitions for the service. */
   limits: QuotaLimit[];
   /**
@@ -70,6 +72,7 @@ export interface Quota {
  * metric's configured quota behaviors to apply to the method call.
  */
 export interface MetricRule {
+  $type: "google.api.MetricRule";
   /**
    * Selects the methods to which this rule applies.
    *
@@ -88,6 +91,7 @@ export interface MetricRule {
 }
 
 export interface MetricRule_MetricCostsEntry {
+  $type: "google.api.MetricRule.MetricCostsEntry";
   key: string;
   value: Long;
 }
@@ -98,6 +102,7 @@ export interface MetricRule_MetricCostsEntry {
  * type combination defined within a `QuotaGroup`.
  */
 export interface QuotaLimit {
+  $type: "google.api.QuotaLimit";
   /**
    * Name of the quota limit.
    *
@@ -189,15 +194,18 @@ export interface QuotaLimit {
 }
 
 export interface QuotaLimit_ValuesEntry {
+  $type: "google.api.QuotaLimit.ValuesEntry";
   key: string;
   value: Long;
 }
 
 function createBaseQuota(): Quota {
-  return { limits: [], metricRules: [] };
+  return { $type: "google.api.Quota", limits: [], metricRules: [] };
 }
 
 export const Quota = {
+  $type: "google.api.Quota" as const,
+
   encode(message: Quota, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.limits) {
       QuotaLimit.encode(v!, writer.uint32(26).fork()).ldelim();
@@ -231,6 +239,7 @@ export const Quota = {
 
   fromJSON(object: any): Quota {
     return {
+      $type: Quota.$type,
       limits: Array.isArray(object?.limits)
         ? object.limits.map((e: any) => QuotaLimit.fromJSON(e))
         : [],
@@ -268,11 +277,15 @@ export const Quota = {
   },
 };
 
+messageTypeRegistry.set(Quota.$type, Quota);
+
 function createBaseMetricRule(): MetricRule {
-  return { selector: "", metricCosts: {} };
+  return { $type: "google.api.MetricRule", selector: "", metricCosts: {} };
 }
 
 export const MetricRule = {
+  $type: "google.api.MetricRule" as const,
+
   encode(
     message: MetricRule,
     writer: _m0.Writer = _m0.Writer.create()
@@ -282,7 +295,11 @@ export const MetricRule = {
     }
     Object.entries(message.metricCosts).forEach(([key, value]) => {
       MetricRule_MetricCostsEntry.encode(
-        { key: key as any, value },
+        {
+          $type: "google.api.MetricRule.MetricCostsEntry",
+          key: key as any,
+          value,
+        },
         writer.uint32(18).fork()
       ).ldelim();
     });
@@ -318,6 +335,7 @@ export const MetricRule = {
 
   fromJSON(object: any): MetricRule {
     return {
+      $type: MetricRule.$type,
       selector: isSet(object.selector) ? String(object.selector) : "",
       metricCosts: isObject(object.metricCosts)
         ? Object.entries(object.metricCosts).reduce<{ [key: string]: Long }>(
@@ -360,11 +378,19 @@ export const MetricRule = {
   },
 };
 
+messageTypeRegistry.set(MetricRule.$type, MetricRule);
+
 function createBaseMetricRule_MetricCostsEntry(): MetricRule_MetricCostsEntry {
-  return { key: "", value: Long.ZERO };
+  return {
+    $type: "google.api.MetricRule.MetricCostsEntry",
+    key: "",
+    value: Long.ZERO,
+  };
 }
 
 export const MetricRule_MetricCostsEntry = {
+  $type: "google.api.MetricRule.MetricCostsEntry" as const,
+
   encode(
     message: MetricRule_MetricCostsEntry,
     writer: _m0.Writer = _m0.Writer.create()
@@ -404,6 +430,7 @@ export const MetricRule_MetricCostsEntry = {
 
   fromJSON(object: any): MetricRule_MetricCostsEntry {
     return {
+      $type: MetricRule_MetricCostsEntry.$type,
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? Long.fromString(object.value) : Long.ZERO,
     };
@@ -430,8 +457,14 @@ export const MetricRule_MetricCostsEntry = {
   },
 };
 
+messageTypeRegistry.set(
+  MetricRule_MetricCostsEntry.$type,
+  MetricRule_MetricCostsEntry
+);
+
 function createBaseQuotaLimit(): QuotaLimit {
   return {
+    $type: "google.api.QuotaLimit",
     name: "",
     description: "",
     defaultLimit: Long.ZERO,
@@ -446,6 +479,8 @@ function createBaseQuotaLimit(): QuotaLimit {
 }
 
 export const QuotaLimit = {
+  $type: "google.api.QuotaLimit" as const,
+
   encode(
     message: QuotaLimit,
     writer: _m0.Writer = _m0.Writer.create()
@@ -476,7 +511,7 @@ export const QuotaLimit = {
     }
     Object.entries(message.values).forEach(([key, value]) => {
       QuotaLimit_ValuesEntry.encode(
-        { key: key as any, value },
+        { $type: "google.api.QuotaLimit.ValuesEntry", key: key as any, value },
         writer.uint32(82).fork()
       ).ldelim();
     });
@@ -539,6 +574,7 @@ export const QuotaLimit = {
 
   fromJSON(object: any): QuotaLimit {
     return {
+      $type: QuotaLimit.$type,
       name: isSet(object.name) ? String(object.name) : "",
       description: isSet(object.description) ? String(object.description) : "",
       defaultLimit: isSet(object.defaultLimit)
@@ -625,11 +661,19 @@ export const QuotaLimit = {
   },
 };
 
+messageTypeRegistry.set(QuotaLimit.$type, QuotaLimit);
+
 function createBaseQuotaLimit_ValuesEntry(): QuotaLimit_ValuesEntry {
-  return { key: "", value: Long.ZERO };
+  return {
+    $type: "google.api.QuotaLimit.ValuesEntry",
+    key: "",
+    value: Long.ZERO,
+  };
 }
 
 export const QuotaLimit_ValuesEntry = {
+  $type: "google.api.QuotaLimit.ValuesEntry" as const,
+
   encode(
     message: QuotaLimit_ValuesEntry,
     writer: _m0.Writer = _m0.Writer.create()
@@ -669,6 +713,7 @@ export const QuotaLimit_ValuesEntry = {
 
   fromJSON(object: any): QuotaLimit_ValuesEntry {
     return {
+      $type: QuotaLimit_ValuesEntry.$type,
       key: isSet(object.key) ? String(object.key) : "",
       value: isSet(object.value) ? Long.fromString(object.value) : Long.ZERO,
     };
@@ -695,6 +740,8 @@ export const QuotaLimit_ValuesEntry = {
   },
 };
 
+messageTypeRegistry.set(QuotaLimit_ValuesEntry.$type, QuotaLimit_ValuesEntry);
+
 type Builtin =
   | Date
   | Function
@@ -713,14 +760,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

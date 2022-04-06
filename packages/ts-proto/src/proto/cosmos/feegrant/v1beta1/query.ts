@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Grant } from "../../../cosmos/feegrant/v1beta1/feegrant";
@@ -13,6 +14,7 @@ export const protobufPackage = "cosmos.feegrant.v1beta1";
 
 /** QueryAllowanceRequest is the request type for the Query/Allowance RPC method. */
 export interface QueryAllowanceRequest {
+  $type: "cosmos.feegrant.v1beta1.QueryAllowanceRequest";
   /** granter is the address of the user granting an allowance of their funds. */
   granter: string;
   /** grantee is the address of the user being granted an allowance of another user's funds. */
@@ -21,45 +23,56 @@ export interface QueryAllowanceRequest {
 
 /** QueryAllowanceResponse is the response type for the Query/Allowance RPC method. */
 export interface QueryAllowanceResponse {
+  $type: "cosmos.feegrant.v1beta1.QueryAllowanceResponse";
   /** allowance is a allowance granted for grantee by granter. */
-  allowance?: Grant;
+  allowance: Grant;
 }
 
 /** QueryAllowancesRequest is the request type for the Query/Allowances RPC method. */
 export interface QueryAllowancesRequest {
+  $type: "cosmos.feegrant.v1beta1.QueryAllowancesRequest";
   grantee: string;
   /** pagination defines an pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 
 /** QueryAllowancesResponse is the response type for the Query/Allowances RPC method. */
 export interface QueryAllowancesResponse {
+  $type: "cosmos.feegrant.v1beta1.QueryAllowancesResponse";
   /** allowances are allowance's granted for grantee by granter. */
   allowances: Grant[];
   /** pagination defines an pagination for the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 
 /** QueryAllowancesByGranterRequest is the request type for the Query/AllowancesByGranter RPC method. */
 export interface QueryAllowancesByGranterRequest {
+  $type: "cosmos.feegrant.v1beta1.QueryAllowancesByGranterRequest";
   granter: string;
   /** pagination defines an pagination for the request. */
-  pagination?: PageRequest;
+  pagination: PageRequest;
 }
 
 /** QueryAllowancesByGranterResponse is the response type for the Query/AllowancesByGranter RPC method. */
 export interface QueryAllowancesByGranterResponse {
+  $type: "cosmos.feegrant.v1beta1.QueryAllowancesByGranterResponse";
   /** allowances that have been issued by the granter. */
   allowances: Grant[];
   /** pagination defines an pagination for the response. */
-  pagination?: PageResponse;
+  pagination: PageResponse;
 }
 
 function createBaseQueryAllowanceRequest(): QueryAllowanceRequest {
-  return { granter: "", grantee: "" };
+  return {
+    $type: "cosmos.feegrant.v1beta1.QueryAllowanceRequest",
+    granter: "",
+    grantee: "",
+  };
 }
 
 export const QueryAllowanceRequest = {
+  $type: "cosmos.feegrant.v1beta1.QueryAllowanceRequest" as const,
+
   encode(
     message: QueryAllowanceRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -99,6 +112,7 @@ export const QueryAllowanceRequest = {
 
   fromJSON(object: any): QueryAllowanceRequest {
     return {
+      $type: QueryAllowanceRequest.$type,
       granter: isSet(object.granter) ? String(object.granter) : "",
       grantee: isSet(object.grantee) ? String(object.grantee) : "",
     };
@@ -121,11 +135,18 @@ export const QueryAllowanceRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryAllowanceRequest.$type, QueryAllowanceRequest);
+
 function createBaseQueryAllowanceResponse(): QueryAllowanceResponse {
-  return { allowance: undefined };
+  return {
+    $type: "cosmos.feegrant.v1beta1.QueryAllowanceResponse",
+    allowance: undefined,
+  };
 }
 
 export const QueryAllowanceResponse = {
+  $type: "cosmos.feegrant.v1beta1.QueryAllowanceResponse" as const,
+
   encode(
     message: QueryAllowanceResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -159,6 +180,7 @@ export const QueryAllowanceResponse = {
 
   fromJSON(object: any): QueryAllowanceResponse {
     return {
+      $type: QueryAllowanceResponse.$type,
       allowance: isSet(object.allowance)
         ? Grant.fromJSON(object.allowance)
         : undefined,
@@ -186,11 +208,19 @@ export const QueryAllowanceResponse = {
   },
 };
 
+messageTypeRegistry.set(QueryAllowanceResponse.$type, QueryAllowanceResponse);
+
 function createBaseQueryAllowancesRequest(): QueryAllowancesRequest {
-  return { grantee: "", pagination: undefined };
+  return {
+    $type: "cosmos.feegrant.v1beta1.QueryAllowancesRequest",
+    grantee: "",
+    pagination: undefined,
+  };
 }
 
 export const QueryAllowancesRequest = {
+  $type: "cosmos.feegrant.v1beta1.QueryAllowancesRequest" as const,
+
   encode(
     message: QueryAllowancesRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -230,6 +260,7 @@ export const QueryAllowancesRequest = {
 
   fromJSON(object: any): QueryAllowancesRequest {
     return {
+      $type: QueryAllowancesRequest.$type,
       grantee: isSet(object.grantee) ? String(object.grantee) : "",
       pagination: isSet(object.pagination)
         ? PageRequest.fromJSON(object.pagination)
@@ -260,11 +291,19 @@ export const QueryAllowancesRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryAllowancesRequest.$type, QueryAllowancesRequest);
+
 function createBaseQueryAllowancesResponse(): QueryAllowancesResponse {
-  return { allowances: [], pagination: undefined };
+  return {
+    $type: "cosmos.feegrant.v1beta1.QueryAllowancesResponse",
+    allowances: [],
+    pagination: undefined,
+  };
 }
 
 export const QueryAllowancesResponse = {
+  $type: "cosmos.feegrant.v1beta1.QueryAllowancesResponse" as const,
+
   encode(
     message: QueryAllowancesResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -307,6 +346,7 @@ export const QueryAllowancesResponse = {
 
   fromJSON(object: any): QueryAllowancesResponse {
     return {
+      $type: QueryAllowancesResponse.$type,
       allowances: Array.isArray(object?.allowances)
         ? object.allowances.map((e: any) => Grant.fromJSON(e))
         : [],
@@ -346,11 +386,19 @@ export const QueryAllowancesResponse = {
   },
 };
 
+messageTypeRegistry.set(QueryAllowancesResponse.$type, QueryAllowancesResponse);
+
 function createBaseQueryAllowancesByGranterRequest(): QueryAllowancesByGranterRequest {
-  return { granter: "", pagination: undefined };
+  return {
+    $type: "cosmos.feegrant.v1beta1.QueryAllowancesByGranterRequest",
+    granter: "",
+    pagination: undefined,
+  };
 }
 
 export const QueryAllowancesByGranterRequest = {
+  $type: "cosmos.feegrant.v1beta1.QueryAllowancesByGranterRequest" as const,
+
   encode(
     message: QueryAllowancesByGranterRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -390,6 +438,7 @@ export const QueryAllowancesByGranterRequest = {
 
   fromJSON(object: any): QueryAllowancesByGranterRequest {
     return {
+      $type: QueryAllowancesByGranterRequest.$type,
       granter: isSet(object.granter) ? String(object.granter) : "",
       pagination: isSet(object.pagination)
         ? PageRequest.fromJSON(object.pagination)
@@ -420,11 +469,22 @@ export const QueryAllowancesByGranterRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryAllowancesByGranterRequest.$type,
+  QueryAllowancesByGranterRequest
+);
+
 function createBaseQueryAllowancesByGranterResponse(): QueryAllowancesByGranterResponse {
-  return { allowances: [], pagination: undefined };
+  return {
+    $type: "cosmos.feegrant.v1beta1.QueryAllowancesByGranterResponse",
+    allowances: [],
+    pagination: undefined,
+  };
 }
 
 export const QueryAllowancesByGranterResponse = {
+  $type: "cosmos.feegrant.v1beta1.QueryAllowancesByGranterResponse" as const,
+
   encode(
     message: QueryAllowancesByGranterResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -467,6 +527,7 @@ export const QueryAllowancesByGranterResponse = {
 
   fromJSON(object: any): QueryAllowancesByGranterResponse {
     return {
+      $type: QueryAllowancesByGranterResponse.$type,
       allowances: Array.isArray(object?.allowances)
         ? object.allowances.map((e: any) => Grant.fromJSON(e))
         : [],
@@ -505,6 +566,11 @@ export const QueryAllowancesByGranterResponse = {
     return message;
   },
 };
+
+messageTypeRegistry.set(
+  QueryAllowancesByGranterResponse.$type,
+  QueryAllowancesByGranterResponse
+);
 
 /** Query defines the gRPC querier service. */
 export interface Query {
@@ -596,14 +662,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 
@@ -29,6 +30,7 @@ export const protobufPackage = "google.api";
  * EnhancedSearch and Delegate.
  */
 export interface Visibility {
+  $type: "google.api.Visibility";
   /**
    * A list of visibility rules that apply to individual API elements.
    *
@@ -42,6 +44,7 @@ export interface Visibility {
  * element.
  */
 export interface VisibilityRule {
+  $type: "google.api.VisibilityRule";
   /**
    * Selects methods, messages, fields, enums, etc. to which this rule applies.
    *
@@ -69,10 +72,12 @@ export interface VisibilityRule {
 }
 
 function createBaseVisibility(): Visibility {
-  return { rules: [] };
+  return { $type: "google.api.Visibility", rules: [] };
 }
 
 export const Visibility = {
+  $type: "google.api.Visibility" as const,
+
   encode(
     message: Visibility,
     writer: _m0.Writer = _m0.Writer.create()
@@ -103,6 +108,7 @@ export const Visibility = {
 
   fromJSON(object: any): Visibility {
     return {
+      $type: Visibility.$type,
       rules: Array.isArray(object?.rules)
         ? object.rules.map((e: any) => VisibilityRule.fromJSON(e))
         : [],
@@ -131,11 +137,15 @@ export const Visibility = {
   },
 };
 
+messageTypeRegistry.set(Visibility.$type, Visibility);
+
 function createBaseVisibilityRule(): VisibilityRule {
-  return { selector: "", restriction: "" };
+  return { $type: "google.api.VisibilityRule", selector: "", restriction: "" };
 }
 
 export const VisibilityRule = {
+  $type: "google.api.VisibilityRule" as const,
+
   encode(
     message: VisibilityRule,
     writer: _m0.Writer = _m0.Writer.create()
@@ -172,6 +182,7 @@ export const VisibilityRule = {
 
   fromJSON(object: any): VisibilityRule {
     return {
+      $type: VisibilityRule.$type,
       selector: isSet(object.selector) ? String(object.selector) : "",
       restriction: isSet(object.restriction) ? String(object.restriction) : "",
     };
@@ -195,6 +206,8 @@ export const VisibilityRule = {
   },
 };
 
+messageTypeRegistry.set(VisibilityRule.$type, VisibilityRule);
+
 type Builtin =
   | Date
   | Function
@@ -213,14 +226,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

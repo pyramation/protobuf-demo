@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 
@@ -6,6 +7,7 @@ export const protobufPackage = "google.api.expr.v1beta1";
 
 /** Source information collected at parse time. */
 export interface SourceInfo {
+  $type: "google.api.expr.v1beta1.SourceInfo";
   /**
    * The location name. All position information attached to an expression is
    * relative to this location.
@@ -30,12 +32,14 @@ export interface SourceInfo {
 }
 
 export interface SourceInfo_PositionsEntry {
+  $type: "google.api.expr.v1beta1.SourceInfo.PositionsEntry";
   key: number;
   value: number;
 }
 
 /** A specific position in source. */
 export interface SourcePosition {
+  $type: "google.api.expr.v1beta1.SourcePosition";
   /** The soucre location name (e.g. file name). */
   location: string;
   /** The character offset. */
@@ -53,10 +57,17 @@ export interface SourcePosition {
 }
 
 function createBaseSourceInfo(): SourceInfo {
-  return { location: "", lineOffsets: [], positions: {} };
+  return {
+    $type: "google.api.expr.v1beta1.SourceInfo",
+    location: "",
+    lineOffsets: [],
+    positions: {},
+  };
 }
 
 export const SourceInfo = {
+  $type: "google.api.expr.v1beta1.SourceInfo" as const,
+
   encode(
     message: SourceInfo,
     writer: _m0.Writer = _m0.Writer.create()
@@ -71,7 +82,11 @@ export const SourceInfo = {
     writer.ldelim();
     Object.entries(message.positions).forEach(([key, value]) => {
       SourceInfo_PositionsEntry.encode(
-        { key: key as any, value },
+        {
+          $type: "google.api.expr.v1beta1.SourceInfo.PositionsEntry",
+          key: key as any,
+          value,
+        },
         writer.uint32(34).fork()
       ).ldelim();
     });
@@ -117,6 +132,7 @@ export const SourceInfo = {
 
   fromJSON(object: any): SourceInfo {
     return {
+      $type: SourceInfo.$type,
       location: isSet(object.location) ? String(object.location) : "",
       lineOffsets: Array.isArray(object?.lineOffsets)
         ? object.lineOffsets.map((e: any) => Number(e))
@@ -168,11 +184,19 @@ export const SourceInfo = {
   },
 };
 
+messageTypeRegistry.set(SourceInfo.$type, SourceInfo);
+
 function createBaseSourceInfo_PositionsEntry(): SourceInfo_PositionsEntry {
-  return { key: 0, value: 0 };
+  return {
+    $type: "google.api.expr.v1beta1.SourceInfo.PositionsEntry",
+    key: 0,
+    value: 0,
+  };
 }
 
 export const SourceInfo_PositionsEntry = {
+  $type: "google.api.expr.v1beta1.SourceInfo.PositionsEntry" as const,
+
   encode(
     message: SourceInfo_PositionsEntry,
     writer: _m0.Writer = _m0.Writer.create()
@@ -212,6 +236,7 @@ export const SourceInfo_PositionsEntry = {
 
   fromJSON(object: any): SourceInfo_PositionsEntry {
     return {
+      $type: SourceInfo_PositionsEntry.$type,
       key: isSet(object.key) ? Number(object.key) : 0,
       value: isSet(object.value) ? Number(object.value) : 0,
     };
@@ -234,11 +259,24 @@ export const SourceInfo_PositionsEntry = {
   },
 };
 
+messageTypeRegistry.set(
+  SourceInfo_PositionsEntry.$type,
+  SourceInfo_PositionsEntry
+);
+
 function createBaseSourcePosition(): SourcePosition {
-  return { location: "", offset: 0, line: 0, column: 0 };
+  return {
+    $type: "google.api.expr.v1beta1.SourcePosition",
+    location: "",
+    offset: 0,
+    line: 0,
+    column: 0,
+  };
 }
 
 export const SourcePosition = {
+  $type: "google.api.expr.v1beta1.SourcePosition" as const,
+
   encode(
     message: SourcePosition,
     writer: _m0.Writer = _m0.Writer.create()
@@ -287,6 +325,7 @@ export const SourcePosition = {
 
   fromJSON(object: any): SourcePosition {
     return {
+      $type: SourcePosition.$type,
       location: isSet(object.location) ? String(object.location) : "",
       offset: isSet(object.offset) ? Number(object.offset) : 0,
       line: isSet(object.line) ? Number(object.line) : 0,
@@ -315,6 +354,8 @@ export const SourcePosition = {
   },
 };
 
+messageTypeRegistry.set(SourcePosition.$type, SourcePosition);
+
 type Builtin =
   | Date
   | Function
@@ -333,14 +374,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

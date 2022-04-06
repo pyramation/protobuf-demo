@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
@@ -11,6 +12,7 @@ export const protobufPackage = "cosmos.vesting.v1beta1";
  * account.
  */
 export interface MsgCreateVestingAccount {
+  $type: "cosmos.vesting.v1beta1.MsgCreateVestingAccount";
   fromAddress: string;
   toAddress: string;
   amount: Coin[];
@@ -19,26 +21,32 @@ export interface MsgCreateVestingAccount {
 }
 
 /** MsgCreateVestingAccountResponse defines the Msg/CreateVestingAccount response type. */
-export interface MsgCreateVestingAccountResponse {}
+export interface MsgCreateVestingAccountResponse {
+  $type: "cosmos.vesting.v1beta1.MsgCreateVestingAccountResponse";
+}
 
 /**
  * MsgCreatePermanentLockedAccount defines a message that enables creating a permanent
  * locked account.
  */
 export interface MsgCreatePermanentLockedAccount {
+  $type: "cosmos.vesting.v1beta1.MsgCreatePermanentLockedAccount";
   fromAddress: string;
   toAddress: string;
   amount: Coin[];
 }
 
 /** MsgCreatePermanentLockedAccountResponse defines the Msg/CreatePermanentLockedAccount response type. */
-export interface MsgCreatePermanentLockedAccountResponse {}
+export interface MsgCreatePermanentLockedAccountResponse {
+  $type: "cosmos.vesting.v1beta1.MsgCreatePermanentLockedAccountResponse";
+}
 
 /**
  * MsgCreateVestingAccount defines a message that enables creating a vesting
  * account.
  */
 export interface MsgCreatePeriodicVestingAccount {
+  $type: "cosmos.vesting.v1beta1.MsgCreatePeriodicVestingAccount";
   fromAddress: string;
   toAddress: string;
   startTime: Long;
@@ -49,10 +57,13 @@ export interface MsgCreatePeriodicVestingAccount {
  * MsgCreateVestingAccountResponse defines the Msg/CreatePeriodicVestingAccount
  * response type.
  */
-export interface MsgCreatePeriodicVestingAccountResponse {}
+export interface MsgCreatePeriodicVestingAccountResponse {
+  $type: "cosmos.vesting.v1beta1.MsgCreatePeriodicVestingAccountResponse";
+}
 
 function createBaseMsgCreateVestingAccount(): MsgCreateVestingAccount {
   return {
+    $type: "cosmos.vesting.v1beta1.MsgCreateVestingAccount",
     fromAddress: "",
     toAddress: "",
     amount: [],
@@ -62,6 +73,8 @@ function createBaseMsgCreateVestingAccount(): MsgCreateVestingAccount {
 }
 
 export const MsgCreateVestingAccount = {
+  $type: "cosmos.vesting.v1beta1.MsgCreateVestingAccount" as const,
+
   encode(
     message: MsgCreateVestingAccount,
     writer: _m0.Writer = _m0.Writer.create()
@@ -119,6 +132,7 @@ export const MsgCreateVestingAccount = {
 
   fromJSON(object: any): MsgCreateVestingAccount {
     return {
+      $type: MsgCreateVestingAccount.$type,
       fromAddress: isSet(object.fromAddress) ? String(object.fromAddress) : "",
       toAddress: isSet(object.toAddress) ? String(object.toAddress) : "",
       amount: Array.isArray(object?.amount)
@@ -163,11 +177,15 @@ export const MsgCreateVestingAccount = {
   },
 };
 
+messageTypeRegistry.set(MsgCreateVestingAccount.$type, MsgCreateVestingAccount);
+
 function createBaseMsgCreateVestingAccountResponse(): MsgCreateVestingAccountResponse {
-  return {};
+  return { $type: "cosmos.vesting.v1beta1.MsgCreateVestingAccountResponse" };
 }
 
 export const MsgCreateVestingAccountResponse = {
+  $type: "cosmos.vesting.v1beta1.MsgCreateVestingAccountResponse" as const,
+
   encode(
     _: MsgCreateVestingAccountResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -194,7 +212,9 @@ export const MsgCreateVestingAccountResponse = {
   },
 
   fromJSON(_: any): MsgCreateVestingAccountResponse {
-    return {};
+    return {
+      $type: MsgCreateVestingAccountResponse.$type,
+    };
   },
 
   toJSON(_: MsgCreateVestingAccountResponse): unknown {
@@ -210,11 +230,23 @@ export const MsgCreateVestingAccountResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgCreateVestingAccountResponse.$type,
+  MsgCreateVestingAccountResponse
+);
+
 function createBaseMsgCreatePermanentLockedAccount(): MsgCreatePermanentLockedAccount {
-  return { fromAddress: "", toAddress: "", amount: [] };
+  return {
+    $type: "cosmos.vesting.v1beta1.MsgCreatePermanentLockedAccount",
+    fromAddress: "",
+    toAddress: "",
+    amount: [],
+  };
 }
 
 export const MsgCreatePermanentLockedAccount = {
+  $type: "cosmos.vesting.v1beta1.MsgCreatePermanentLockedAccount" as const,
+
   encode(
     message: MsgCreatePermanentLockedAccount,
     writer: _m0.Writer = _m0.Writer.create()
@@ -260,6 +292,7 @@ export const MsgCreatePermanentLockedAccount = {
 
   fromJSON(object: any): MsgCreatePermanentLockedAccount {
     return {
+      $type: MsgCreatePermanentLockedAccount.$type,
       fromAddress: isSet(object.fromAddress) ? String(object.fromAddress) : "",
       toAddress: isSet(object.toAddress) ? String(object.toAddress) : "",
       amount: Array.isArray(object?.amount)
@@ -292,11 +325,21 @@ export const MsgCreatePermanentLockedAccount = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgCreatePermanentLockedAccount.$type,
+  MsgCreatePermanentLockedAccount
+);
+
 function createBaseMsgCreatePermanentLockedAccountResponse(): MsgCreatePermanentLockedAccountResponse {
-  return {};
+  return {
+    $type: "cosmos.vesting.v1beta1.MsgCreatePermanentLockedAccountResponse",
+  };
 }
 
 export const MsgCreatePermanentLockedAccountResponse = {
+  $type:
+    "cosmos.vesting.v1beta1.MsgCreatePermanentLockedAccountResponse" as const,
+
   encode(
     _: MsgCreatePermanentLockedAccountResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -323,7 +366,9 @@ export const MsgCreatePermanentLockedAccountResponse = {
   },
 
   fromJSON(_: any): MsgCreatePermanentLockedAccountResponse {
-    return {};
+    return {
+      $type: MsgCreatePermanentLockedAccountResponse.$type,
+    };
   },
 
   toJSON(_: MsgCreatePermanentLockedAccountResponse): unknown {
@@ -339,8 +384,14 @@ export const MsgCreatePermanentLockedAccountResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgCreatePermanentLockedAccountResponse.$type,
+  MsgCreatePermanentLockedAccountResponse
+);
+
 function createBaseMsgCreatePeriodicVestingAccount(): MsgCreatePeriodicVestingAccount {
   return {
+    $type: "cosmos.vesting.v1beta1.MsgCreatePeriodicVestingAccount",
     fromAddress: "",
     toAddress: "",
     startTime: Long.ZERO,
@@ -349,6 +400,8 @@ function createBaseMsgCreatePeriodicVestingAccount(): MsgCreatePeriodicVestingAc
 }
 
 export const MsgCreatePeriodicVestingAccount = {
+  $type: "cosmos.vesting.v1beta1.MsgCreatePeriodicVestingAccount" as const,
+
   encode(
     message: MsgCreatePeriodicVestingAccount,
     writer: _m0.Writer = _m0.Writer.create()
@@ -400,6 +453,7 @@ export const MsgCreatePeriodicVestingAccount = {
 
   fromJSON(object: any): MsgCreatePeriodicVestingAccount {
     return {
+      $type: MsgCreatePeriodicVestingAccount.$type,
       fromAddress: isSet(object.fromAddress) ? String(object.fromAddress) : "",
       toAddress: isSet(object.toAddress) ? String(object.toAddress) : "",
       startTime: isSet(object.startTime)
@@ -444,11 +498,21 @@ export const MsgCreatePeriodicVestingAccount = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgCreatePeriodicVestingAccount.$type,
+  MsgCreatePeriodicVestingAccount
+);
+
 function createBaseMsgCreatePeriodicVestingAccountResponse(): MsgCreatePeriodicVestingAccountResponse {
-  return {};
+  return {
+    $type: "cosmos.vesting.v1beta1.MsgCreatePeriodicVestingAccountResponse",
+  };
 }
 
 export const MsgCreatePeriodicVestingAccountResponse = {
+  $type:
+    "cosmos.vesting.v1beta1.MsgCreatePeriodicVestingAccountResponse" as const,
+
   encode(
     _: MsgCreatePeriodicVestingAccountResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -475,7 +539,9 @@ export const MsgCreatePeriodicVestingAccountResponse = {
   },
 
   fromJSON(_: any): MsgCreatePeriodicVestingAccountResponse {
-    return {};
+    return {
+      $type: MsgCreatePeriodicVestingAccountResponse.$type,
+    };
   },
 
   toJSON(_: MsgCreatePeriodicVestingAccountResponse): unknown {
@@ -490,6 +556,11 @@ export const MsgCreatePeriodicVestingAccountResponse = {
     return message;
   },
 };
+
+messageTypeRegistry.set(
+  MsgCreatePeriodicVestingAccountResponse.$type,
+  MsgCreatePeriodicVestingAccountResponse
+);
 
 /** Msg defines the bank Msg service. */
 export interface Msg {
@@ -595,14 +666,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

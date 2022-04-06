@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Minter, Params } from "../../../osmosis/mint/v1beta1/mint";
@@ -7,16 +8,18 @@ export const protobufPackage = "osmosis.mint.v1beta1";
 
 /** GenesisState defines the mint module's genesis state. */
 export interface GenesisState {
+  $type: "osmosis.mint.v1beta1.GenesisState";
   /** minter is a space for holding current rewards information. */
-  minter?: Minter;
+  minter: Minter;
   /** params defines all the paramaters of the module. */
-  params?: Params;
+  params: Params;
   /** current halven period start epoch */
   halvenStartedEpoch: Long;
 }
 
 function createBaseGenesisState(): GenesisState {
   return {
+    $type: "osmosis.mint.v1beta1.GenesisState",
     minter: undefined,
     params: undefined,
     halvenStartedEpoch: Long.ZERO,
@@ -24,6 +27,8 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
+  $type: "osmosis.mint.v1beta1.GenesisState" as const,
+
   encode(
     message: GenesisState,
     writer: _m0.Writer = _m0.Writer.create()
@@ -66,6 +71,7 @@ export const GenesisState = {
 
   fromJSON(object: any): GenesisState {
     return {
+      $type: GenesisState.$type,
       minter: isSet(object.minter) ? Minter.fromJSON(object.minter) : undefined,
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
       halvenStartedEpoch: isSet(object.halvenStartedEpoch)
@@ -108,6 +114,8 @@ export const GenesisState = {
   },
 };
 
+messageTypeRegistry.set(GenesisState.$type, GenesisState);
+
 type Builtin =
   | Date
   | Function
@@ -126,14 +134,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

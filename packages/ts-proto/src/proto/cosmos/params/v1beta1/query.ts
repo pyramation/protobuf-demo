@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { ParamChange } from "../../../cosmos/params/v1beta1/params";
@@ -7,6 +8,7 @@ export const protobufPackage = "cosmos.params.v1beta1";
 
 /** QueryParamsRequest is request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {
+  $type: "cosmos.params.v1beta1.QueryParamsRequest";
   /** subspace defines the module to query the parameter for. */
   subspace: string;
   /** key defines the key of the parameter in the subspace. */
@@ -15,21 +17,25 @@ export interface QueryParamsRequest {
 
 /** QueryParamsResponse is response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
+  $type: "cosmos.params.v1beta1.QueryParamsResponse";
   /** param defines the queried parameter. */
-  param?: ParamChange;
+  param: ParamChange;
 }
 
 /**
  * QuerySubspacesRequest defines a request type for querying for all registered
  * subspaces and all keys for a subspace.
  */
-export interface QuerySubspacesRequest {}
+export interface QuerySubspacesRequest {
+  $type: "cosmos.params.v1beta1.QuerySubspacesRequest";
+}
 
 /**
  * QuerySubspacesResponse defines the response types for querying for all
  * registered subspaces and all keys for a subspace.
  */
 export interface QuerySubspacesResponse {
+  $type: "cosmos.params.v1beta1.QuerySubspacesResponse";
   subspaces: Subspace[];
 }
 
@@ -38,15 +44,22 @@ export interface QuerySubspacesResponse {
  * the subspace.
  */
 export interface Subspace {
+  $type: "cosmos.params.v1beta1.Subspace";
   subspace: string;
   keys: string[];
 }
 
 function createBaseQueryParamsRequest(): QueryParamsRequest {
-  return { subspace: "", key: "" };
+  return {
+    $type: "cosmos.params.v1beta1.QueryParamsRequest",
+    subspace: "",
+    key: "",
+  };
 }
 
 export const QueryParamsRequest = {
+  $type: "cosmos.params.v1beta1.QueryParamsRequest" as const,
+
   encode(
     message: QueryParamsRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -83,6 +96,7 @@ export const QueryParamsRequest = {
 
   fromJSON(object: any): QueryParamsRequest {
     return {
+      $type: QueryParamsRequest.$type,
       subspace: isSet(object.subspace) ? String(object.subspace) : "",
       key: isSet(object.key) ? String(object.key) : "",
     };
@@ -105,11 +119,18 @@ export const QueryParamsRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryParamsRequest.$type, QueryParamsRequest);
+
 function createBaseQueryParamsResponse(): QueryParamsResponse {
-  return { param: undefined };
+  return {
+    $type: "cosmos.params.v1beta1.QueryParamsResponse",
+    param: undefined,
+  };
 }
 
 export const QueryParamsResponse = {
+  $type: "cosmos.params.v1beta1.QueryParamsResponse" as const,
+
   encode(
     message: QueryParamsResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -140,6 +161,7 @@ export const QueryParamsResponse = {
 
   fromJSON(object: any): QueryParamsResponse {
     return {
+      $type: QueryParamsResponse.$type,
       param: isSet(object.param)
         ? ParamChange.fromJSON(object.param)
         : undefined,
@@ -167,11 +189,15 @@ export const QueryParamsResponse = {
   },
 };
 
+messageTypeRegistry.set(QueryParamsResponse.$type, QueryParamsResponse);
+
 function createBaseQuerySubspacesRequest(): QuerySubspacesRequest {
-  return {};
+  return { $type: "cosmos.params.v1beta1.QuerySubspacesRequest" };
 }
 
 export const QuerySubspacesRequest = {
+  $type: "cosmos.params.v1beta1.QuerySubspacesRequest" as const,
+
   encode(
     _: QuerySubspacesRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -198,7 +224,9 @@ export const QuerySubspacesRequest = {
   },
 
   fromJSON(_: any): QuerySubspacesRequest {
-    return {};
+    return {
+      $type: QuerySubspacesRequest.$type,
+    };
   },
 
   toJSON(_: QuerySubspacesRequest): unknown {
@@ -214,11 +242,18 @@ export const QuerySubspacesRequest = {
   },
 };
 
+messageTypeRegistry.set(QuerySubspacesRequest.$type, QuerySubspacesRequest);
+
 function createBaseQuerySubspacesResponse(): QuerySubspacesResponse {
-  return { subspaces: [] };
+  return {
+    $type: "cosmos.params.v1beta1.QuerySubspacesResponse",
+    subspaces: [],
+  };
 }
 
 export const QuerySubspacesResponse = {
+  $type: "cosmos.params.v1beta1.QuerySubspacesResponse" as const,
+
   encode(
     message: QuerySubspacesResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -252,6 +287,7 @@ export const QuerySubspacesResponse = {
 
   fromJSON(object: any): QuerySubspacesResponse {
     return {
+      $type: QuerySubspacesResponse.$type,
       subspaces: Array.isArray(object?.subspaces)
         ? object.subspaces.map((e: any) => Subspace.fromJSON(e))
         : [],
@@ -280,11 +316,15 @@ export const QuerySubspacesResponse = {
   },
 };
 
+messageTypeRegistry.set(QuerySubspacesResponse.$type, QuerySubspacesResponse);
+
 function createBaseSubspace(): Subspace {
-  return { subspace: "", keys: [] };
+  return { $type: "cosmos.params.v1beta1.Subspace", subspace: "", keys: [] };
 }
 
 export const Subspace = {
+  $type: "cosmos.params.v1beta1.Subspace" as const,
+
   encode(
     message: Subspace,
     writer: _m0.Writer = _m0.Writer.create()
@@ -321,6 +361,7 @@ export const Subspace = {
 
   fromJSON(object: any): Subspace {
     return {
+      $type: Subspace.$type,
       subspace: isSet(object.subspace) ? String(object.subspace) : "",
       keys: Array.isArray(object?.keys)
         ? object.keys.map((e: any) => String(e))
@@ -346,6 +387,8 @@ export const Subspace = {
     return message;
   },
 };
+
+messageTypeRegistry.set(Subspace.$type, Subspace);
 
 /** Query defines the gRPC querier service. */
 export interface Query {
@@ -416,14 +459,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

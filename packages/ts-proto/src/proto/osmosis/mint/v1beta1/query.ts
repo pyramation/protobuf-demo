@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Params } from "../../../osmosis/mint/v1beta1/mint";
@@ -6,34 +7,42 @@ import { Params } from "../../../osmosis/mint/v1beta1/mint";
 export const protobufPackage = "osmosis.mint.v1beta1";
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
-export interface QueryParamsRequest {}
+export interface QueryParamsRequest {
+  $type: "osmosis.mint.v1beta1.QueryParamsRequest";
+}
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
+  $type: "osmosis.mint.v1beta1.QueryParamsResponse";
   /** params defines the parameters of the module. */
-  params?: Params;
+  params: Params;
 }
 
 /**
  * QueryEpochProvisionsRequest is the request type for the
  * Query/EpochProvisions RPC method.
  */
-export interface QueryEpochProvisionsRequest {}
+export interface QueryEpochProvisionsRequest {
+  $type: "osmosis.mint.v1beta1.QueryEpochProvisionsRequest";
+}
 
 /**
  * QueryEpochProvisionsResponse is the response type for the
  * Query/EpochProvisions RPC method.
  */
 export interface QueryEpochProvisionsResponse {
+  $type: "osmosis.mint.v1beta1.QueryEpochProvisionsResponse";
   /** epoch_provisions is the current minting per epoch provisions value. */
   epochProvisions: Uint8Array;
 }
 
 function createBaseQueryParamsRequest(): QueryParamsRequest {
-  return {};
+  return { $type: "osmosis.mint.v1beta1.QueryParamsRequest" };
 }
 
 export const QueryParamsRequest = {
+  $type: "osmosis.mint.v1beta1.QueryParamsRequest" as const,
+
   encode(
     _: QueryParamsRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -57,7 +66,9 @@ export const QueryParamsRequest = {
   },
 
   fromJSON(_: any): QueryParamsRequest {
-    return {};
+    return {
+      $type: QueryParamsRequest.$type,
+    };
   },
 
   toJSON(_: QueryParamsRequest): unknown {
@@ -73,11 +84,18 @@ export const QueryParamsRequest = {
   },
 };
 
+messageTypeRegistry.set(QueryParamsRequest.$type, QueryParamsRequest);
+
 function createBaseQueryParamsResponse(): QueryParamsResponse {
-  return { params: undefined };
+  return {
+    $type: "osmosis.mint.v1beta1.QueryParamsResponse",
+    params: undefined,
+  };
 }
 
 export const QueryParamsResponse = {
+  $type: "osmosis.mint.v1beta1.QueryParamsResponse" as const,
+
   encode(
     message: QueryParamsResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -108,6 +126,7 @@ export const QueryParamsResponse = {
 
   fromJSON(object: any): QueryParamsResponse {
     return {
+      $type: QueryParamsResponse.$type,
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
     };
   },
@@ -131,11 +150,15 @@ export const QueryParamsResponse = {
   },
 };
 
+messageTypeRegistry.set(QueryParamsResponse.$type, QueryParamsResponse);
+
 function createBaseQueryEpochProvisionsRequest(): QueryEpochProvisionsRequest {
-  return {};
+  return { $type: "osmosis.mint.v1beta1.QueryEpochProvisionsRequest" };
 }
 
 export const QueryEpochProvisionsRequest = {
+  $type: "osmosis.mint.v1beta1.QueryEpochProvisionsRequest" as const,
+
   encode(
     _: QueryEpochProvisionsRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -162,7 +185,9 @@ export const QueryEpochProvisionsRequest = {
   },
 
   fromJSON(_: any): QueryEpochProvisionsRequest {
-    return {};
+    return {
+      $type: QueryEpochProvisionsRequest.$type,
+    };
   },
 
   toJSON(_: QueryEpochProvisionsRequest): unknown {
@@ -178,11 +203,21 @@ export const QueryEpochProvisionsRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  QueryEpochProvisionsRequest.$type,
+  QueryEpochProvisionsRequest
+);
+
 function createBaseQueryEpochProvisionsResponse(): QueryEpochProvisionsResponse {
-  return { epochProvisions: new Uint8Array() };
+  return {
+    $type: "osmosis.mint.v1beta1.QueryEpochProvisionsResponse",
+    epochProvisions: new Uint8Array(),
+  };
 }
 
 export const QueryEpochProvisionsResponse = {
+  $type: "osmosis.mint.v1beta1.QueryEpochProvisionsResponse" as const,
+
   encode(
     message: QueryEpochProvisionsResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -216,6 +251,7 @@ export const QueryEpochProvisionsResponse = {
 
   fromJSON(object: any): QueryEpochProvisionsResponse {
     return {
+      $type: QueryEpochProvisionsResponse.$type,
       epochProvisions: isSet(object.epochProvisions)
         ? bytesFromBase64(object.epochProvisions)
         : new Uint8Array(),
@@ -241,6 +277,11 @@ export const QueryEpochProvisionsResponse = {
     return message;
   },
 };
+
+messageTypeRegistry.set(
+  QueryEpochProvisionsResponse.$type,
+  QueryEpochProvisionsResponse
+);
 
 /** Query provides defines the gRPC querier service. */
 export interface Query {
@@ -346,14 +387,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

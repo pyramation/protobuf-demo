@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 
@@ -25,6 +26,7 @@ export const protobufPackage = "google.api";
  *           canonical_scopes: https://www.googleapis.com/auth/calendar.read
  */
 export interface Authentication {
+  $type: "google.api.Authentication";
   /**
    * A list of authentication rules that apply to individual API methods.
    *
@@ -47,6 +49,7 @@ export interface Authentication {
  * ignored.
  */
 export interface AuthenticationRule {
+  $type: "google.api.AuthenticationRule";
   /**
    * Selects the methods to which this rule applies.
    *
@@ -54,7 +57,7 @@ export interface AuthenticationRule {
    */
   selector: string;
   /** The requirements for OAuth credentials. */
-  oauth?: OAuthRequirements;
+  oauth: OAuthRequirements;
   /**
    * If true, the service accepts API keys without any other credential.
    * This flag only applies to HTTP and gRPC requests.
@@ -66,6 +69,7 @@ export interface AuthenticationRule {
 
 /** Specifies a location to extract JWT from an API request. */
 export interface JwtLocation {
+  $type: "google.api.JwtLocation";
   /** Specifies HTTP header name to extract JWT token. */
   header: string | undefined;
   /** Specifies URL query parameter name to extract JWT token. */
@@ -89,6 +93,7 @@ export interface JwtLocation {
  * (JWT)](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32).
  */
 export interface AuthProvider {
+  $type: "google.api.AuthProvider";
   /**
    * The unique identifier of the auth provider. It will be referred to by
    * `AuthRequirement.provider_id`.
@@ -188,6 +193,7 @@ export interface AuthProvider {
  * due to the backend requiring additional scopes or permissions.
  */
 export interface OAuthRequirements {
+  $type: "google.api.OAuthRequirements";
   /**
    * The list of publicly documented OAuth scopes that are allowed access. An
    * OAuth token containing any of these scopes will be accepted.
@@ -206,6 +212,7 @@ export interface OAuthRequirements {
  * (JWT)](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32).
  */
 export interface AuthRequirement {
+  $type: "google.api.AuthRequirement";
   /**
    * [id][google.api.AuthProvider.id] from authentication provider.
    *
@@ -236,10 +243,12 @@ export interface AuthRequirement {
 }
 
 function createBaseAuthentication(): Authentication {
-  return { rules: [], providers: [] };
+  return { $type: "google.api.Authentication", rules: [], providers: [] };
 }
 
 export const Authentication = {
+  $type: "google.api.Authentication" as const,
+
   encode(
     message: Authentication,
     writer: _m0.Writer = _m0.Writer.create()
@@ -278,6 +287,7 @@ export const Authentication = {
 
   fromJSON(object: any): Authentication {
     return {
+      $type: Authentication.$type,
       rules: Array.isArray(object?.rules)
         ? object.rules.map((e: any) => AuthenticationRule.fromJSON(e))
         : [],
@@ -318,8 +328,11 @@ export const Authentication = {
   },
 };
 
+messageTypeRegistry.set(Authentication.$type, Authentication);
+
 function createBaseAuthenticationRule(): AuthenticationRule {
   return {
+    $type: "google.api.AuthenticationRule",
     selector: "",
     oauth: undefined,
     allowWithoutCredential: false,
@@ -328,6 +341,8 @@ function createBaseAuthenticationRule(): AuthenticationRule {
 }
 
 export const AuthenticationRule = {
+  $type: "google.api.AuthenticationRule" as const,
+
   encode(
     message: AuthenticationRule,
     writer: _m0.Writer = _m0.Writer.create()
@@ -381,6 +396,7 @@ export const AuthenticationRule = {
 
   fromJSON(object: any): AuthenticationRule {
     return {
+      $type: AuthenticationRule.$type,
       selector: isSet(object.selector) ? String(object.selector) : "",
       oauth: isSet(object.oauth)
         ? OAuthRequirements.fromJSON(object.oauth)
@@ -429,11 +445,20 @@ export const AuthenticationRule = {
   },
 };
 
+messageTypeRegistry.set(AuthenticationRule.$type, AuthenticationRule);
+
 function createBaseJwtLocation(): JwtLocation {
-  return { header: undefined, query: undefined, valuePrefix: "" };
+  return {
+    $type: "google.api.JwtLocation",
+    header: undefined,
+    query: undefined,
+    valuePrefix: "",
+  };
 }
 
 export const JwtLocation = {
+  $type: "google.api.JwtLocation" as const,
+
   encode(
     message: JwtLocation,
     writer: _m0.Writer = _m0.Writer.create()
@@ -476,6 +501,7 @@ export const JwtLocation = {
 
   fromJSON(object: any): JwtLocation {
     return {
+      $type: JwtLocation.$type,
       header: isSet(object.header) ? String(object.header) : undefined,
       query: isSet(object.query) ? String(object.query) : undefined,
       valuePrefix: isSet(object.valuePrefix) ? String(object.valuePrefix) : "",
@@ -502,8 +528,11 @@ export const JwtLocation = {
   },
 };
 
+messageTypeRegistry.set(JwtLocation.$type, JwtLocation);
+
 function createBaseAuthProvider(): AuthProvider {
   return {
+    $type: "google.api.AuthProvider",
     id: "",
     issuer: "",
     jwksUri: "",
@@ -514,6 +543,8 @@ function createBaseAuthProvider(): AuthProvider {
 }
 
 export const AuthProvider = {
+  $type: "google.api.AuthProvider" as const,
+
   encode(
     message: AuthProvider,
     writer: _m0.Writer = _m0.Writer.create()
@@ -576,6 +607,7 @@ export const AuthProvider = {
 
   fromJSON(object: any): AuthProvider {
     return {
+      $type: AuthProvider.$type,
       id: isSet(object.id) ? String(object.id) : "",
       issuer: isSet(object.issuer) ? String(object.issuer) : "",
       jwksUri: isSet(object.jwksUri) ? String(object.jwksUri) : "",
@@ -622,11 +654,15 @@ export const AuthProvider = {
   },
 };
 
+messageTypeRegistry.set(AuthProvider.$type, AuthProvider);
+
 function createBaseOAuthRequirements(): OAuthRequirements {
-  return { canonicalScopes: "" };
+  return { $type: "google.api.OAuthRequirements", canonicalScopes: "" };
 }
 
 export const OAuthRequirements = {
+  $type: "google.api.OAuthRequirements" as const,
+
   encode(
     message: OAuthRequirements,
     writer: _m0.Writer = _m0.Writer.create()
@@ -657,6 +693,7 @@ export const OAuthRequirements = {
 
   fromJSON(object: any): OAuthRequirements {
     return {
+      $type: OAuthRequirements.$type,
       canonicalScopes: isSet(object.canonicalScopes)
         ? String(object.canonicalScopes)
         : "",
@@ -679,11 +716,15 @@ export const OAuthRequirements = {
   },
 };
 
+messageTypeRegistry.set(OAuthRequirements.$type, OAuthRequirements);
+
 function createBaseAuthRequirement(): AuthRequirement {
-  return { providerId: "", audiences: "" };
+  return { $type: "google.api.AuthRequirement", providerId: "", audiences: "" };
 }
 
 export const AuthRequirement = {
+  $type: "google.api.AuthRequirement" as const,
+
   encode(
     message: AuthRequirement,
     writer: _m0.Writer = _m0.Writer.create()
@@ -720,6 +761,7 @@ export const AuthRequirement = {
 
   fromJSON(object: any): AuthRequirement {
     return {
+      $type: AuthRequirement.$type,
       providerId: isSet(object.providerId) ? String(object.providerId) : "",
       audiences: isSet(object.audiences) ? String(object.audiences) : "",
     };
@@ -742,6 +784,8 @@ export const AuthRequirement = {
   },
 };
 
+messageTypeRegistry.set(AuthRequirement.$type, AuthRequirement);
+
 type Builtin =
   | Date
   | Function
@@ -760,14 +804,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

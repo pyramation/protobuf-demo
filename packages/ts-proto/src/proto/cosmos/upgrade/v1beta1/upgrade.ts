@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Any } from "../../../google/protobuf/any";
@@ -8,6 +9,7 @@ export const protobufPackage = "cosmos.upgrade.v1beta1";
 
 /** Plan specifies information about a planned upgrade and when it should occur. */
 export interface Plan {
+  $type: "cosmos.upgrade.v1beta1.Plan";
   /**
    * Sets the name for the upgrade. This name will be used by the upgraded
    * version of the software to apply any special "on-upgrade" commands during
@@ -25,7 +27,7 @@ export interface Plan {
    *
    * @deprecated
    */
-  time?: Date;
+  time: Date;
   /**
    * The height at which the upgrade must be performed.
    * Only used if Time is not set.
@@ -43,7 +45,7 @@ export interface Plan {
    *
    * @deprecated
    */
-  upgradedClientState?: Any;
+  upgradedClientState: Any;
 }
 
 /**
@@ -55,9 +57,10 @@ export interface Plan {
  * @deprecated
  */
 export interface SoftwareUpgradeProposal {
+  $type: "cosmos.upgrade.v1beta1.SoftwareUpgradeProposal";
   title: string;
   description: string;
-  plan?: Plan;
+  plan: Plan;
 }
 
 /**
@@ -69,6 +72,7 @@ export interface SoftwareUpgradeProposal {
  * @deprecated
  */
 export interface CancelSoftwareUpgradeProposal {
+  $type: "cosmos.upgrade.v1beta1.CancelSoftwareUpgradeProposal";
   title: string;
   description: string;
 }
@@ -79,6 +83,7 @@ export interface CancelSoftwareUpgradeProposal {
  * Since: cosmos-sdk 0.43
  */
 export interface ModuleVersion {
+  $type: "cosmos.upgrade.v1beta1.ModuleVersion";
   /** name of the app module */
   name: string;
   /** consensus version of the app module */
@@ -87,6 +92,7 @@ export interface ModuleVersion {
 
 function createBasePlan(): Plan {
   return {
+    $type: "cosmos.upgrade.v1beta1.Plan",
     name: "",
     time: undefined,
     height: Long.ZERO,
@@ -96,6 +102,8 @@ function createBasePlan(): Plan {
 }
 
 export const Plan = {
+  $type: "cosmos.upgrade.v1beta1.Plan" as const,
+
   encode(message: Plan, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -155,6 +163,7 @@ export const Plan = {
 
   fromJSON(object: any): Plan {
     return {
+      $type: Plan.$type,
       name: isSet(object.name) ? String(object.name) : "",
       time: isSet(object.time) ? fromJsonTimestamp(object.time) : undefined,
       height: isSet(object.height) ? Long.fromString(object.height) : Long.ZERO,
@@ -197,11 +206,20 @@ export const Plan = {
   },
 };
 
+messageTypeRegistry.set(Plan.$type, Plan);
+
 function createBaseSoftwareUpgradeProposal(): SoftwareUpgradeProposal {
-  return { title: "", description: "", plan: undefined };
+  return {
+    $type: "cosmos.upgrade.v1beta1.SoftwareUpgradeProposal",
+    title: "",
+    description: "",
+    plan: undefined,
+  };
 }
 
 export const SoftwareUpgradeProposal = {
+  $type: "cosmos.upgrade.v1beta1.SoftwareUpgradeProposal" as const,
+
   encode(
     message: SoftwareUpgradeProposal,
     writer: _m0.Writer = _m0.Writer.create()
@@ -247,6 +265,7 @@ export const SoftwareUpgradeProposal = {
 
   fromJSON(object: any): SoftwareUpgradeProposal {
     return {
+      $type: SoftwareUpgradeProposal.$type,
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
       plan: isSet(object.plan) ? Plan.fromJSON(object.plan) : undefined,
@@ -277,11 +296,19 @@ export const SoftwareUpgradeProposal = {
   },
 };
 
+messageTypeRegistry.set(SoftwareUpgradeProposal.$type, SoftwareUpgradeProposal);
+
 function createBaseCancelSoftwareUpgradeProposal(): CancelSoftwareUpgradeProposal {
-  return { title: "", description: "" };
+  return {
+    $type: "cosmos.upgrade.v1beta1.CancelSoftwareUpgradeProposal",
+    title: "",
+    description: "",
+  };
 }
 
 export const CancelSoftwareUpgradeProposal = {
+  $type: "cosmos.upgrade.v1beta1.CancelSoftwareUpgradeProposal" as const,
+
   encode(
     message: CancelSoftwareUpgradeProposal,
     writer: _m0.Writer = _m0.Writer.create()
@@ -321,6 +348,7 @@ export const CancelSoftwareUpgradeProposal = {
 
   fromJSON(object: any): CancelSoftwareUpgradeProposal {
     return {
+      $type: CancelSoftwareUpgradeProposal.$type,
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
     };
@@ -344,11 +372,22 @@ export const CancelSoftwareUpgradeProposal = {
   },
 };
 
+messageTypeRegistry.set(
+  CancelSoftwareUpgradeProposal.$type,
+  CancelSoftwareUpgradeProposal
+);
+
 function createBaseModuleVersion(): ModuleVersion {
-  return { name: "", version: Long.UZERO };
+  return {
+    $type: "cosmos.upgrade.v1beta1.ModuleVersion",
+    name: "",
+    version: Long.UZERO,
+  };
 }
 
 export const ModuleVersion = {
+  $type: "cosmos.upgrade.v1beta1.ModuleVersion" as const,
+
   encode(
     message: ModuleVersion,
     writer: _m0.Writer = _m0.Writer.create()
@@ -385,6 +424,7 @@ export const ModuleVersion = {
 
   fromJSON(object: any): ModuleVersion {
     return {
+      $type: ModuleVersion.$type,
       name: isSet(object.name) ? String(object.name) : "",
       version: isSet(object.version)
         ? Long.fromString(object.version)
@@ -413,6 +453,8 @@ export const ModuleVersion = {
   },
 };
 
+messageTypeRegistry.set(ModuleVersion.$type, ModuleVersion);
+
 type Builtin =
   | Date
   | Function
@@ -431,21 +473,21 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = (date.getTime() % 1_000) * 1_000_000;
-  return { seconds, nanos };
+  return { $type: "google.protobuf.Timestamp", seconds, nanos };
 }
 
 function fromTimestamp(t: Timestamp): Date {

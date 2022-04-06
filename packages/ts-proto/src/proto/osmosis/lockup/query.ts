@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Duration } from "../../google/protobuf/duration";
@@ -8,137 +9,171 @@ import { Coin } from "../../cosmos/base/v1beta1/coin";
 
 export const protobufPackage = "osmosis.lockup";
 
-export interface ModuleBalanceRequest {}
+export interface ModuleBalanceRequest {
+  $type: "osmosis.lockup.ModuleBalanceRequest";
+}
 
 export interface ModuleBalanceResponse {
+  $type: "osmosis.lockup.ModuleBalanceResponse";
   coins: Coin[];
 }
 
-export interface ModuleLockedAmountRequest {}
+export interface ModuleLockedAmountRequest {
+  $type: "osmosis.lockup.ModuleLockedAmountRequest";
+}
 
 export interface ModuleLockedAmountResponse {
+  $type: "osmosis.lockup.ModuleLockedAmountResponse";
   coins: Coin[];
 }
 
 export interface AccountUnlockableCoinsRequest {
+  $type: "osmosis.lockup.AccountUnlockableCoinsRequest";
   owner: string;
 }
 
 export interface AccountUnlockableCoinsResponse {
+  $type: "osmosis.lockup.AccountUnlockableCoinsResponse";
   coins: Coin[];
 }
 
 export interface AccountUnlockingCoinsRequest {
+  $type: "osmosis.lockup.AccountUnlockingCoinsRequest";
   owner: string;
 }
 
 export interface AccountUnlockingCoinsResponse {
+  $type: "osmosis.lockup.AccountUnlockingCoinsResponse";
   coins: Coin[];
 }
 
 export interface AccountLockedCoinsRequest {
+  $type: "osmosis.lockup.AccountLockedCoinsRequest";
   owner: string;
 }
 
 export interface AccountLockedCoinsResponse {
+  $type: "osmosis.lockup.AccountLockedCoinsResponse";
   coins: Coin[];
 }
 
 export interface AccountLockedPastTimeRequest {
+  $type: "osmosis.lockup.AccountLockedPastTimeRequest";
   owner: string;
-  timestamp?: Date;
+  timestamp: Date;
 }
 
 export interface AccountLockedPastTimeResponse {
+  $type: "osmosis.lockup.AccountLockedPastTimeResponse";
   locks: PeriodLock[];
 }
 
 export interface AccountLockedPastTimeNotUnlockingOnlyRequest {
+  $type: "osmosis.lockup.AccountLockedPastTimeNotUnlockingOnlyRequest";
   owner: string;
-  timestamp?: Date;
+  timestamp: Date;
 }
 
 export interface AccountLockedPastTimeNotUnlockingOnlyResponse {
+  $type: "osmosis.lockup.AccountLockedPastTimeNotUnlockingOnlyResponse";
   locks: PeriodLock[];
 }
 
 export interface AccountUnlockedBeforeTimeRequest {
+  $type: "osmosis.lockup.AccountUnlockedBeforeTimeRequest";
   owner: string;
-  timestamp?: Date;
+  timestamp: Date;
 }
 
 export interface AccountUnlockedBeforeTimeResponse {
+  $type: "osmosis.lockup.AccountUnlockedBeforeTimeResponse";
   locks: PeriodLock[];
 }
 
 export interface AccountLockedPastTimeDenomRequest {
+  $type: "osmosis.lockup.AccountLockedPastTimeDenomRequest";
   owner: string;
-  timestamp?: Date;
+  timestamp: Date;
   denom: string;
 }
 
 export interface AccountLockedPastTimeDenomResponse {
+  $type: "osmosis.lockup.AccountLockedPastTimeDenomResponse";
   locks: PeriodLock[];
 }
 
 export interface LockedDenomRequest {
+  $type: "osmosis.lockup.LockedDenomRequest";
   denom: string;
-  duration?: Duration;
+  duration: Duration;
 }
 
 export interface LockedDenomResponse {
+  $type: "osmosis.lockup.LockedDenomResponse";
   amount: string;
 }
 
 export interface LockedRequest {
+  $type: "osmosis.lockup.LockedRequest";
   lockId: Long;
 }
 
 export interface LockedResponse {
-  lock?: PeriodLock;
+  $type: "osmosis.lockup.LockedResponse";
+  lock: PeriodLock;
 }
 
 export interface SyntheticLockupsByLockupIDRequest {
+  $type: "osmosis.lockup.SyntheticLockupsByLockupIDRequest";
   lockId: Long;
 }
 
 export interface SyntheticLockupsByLockupIDResponse {
+  $type: "osmosis.lockup.SyntheticLockupsByLockupIDResponse";
   syntheticLocks: SyntheticLock[];
 }
 
 export interface AccountLockedLongerDurationRequest {
+  $type: "osmosis.lockup.AccountLockedLongerDurationRequest";
   owner: string;
-  duration?: Duration;
+  duration: Duration;
 }
 
 export interface AccountLockedLongerDurationResponse {
+  $type: "osmosis.lockup.AccountLockedLongerDurationResponse";
   locks: PeriodLock[];
 }
 
 export interface AccountLockedLongerDurationNotUnlockingOnlyRequest {
+  $type: "osmosis.lockup.AccountLockedLongerDurationNotUnlockingOnlyRequest";
   owner: string;
-  duration?: Duration;
+  duration: Duration;
 }
 
 export interface AccountLockedLongerDurationNotUnlockingOnlyResponse {
+  $type: "osmosis.lockup.AccountLockedLongerDurationNotUnlockingOnlyResponse";
   locks: PeriodLock[];
 }
 
 export interface AccountLockedLongerDurationDenomRequest {
+  $type: "osmosis.lockup.AccountLockedLongerDurationDenomRequest";
   owner: string;
-  duration?: Duration;
+  duration: Duration;
   denom: string;
 }
 
 export interface AccountLockedLongerDurationDenomResponse {
+  $type: "osmosis.lockup.AccountLockedLongerDurationDenomResponse";
   locks: PeriodLock[];
 }
 
 function createBaseModuleBalanceRequest(): ModuleBalanceRequest {
-  return {};
+  return { $type: "osmosis.lockup.ModuleBalanceRequest" };
 }
 
 export const ModuleBalanceRequest = {
+  $type: "osmosis.lockup.ModuleBalanceRequest" as const,
+
   encode(
     _: ModuleBalanceRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -165,7 +200,9 @@ export const ModuleBalanceRequest = {
   },
 
   fromJSON(_: any): ModuleBalanceRequest {
-    return {};
+    return {
+      $type: ModuleBalanceRequest.$type,
+    };
   },
 
   toJSON(_: ModuleBalanceRequest): unknown {
@@ -181,11 +218,15 @@ export const ModuleBalanceRequest = {
   },
 };
 
+messageTypeRegistry.set(ModuleBalanceRequest.$type, ModuleBalanceRequest);
+
 function createBaseModuleBalanceResponse(): ModuleBalanceResponse {
-  return { coins: [] };
+  return { $type: "osmosis.lockup.ModuleBalanceResponse", coins: [] };
 }
 
 export const ModuleBalanceResponse = {
+  $type: "osmosis.lockup.ModuleBalanceResponse" as const,
+
   encode(
     message: ModuleBalanceResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -219,6 +260,7 @@ export const ModuleBalanceResponse = {
 
   fromJSON(object: any): ModuleBalanceResponse {
     return {
+      $type: ModuleBalanceResponse.$type,
       coins: Array.isArray(object?.coins)
         ? object.coins.map((e: any) => Coin.fromJSON(e))
         : [],
@@ -244,11 +286,15 @@ export const ModuleBalanceResponse = {
   },
 };
 
+messageTypeRegistry.set(ModuleBalanceResponse.$type, ModuleBalanceResponse);
+
 function createBaseModuleLockedAmountRequest(): ModuleLockedAmountRequest {
-  return {};
+  return { $type: "osmosis.lockup.ModuleLockedAmountRequest" };
 }
 
 export const ModuleLockedAmountRequest = {
+  $type: "osmosis.lockup.ModuleLockedAmountRequest" as const,
+
   encode(
     _: ModuleLockedAmountRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -275,7 +321,9 @@ export const ModuleLockedAmountRequest = {
   },
 
   fromJSON(_: any): ModuleLockedAmountRequest {
-    return {};
+    return {
+      $type: ModuleLockedAmountRequest.$type,
+    };
   },
 
   toJSON(_: ModuleLockedAmountRequest): unknown {
@@ -291,11 +339,18 @@ export const ModuleLockedAmountRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  ModuleLockedAmountRequest.$type,
+  ModuleLockedAmountRequest
+);
+
 function createBaseModuleLockedAmountResponse(): ModuleLockedAmountResponse {
-  return { coins: [] };
+  return { $type: "osmosis.lockup.ModuleLockedAmountResponse", coins: [] };
 }
 
 export const ModuleLockedAmountResponse = {
+  $type: "osmosis.lockup.ModuleLockedAmountResponse" as const,
+
   encode(
     message: ModuleLockedAmountResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -329,6 +384,7 @@ export const ModuleLockedAmountResponse = {
 
   fromJSON(object: any): ModuleLockedAmountResponse {
     return {
+      $type: ModuleLockedAmountResponse.$type,
       coins: Array.isArray(object?.coins)
         ? object.coins.map((e: any) => Coin.fromJSON(e))
         : [],
@@ -354,11 +410,18 @@ export const ModuleLockedAmountResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  ModuleLockedAmountResponse.$type,
+  ModuleLockedAmountResponse
+);
+
 function createBaseAccountUnlockableCoinsRequest(): AccountUnlockableCoinsRequest {
-  return { owner: "" };
+  return { $type: "osmosis.lockup.AccountUnlockableCoinsRequest", owner: "" };
 }
 
 export const AccountUnlockableCoinsRequest = {
+  $type: "osmosis.lockup.AccountUnlockableCoinsRequest" as const,
+
   encode(
     message: AccountUnlockableCoinsRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -392,6 +455,7 @@ export const AccountUnlockableCoinsRequest = {
 
   fromJSON(object: any): AccountUnlockableCoinsRequest {
     return {
+      $type: AccountUnlockableCoinsRequest.$type,
       owner: isSet(object.owner) ? String(object.owner) : "",
     };
   },
@@ -411,11 +475,18 @@ export const AccountUnlockableCoinsRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  AccountUnlockableCoinsRequest.$type,
+  AccountUnlockableCoinsRequest
+);
+
 function createBaseAccountUnlockableCoinsResponse(): AccountUnlockableCoinsResponse {
-  return { coins: [] };
+  return { $type: "osmosis.lockup.AccountUnlockableCoinsResponse", coins: [] };
 }
 
 export const AccountUnlockableCoinsResponse = {
+  $type: "osmosis.lockup.AccountUnlockableCoinsResponse" as const,
+
   encode(
     message: AccountUnlockableCoinsResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -449,6 +520,7 @@ export const AccountUnlockableCoinsResponse = {
 
   fromJSON(object: any): AccountUnlockableCoinsResponse {
     return {
+      $type: AccountUnlockableCoinsResponse.$type,
       coins: Array.isArray(object?.coins)
         ? object.coins.map((e: any) => Coin.fromJSON(e))
         : [],
@@ -474,11 +546,18 @@ export const AccountUnlockableCoinsResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  AccountUnlockableCoinsResponse.$type,
+  AccountUnlockableCoinsResponse
+);
+
 function createBaseAccountUnlockingCoinsRequest(): AccountUnlockingCoinsRequest {
-  return { owner: "" };
+  return { $type: "osmosis.lockup.AccountUnlockingCoinsRequest", owner: "" };
 }
 
 export const AccountUnlockingCoinsRequest = {
+  $type: "osmosis.lockup.AccountUnlockingCoinsRequest" as const,
+
   encode(
     message: AccountUnlockingCoinsRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -512,6 +591,7 @@ export const AccountUnlockingCoinsRequest = {
 
   fromJSON(object: any): AccountUnlockingCoinsRequest {
     return {
+      $type: AccountUnlockingCoinsRequest.$type,
       owner: isSet(object.owner) ? String(object.owner) : "",
     };
   },
@@ -531,11 +611,18 @@ export const AccountUnlockingCoinsRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  AccountUnlockingCoinsRequest.$type,
+  AccountUnlockingCoinsRequest
+);
+
 function createBaseAccountUnlockingCoinsResponse(): AccountUnlockingCoinsResponse {
-  return { coins: [] };
+  return { $type: "osmosis.lockup.AccountUnlockingCoinsResponse", coins: [] };
 }
 
 export const AccountUnlockingCoinsResponse = {
+  $type: "osmosis.lockup.AccountUnlockingCoinsResponse" as const,
+
   encode(
     message: AccountUnlockingCoinsResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -569,6 +656,7 @@ export const AccountUnlockingCoinsResponse = {
 
   fromJSON(object: any): AccountUnlockingCoinsResponse {
     return {
+      $type: AccountUnlockingCoinsResponse.$type,
       coins: Array.isArray(object?.coins)
         ? object.coins.map((e: any) => Coin.fromJSON(e))
         : [],
@@ -594,11 +682,18 @@ export const AccountUnlockingCoinsResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  AccountUnlockingCoinsResponse.$type,
+  AccountUnlockingCoinsResponse
+);
+
 function createBaseAccountLockedCoinsRequest(): AccountLockedCoinsRequest {
-  return { owner: "" };
+  return { $type: "osmosis.lockup.AccountLockedCoinsRequest", owner: "" };
 }
 
 export const AccountLockedCoinsRequest = {
+  $type: "osmosis.lockup.AccountLockedCoinsRequest" as const,
+
   encode(
     message: AccountLockedCoinsRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -632,6 +727,7 @@ export const AccountLockedCoinsRequest = {
 
   fromJSON(object: any): AccountLockedCoinsRequest {
     return {
+      $type: AccountLockedCoinsRequest.$type,
       owner: isSet(object.owner) ? String(object.owner) : "",
     };
   },
@@ -651,11 +747,18 @@ export const AccountLockedCoinsRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  AccountLockedCoinsRequest.$type,
+  AccountLockedCoinsRequest
+);
+
 function createBaseAccountLockedCoinsResponse(): AccountLockedCoinsResponse {
-  return { coins: [] };
+  return { $type: "osmosis.lockup.AccountLockedCoinsResponse", coins: [] };
 }
 
 export const AccountLockedCoinsResponse = {
+  $type: "osmosis.lockup.AccountLockedCoinsResponse" as const,
+
   encode(
     message: AccountLockedCoinsResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -689,6 +792,7 @@ export const AccountLockedCoinsResponse = {
 
   fromJSON(object: any): AccountLockedCoinsResponse {
     return {
+      $type: AccountLockedCoinsResponse.$type,
       coins: Array.isArray(object?.coins)
         ? object.coins.map((e: any) => Coin.fromJSON(e))
         : [],
@@ -714,11 +818,22 @@ export const AccountLockedCoinsResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  AccountLockedCoinsResponse.$type,
+  AccountLockedCoinsResponse
+);
+
 function createBaseAccountLockedPastTimeRequest(): AccountLockedPastTimeRequest {
-  return { owner: "", timestamp: undefined };
+  return {
+    $type: "osmosis.lockup.AccountLockedPastTimeRequest",
+    owner: "",
+    timestamp: undefined,
+  };
 }
 
 export const AccountLockedPastTimeRequest = {
+  $type: "osmosis.lockup.AccountLockedPastTimeRequest" as const,
+
   encode(
     message: AccountLockedPastTimeRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -763,6 +878,7 @@ export const AccountLockedPastTimeRequest = {
 
   fromJSON(object: any): AccountLockedPastTimeRequest {
     return {
+      $type: AccountLockedPastTimeRequest.$type,
       owner: isSet(object.owner) ? String(object.owner) : "",
       timestamp: isSet(object.timestamp)
         ? fromJsonTimestamp(object.timestamp)
@@ -788,11 +904,18 @@ export const AccountLockedPastTimeRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  AccountLockedPastTimeRequest.$type,
+  AccountLockedPastTimeRequest
+);
+
 function createBaseAccountLockedPastTimeResponse(): AccountLockedPastTimeResponse {
-  return { locks: [] };
+  return { $type: "osmosis.lockup.AccountLockedPastTimeResponse", locks: [] };
 }
 
 export const AccountLockedPastTimeResponse = {
+  $type: "osmosis.lockup.AccountLockedPastTimeResponse" as const,
+
   encode(
     message: AccountLockedPastTimeResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -826,6 +949,7 @@ export const AccountLockedPastTimeResponse = {
 
   fromJSON(object: any): AccountLockedPastTimeResponse {
     return {
+      $type: AccountLockedPastTimeResponse.$type,
       locks: Array.isArray(object?.locks)
         ? object.locks.map((e: any) => PeriodLock.fromJSON(e))
         : [],
@@ -853,11 +977,22 @@ export const AccountLockedPastTimeResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  AccountLockedPastTimeResponse.$type,
+  AccountLockedPastTimeResponse
+);
+
 function createBaseAccountLockedPastTimeNotUnlockingOnlyRequest(): AccountLockedPastTimeNotUnlockingOnlyRequest {
-  return { owner: "", timestamp: undefined };
+  return {
+    $type: "osmosis.lockup.AccountLockedPastTimeNotUnlockingOnlyRequest",
+    owner: "",
+    timestamp: undefined,
+  };
 }
 
 export const AccountLockedPastTimeNotUnlockingOnlyRequest = {
+  $type: "osmosis.lockup.AccountLockedPastTimeNotUnlockingOnlyRequest" as const,
+
   encode(
     message: AccountLockedPastTimeNotUnlockingOnlyRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -902,6 +1037,7 @@ export const AccountLockedPastTimeNotUnlockingOnlyRequest = {
 
   fromJSON(object: any): AccountLockedPastTimeNotUnlockingOnlyRequest {
     return {
+      $type: AccountLockedPastTimeNotUnlockingOnlyRequest.$type,
       owner: isSet(object.owner) ? String(object.owner) : "",
       timestamp: isSet(object.timestamp)
         ? fromJsonTimestamp(object.timestamp)
@@ -930,11 +1066,22 @@ export const AccountLockedPastTimeNotUnlockingOnlyRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  AccountLockedPastTimeNotUnlockingOnlyRequest.$type,
+  AccountLockedPastTimeNotUnlockingOnlyRequest
+);
+
 function createBaseAccountLockedPastTimeNotUnlockingOnlyResponse(): AccountLockedPastTimeNotUnlockingOnlyResponse {
-  return { locks: [] };
+  return {
+    $type: "osmosis.lockup.AccountLockedPastTimeNotUnlockingOnlyResponse",
+    locks: [],
+  };
 }
 
 export const AccountLockedPastTimeNotUnlockingOnlyResponse = {
+  $type:
+    "osmosis.lockup.AccountLockedPastTimeNotUnlockingOnlyResponse" as const,
+
   encode(
     message: AccountLockedPastTimeNotUnlockingOnlyResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -968,6 +1115,7 @@ export const AccountLockedPastTimeNotUnlockingOnlyResponse = {
 
   fromJSON(object: any): AccountLockedPastTimeNotUnlockingOnlyResponse {
     return {
+      $type: AccountLockedPastTimeNotUnlockingOnlyResponse.$type,
       locks: Array.isArray(object?.locks)
         ? object.locks.map((e: any) => PeriodLock.fromJSON(e))
         : [],
@@ -998,11 +1146,22 @@ export const AccountLockedPastTimeNotUnlockingOnlyResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  AccountLockedPastTimeNotUnlockingOnlyResponse.$type,
+  AccountLockedPastTimeNotUnlockingOnlyResponse
+);
+
 function createBaseAccountUnlockedBeforeTimeRequest(): AccountUnlockedBeforeTimeRequest {
-  return { owner: "", timestamp: undefined };
+  return {
+    $type: "osmosis.lockup.AccountUnlockedBeforeTimeRequest",
+    owner: "",
+    timestamp: undefined,
+  };
 }
 
 export const AccountUnlockedBeforeTimeRequest = {
+  $type: "osmosis.lockup.AccountUnlockedBeforeTimeRequest" as const,
+
   encode(
     message: AccountUnlockedBeforeTimeRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1047,6 +1206,7 @@ export const AccountUnlockedBeforeTimeRequest = {
 
   fromJSON(object: any): AccountUnlockedBeforeTimeRequest {
     return {
+      $type: AccountUnlockedBeforeTimeRequest.$type,
       owner: isSet(object.owner) ? String(object.owner) : "",
       timestamp: isSet(object.timestamp)
         ? fromJsonTimestamp(object.timestamp)
@@ -1072,11 +1232,21 @@ export const AccountUnlockedBeforeTimeRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  AccountUnlockedBeforeTimeRequest.$type,
+  AccountUnlockedBeforeTimeRequest
+);
+
 function createBaseAccountUnlockedBeforeTimeResponse(): AccountUnlockedBeforeTimeResponse {
-  return { locks: [] };
+  return {
+    $type: "osmosis.lockup.AccountUnlockedBeforeTimeResponse",
+    locks: [],
+  };
 }
 
 export const AccountUnlockedBeforeTimeResponse = {
+  $type: "osmosis.lockup.AccountUnlockedBeforeTimeResponse" as const,
+
   encode(
     message: AccountUnlockedBeforeTimeResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1110,6 +1280,7 @@ export const AccountUnlockedBeforeTimeResponse = {
 
   fromJSON(object: any): AccountUnlockedBeforeTimeResponse {
     return {
+      $type: AccountUnlockedBeforeTimeResponse.$type,
       locks: Array.isArray(object?.locks)
         ? object.locks.map((e: any) => PeriodLock.fromJSON(e))
         : [],
@@ -1137,11 +1308,23 @@ export const AccountUnlockedBeforeTimeResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  AccountUnlockedBeforeTimeResponse.$type,
+  AccountUnlockedBeforeTimeResponse
+);
+
 function createBaseAccountLockedPastTimeDenomRequest(): AccountLockedPastTimeDenomRequest {
-  return { owner: "", timestamp: undefined, denom: "" };
+  return {
+    $type: "osmosis.lockup.AccountLockedPastTimeDenomRequest",
+    owner: "",
+    timestamp: undefined,
+    denom: "",
+  };
 }
 
 export const AccountLockedPastTimeDenomRequest = {
+  $type: "osmosis.lockup.AccountLockedPastTimeDenomRequest" as const,
+
   encode(
     message: AccountLockedPastTimeDenomRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1192,6 +1375,7 @@ export const AccountLockedPastTimeDenomRequest = {
 
   fromJSON(object: any): AccountLockedPastTimeDenomRequest {
     return {
+      $type: AccountLockedPastTimeDenomRequest.$type,
       owner: isSet(object.owner) ? String(object.owner) : "",
       timestamp: isSet(object.timestamp)
         ? fromJsonTimestamp(object.timestamp)
@@ -1220,11 +1404,21 @@ export const AccountLockedPastTimeDenomRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  AccountLockedPastTimeDenomRequest.$type,
+  AccountLockedPastTimeDenomRequest
+);
+
 function createBaseAccountLockedPastTimeDenomResponse(): AccountLockedPastTimeDenomResponse {
-  return { locks: [] };
+  return {
+    $type: "osmosis.lockup.AccountLockedPastTimeDenomResponse",
+    locks: [],
+  };
 }
 
 export const AccountLockedPastTimeDenomResponse = {
+  $type: "osmosis.lockup.AccountLockedPastTimeDenomResponse" as const,
+
   encode(
     message: AccountLockedPastTimeDenomResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1258,6 +1452,7 @@ export const AccountLockedPastTimeDenomResponse = {
 
   fromJSON(object: any): AccountLockedPastTimeDenomResponse {
     return {
+      $type: AccountLockedPastTimeDenomResponse.$type,
       locks: Array.isArray(object?.locks)
         ? object.locks.map((e: any) => PeriodLock.fromJSON(e))
         : [],
@@ -1285,11 +1480,22 @@ export const AccountLockedPastTimeDenomResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  AccountLockedPastTimeDenomResponse.$type,
+  AccountLockedPastTimeDenomResponse
+);
+
 function createBaseLockedDenomRequest(): LockedDenomRequest {
-  return { denom: "", duration: undefined };
+  return {
+    $type: "osmosis.lockup.LockedDenomRequest",
+    denom: "",
+    duration: undefined,
+  };
 }
 
 export const LockedDenomRequest = {
+  $type: "osmosis.lockup.LockedDenomRequest" as const,
+
   encode(
     message: LockedDenomRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1326,6 +1532,7 @@ export const LockedDenomRequest = {
 
   fromJSON(object: any): LockedDenomRequest {
     return {
+      $type: LockedDenomRequest.$type,
       denom: isSet(object.denom) ? String(object.denom) : "",
       duration: isSet(object.duration)
         ? Duration.fromJSON(object.duration)
@@ -1356,11 +1563,15 @@ export const LockedDenomRequest = {
   },
 };
 
+messageTypeRegistry.set(LockedDenomRequest.$type, LockedDenomRequest);
+
 function createBaseLockedDenomResponse(): LockedDenomResponse {
-  return { amount: "" };
+  return { $type: "osmosis.lockup.LockedDenomResponse", amount: "" };
 }
 
 export const LockedDenomResponse = {
+  $type: "osmosis.lockup.LockedDenomResponse" as const,
+
   encode(
     message: LockedDenomResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1391,6 +1602,7 @@ export const LockedDenomResponse = {
 
   fromJSON(object: any): LockedDenomResponse {
     return {
+      $type: LockedDenomResponse.$type,
       amount: isSet(object.amount) ? String(object.amount) : "",
     };
   },
@@ -1410,11 +1622,15 @@ export const LockedDenomResponse = {
   },
 };
 
+messageTypeRegistry.set(LockedDenomResponse.$type, LockedDenomResponse);
+
 function createBaseLockedRequest(): LockedRequest {
-  return { lockId: Long.UZERO };
+  return { $type: "osmosis.lockup.LockedRequest", lockId: Long.UZERO };
 }
 
 export const LockedRequest = {
+  $type: "osmosis.lockup.LockedRequest" as const,
+
   encode(
     message: LockedRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1445,6 +1661,7 @@ export const LockedRequest = {
 
   fromJSON(object: any): LockedRequest {
     return {
+      $type: LockedRequest.$type,
       lockId: isSet(object.lockId)
         ? Long.fromString(object.lockId)
         : Long.UZERO,
@@ -1470,11 +1687,15 @@ export const LockedRequest = {
   },
 };
 
+messageTypeRegistry.set(LockedRequest.$type, LockedRequest);
+
 function createBaseLockedResponse(): LockedResponse {
-  return { lock: undefined };
+  return { $type: "osmosis.lockup.LockedResponse", lock: undefined };
 }
 
 export const LockedResponse = {
+  $type: "osmosis.lockup.LockedResponse" as const,
+
   encode(
     message: LockedResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1505,6 +1726,7 @@ export const LockedResponse = {
 
   fromJSON(object: any): LockedResponse {
     return {
+      $type: LockedResponse.$type,
       lock: isSet(object.lock) ? PeriodLock.fromJSON(object.lock) : undefined,
     };
   },
@@ -1528,11 +1750,18 @@ export const LockedResponse = {
   },
 };
 
+messageTypeRegistry.set(LockedResponse.$type, LockedResponse);
+
 function createBaseSyntheticLockupsByLockupIDRequest(): SyntheticLockupsByLockupIDRequest {
-  return { lockId: Long.UZERO };
+  return {
+    $type: "osmosis.lockup.SyntheticLockupsByLockupIDRequest",
+    lockId: Long.UZERO,
+  };
 }
 
 export const SyntheticLockupsByLockupIDRequest = {
+  $type: "osmosis.lockup.SyntheticLockupsByLockupIDRequest" as const,
+
   encode(
     message: SyntheticLockupsByLockupIDRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1566,6 +1795,7 @@ export const SyntheticLockupsByLockupIDRequest = {
 
   fromJSON(object: any): SyntheticLockupsByLockupIDRequest {
     return {
+      $type: SyntheticLockupsByLockupIDRequest.$type,
       lockId: isSet(object.lockId)
         ? Long.fromString(object.lockId)
         : Long.UZERO,
@@ -1591,11 +1821,21 @@ export const SyntheticLockupsByLockupIDRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  SyntheticLockupsByLockupIDRequest.$type,
+  SyntheticLockupsByLockupIDRequest
+);
+
 function createBaseSyntheticLockupsByLockupIDResponse(): SyntheticLockupsByLockupIDResponse {
-  return { syntheticLocks: [] };
+  return {
+    $type: "osmosis.lockup.SyntheticLockupsByLockupIDResponse",
+    syntheticLocks: [],
+  };
 }
 
 export const SyntheticLockupsByLockupIDResponse = {
+  $type: "osmosis.lockup.SyntheticLockupsByLockupIDResponse" as const,
+
   encode(
     message: SyntheticLockupsByLockupIDResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1631,6 +1871,7 @@ export const SyntheticLockupsByLockupIDResponse = {
 
   fromJSON(object: any): SyntheticLockupsByLockupIDResponse {
     return {
+      $type: SyntheticLockupsByLockupIDResponse.$type,
       syntheticLocks: Array.isArray(object?.syntheticLocks)
         ? object.syntheticLocks.map((e: any) => SyntheticLock.fromJSON(e))
         : [],
@@ -1659,11 +1900,22 @@ export const SyntheticLockupsByLockupIDResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  SyntheticLockupsByLockupIDResponse.$type,
+  SyntheticLockupsByLockupIDResponse
+);
+
 function createBaseAccountLockedLongerDurationRequest(): AccountLockedLongerDurationRequest {
-  return { owner: "", duration: undefined };
+  return {
+    $type: "osmosis.lockup.AccountLockedLongerDurationRequest",
+    owner: "",
+    duration: undefined,
+  };
 }
 
 export const AccountLockedLongerDurationRequest = {
+  $type: "osmosis.lockup.AccountLockedLongerDurationRequest" as const,
+
   encode(
     message: AccountLockedLongerDurationRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1703,6 +1955,7 @@ export const AccountLockedLongerDurationRequest = {
 
   fromJSON(object: any): AccountLockedLongerDurationRequest {
     return {
+      $type: AccountLockedLongerDurationRequest.$type,
       owner: isSet(object.owner) ? String(object.owner) : "",
       duration: isSet(object.duration)
         ? Duration.fromJSON(object.duration)
@@ -1733,11 +1986,21 @@ export const AccountLockedLongerDurationRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  AccountLockedLongerDurationRequest.$type,
+  AccountLockedLongerDurationRequest
+);
+
 function createBaseAccountLockedLongerDurationResponse(): AccountLockedLongerDurationResponse {
-  return { locks: [] };
+  return {
+    $type: "osmosis.lockup.AccountLockedLongerDurationResponse",
+    locks: [],
+  };
 }
 
 export const AccountLockedLongerDurationResponse = {
+  $type: "osmosis.lockup.AccountLockedLongerDurationResponse" as const,
+
   encode(
     message: AccountLockedLongerDurationResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1771,6 +2034,7 @@ export const AccountLockedLongerDurationResponse = {
 
   fromJSON(object: any): AccountLockedLongerDurationResponse {
     return {
+      $type: AccountLockedLongerDurationResponse.$type,
       locks: Array.isArray(object?.locks)
         ? object.locks.map((e: any) => PeriodLock.fromJSON(e))
         : [],
@@ -1798,11 +2062,23 @@ export const AccountLockedLongerDurationResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  AccountLockedLongerDurationResponse.$type,
+  AccountLockedLongerDurationResponse
+);
+
 function createBaseAccountLockedLongerDurationNotUnlockingOnlyRequest(): AccountLockedLongerDurationNotUnlockingOnlyRequest {
-  return { owner: "", duration: undefined };
+  return {
+    $type: "osmosis.lockup.AccountLockedLongerDurationNotUnlockingOnlyRequest",
+    owner: "",
+    duration: undefined,
+  };
 }
 
 export const AccountLockedLongerDurationNotUnlockingOnlyRequest = {
+  $type:
+    "osmosis.lockup.AccountLockedLongerDurationNotUnlockingOnlyRequest" as const,
+
   encode(
     message: AccountLockedLongerDurationNotUnlockingOnlyRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1843,6 +2119,7 @@ export const AccountLockedLongerDurationNotUnlockingOnlyRequest = {
 
   fromJSON(object: any): AccountLockedLongerDurationNotUnlockingOnlyRequest {
     return {
+      $type: AccountLockedLongerDurationNotUnlockingOnlyRequest.$type,
       owner: isSet(object.owner) ? String(object.owner) : "",
       duration: isSet(object.duration)
         ? Duration.fromJSON(object.duration)
@@ -1877,11 +2154,22 @@ export const AccountLockedLongerDurationNotUnlockingOnlyRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  AccountLockedLongerDurationNotUnlockingOnlyRequest.$type,
+  AccountLockedLongerDurationNotUnlockingOnlyRequest
+);
+
 function createBaseAccountLockedLongerDurationNotUnlockingOnlyResponse(): AccountLockedLongerDurationNotUnlockingOnlyResponse {
-  return { locks: [] };
+  return {
+    $type: "osmosis.lockup.AccountLockedLongerDurationNotUnlockingOnlyResponse",
+    locks: [],
+  };
 }
 
 export const AccountLockedLongerDurationNotUnlockingOnlyResponse = {
+  $type:
+    "osmosis.lockup.AccountLockedLongerDurationNotUnlockingOnlyResponse" as const,
+
   encode(
     message: AccountLockedLongerDurationNotUnlockingOnlyResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1916,6 +2204,7 @@ export const AccountLockedLongerDurationNotUnlockingOnlyResponse = {
 
   fromJSON(object: any): AccountLockedLongerDurationNotUnlockingOnlyResponse {
     return {
+      $type: AccountLockedLongerDurationNotUnlockingOnlyResponse.$type,
       locks: Array.isArray(object?.locks)
         ? object.locks.map((e: any) => PeriodLock.fromJSON(e))
         : [],
@@ -1949,11 +2238,23 @@ export const AccountLockedLongerDurationNotUnlockingOnlyResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  AccountLockedLongerDurationNotUnlockingOnlyResponse.$type,
+  AccountLockedLongerDurationNotUnlockingOnlyResponse
+);
+
 function createBaseAccountLockedLongerDurationDenomRequest(): AccountLockedLongerDurationDenomRequest {
-  return { owner: "", duration: undefined, denom: "" };
+  return {
+    $type: "osmosis.lockup.AccountLockedLongerDurationDenomRequest",
+    owner: "",
+    duration: undefined,
+    denom: "",
+  };
 }
 
 export const AccountLockedLongerDurationDenomRequest = {
+  $type: "osmosis.lockup.AccountLockedLongerDurationDenomRequest" as const,
+
   encode(
     message: AccountLockedLongerDurationDenomRequest,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1999,6 +2300,7 @@ export const AccountLockedLongerDurationDenomRequest = {
 
   fromJSON(object: any): AccountLockedLongerDurationDenomRequest {
     return {
+      $type: AccountLockedLongerDurationDenomRequest.$type,
       owner: isSet(object.owner) ? String(object.owner) : "",
       duration: isSet(object.duration)
         ? Duration.fromJSON(object.duration)
@@ -2032,11 +2334,21 @@ export const AccountLockedLongerDurationDenomRequest = {
   },
 };
 
+messageTypeRegistry.set(
+  AccountLockedLongerDurationDenomRequest.$type,
+  AccountLockedLongerDurationDenomRequest
+);
+
 function createBaseAccountLockedLongerDurationDenomResponse(): AccountLockedLongerDurationDenomResponse {
-  return { locks: [] };
+  return {
+    $type: "osmosis.lockup.AccountLockedLongerDurationDenomResponse",
+    locks: [],
+  };
 }
 
 export const AccountLockedLongerDurationDenomResponse = {
+  $type: "osmosis.lockup.AccountLockedLongerDurationDenomResponse" as const,
+
   encode(
     message: AccountLockedLongerDurationDenomResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -2070,6 +2382,7 @@ export const AccountLockedLongerDurationDenomResponse = {
 
   fromJSON(object: any): AccountLockedLongerDurationDenomResponse {
     return {
+      $type: AccountLockedLongerDurationDenomResponse.$type,
       locks: Array.isArray(object?.locks)
         ? object.locks.map((e: any) => PeriodLock.fromJSON(e))
         : [],
@@ -2096,6 +2409,11 @@ export const AccountLockedLongerDurationDenomResponse = {
     return message;
   },
 };
+
+messageTypeRegistry.set(
+  AccountLockedLongerDurationDenomResponse.$type,
+  AccountLockedLongerDurationDenomResponse
+);
 
 /** Query defines the gRPC querier service. */
 export interface Query {
@@ -2423,21 +2741,21 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = (date.getTime() % 1_000) * 1_000_000;
-  return { seconds, nanos };
+  return { $type: "google.protobuf.Timestamp", seconds, nanos };
 }
 
 function fromTimestamp(t: Timestamp): Date {

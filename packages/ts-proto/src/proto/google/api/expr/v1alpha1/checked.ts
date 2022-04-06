@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import {
@@ -17,6 +18,7 @@ export const protobufPackage = "google.api.expr.v1alpha1";
 
 /** A CEL expression which has been successfully type checked. */
 export interface CheckedExpr {
+  $type: "google.api.expr.v1alpha1.CheckedExpr";
   /**
    * A map from expression ids to resolved references.
    *
@@ -47,7 +49,7 @@ export interface CheckedExpr {
    * The source info derived from input that generated the parsed `expr` and
    * any optimizations made during the type-checking pass.
    */
-  sourceInfo?: SourceInfo;
+  sourceInfo: SourceInfo;
   /**
    * The expr version indicates the major / minor version number of the `expr`
    * representation.
@@ -62,23 +64,26 @@ export interface CheckedExpr {
    * The checked expression. Semantically equivalent to the parsed `expr`, but
    * may have structural differences.
    */
-  expr?: Expr;
+  expr: Expr;
 }
 
 export interface CheckedExpr_ReferenceMapEntry {
+  $type: "google.api.expr.v1alpha1.CheckedExpr.ReferenceMapEntry";
   key: Long;
-  value?: Reference;
+  value: Reference;
 }
 
 export interface CheckedExpr_TypeMapEntry {
+  $type: "google.api.expr.v1alpha1.CheckedExpr.TypeMapEntry";
   key: Long;
-  value?: Type;
+  value: Type;
 }
 
 /** Represents a CEL type. */
 export interface Type {
+  $type: "google.api.expr.v1alpha1.Type";
   /** Dynamic type. */
-  dyn?: Empty | undefined;
+  dyn: Empty | undefined;
   /** Null value. */
   null: NullValue | undefined;
   /** Primitive types: `true`, `1u`, `-2.0`, `'string'`, `b'bytes'`. */
@@ -88,11 +93,11 @@ export interface Type {
   /** Well-known protobuf type such as `google.protobuf.Timestamp`. */
   wellKnown: Type_WellKnownType | undefined;
   /** Parameterized list with elements of `list_type`, e.g. `list<timestamp>`. */
-  listType?: Type_ListType | undefined;
+  listType: Type_ListType | undefined;
   /** Parameterized map with typed keys and values. */
-  mapType?: Type_MapType | undefined;
+  mapType: Type_MapType | undefined;
   /** Function type. */
-  function?: Type_FunctionType | undefined;
+  function: Type_FunctionType | undefined;
   /**
    * Protocol buffer message type.
    *
@@ -114,7 +119,7 @@ export interface Type {
    * The `type` value specifies the target type. e.g. int is type with a
    * target type of `Primitive.INT`.
    */
-  type?: Type | undefined;
+  type: Type | undefined;
   /**
    * Error type.
    *
@@ -122,9 +127,9 @@ export interface Type {
    * as the `ERROR` type. This permits the type-checker to discover other
    * errors present in the expression.
    */
-  error?: Empty | undefined;
+  error: Empty | undefined;
   /** Abstract, application defined type. */
-  abstractType?: Type_AbstractType | undefined;
+  abstractType: Type_AbstractType | undefined;
 }
 
 /** CEL primitive types. */
@@ -266,28 +271,32 @@ export function type_WellKnownTypeToJSON(object: Type_WellKnownType): string {
 
 /** List type with typed elements, e.g. `list<example.proto.MyMessage>`. */
 export interface Type_ListType {
+  $type: "google.api.expr.v1alpha1.Type.ListType";
   /** The element type. */
-  elemType?: Type;
+  elemType: Type;
 }
 
 /** Map type with parameterized key and value types, e.g. `map<string, int>`. */
 export interface Type_MapType {
+  $type: "google.api.expr.v1alpha1.Type.MapType";
   /** The type of the key. */
-  keyType?: Type;
+  keyType: Type;
   /** The type of the value. */
-  valueType?: Type;
+  valueType: Type;
 }
 
 /** Function type with result and arg types. */
 export interface Type_FunctionType {
+  $type: "google.api.expr.v1alpha1.Type.FunctionType";
   /** Result type of the function. */
-  resultType?: Type;
+  resultType: Type;
   /** Argument types of the function. */
   argTypes: Type[];
 }
 
 /** Application defined abstract type. */
 export interface Type_AbstractType {
+  $type: "google.api.expr.v1alpha1.Type.AbstractType";
   /** The fully qualified name of this abstract type. */
   name: string;
   /** Parameter types for this abstract type. */
@@ -301,6 +310,7 @@ export interface Type_AbstractType {
  * evaluating that expression, and the caller requesting evaluation.
  */
 export interface Decl {
+  $type: "google.api.expr.v1alpha1.Decl";
   /**
    * The fully qualified name of the declaration.
    *
@@ -313,9 +323,9 @@ export interface Decl {
    */
   name: string;
   /** Identifier declaration. */
-  ident?: Decl_IdentDecl | undefined;
+  ident: Decl_IdentDecl | undefined;
   /** Function declaration. */
-  function?: Decl_FunctionDecl | undefined;
+  function: Decl_FunctionDecl | undefined;
 }
 
 /**
@@ -327,13 +337,14 @@ export interface Decl {
  * time.
  */
 export interface Decl_IdentDecl {
+  $type: "google.api.expr.v1alpha1.Decl.IdentDecl";
   /** Required. The type of the identifier. */
-  type?: Type;
+  type: Type;
   /**
    * The constant value of the identifier. If not specified, the identifier
    * must be supplied at evaluation time.
    */
-  value?: Constant;
+  value: Constant;
   /** Documentation string for the identifier. */
   doc: string;
 }
@@ -346,6 +357,7 @@ export interface Decl_IdentDecl {
  * logging which are not observable from CEL).
  */
 export interface Decl_FunctionDecl {
+  $type: "google.api.expr.v1alpha1.Decl.FunctionDecl";
   /** Required. List of function overloads, must contain at least one overload. */
   overloads: Decl_FunctionDecl_Overload[];
 }
@@ -363,6 +375,7 @@ export interface Decl_FunctionDecl {
  * parameterized type variables (similar as type erasure in Java).
  */
 export interface Decl_FunctionDecl_Overload {
+  $type: "google.api.expr.v1alpha1.Decl.FunctionDecl.Overload";
   /**
    * Required. Globally unique overload name of the function which reflects
    * the function name and argument types.
@@ -395,7 +408,7 @@ export interface Decl_FunctionDecl_Overload {
    * Required. The result type of the function. For example, the operator
    * `string.isEmpty()` would have `result_type` of `kind: BOOL`.
    */
-  resultType?: Type;
+  resultType: Type;
   /**
    * Whether the function is to be used in a method call-style `x.f(...)`
    * of a function call-style `f(x, ...)`.
@@ -410,6 +423,7 @@ export interface Decl_FunctionDecl_Overload {
 
 /** Describes a resolved reference to a declaration. */
 export interface Reference {
+  $type: "google.api.expr.v1alpha1.Reference";
   /** The fully qualified name of the declaration. */
   name: string;
   /**
@@ -427,11 +441,12 @@ export interface Reference {
    * For references to constants, this may contain the value of the
    * constant if known at compile time.
    */
-  value?: Constant;
+  value: Constant;
 }
 
 function createBaseCheckedExpr(): CheckedExpr {
   return {
+    $type: "google.api.expr.v1alpha1.CheckedExpr",
     referenceMap: {},
     typeMap: {},
     sourceInfo: undefined,
@@ -441,19 +456,29 @@ function createBaseCheckedExpr(): CheckedExpr {
 }
 
 export const CheckedExpr = {
+  $type: "google.api.expr.v1alpha1.CheckedExpr" as const,
+
   encode(
     message: CheckedExpr,
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
     Object.entries(message.referenceMap).forEach(([key, value]) => {
       CheckedExpr_ReferenceMapEntry.encode(
-        { key: key as any, value },
+        {
+          $type: "google.api.expr.v1alpha1.CheckedExpr.ReferenceMapEntry",
+          key: key as any,
+          value,
+        },
         writer.uint32(18).fork()
       ).ldelim();
     });
     Object.entries(message.typeMap).forEach(([key, value]) => {
       CheckedExpr_TypeMapEntry.encode(
-        { key: key as any, value },
+        {
+          $type: "google.api.expr.v1alpha1.CheckedExpr.TypeMapEntry",
+          key: key as any,
+          value,
+        },
         writer.uint32(26).fork()
       ).ldelim();
     });
@@ -513,6 +538,7 @@ export const CheckedExpr = {
 
   fromJSON(object: any): CheckedExpr {
     return {
+      $type: CheckedExpr.$type,
       referenceMap: isObject(object.referenceMap)
         ? Object.entries(object.referenceMap).reduce<{
             [key: Long]: Reference;
@@ -596,11 +622,19 @@ export const CheckedExpr = {
   },
 };
 
+messageTypeRegistry.set(CheckedExpr.$type, CheckedExpr);
+
 function createBaseCheckedExpr_ReferenceMapEntry(): CheckedExpr_ReferenceMapEntry {
-  return { key: Long.ZERO, value: undefined };
+  return {
+    $type: "google.api.expr.v1alpha1.CheckedExpr.ReferenceMapEntry",
+    key: Long.ZERO,
+    value: undefined,
+  };
 }
 
 export const CheckedExpr_ReferenceMapEntry = {
+  $type: "google.api.expr.v1alpha1.CheckedExpr.ReferenceMapEntry" as const,
+
   encode(
     message: CheckedExpr_ReferenceMapEntry,
     writer: _m0.Writer = _m0.Writer.create()
@@ -640,6 +674,7 @@ export const CheckedExpr_ReferenceMapEntry = {
 
   fromJSON(object: any): CheckedExpr_ReferenceMapEntry {
     return {
+      $type: CheckedExpr_ReferenceMapEntry.$type,
       key: isSet(object.key) ? Long.fromString(object.key) : Long.ZERO,
       value: isSet(object.value) ? Reference.fromJSON(object.value) : undefined,
     };
@@ -670,11 +705,22 @@ export const CheckedExpr_ReferenceMapEntry = {
   },
 };
 
+messageTypeRegistry.set(
+  CheckedExpr_ReferenceMapEntry.$type,
+  CheckedExpr_ReferenceMapEntry
+);
+
 function createBaseCheckedExpr_TypeMapEntry(): CheckedExpr_TypeMapEntry {
-  return { key: Long.ZERO, value: undefined };
+  return {
+    $type: "google.api.expr.v1alpha1.CheckedExpr.TypeMapEntry",
+    key: Long.ZERO,
+    value: undefined,
+  };
 }
 
 export const CheckedExpr_TypeMapEntry = {
+  $type: "google.api.expr.v1alpha1.CheckedExpr.TypeMapEntry" as const,
+
   encode(
     message: CheckedExpr_TypeMapEntry,
     writer: _m0.Writer = _m0.Writer.create()
@@ -714,6 +760,7 @@ export const CheckedExpr_TypeMapEntry = {
 
   fromJSON(object: any): CheckedExpr_TypeMapEntry {
     return {
+      $type: CheckedExpr_TypeMapEntry.$type,
       key: isSet(object.key) ? Long.fromString(object.key) : Long.ZERO,
       value: isSet(object.value) ? Type.fromJSON(object.value) : undefined,
     };
@@ -744,8 +791,14 @@ export const CheckedExpr_TypeMapEntry = {
   },
 };
 
+messageTypeRegistry.set(
+  CheckedExpr_TypeMapEntry.$type,
+  CheckedExpr_TypeMapEntry
+);
+
 function createBaseType(): Type {
   return {
+    $type: "google.api.expr.v1alpha1.Type",
     dyn: undefined,
     null: undefined,
     primitive: undefined,
@@ -763,6 +816,8 @@ function createBaseType(): Type {
 }
 
 export const Type = {
+  $type: "google.api.expr.v1alpha1.Type" as const,
+
   encode(message: Type, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.dyn !== undefined) {
       Empty.encode(message.dyn, writer.uint32(10).fork()).ldelim();
@@ -871,6 +926,7 @@ export const Type = {
 
   fromJSON(object: any): Type {
     return {
+      $type: Type.$type,
       dyn: isSet(object.dyn) ? Empty.fromJSON(object.dyn) : undefined,
       null: isSet(object.null) ? nullValueFromJSON(object.null) : undefined,
       primitive: isSet(object.primitive)
@@ -991,11 +1047,18 @@ export const Type = {
   },
 };
 
+messageTypeRegistry.set(Type.$type, Type);
+
 function createBaseType_ListType(): Type_ListType {
-  return { elemType: undefined };
+  return {
+    $type: "google.api.expr.v1alpha1.Type.ListType",
+    elemType: undefined,
+  };
 }
 
 export const Type_ListType = {
+  $type: "google.api.expr.v1alpha1.Type.ListType" as const,
+
   encode(
     message: Type_ListType,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1026,6 +1089,7 @@ export const Type_ListType = {
 
   fromJSON(object: any): Type_ListType {
     return {
+      $type: Type_ListType.$type,
       elemType: isSet(object.elemType)
         ? Type.fromJSON(object.elemType)
         : undefined,
@@ -1053,11 +1117,19 @@ export const Type_ListType = {
   },
 };
 
+messageTypeRegistry.set(Type_ListType.$type, Type_ListType);
+
 function createBaseType_MapType(): Type_MapType {
-  return { keyType: undefined, valueType: undefined };
+  return {
+    $type: "google.api.expr.v1alpha1.Type.MapType",
+    keyType: undefined,
+    valueType: undefined,
+  };
 }
 
 export const Type_MapType = {
+  $type: "google.api.expr.v1alpha1.Type.MapType" as const,
+
   encode(
     message: Type_MapType,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1094,6 +1166,7 @@ export const Type_MapType = {
 
   fromJSON(object: any): Type_MapType {
     return {
+      $type: Type_MapType.$type,
       keyType: isSet(object.keyType)
         ? Type.fromJSON(object.keyType)
         : undefined,
@@ -1132,11 +1205,19 @@ export const Type_MapType = {
   },
 };
 
+messageTypeRegistry.set(Type_MapType.$type, Type_MapType);
+
 function createBaseType_FunctionType(): Type_FunctionType {
-  return { resultType: undefined, argTypes: [] };
+  return {
+    $type: "google.api.expr.v1alpha1.Type.FunctionType",
+    resultType: undefined,
+    argTypes: [],
+  };
 }
 
 export const Type_FunctionType = {
+  $type: "google.api.expr.v1alpha1.Type.FunctionType" as const,
+
   encode(
     message: Type_FunctionType,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1173,6 +1254,7 @@ export const Type_FunctionType = {
 
   fromJSON(object: any): Type_FunctionType {
     return {
+      $type: Type_FunctionType.$type,
       resultType: isSet(object.resultType)
         ? Type.fromJSON(object.resultType)
         : undefined,
@@ -1211,11 +1293,19 @@ export const Type_FunctionType = {
   },
 };
 
+messageTypeRegistry.set(Type_FunctionType.$type, Type_FunctionType);
+
 function createBaseType_AbstractType(): Type_AbstractType {
-  return { name: "", parameterTypes: [] };
+  return {
+    $type: "google.api.expr.v1alpha1.Type.AbstractType",
+    name: "",
+    parameterTypes: [],
+  };
 }
 
 export const Type_AbstractType = {
+  $type: "google.api.expr.v1alpha1.Type.AbstractType" as const,
+
   encode(
     message: Type_AbstractType,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1252,6 +1342,7 @@ export const Type_AbstractType = {
 
   fromJSON(object: any): Type_AbstractType {
     return {
+      $type: Type_AbstractType.$type,
       name: isSet(object.name) ? String(object.name) : "",
       parameterTypes: Array.isArray(object?.parameterTypes)
         ? object.parameterTypes.map((e: any) => Type.fromJSON(e))
@@ -1283,11 +1374,20 @@ export const Type_AbstractType = {
   },
 };
 
+messageTypeRegistry.set(Type_AbstractType.$type, Type_AbstractType);
+
 function createBaseDecl(): Decl {
-  return { name: "", ident: undefined, function: undefined };
+  return {
+    $type: "google.api.expr.v1alpha1.Decl",
+    name: "",
+    ident: undefined,
+    function: undefined,
+  };
 }
 
 export const Decl = {
+  $type: "google.api.expr.v1alpha1.Decl" as const,
+
   encode(message: Decl, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -1330,6 +1430,7 @@ export const Decl = {
 
   fromJSON(object: any): Decl {
     return {
+      $type: Decl.$type,
       name: isSet(object.name) ? String(object.name) : "",
       ident: isSet(object.ident)
         ? Decl_IdentDecl.fromJSON(object.ident)
@@ -1369,11 +1470,20 @@ export const Decl = {
   },
 };
 
+messageTypeRegistry.set(Decl.$type, Decl);
+
 function createBaseDecl_IdentDecl(): Decl_IdentDecl {
-  return { type: undefined, value: undefined, doc: "" };
+  return {
+    $type: "google.api.expr.v1alpha1.Decl.IdentDecl",
+    type: undefined,
+    value: undefined,
+    doc: "",
+  };
 }
 
 export const Decl_IdentDecl = {
+  $type: "google.api.expr.v1alpha1.Decl.IdentDecl" as const,
+
   encode(
     message: Decl_IdentDecl,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1416,6 +1526,7 @@ export const Decl_IdentDecl = {
 
   fromJSON(object: any): Decl_IdentDecl {
     return {
+      $type: Decl_IdentDecl.$type,
       type: isSet(object.type) ? Type.fromJSON(object.type) : undefined,
       value: isSet(object.value) ? Constant.fromJSON(object.value) : undefined,
       doc: isSet(object.doc) ? String(object.doc) : "",
@@ -1449,11 +1560,15 @@ export const Decl_IdentDecl = {
   },
 };
 
+messageTypeRegistry.set(Decl_IdentDecl.$type, Decl_IdentDecl);
+
 function createBaseDecl_FunctionDecl(): Decl_FunctionDecl {
-  return { overloads: [] };
+  return { $type: "google.api.expr.v1alpha1.Decl.FunctionDecl", overloads: [] };
 }
 
 export const Decl_FunctionDecl = {
+  $type: "google.api.expr.v1alpha1.Decl.FunctionDecl" as const,
+
   encode(
     message: Decl_FunctionDecl,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1486,6 +1601,7 @@ export const Decl_FunctionDecl = {
 
   fromJSON(object: any): Decl_FunctionDecl {
     return {
+      $type: Decl_FunctionDecl.$type,
       overloads: Array.isArray(object?.overloads)
         ? object.overloads.map((e: any) =>
             Decl_FunctionDecl_Overload.fromJSON(e)
@@ -1517,8 +1633,11 @@ export const Decl_FunctionDecl = {
   },
 };
 
+messageTypeRegistry.set(Decl_FunctionDecl.$type, Decl_FunctionDecl);
+
 function createBaseDecl_FunctionDecl_Overload(): Decl_FunctionDecl_Overload {
   return {
+    $type: "google.api.expr.v1alpha1.Decl.FunctionDecl.Overload",
     overloadId: "",
     params: [],
     typeParams: [],
@@ -1529,6 +1648,8 @@ function createBaseDecl_FunctionDecl_Overload(): Decl_FunctionDecl_Overload {
 }
 
 export const Decl_FunctionDecl_Overload = {
+  $type: "google.api.expr.v1alpha1.Decl.FunctionDecl.Overload" as const,
+
   encode(
     message: Decl_FunctionDecl_Overload,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1592,6 +1713,7 @@ export const Decl_FunctionDecl_Overload = {
 
   fromJSON(object: any): Decl_FunctionDecl_Overload {
     return {
+      $type: Decl_FunctionDecl_Overload.$type,
       overloadId: isSet(object.overloadId) ? String(object.overloadId) : "",
       params: Array.isArray(object?.params)
         ? object.params.map((e: any) => Type.fromJSON(e))
@@ -1649,11 +1771,23 @@ export const Decl_FunctionDecl_Overload = {
   },
 };
 
+messageTypeRegistry.set(
+  Decl_FunctionDecl_Overload.$type,
+  Decl_FunctionDecl_Overload
+);
+
 function createBaseReference(): Reference {
-  return { name: "", overloadId: [], value: undefined };
+  return {
+    $type: "google.api.expr.v1alpha1.Reference",
+    name: "",
+    overloadId: [],
+    value: undefined,
+  };
 }
 
 export const Reference = {
+  $type: "google.api.expr.v1alpha1.Reference" as const,
+
   encode(
     message: Reference,
     writer: _m0.Writer = _m0.Writer.create()
@@ -1696,6 +1830,7 @@ export const Reference = {
 
   fromJSON(object: any): Reference {
     return {
+      $type: Reference.$type,
       name: isSet(object.name) ? String(object.name) : "",
       overloadId: Array.isArray(object?.overloadId)
         ? object.overloadId.map((e: any) => String(e))
@@ -1731,6 +1866,8 @@ export const Reference = {
   },
 };
 
+messageTypeRegistry.set(Reference.$type, Reference);
+
 type Builtin =
   | Date
   | Function
@@ -1749,14 +1886,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

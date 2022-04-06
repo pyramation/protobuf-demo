@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
@@ -10,24 +11,29 @@ export const protobufPackage = "cosmos.distribution.v1beta1";
  * a delegator (or validator self-delegation).
  */
 export interface MsgSetWithdrawAddress {
+  $type: "cosmos.distribution.v1beta1.MsgSetWithdrawAddress";
   delegatorAddress: string;
   withdrawAddress: string;
 }
 
 /** MsgSetWithdrawAddressResponse defines the Msg/SetWithdrawAddress response type. */
-export interface MsgSetWithdrawAddressResponse {}
+export interface MsgSetWithdrawAddressResponse {
+  $type: "cosmos.distribution.v1beta1.MsgSetWithdrawAddressResponse";
+}
 
 /**
  * MsgWithdrawDelegatorReward represents delegation withdrawal to a delegator
  * from a single validator.
  */
 export interface MsgWithdrawDelegatorReward {
+  $type: "cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward";
   delegatorAddress: string;
   validatorAddress: string;
 }
 
 /** MsgWithdrawDelegatorRewardResponse defines the Msg/WithdrawDelegatorReward response type. */
 export interface MsgWithdrawDelegatorRewardResponse {
+  $type: "cosmos.distribution.v1beta1.MsgWithdrawDelegatorRewardResponse";
   amount: Coin[];
 }
 
@@ -36,11 +42,13 @@ export interface MsgWithdrawDelegatorRewardResponse {
  * address.
  */
 export interface MsgWithdrawValidatorCommission {
+  $type: "cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission";
   validatorAddress: string;
 }
 
 /** MsgWithdrawValidatorCommissionResponse defines the Msg/WithdrawValidatorCommission response type. */
 export interface MsgWithdrawValidatorCommissionResponse {
+  $type: "cosmos.distribution.v1beta1.MsgWithdrawValidatorCommissionResponse";
   amount: Coin[];
 }
 
@@ -49,18 +57,27 @@ export interface MsgWithdrawValidatorCommissionResponse {
  * fund the community pool.
  */
 export interface MsgFundCommunityPool {
+  $type: "cosmos.distribution.v1beta1.MsgFundCommunityPool";
   amount: Coin[];
   depositor: string;
 }
 
 /** MsgFundCommunityPoolResponse defines the Msg/FundCommunityPool response type. */
-export interface MsgFundCommunityPoolResponse {}
+export interface MsgFundCommunityPoolResponse {
+  $type: "cosmos.distribution.v1beta1.MsgFundCommunityPoolResponse";
+}
 
 function createBaseMsgSetWithdrawAddress(): MsgSetWithdrawAddress {
-  return { delegatorAddress: "", withdrawAddress: "" };
+  return {
+    $type: "cosmos.distribution.v1beta1.MsgSetWithdrawAddress",
+    delegatorAddress: "",
+    withdrawAddress: "",
+  };
 }
 
 export const MsgSetWithdrawAddress = {
+  $type: "cosmos.distribution.v1beta1.MsgSetWithdrawAddress" as const,
+
   encode(
     message: MsgSetWithdrawAddress,
     writer: _m0.Writer = _m0.Writer.create()
@@ -100,6 +117,7 @@ export const MsgSetWithdrawAddress = {
 
   fromJSON(object: any): MsgSetWithdrawAddress {
     return {
+      $type: MsgSetWithdrawAddress.$type,
       delegatorAddress: isSet(object.delegatorAddress)
         ? String(object.delegatorAddress)
         : "",
@@ -128,11 +146,15 @@ export const MsgSetWithdrawAddress = {
   },
 };
 
+messageTypeRegistry.set(MsgSetWithdrawAddress.$type, MsgSetWithdrawAddress);
+
 function createBaseMsgSetWithdrawAddressResponse(): MsgSetWithdrawAddressResponse {
-  return {};
+  return { $type: "cosmos.distribution.v1beta1.MsgSetWithdrawAddressResponse" };
 }
 
 export const MsgSetWithdrawAddressResponse = {
+  $type: "cosmos.distribution.v1beta1.MsgSetWithdrawAddressResponse" as const,
+
   encode(
     _: MsgSetWithdrawAddressResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -159,7 +181,9 @@ export const MsgSetWithdrawAddressResponse = {
   },
 
   fromJSON(_: any): MsgSetWithdrawAddressResponse {
-    return {};
+    return {
+      $type: MsgSetWithdrawAddressResponse.$type,
+    };
   },
 
   toJSON(_: MsgSetWithdrawAddressResponse): unknown {
@@ -175,11 +199,22 @@ export const MsgSetWithdrawAddressResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgSetWithdrawAddressResponse.$type,
+  MsgSetWithdrawAddressResponse
+);
+
 function createBaseMsgWithdrawDelegatorReward(): MsgWithdrawDelegatorReward {
-  return { delegatorAddress: "", validatorAddress: "" };
+  return {
+    $type: "cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward",
+    delegatorAddress: "",
+    validatorAddress: "",
+  };
 }
 
 export const MsgWithdrawDelegatorReward = {
+  $type: "cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward" as const,
+
   encode(
     message: MsgWithdrawDelegatorReward,
     writer: _m0.Writer = _m0.Writer.create()
@@ -219,6 +254,7 @@ export const MsgWithdrawDelegatorReward = {
 
   fromJSON(object: any): MsgWithdrawDelegatorReward {
     return {
+      $type: MsgWithdrawDelegatorReward.$type,
       delegatorAddress: isSet(object.delegatorAddress)
         ? String(object.delegatorAddress)
         : "",
@@ -247,11 +283,22 @@ export const MsgWithdrawDelegatorReward = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgWithdrawDelegatorReward.$type,
+  MsgWithdrawDelegatorReward
+);
+
 function createBaseMsgWithdrawDelegatorRewardResponse(): MsgWithdrawDelegatorRewardResponse {
-  return { amount: [] };
+  return {
+    $type: "cosmos.distribution.v1beta1.MsgWithdrawDelegatorRewardResponse",
+    amount: [],
+  };
 }
 
 export const MsgWithdrawDelegatorRewardResponse = {
+  $type:
+    "cosmos.distribution.v1beta1.MsgWithdrawDelegatorRewardResponse" as const,
+
   encode(
     message: MsgWithdrawDelegatorRewardResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -285,6 +332,7 @@ export const MsgWithdrawDelegatorRewardResponse = {
 
   fromJSON(object: any): MsgWithdrawDelegatorRewardResponse {
     return {
+      $type: MsgWithdrawDelegatorRewardResponse.$type,
       amount: Array.isArray(object?.amount)
         ? object.amount.map((e: any) => Coin.fromJSON(e))
         : [],
@@ -310,11 +358,21 @@ export const MsgWithdrawDelegatorRewardResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgWithdrawDelegatorRewardResponse.$type,
+  MsgWithdrawDelegatorRewardResponse
+);
+
 function createBaseMsgWithdrawValidatorCommission(): MsgWithdrawValidatorCommission {
-  return { validatorAddress: "" };
+  return {
+    $type: "cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission",
+    validatorAddress: "",
+  };
 }
 
 export const MsgWithdrawValidatorCommission = {
+  $type: "cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission" as const,
+
   encode(
     message: MsgWithdrawValidatorCommission,
     writer: _m0.Writer = _m0.Writer.create()
@@ -348,6 +406,7 @@ export const MsgWithdrawValidatorCommission = {
 
   fromJSON(object: any): MsgWithdrawValidatorCommission {
     return {
+      $type: MsgWithdrawValidatorCommission.$type,
       validatorAddress: isSet(object.validatorAddress)
         ? String(object.validatorAddress)
         : "",
@@ -370,11 +429,22 @@ export const MsgWithdrawValidatorCommission = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgWithdrawValidatorCommission.$type,
+  MsgWithdrawValidatorCommission
+);
+
 function createBaseMsgWithdrawValidatorCommissionResponse(): MsgWithdrawValidatorCommissionResponse {
-  return { amount: [] };
+  return {
+    $type: "cosmos.distribution.v1beta1.MsgWithdrawValidatorCommissionResponse",
+    amount: [],
+  };
 }
 
 export const MsgWithdrawValidatorCommissionResponse = {
+  $type:
+    "cosmos.distribution.v1beta1.MsgWithdrawValidatorCommissionResponse" as const,
+
   encode(
     message: MsgWithdrawValidatorCommissionResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -408,6 +478,7 @@ export const MsgWithdrawValidatorCommissionResponse = {
 
   fromJSON(object: any): MsgWithdrawValidatorCommissionResponse {
     return {
+      $type: MsgWithdrawValidatorCommissionResponse.$type,
       amount: Array.isArray(object?.amount)
         ? object.amount.map((e: any) => Coin.fromJSON(e))
         : [],
@@ -433,11 +504,22 @@ export const MsgWithdrawValidatorCommissionResponse = {
   },
 };
 
+messageTypeRegistry.set(
+  MsgWithdrawValidatorCommissionResponse.$type,
+  MsgWithdrawValidatorCommissionResponse
+);
+
 function createBaseMsgFundCommunityPool(): MsgFundCommunityPool {
-  return { amount: [], depositor: "" };
+  return {
+    $type: "cosmos.distribution.v1beta1.MsgFundCommunityPool",
+    amount: [],
+    depositor: "",
+  };
 }
 
 export const MsgFundCommunityPool = {
+  $type: "cosmos.distribution.v1beta1.MsgFundCommunityPool" as const,
+
   encode(
     message: MsgFundCommunityPool,
     writer: _m0.Writer = _m0.Writer.create()
@@ -477,6 +559,7 @@ export const MsgFundCommunityPool = {
 
   fromJSON(object: any): MsgFundCommunityPool {
     return {
+      $type: MsgFundCommunityPool.$type,
       amount: Array.isArray(object?.amount)
         ? object.amount.map((e: any) => Coin.fromJSON(e))
         : [],
@@ -505,11 +588,15 @@ export const MsgFundCommunityPool = {
   },
 };
 
+messageTypeRegistry.set(MsgFundCommunityPool.$type, MsgFundCommunityPool);
+
 function createBaseMsgFundCommunityPoolResponse(): MsgFundCommunityPoolResponse {
-  return {};
+  return { $type: "cosmos.distribution.v1beta1.MsgFundCommunityPoolResponse" };
 }
 
 export const MsgFundCommunityPoolResponse = {
+  $type: "cosmos.distribution.v1beta1.MsgFundCommunityPoolResponse" as const,
+
   encode(
     _: MsgFundCommunityPoolResponse,
     writer: _m0.Writer = _m0.Writer.create()
@@ -536,7 +623,9 @@ export const MsgFundCommunityPoolResponse = {
   },
 
   fromJSON(_: any): MsgFundCommunityPoolResponse {
-    return {};
+    return {
+      $type: MsgFundCommunityPoolResponse.$type,
+    };
   },
 
   toJSON(_: MsgFundCommunityPoolResponse): unknown {
@@ -551,6 +640,11 @@ export const MsgFundCommunityPoolResponse = {
     return message;
   },
 };
+
+messageTypeRegistry.set(
+  MsgFundCommunityPoolResponse.$type,
+  MsgFundCommunityPoolResponse
+);
 
 /** Msg defines the distribution Msg service. */
 export interface Msg {
@@ -677,14 +771,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

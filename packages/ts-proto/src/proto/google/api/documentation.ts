@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 
@@ -62,6 +63,7 @@ export const protobufPackage = "google.api";
  * and is documented together with service config validation.
  */
 export interface Documentation {
+  $type: "google.api.Documentation";
   /**
    * A short summary of what the service does. Can only be provided by
    * plain text.
@@ -104,6 +106,7 @@ export interface Documentation {
 
 /** A documentation rule provides information about individual API elements. */
 export interface DocumentationRule {
+  $type: "google.api.DocumentationRule";
   /**
    * The selector is a comma-separated list of patterns. Each pattern is a
    * qualified name of the element which may end in "*", indicating a wildcard.
@@ -127,6 +130,7 @@ export interface DocumentationRule {
  * nested documentation set structure.
  */
 export interface Page {
+  $type: "google.api.Page";
   /**
    * The name of the page. It will be used as an identity of the page to
    * generate URI of the page, text of the link to this page in navigation,
@@ -158,6 +162,7 @@ export interface Page {
 
 function createBaseDocumentation(): Documentation {
   return {
+    $type: "google.api.Documentation",
     summary: "",
     pages: [],
     rules: [],
@@ -168,6 +173,8 @@ function createBaseDocumentation(): Documentation {
 }
 
 export const Documentation = {
+  $type: "google.api.Documentation" as const,
+
   encode(
     message: Documentation,
     writer: _m0.Writer = _m0.Writer.create()
@@ -228,6 +235,7 @@ export const Documentation = {
 
   fromJSON(object: any): Documentation {
     return {
+      $type: Documentation.$type,
       summary: isSet(object.summary) ? String(object.summary) : "",
       pages: Array.isArray(object?.pages)
         ? object.pages.map((e: any) => Page.fromJSON(e))
@@ -283,11 +291,20 @@ export const Documentation = {
   },
 };
 
+messageTypeRegistry.set(Documentation.$type, Documentation);
+
 function createBaseDocumentationRule(): DocumentationRule {
-  return { selector: "", description: "", deprecationDescription: "" };
+  return {
+    $type: "google.api.DocumentationRule",
+    selector: "",
+    description: "",
+    deprecationDescription: "",
+  };
 }
 
 export const DocumentationRule = {
+  $type: "google.api.DocumentationRule" as const,
+
   encode(
     message: DocumentationRule,
     writer: _m0.Writer = _m0.Writer.create()
@@ -330,6 +347,7 @@ export const DocumentationRule = {
 
   fromJSON(object: any): DocumentationRule {
     return {
+      $type: DocumentationRule.$type,
       selector: isSet(object.selector) ? String(object.selector) : "",
       description: isSet(object.description) ? String(object.description) : "",
       deprecationDescription: isSet(object.deprecationDescription)
@@ -359,11 +377,15 @@ export const DocumentationRule = {
   },
 };
 
+messageTypeRegistry.set(DocumentationRule.$type, DocumentationRule);
+
 function createBasePage(): Page {
-  return { name: "", content: "", subpages: [] };
+  return { $type: "google.api.Page", name: "", content: "", subpages: [] };
 }
 
 export const Page = {
+  $type: "google.api.Page" as const,
+
   encode(message: Page, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -403,6 +425,7 @@ export const Page = {
 
   fromJSON(object: any): Page {
     return {
+      $type: Page.$type,
       name: isSet(object.name) ? String(object.name) : "",
       content: isSet(object.content) ? String(object.content) : "",
       subpages: Array.isArray(object?.subpages)
@@ -434,6 +457,8 @@ export const Page = {
   },
 };
 
+messageTypeRegistry.set(Page.$type, Page);
+
 type Builtin =
   | Date
   | Function
@@ -452,14 +477,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

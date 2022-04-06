@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 
@@ -6,6 +7,7 @@ export const protobufPackage = "cosmos.app.v1alpha1";
 
 /** ModuleDescriptor describes an app module. */
 export interface ModuleDescriptor {
+  $type: "cosmos.app.v1alpha1.ModuleDescriptor";
   /**
    * go_import names the package that should be imported by an app to load the
    * module in the runtime module registry. Either go_import must be defined here
@@ -35,6 +37,7 @@ export interface ModuleDescriptor {
 
 /** PackageReference is a reference to a protobuf package used by a module. */
 export interface PackageReference {
+  $type: "cosmos.app.v1alpha1.PackageReference";
   /** name is the fully-qualified name of the package. */
   name: string;
   /**
@@ -82,6 +85,7 @@ export interface PackageReference {
  * can migrate from.
  */
 export interface MigrateFromInfo {
+  $type: "cosmos.app.v1alpha1.MigrateFromInfo";
   /**
    * module is the fully-qualified protobuf name of the module config object
    * for the previous module version, ex: "cosmos.group.module.v1.Module".
@@ -90,10 +94,17 @@ export interface MigrateFromInfo {
 }
 
 function createBaseModuleDescriptor(): ModuleDescriptor {
-  return { goImport: "", usePackage: [], canMigrateFrom: [] };
+  return {
+    $type: "cosmos.app.v1alpha1.ModuleDescriptor",
+    goImport: "",
+    usePackage: [],
+    canMigrateFrom: [],
+  };
 }
 
 export const ModuleDescriptor = {
+  $type: "cosmos.app.v1alpha1.ModuleDescriptor" as const,
+
   encode(
     message: ModuleDescriptor,
     writer: _m0.Writer = _m0.Writer.create()
@@ -140,6 +151,7 @@ export const ModuleDescriptor = {
 
   fromJSON(object: any): ModuleDescriptor {
     return {
+      $type: ModuleDescriptor.$type,
       goImport: isSet(object.goImport) ? String(object.goImport) : "",
       usePackage: Array.isArray(object?.usePackage)
         ? object.usePackage.map((e: any) => PackageReference.fromJSON(e))
@@ -183,11 +195,19 @@ export const ModuleDescriptor = {
   },
 };
 
+messageTypeRegistry.set(ModuleDescriptor.$type, ModuleDescriptor);
+
 function createBasePackageReference(): PackageReference {
-  return { name: "", revision: 0 };
+  return {
+    $type: "cosmos.app.v1alpha1.PackageReference",
+    name: "",
+    revision: 0,
+  };
 }
 
 export const PackageReference = {
+  $type: "cosmos.app.v1alpha1.PackageReference" as const,
+
   encode(
     message: PackageReference,
     writer: _m0.Writer = _m0.Writer.create()
@@ -224,6 +244,7 @@ export const PackageReference = {
 
   fromJSON(object: any): PackageReference {
     return {
+      $type: PackageReference.$type,
       name: isSet(object.name) ? String(object.name) : "",
       revision: isSet(object.revision) ? Number(object.revision) : 0,
     };
@@ -247,11 +268,15 @@ export const PackageReference = {
   },
 };
 
+messageTypeRegistry.set(PackageReference.$type, PackageReference);
+
 function createBaseMigrateFromInfo(): MigrateFromInfo {
-  return { module: "" };
+  return { $type: "cosmos.app.v1alpha1.MigrateFromInfo", module: "" };
 }
 
 export const MigrateFromInfo = {
+  $type: "cosmos.app.v1alpha1.MigrateFromInfo" as const,
+
   encode(
     message: MigrateFromInfo,
     writer: _m0.Writer = _m0.Writer.create()
@@ -282,6 +307,7 @@ export const MigrateFromInfo = {
 
   fromJSON(object: any): MigrateFromInfo {
     return {
+      $type: MigrateFromInfo.$type,
       module: isSet(object.module) ? String(object.module) : "",
     };
   },
@@ -301,6 +327,8 @@ export const MigrateFromInfo = {
   },
 };
 
+messageTypeRegistry.set(MigrateFromInfo.$type, MigrateFromInfo);
+
 type Builtin =
   | Date
   | Function
@@ -319,14 +347,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

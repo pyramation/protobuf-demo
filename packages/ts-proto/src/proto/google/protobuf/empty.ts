@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 
@@ -15,13 +16,17 @@ export const protobufPackage = "google.protobuf";
  *
  * The JSON representation for `Empty` is empty JSON object `{}`.
  */
-export interface Empty {}
+export interface Empty {
+  $type: "google.protobuf.Empty";
+}
 
 function createBaseEmpty(): Empty {
-  return {};
+  return { $type: "google.protobuf.Empty" };
 }
 
 export const Empty = {
+  $type: "google.protobuf.Empty" as const,
+
   encode(_: Empty, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -42,7 +47,9 @@ export const Empty = {
   },
 
   fromJSON(_: any): Empty {
-    return {};
+    return {
+      $type: Empty.$type,
+    };
   },
 
   toJSON(_: Empty): unknown {
@@ -55,6 +62,8 @@ export const Empty = {
     return message;
   },
 };
+
+messageTypeRegistry.set(Empty.$type, Empty);
 
 type Builtin =
   | Date
@@ -74,14 +83,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 

@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { messageTypeRegistry } from "../../typeRegistry";
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 
@@ -43,6 +44,7 @@ export const protobufPackage = "google.api";
  * here.
  */
 export interface Context {
+  $type: "google.api.Context";
   /**
    * A list of RPC context rules that apply to individual API methods.
    *
@@ -56,6 +58,7 @@ export interface Context {
  * element.
  */
 export interface ContextRule {
+  $type: "google.api.ContextRule";
   /**
    * Selects the methods to which this rule applies.
    *
@@ -79,10 +82,12 @@ export interface ContextRule {
 }
 
 function createBaseContext(): Context {
-  return { rules: [] };
+  return { $type: "google.api.Context", rules: [] };
 }
 
 export const Context = {
+  $type: "google.api.Context" as const,
+
   encode(
     message: Context,
     writer: _m0.Writer = _m0.Writer.create()
@@ -113,6 +118,7 @@ export const Context = {
 
   fromJSON(object: any): Context {
     return {
+      $type: Context.$type,
       rules: Array.isArray(object?.rules)
         ? object.rules.map((e: any) => ContextRule.fromJSON(e))
         : [],
@@ -138,8 +144,11 @@ export const Context = {
   },
 };
 
+messageTypeRegistry.set(Context.$type, Context);
+
 function createBaseContextRule(): ContextRule {
   return {
+    $type: "google.api.ContextRule",
     selector: "",
     requested: [],
     provided: [],
@@ -149,6 +158,8 @@ function createBaseContextRule(): ContextRule {
 }
 
 export const ContextRule = {
+  $type: "google.api.ContextRule" as const,
+
   encode(
     message: ContextRule,
     writer: _m0.Writer = _m0.Writer.create()
@@ -203,6 +214,7 @@ export const ContextRule = {
 
   fromJSON(object: any): ContextRule {
     return {
+      $type: ContextRule.$type,
       selector: isSet(object.selector) ? String(object.selector) : "",
       requested: Array.isArray(object?.requested)
         ? object.requested.map((e: any) => String(e))
@@ -266,6 +278,8 @@ export const ContextRule = {
   },
 };
 
+messageTypeRegistry.set(ContextRule.$type, ContextRule);
+
 type Builtin =
   | Date
   | Function
@@ -284,14 +298,14 @@ export type DeepPartial<T> = T extends Builtin
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
+        Exclude<keyof I, KeysOfUnion<P> | "$type">,
         never
       >;
 
