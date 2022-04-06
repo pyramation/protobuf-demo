@@ -2,7 +2,10 @@
 
 https://pkg.go.dev/github.com/ocavue/protoc-gen-typescript
 
-Seems to be broken — [not fully processing the protofiles](./src/proto/osmosis/gamm/pool-models/balancer/osmosis.gamm.v1beta1.balancerPool.d.ts)
+- seems to be broken — [not fully processing the protofiles](./src/proto/osmosis/gamm/pool-models/balancer/osmosis.gamm.v1beta1.balancerPool.d.ts)
+- requires a lot of `go` pkg mgmt
+- doesn't use imports
+- only type files
 
 ## installation
 
