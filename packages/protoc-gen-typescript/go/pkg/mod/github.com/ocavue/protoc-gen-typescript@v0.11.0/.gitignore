@@ -1,0 +1,11 @@
+node_modules
+package-lock.json
+.env
+
+# These file will be created during build time
+protoc-gen-typescript/testdata/any.proto
+protoc-gen-typescript/testdata/duration.proto
+protoc-gen-typescript/testdata/empty.proto
+protoc-gen-typescript/testdata/struct.proto
+protoc-gen-typescript/testdata/timestamp.proto
+protoc-gen-typescript/testdata/wrappers.proto
